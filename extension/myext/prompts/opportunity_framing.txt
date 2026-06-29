@@ -1,0 +1,30 @@
+You are tracking a student's general, recurring misconception through a math tutoring dialogue, turn by turn. The student has a characteristic misconception; track THAT general misconception. You are also told how it concretely shows up in this dialogue, but use that only as a lens to recognise the general misconception.
+
+== PROBLEM ==
+{problem}
+
+== THE GENERAL MISCONCEPTION (the construct you label) ==
+{profile}
+
+== HOW IT SHOWS UP HERE (a lens, not a separate target) ==
+{described}
+
+== DIALOGUE ==
+{dialogue_block}
+
+== THE METHOD ==
+For each student turn, ask two questions in order.
+
+Question 1: Does this turn engage the specific reasoning the general misconception is about? (That is, does the student actually work on the thing that this misconception would corrupt?)
+  - If NO: the misconception had no opportunity to appear. Label "not_evidenced". Stop.
+  - If YES: go to Question 2.
+
+Question 2: In doing that reasoning, does the student exhibit or rely on the general misconception?
+  - If YES (the faulty reasoning is there, even partially, even if the final number is right): label "present".
+  - If NO (the reasoning is done correctly, no trace of the faulty idea): label "absent".
+
+The whole point of this two-question method is to keep "absent" and "not_evidenced" distinct. Absent means the general misconception had a real opportunity and the student avoided it. Not_evidenced means there was no opportunity because the turn was not about that reasoning at all. A turn full of correct arithmetic that is not about the misconception's specific target is not_evidenced, not absent.
+
+== OUTPUT ==
+Work through each turn with the two questions, then output ONLY a JSON object keyed by turn number (string), each value {{"label": ..., "reason": ...}}, where the reason briefly notes the answers to the two questions. No surrounding text or markdown.
+{{"1": {{"label": "absent", "reason": "engages the relevance reasoning (Q1 yes) and does it correctly (Q2 no misconception)"}}}}

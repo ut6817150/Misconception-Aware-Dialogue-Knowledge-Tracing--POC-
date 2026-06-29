@@ -1,0 +1,18 @@
+You are labelling a tutoring dialogue for whether a student exhibits their known general misconception, turn by turn.
+
+PROBLEM:
+{problem}
+
+THE GENERAL MISCONCEPTION TO TRACK (this is the construct you label):
+{profile}
+
+DIALOGUE (student turns are numbered; label each numbered student turn):
+{dialogue_block}
+
+LABEL DEFINITIONS. For each student turn, assign exactly one of:
+- "present": the turn exhibits or relies on the general misconception, whether or not the final numeric answer is correct. If the student is mid-correction but some reliance remains, label present.
+- "absent": the turn engages the specific reasoning the general misconception corrupts and does it correctly, with no trace of the faulty idea. The misconception had an opportunity to appear here and did not.
+- "not_evidenced": the turn does not engage the reasoning the general misconception is about at all (a procedural acknowledgement, a clarifying question, or an off-topic reply). The misconception could not have appeared here. This is NOT the same as absent: absent means correct engagement, not_evidenced means no engagement.
+
+Think step by step about each turn, then output ONLY a JSON object, keyed by turn number, with no surrounding text or markdown. Each value is an object with "label" and a one-line "reason". Example format:
+{{"1": {{"label": "present", "reason": "divides by 3 instead of 4, an instance of the general misconception"}}, "2": {{"label": "not_evidenced", "reason": "only acknowledges the tutor, no reasoning"}}}}

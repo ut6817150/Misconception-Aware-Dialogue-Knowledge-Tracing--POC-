@@ -1,0 +1,24 @@
+
+== PROBLEM ==
+{problem}
+
+== THE GENERAL MISCONCEPTION TO TRACK (the construct you label) ==
+{profile}
+
+== DIALOGUE ==
+{dialogue_block}
+
+== LABELS ==
+- "present": the turn exhibits or relies on the general misconception (even if the final number is right, and even if the student is only partway through correcting it).
+- "absent": the student does the exact reasoning the general misconception corrupts, correctly, with no trace of it. The misconception had a real chance to appear and did not.
+- "not_evidenced": the turn does not engage the general misconception's reasoning at all (acknowledgement, clarifying question, off-topic). The misconception had no chance to appear.
+
+== WORKED EXAMPLES (for a general misconception about using irrelevant information) ==
+Student: "There are 5 red and 3 blue, and the tank is 40 litres, so I multiply 8 by 40." -> present (drags in the irrelevant 40-litre figure, an instance of the general misconception).
+Student: "The relevant quantities are the 5 red and 3 blue, so 5 plus 3 is 8." -> absent (correctly separates relevant from irrelevant, the thing the general misconception corrupts, and gets it right).
+Student: "Okay, that makes sense, let me try." -> not_evidenced (pure acknowledgement, no reasoning about relevance at all).
+Student: "Wait, do you mean the total or just the red ones?" -> not_evidenced (a clarifying question, engages no relevance reasoning).
+
+== OUTPUT ==
+Reason briefly per turn, then output ONLY a JSON object keyed by turn number (string), each value {{"label": ..., "reason": ...}}. No text or markdown around the JSON. Example:
+{{"1": {{"label": "present", "reason": "uses the irrelevant figure, an instance of the general misconception"}}, "2": {{"label": "not_evidenced", "reason": "acknowledgement only"}}}}
