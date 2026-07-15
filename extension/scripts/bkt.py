@@ -13,11 +13,10 @@ optima and the standard identifiability constraint guess, slip < 0.5.
 
 Beyond the standard fit, this module adds:
 
-  1. A weighted-average parameter fallback for KCs with no trained parameters
-     at test time (structural test-only KCs, plus any KC the filter removed
-     from train that still occurs in test). The fallback for each parameter is
-     the observation-count-weighted mean across trained KCs, applied
-     per-parameter so a KC missing one parameter keeps the others.
+  1. A weighted-average parameter fallback for degenerate training KCs and KCs
+     unseen at test time. Degenerate KCs (all-correct or all-incorrect) are not
+     fit individually; they receive the complete parameter vector formed by
+     the observation-count-weighted mean across nondegenerate fitted KCs.
 
   2. Clean separation of fit / fallback / predict so the same machinery
      extends to the misconception emission later.
@@ -244,7 +243,7 @@ def weighted_average_params(
 
 
 # ---------------------------------------------------------------------------
-# Prediction with per-parameter fallback
+# Prediction with pooled fallback
 # ---------------------------------------------------------------------------
 
 def _bkt_seq_predict(
@@ -325,21 +324,34 @@ def fit_bkt(
     seed: int = 221,
     verbose: bool = True,
 ) -> FittedBKT:
-    """Fit correctness-only BKT per KC on (already-filtered) training data,
-    then build the weighted-average parameter fallback.
+    """Fit BKT per nondegenerate KC and build a pooled fallback.
 
-    Expects train_long with degenerate KCs already removed, so each KC has
-    label variation and EM is well-posed.
+    KCs that are all-correct or all-incorrect are not fit individually because
+    their four BKT parameters cannot be separated reliably. Instead, they are
+    assigned the complete observation-weighted mean parameter vector estimated
+    from nondegenerate KCs. The same vector is used for KCs unseen in training.
     """
     sequences = kc_sequences(train_long)
+    stats = train_long.groupby("kc")["correct"].agg(n="count", n_correct="sum")
+    degenerate_mask = ((stats["n_correct"] == 0) |
+                       (stats["n_correct"] == stats["n"]))
+    degenerate_kcs = set(stats.index[degenerate_mask].astype(str))
+
     rows = {}
     for i, (kc, seqs) in enumerate(sequences.items()):
+        if kc in degenerate_kcs:
+            continue
         rows[kc] = _em_single_kc(
             seqs, n_restarts=n_restarts, max_iter=max_iter, seed=seed + i
         )
-    params = pd.DataFrame.from_dict(rows, orient="index")[list(PARAM_NAMES)]
+    params = pd.DataFrame.from_dict(
+        rows, orient="index", columns=list(PARAM_NAMES)
+    )
 
-    obs_counts = train_long.groupby("kc").size()
+    # The fallback is learned only from nondegenerate KCs. Observation weighting
+    # makes it representative of a typical observation rather than a typical KC.
+    nondegenerate_rows = ~train_long["kc"].astype(str).isin(degenerate_kcs)
+    obs_counts = train_long[nondegenerate_rows].groupby("kc").size()
     obs_counts.index = obs_counts.index.astype(str)
 
     n_nan = int(params.isna().any(axis=1).sum())
@@ -349,6 +361,12 @@ def fit_bkt(
 
     fallback = weighted_average_params(params, obs_counts)
     per_skill = {skill: row.dropna().to_dict() for skill, row in params.iterrows()}
+    for kc in degenerate_kcs:
+        per_skill[kc] = dict(fallback)
+
+    if verbose and degenerate_kcs:
+        print(f"[fit_bkt] {len(degenerate_kcs)} degenerate KCs assigned the "
+              "observation-weighted fallback from nondegenerate KCs.")
     return FittedBKT(per_skill=per_skill, fallback=fallback)
 
 
