@@ -32,6 +32,14 @@ CACHE_DIR = Path("extension/artifacts/extraction_cache")
 FAMILIES = ["comprehension", "relevance", "principles", "wrong_operation", "steps"]
 
 TEMPERATURE = 0.0
+# Optional provider pinning (OpenRouter routing). None routes freely across
+# all providers serving the slug. To pin, set an ordered list of provider
+# names exactly as OpenRouter's model page spells them, e.g.
+# PROVIDER_ORDER = ["Fireworks", "Together"]; with ALLOW_FALLBACKS = False
+# routing is restricted to that list, converting the speed lottery into a
+# constant. Every call's serving provider is recorded in meta for ranking.
+PROVIDER_ORDER = None
+ALLOW_FALLBACKS = False
 # Optional output circuit breaker. None sends no cap (models run provider
 # defaults). A generous value such as 40000 bounds runaway reasoning
 # (observed: 51k reasoning tokens, $0.78, 20 minutes on one uncapped call)
@@ -76,6 +84,11 @@ def _model_dirname(model_slug: str) -> str:
 
 def cache_path(model_slug: str, prompt_name: str, dialogue_id: int,
                split: str = "validation") -> Path:
+    # the validation gold is carved from the MathDial train split and keeps
+    # its train indices, so its cache lives with train: annotating the full
+    # train set later finds these dialogues already done and skips them
+    if split == "validation":
+        split = "train"
     folder = CACHE_DIR / split / _model_dirname(model_slug) / prompt_name
     folder.mkdir(parents=True, exist_ok=True)
     return folder / f"{dialogue_id}.json"
@@ -144,10 +157,15 @@ def validate(obj: dict, units: List[str]) -> List[str]:
 # The LLM call
 # ---------------------------------------------------------------------------
 
-def llm_call(model_slug: str, messages: List[dict]) -> Tuple[str, str, dict]:
+def llm_call(model_slug: str, messages: List[dict],
+             provider: Optional[str] = None) -> Tuple[str, str, dict]:
     """One OpenRouter chat completion against the given slug (e.g.
     'moonshotai/kimi-k3'). Returns (content, reasoning_trace, meta) where
-    meta carries latency, usage, and OpenRouter's accounted cost."""
+    meta carries latency, usage, and OpenRouter's accounted cost. ``provider``
+    pins the call to one named provider (spelled as on the OpenRouter model
+    page); None falls back to PROVIDER_ORDER, and free routing if that is
+    also unset."""
+    order = [provider] if provider else PROVIDER_ORDER
     t0 = time.time()
     resp = requests.post(
         f"{BASE_URL}/chat/completions",
@@ -163,6 +181,9 @@ def llm_call(model_slug: str, messages: List[dict]) -> Tuple[str, str, dict]:
             "temperature": TEMPERATURE,
             "usage": {"include": True},
             **({"max_tokens": MAX_OUTPUT_TOKENS} if MAX_OUTPUT_TOKENS else {}),
+            **({"provider": {"order": order,
+                             "allow_fallbacks": ALLOW_FALLBACKS}}
+               if order else {}),
         },
         timeout=None,
     )
@@ -178,7 +199,8 @@ def llm_call(model_slug: str, messages: List[dict]) -> Tuple[str, str, dict]:
     usage = data.get("usage", {}) or {}
     cost = usage.get("cost") or 0.0
     return text, reasoning, {
-        "latency_s": time.time() - t0, "usage": usage, "cost_usd": float(cost)
+        "latency_s": time.time() - t0, "usage": usage, "cost_usd": float(cost),
+        "provider": data.get("provider"),
     }
 
 
@@ -186,7 +208,8 @@ def llm_call(model_slug: str, messages: List[dict]) -> Tuple[str, str, dict]:
 # The entry point
 # ---------------------------------------------------------------------------
 
-def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict) -> str:
+def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
+                        provider: Optional[str] = None) -> str:
     """Annotate one dialogue under one prompt with one model.
 
     ``dialogue`` is a record from dialogues_from: {'dialogue_id', 'split',
@@ -196,7 +219,9 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict) -> st
     timeout, no retries), and the full record
     (raw output, reasoning trace, errors, usage, cost) is cached under
     extraction_cache/{split}/{model}/{prompt}/{id}.json.
-    Returns 'cached', 'ok', or 'invalid'.
+    Returns 'cached', 'ok', or 'invalid'. ``provider`` optionally pins this
+    call to one OpenRouter provider; omitted, routing behaves as configured
+    at module level (PROVIDER_ORDER, or free routing).
     """
     if not model_slug or "/" not in model_slug:
         raise ValueError(f"{model_slug!r} does not look like an OpenRouter slug "
@@ -223,7 +248,7 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict) -> st
         "latency_s": 0.0,
     }
     try:
-        text, reasoning, meta = llm_call(model_slug, messages)
+        text, reasoning, meta = llm_call(model_slug, messages, provider)
     except Exception as exc:  # noqa: BLE001 (transport layer; recorded, not retried)
         record["attempts"].append({"transport_error": str(exc)})
         json.dump(record, open(cache_path(model_slug, prompt_name, did, split), "w"), indent=1)
