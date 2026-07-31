@@ -11,7 +11,18 @@ A further five clarifications were added after a trace audit of an LLM
 grader's divergences (the principles-versus-wrong-operation tie-breaker, the
 framing, bare-execution, and silence floors at the engagement gate, and the
 framing-before-continuity ordering); these likewise state readings already
-applied in the corrected set and change no stored labels.
+applied in the corrected set and change no stored labels. The
+tie-breaker's alternative-concept clause was subsequently sharpened with the
+structural-fidelity criterion after a regression-canary run showed
+statability alone being read as demonstration. A further
+amendment round followed the full-set LLM screening: the family routing
+principle with the licensed-step clause, relevance ownership with the
+silence-floor scope note, the credit default with the earn-side calibration,
+thread individuation with the residual scan, and the operational recitation
+test. The recitation test additionally corrected walkthrough credit at five
+turn-1 cells where sentence-replay had been credited as rewording (the
+adjudication column in the validation set documents each); no other stored
+labels changed.
 Worked examples drawn from held-out validation dialogues were later
 rewritten as synthetic illustrations so the instrument can be deployed
 without exposing held-out content; the adjudication log preserves the
@@ -61,6 +72,12 @@ navigation; every rule binds regardless of its group.
     reasoning handles the family's target soundly, the turn is **absent**. If
     the reasoning is in play but exhibits the misconception, the turn is
     **present**.
+  - **The credit default.** Credit is act-based and per-construct: an absent
+    label requires a self-authored act this turn that engages the family's
+    own decision and comes out right. Ambient correctness, carried figures,
+    and correctness downstream of another family's fault earn nothing, and
+    where it is unclear whether a family was engaged at all, the label is
+    not_evidenced: the default for an unengaged family is never absent.
   - **Floors evaluated before the gate (order of operations):** the engagement
     gate is assessed only after three floors, and an act caught by a floor is
     **not_evidenced** regardless of how much reasoning it displays.
@@ -88,7 +105,12 @@ navigation; every rule binds regardless of its group.
       choice, that the student sets herself beyond what the prompt supplies;
       correctly performing division does not engage the equal-sharing concept
       where the only conceptual choice in play, such as who belongs in the
-      group, is elsewhere or is itself the error.
+      group, is elsewhere or is itself the error. The earn side, for
+      calibration: a scale factor the student derives herself and applies
+      correctly in her own chain is a self-set concept-level choice and earns
+      principles credit despite being arithmetic in form, and a unit rate she
+      derives herself at a posed question is likewise self-set, posed prompts
+      leaving the concept choice hers.
     - *The silence floor (relevance):* silently not using a distractor or an
       irrelevant given is not an act and earns nothing; relevance engagement
       requires an articulated selection, naming which information matters or
@@ -439,7 +461,11 @@ trial passed.
   not a trial, exactly as bare figure-listing is not, whatever operands and
   order the copied text happens to contain. Credit requires a fresh
   formulation, reworded into new sentences, reordered, or shaped to answer
-  the specific question asked, which restores the opportunity to fail (the
+  the specific question asked, which restores the opportunity to fail. The
+  operational test: where each content sentence maps one-to-one onto a prior
+  sentence with only person, tense, or connective changes, the turn is
+  recitation and earns nothing, whatever its length; rewording means fresh
+  sentence structure or a reshaped derivation, not pronoun conversion (the
   games dialogue, 2233, turn 1 earns as a reworded first-person
   re-derivation; the bunny dialogue, 1064, turn 2 repeats the previous turn
   nearly unchanged and earns nothing). The two endorsement effects are
@@ -1342,6 +1368,13 @@ endpoint check, and persistence analysis.
    absent credit unrelated to any thread (the symmetric standard, the
    re-articulation standard, dual-use). Most absent labels arise here, not in
    step 3.
+5b. **Individuation and the residual scan.** Threads are individuated by
+   belief, not by family or by turn: distinct wrong beliefs get distinct
+   threads even in the same family, and a single unit may commit or exhibit
+   several. After attributing a unit's most salient error, re-scan its
+   remaining wrong content; whatever no attributed belief explains founds or
+   exhibits its own thread rather than being absorbed into the dominant
+   story.
 6. **Emit the five labels.** A family is present if any of its threads
    re-exhibits or newly originates in the turn; otherwise absent if the turn
    correctly engages the family's construct on the student's belief;
@@ -1603,7 +1636,15 @@ misunderstand what a correctly chosen piece represents?**
 
 - If the error is in the *selection* of information, choosing a distractor,
   ignoring a stated value or quantity, or attaching a value to the wrong
-  condition among those the problem states, it is **relevance**. *Worked
+  condition among those the problem states, it is **relevance**. Relevance
+  owns which of the problem's information enters the model: a stated given
+  left unused, displaced by an invented quantity or an assumed value, or a
+  foreign quantity imported, is a relevance fault even where it yields a
+  false model of the situation, and even where the problem contains no
+  distractor at all. Comprehension owns what the text is taken to state or
+  ask. The silence floor governs credit only and never blocks a presence: a
+  given silently omitted or displaced, with visible effect in the model, is
+  an act on the present side under the silent-omission rule. *Worked
   example (egg-collection dialogue, 1420):* the one-hour collection duration is
   a stated quantity with no role in any correct chain; multiplying it into the
   egg count (270 x 60) is the inclusion face of the same selection failure whose
@@ -1959,9 +2000,37 @@ direction inverted, a percentage re-based, sequential percentages flattened
 onto one base, the demonstrated-belief pole governs and the thread is
 principles even beside correct enactments of the neighbouring concept
 elsewhere in the chain: correct work nearby does not immunise a coherent
-wrong rule. Naming the underlying concept the act offends ("this is really
+wrong rule. An alternative concept is demonstrated only where the deviant
+act retains the concept's own structure with one component set contrary, the
+fraction inverted inside an otherwise intact scaling, the percentage applied
+with its structure intact to a re-chosen base, successive percentages
+composed with the base held fixed. Mere statability never suffices: any
+operand mispairing can be phrased as a rule ("multiply by the ratio
+number"), and phrasing an act as a rule is redescription, not demonstration.
+An act that abandons the demonstrated concept's structure for a flat
+operation, a raw multiplication standing beside a two-step
+find-the-factor-then-apply scaling, demonstrates no alternative concept and
+is wrong operation. Naming the underlying concept the act offends ("this is really
 about proportionality") never routes the family by itself; the route runs
 through what the student's own act demonstrates.
+
+**The family routing principle (own-chain demonstration).** The same logic
+governs the comprehension boundary. A comprehension thread's belief misstates
+what the text says or asks, and the student's acts follow that wrong reading
+coherently. Where the student's own labels, definitions, or prefix work
+demonstrate the correct reading, an idle correct line computing the very
+quantity later mishandled, a component derived correctly and then dropped or
+contradicted, the deviant act is an operational fault against her own chain,
+however easily a hypothetical misreading could rationalise it. Routing runs
+through what her own chain demonstrates, never through what a misreading
+could explain: nearly every operational fault can be redescribed as a belief
+about the problem, and that redescription is not evidence. Within the
+operational cluster the licensed-step discriminator completes the routing:
+an excess or misplaced operand inside a licensed construction (a total that
+must be formed, a difference that must be taken) is wrong operation, while
+an act with no license at all, including any further derivation performed
+after the asked quantity already stands produced in her own chain, is steps
+unless the act enacts a statable belief of its own.
 
 ### Across-cluster pairs (conceptual versus procedural)
 

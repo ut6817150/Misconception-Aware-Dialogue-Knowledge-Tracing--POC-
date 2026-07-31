@@ -117,7 +117,20 @@ cell recording a resolution names the resolved thread.
   itself enacts a demonstrable alternative concept (inverted ratio direction,
   re-based percentage, flattened sequential percents), it is principles even
   beside correct work elsewhere. Naming the concept an act offends never
-  routes the family by itself.
+  routes the family by itself. The same own-chain logic governs the
+  comprehension boundary: where the student's own labels or prefix work
+  demonstrate the correct reading (an idle correct line, a component derived
+  then dropped or contradicted), the deviant act is operational, however
+  easily a misreading could rationalise it; redescription as a belief is not
+  evidence. An unlicensed act, including any derivation after the asked
+  quantity already stands produced in her own chain, is steps unless it
+  enacts a statable belief.
+- **Relevance ownership.** Relevance owns which of the problem's information
+  enters the model: a stated given unused, displaced by an invented or
+  assumed quantity, or a foreign quantity imported is relevance even where it
+  yields a false model and even with no distractor present; comprehension
+  owns what the text is taken to state or ask. The silence floor governs
+  credit only and never blocks a presence.
 - **Wrong_operation vs steps (produced-role label test).** If the quantity the
   student produced carries a label whose predicate is the same as the role a
   later act fills, the role is filled and the re-derivation is steps. If her
@@ -131,7 +144,21 @@ cell recording a resolution names the resolved thread.
 ## Credit rules (the A label)
 
 - A reworded or restructured walkthrough earns A per construct it genuinely
-  re-articulates; a near-verbatim recitation earns nothing.
+  re-articulates; a near-verbatim recitation earns nothing. The operational
+  test: content sentences mapping one-to-one onto prior sentences with only
+  person, tense, or connective changes are recitation, whatever the length;
+  rewording means fresh structure, not pronoun conversion. Verbatim replay
+  still re-exhibits threads.
+- The credit default: absent requires a self-authored act this turn engaging
+  the family's own decision and coming out right; ambient correctness,
+  carried figures, and correctness downstream of another family's fault earn
+  nothing; an unengaged family defaults to N, never A. Earn-side calibration:
+  a self-derived scale factor or unit rate applied correctly is a self-set
+  concept-level choice and earns principles credit despite arithmetic form.
+- Threads are individuated by belief, not family or turn: distinct wrong
+  beliefs get distinct threads even in one family, one unit may exhibit
+  several; after the salient error, re-scan remaining wrong content and give
+  unexplained content its own thread.
 - Three floors are evaluated before the engagement gate, and an act caught by
   a floor is N regardless of displayed reasoning. Framing: an act whose
   content the preceding tutor turn states (operation with operands, or the

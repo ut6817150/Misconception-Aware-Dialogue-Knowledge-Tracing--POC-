@@ -20,6 +20,7 @@ import json
 import os
 import re
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
@@ -267,3 +268,36 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
         record["annotation"] = obj
     json.dump(record, open(cache_path(model_slug, prompt_name, did, split), "w"), indent=1)
     return "ok" if record["valid"] else "invalid"
+
+
+def generate_annotations(
+    prompt_name: str,
+    model_slug: str,
+    dialogues: List[dict],
+    provider: Optional[str] = None,
+    max_workers: int = 4,
+) -> Dict[int, str]:
+    """Run generate_annotation over many dialogue records in parallel.
+
+    Each dialogue is an independent request writing its own cache file, so
+    parallelism is safe; max_workers bounds concurrent in-flight calls (4-6
+    is polite to a pinned provider, higher risks rate limits). Cached cells
+    return instantly without occupying a worker for long. Statuses are
+    printed as calls complete (completion order, not input order) and
+    returned as {dialogue_id: status}.
+    """
+    results: Dict[int, str] = {}
+    with ThreadPoolExecutor(max_workers=max_workers) as pool:
+        futures = {
+            pool.submit(generate_annotation, prompt_name, model_slug, dlg, provider):
+            dlg["dialogue_id"] for dlg in dialogues
+        }
+        for fut in as_completed(futures):
+            did = futures[fut]
+            try:
+                status = fut.result()
+            except Exception as exc:  # noqa: BLE001 (surface, do not kill the batch)
+                status = f"error: {exc}"
+            results[did] = status
+            print(f"  {did}: {status}")
+    return results
