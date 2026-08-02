@@ -116,15 +116,36 @@ cell recording a resolution names the resolved thread.
   wrong_operation, against her own demonstrated rule; where the deviant act
   itself enacts a demonstrable alternative concept (inverted ratio direction,
   re-based percentage, flattened sequential percents), it is principles even
-  beside correct work elsewhere. Naming the concept an act offends never
-  routes the family by itself. The same own-chain logic governs the
+  beside correct work elsewhere. An alternative concept is demonstrated only
+  where the act retains the concept's own structure with one component set
+  contrary; mere statability never suffices (any mispairing can be phrased
+  as a rule, and phrasing is redescription, not demonstration), and an act
+  abandoning the demonstrated structure for a flat operation is
+  wrong_operation. Naming the concept an act offends never
+  routes the family by itself. Routing order (later tests never overturn earlier ones): (1) own-chain
+  scan first, contradiction of her own demonstration routes operational;
+  (2) ownership, information-selection faults are relevance, text-reading
+  faults comprehension; (3) structural fidelity, principles only where the
+  concept's structure is retained with one component contrary; (4)
+  operational cluster, licensed-construction operand faults are
+  wrong_operation, unlicensed acts steps unless belief-enacting, with
+  belief-enactment outranking the post-answer test; at every step,
+  redescription is never evidence. The same own-chain logic governs the
   comprehension boundary: where the student's own labels or prefix work
   demonstrate the correct reading (an idle correct line, a component derived
   then dropped or contradicted), the deviant act is operational, however
   easily a misreading could rationalise it; redescription as a belief is not
   evidence. An unlicensed act, including any derivation after the asked
   quantity already stands produced in her own chain, is steps unless it
-  enacts a statable belief.
+  enacts a statable belief. Belief-enactment outranks the post-answer test:
+  an act enacting an existing thread's belief, including re-derivations
+  defending an anchored output, exhibits that thread wherever it stands;
+  post-answer steps routing applies only to belief-free acts. Comprehension
+  admission gate: a comprehension belief is admissible only where her own
+  chain contains no demonstration of the correct reading and the belief
+  concerns what the text states or asks, not which stated value satisfies a
+  condition; redescribing a selection or operation fault as a belief never
+  routes to comprehension.
 - **Relevance ownership.** Relevance owns which of the problem's information
   enters the model: a stated given unused, displaced by an invented or
   assumed quantity, or a foreign quantity imported is relevance even where it

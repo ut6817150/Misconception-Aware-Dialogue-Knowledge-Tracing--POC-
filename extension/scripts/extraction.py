@@ -159,13 +159,16 @@ def validate(obj: dict, units: List[str]) -> List[str]:
 # ---------------------------------------------------------------------------
 
 def llm_call(model_slug: str, messages: List[dict],
-             provider: Optional[str] = None) -> Tuple[str, str, dict]:
+             provider: Optional[str] = None,
+             reasoning_effort: Optional[str] = None) -> Tuple[str, str, dict]:
     """One OpenRouter chat completion against the given slug (e.g.
     'moonshotai/kimi-k3'). Returns (content, reasoning_trace, meta) where
     meta carries latency, usage, and OpenRouter's accounted cost. ``provider``
     pins the call to one named provider (spelled as on the OpenRouter model
     page); None falls back to PROVIDER_ORDER, and free routing if that is
-    also unset."""
+    also unset. ``reasoning_effort`` sets OpenRouter's reasoning effort
+    ("low", "medium", "high", "xhigh" where the model supports them); None
+    sends no reasoning field, leaving the provider's default in force."""
     order = [provider] if provider else PROVIDER_ORDER
     t0 = time.time()
     resp = requests.post(
@@ -185,11 +188,20 @@ def llm_call(model_slug: str, messages: List[dict],
             **({"provider": {"order": order,
                              "allow_fallbacks": ALLOW_FALLBACKS}}
                if order else {}),
+            **({"reasoning": {"effort": reasoning_effort}}
+               if reasoning_effort else {}),
         },
         timeout=None,
     )
     resp.raise_for_status()
     data = resp.json()
+    if "choices" not in data or not data["choices"]:
+        # error-in-body: providers sometimes return an error object with
+        # HTTP 200; surface its message instead of a bare KeyError
+        err = data.get("error") or {}
+        raise RuntimeError(
+            f"no choices in response: {err.get('message', json.dumps(data)[:300])}"
+        )
     message = data["choices"][0]["message"]
     text = message.get("content") or ""
     # archival: reasoning models return their trace in a separate field
@@ -210,7 +222,8 @@ def llm_call(model_slug: str, messages: List[dict],
 # ---------------------------------------------------------------------------
 
 def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
-                        provider: Optional[str] = None) -> str:
+                        provider: Optional[str] = None,
+                        reasoning_effort: Optional[str] = None) -> str:
     """Annotate one dialogue under one prompt with one model.
 
     ``dialogue`` is a record from dialogues_from: {'dialogue_id', 'split',
@@ -222,7 +235,9 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
     extraction_cache/{split}/{model}/{prompt}/{id}.json.
     Returns 'cached', 'ok', or 'invalid'. ``provider`` optionally pins this
     call to one OpenRouter provider; omitted, routing behaves as configured
-    at module level (PROVIDER_ORDER, or free routing).
+    at module level (PROVIDER_ORDER, or free routing). ``reasoning_effort``
+    optionally overrides the model's reasoning effort for this call; None
+    keeps the provider default. The record stores the effort sent.
     """
     if not model_slug or "/" not in model_slug:
         raise ValueError(f"{model_slug!r} does not look like an OpenRouter slug "
@@ -240,6 +255,7 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
     record = {
         "model": model_slug,
         "prompt": prompt_name,
+        "reasoning_effort": reasoning_effort,
         "dialogue_id": did,
         "split": split,
         "attempts": [],
@@ -249,7 +265,8 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
         "latency_s": 0.0,
     }
     try:
-        text, reasoning, meta = llm_call(model_slug, messages, provider)
+        text, reasoning, meta = llm_call(model_slug, messages, provider,
+                                         reasoning_effort)
     except Exception as exc:  # noqa: BLE001 (transport layer; recorded, not retried)
         record["attempts"].append({"transport_error": str(exc)})
         json.dump(record, open(cache_path(model_slug, prompt_name, did, split), "w"), indent=1)
@@ -276,6 +293,7 @@ def generate_annotations(
     dialogues: List[dict],
     provider: Optional[str] = None,
     max_workers: int = 4,
+    reasoning_effort: Optional[str] = None,
 ) -> Dict[int, str]:
     """Run generate_annotation over many dialogue records in parallel.
 
@@ -289,7 +307,8 @@ def generate_annotations(
     results: Dict[int, str] = {}
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures = {
-            pool.submit(generate_annotation, prompt_name, model_slug, dlg, provider):
+            pool.submit(generate_annotation, prompt_name, model_slug, dlg,
+                        provider, reasoning_effort):
             dlg["dialogue_id"] for dlg in dialogues
         }
         for fut in as_completed(futures):

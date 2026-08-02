@@ -155,6 +155,7 @@ def score_config(
     }
     if frame.empty:
         out.update({"macro_f1_P": float("nan"), "alpha": float("nan")})
+        out.update({f"f1_{fam}": float("nan") for fam in FAMILIES})
         return out
     f1s = {}
     for fam in FAMILIES:

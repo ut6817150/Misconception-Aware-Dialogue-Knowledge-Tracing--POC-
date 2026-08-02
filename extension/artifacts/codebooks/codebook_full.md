@@ -1,52 +1,5 @@
 # Misconception Annotation Codebook
 
-*Changelog. The codebook was frozen before the full re-pass; six amendments
-were added afterwards, codifying the re-pass adjudications (anchored-output
-thread identity, the shown-operation first-occurrence rule, the produced-role
-label test, the silent-omission versus articulated-substitute tie-breaker,
-isomorph exhibition scope, and the supply-boundary judgments including
-tool-mediated authorship). The amendments change no stored labels; every
-amendment states a reading already applied in the corrected annotation set.
-A further five clarifications were added after a trace audit of an LLM
-grader's divergences (the principles-versus-wrong-operation tie-breaker, the
-framing, bare-execution, and silence floors at the engagement gate, and the
-framing-before-continuity ordering); these likewise state readings already
-applied in the corrected set and change no stored labels. The
-tie-breaker's alternative-concept clause was subsequently sharpened with the
-structural-fidelity criterion after a regression-canary run showed
-statability alone being read as demonstration. A further
-amendment round followed the full-set LLM screening: the family routing
-principle with the licensed-step clause, relevance ownership with the
-silence-floor scope note, the credit default with the earn-side calibration,
-thread individuation with the residual scan, and the operational recitation
-test. The recitation test additionally corrected walkthrough credit at five
-turn-1 cells where sentence-replay had been credited as rewording (the
-adjudication column in the validation set documents each); no other stored
-labels changed.
-Worked examples drawn from held-out validation dialogues were later
-rewritten as synthetic illustrations so the instrument can be deployed
-without exposing held-out content; the adjudication log preserves the
-original case references. Numeric dialogue ids appearing beside remaining
-worked examples (e.g. 1420, 1639) are citations into the MathDial
-development corpus and the adjudication log; each example's
-content is stated inline, and the ids require no lookup and resolve to
-nothing outside those records.*
-
-Rules for labelling each student turn as **present**, **absent**, or
-**not_evidenced** for **each of the five misconception families**. Every turn
-receives five labels, one per family, each judged by that family's own construct.
-
-The codebook has three parts, applied in order. The **general rules** govern how
-any label is decided. The **cross-family adjudication** section fixes which
-family owns an error when more than one could claim it, so that one underlying
-error triggers exactly one family. The **family sections** define each family's
-construct and its present, absent, and not_evidenced conditions.
-
-The label always tracks the **family's specific misconception**, not whether
-the turn is correct overall.
-
----
-
 ## General rules (apply to all)
 
 These rules apply to every family and every turn. They are grouped for
@@ -2010,9 +1963,43 @@ number"), and phrasing an act as a rule is redescription, not demonstration.
 An act that abandons the demonstrated concept's structure for a flat
 operation, a raw multiplication standing beside a two-step
 find-the-factor-then-apply scaling, demonstrates no alternative concept and
-is wrong operation. Naming the underlying concept the act offends ("this is really
+is wrong operation.
+
+**The comprehension admission gate.** Before any comprehension thread is
+founded, the admission gate runs: a comprehension belief is admissible only
+where the student's own chain contains no demonstration of the correct
+reading, no correct labels, no idle correct line, no correctly derived
+component for the very quantity at issue, and where the belief concerns
+what the text states or asks rather than which stated value or candidate
+satisfies a condition. A selection or operation fault can always be
+redescribed as a belief about the problem, the cheaper pair judged after
+the discount, the excess taken as the touching count, and redescription
+never routes to comprehension: coherence of the constructed belief is not
+evidence, demonstration in her own text is. Naming the underlying concept the act offends ("this is really
 about proportionality") never routes the family by itself; the route runs
 through what the student's own act demonstrates.
+
+**The routing procedure (ordered).** Family routing runs these tests in
+this order, and a later test never overturns an earlier one that has fired.
+First, the own-chain scan, before any belief is entertained: inventory what
+the student's own labels, idle lines, and derived components already
+demonstrate; a deviant act contradicting her own demonstration routes to
+the operational cluster, and a comprehension belief is admissible only past
+the admission gate below. Second, ownership: a fault in which stated
+information enters the model, a given unused, displaced, or imported, or a
+candidate misselected against a stated condition, is relevance; a fault in
+what the text is taken to state or ask is comprehension. Third, the
+alternative-concept test under structural fidelity: a deviant application
+is principles only where it retains the concept's own structure with one
+component set contrary, and otherwise falls to the operational cluster.
+Fourth, within the operational cluster: an excess or misplaced operand
+inside a licensed construction is wrong operation, an unlicensed act is
+steps unless it enacts a statable belief, and belief-enactment, including
+re-derivations defending an anchored output, outranks the post-answer
+test. Standing constraint at every step: redescription of a fault as a
+belief is never evidence; routing runs through what her own text
+demonstrates, not through what a constructed belief could rationalise. The
+passages below state each test in full.
 
 **The family routing principle (own-chain demonstration).** The same logic
 governs the comprehension boundary. A comprehension thread's belief misstates
@@ -2030,7 +2017,13 @@ an excess or misplaced operand inside a licensed construction (a total that
 must be formed, a difference that must be taken) is wrong operation, while
 an act with no license at all, including any further derivation performed
 after the asked quantity already stands produced in her own chain, is steps
-unless the act enacts a statable belief of its own.
+unless the act enacts a statable belief of its own. Belief-enactment takes
+priority over the post-answer test: an act that enacts an existing thread's
+belief, including a re-derivation defending an anchored or protected
+output, exhibits that thread whatever its position in the chain; the steps
+routing for post-answer acts applies only to acts enacting no statable
+belief, and the anchor machinery is consulted before the post-answer
+clause, never after.
 
 ### Across-cluster pairs (conceptual versus procedural)
 
