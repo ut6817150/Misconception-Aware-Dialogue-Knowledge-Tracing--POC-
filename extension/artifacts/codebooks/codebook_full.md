@@ -61,7 +61,18 @@ coherent; resolve it from what the student's text demonstrates.
       coherent under the wrong reading and incompatible with an ordinary
       execution slip under the student's demonstrated chain; otherwise require
       consistent repetition or a rationale. An annotator's plausible
-      redescription is not evidence.
+      redescription is not evidence. This test is unreachable while an
+      own-chain demonstration stands: where test 1 of this ordering has fired
+      for the same quantity, role, or reading, no comprehension thread may be
+      founded on that content, however coherent the belief story reads, and
+      the token proceeds directly to the concept and procedural tests. An
+      idle correct line computing the very quantity later mishandled is such
+      a demonstration, whether or not the line was used downstream. Note that
+      comprehension here is narrower than the everyday sense of the word: not
+      every misunderstanding is comprehension, only a demonstrated wrong
+      reading of what the problem states or asks, and the ordinary-language
+      pull to file any rationalisable mistake under comprehension is exactly
+      what this ordering exists to resist.
    3. **Concept structure.** A deviant rule is **principles** only when it
       preserves the governing concept's structure while setting a component of
       that structure incorrectly. A flat or isolated arithmetic operation does
@@ -95,7 +106,37 @@ coherent; resolve it from what the student's text demonstrates.
    authored the construct-relevant content: after the tutor's words, could the
    student still choose that content incorrectly? If yes, the content remains
    the student's; if no, it was supplied.
-7. **Audit before output.** Confirm that:
+7. **Decide credit for each family in this fixed order.** This procedure
+   mirrors the token-routing order of step 4: run the tests in sequence, stop
+   for that cell as soon as a test settles it, and never let a later test or
+   a default reopen an earlier verdict. Each test below names a rule defined
+   in full elsewhere; this step fixes only their firing order.
+   1. **Floors.** The framing, bare-execution, and silence floors, evaluated
+      before the engagement gate as the universal question provides. An act
+      caught by a floor is not_evidenced for that construct; an act that
+      clears the floors proceeds.
+   2. **Supply.** The authorship matrix of step 6. A supplied construct is
+      not_evidenced; a construct the student could still have chosen
+      incorrectly after the tutor's words proceeds.
+   3. **Shadow and dual-use.** Content that is the error token's own
+      derivation, or an automatic consequence of another family's fault,
+      earns nothing; a distinct self-authored decision with its own
+      opportunity to fail proceeds, eligible on its own construct.
+   4. **Recitation.** Sentence replay earns nothing; a genuine reformulation
+      proceeds, judged only on the constructs actually rebuilt, per the
+      re-articulation standard.
+   5. **Fresh versus carried.** The two-condition test with the softened
+      carried default: a fired fresh condition is decisive, and the carried
+      default settles only the true remainder where the prior chain contains
+      the full content.
+   6. **The symmetric standard.** The surviving act is judged by the same
+      engagement standard as the present side: handled correctly it is
+      absent, exhibiting the misconception it is present, per the universal
+      question's correctness judgment.
+   7. **Commitment.** Record the verdict and do not reopen the cell; where
+      two readings survive every test, the stated tie-breaks and defaults
+      decide, once, per the audit's commitment item.
+8. **Audit before output.** Confirm that:
    - every comprehension presence has a direct quote, a structurally diagnostic
      enactment, or consistent repetition, not an annotator-created belief;
    - every displayed equality and assignment has been checked under the
@@ -140,7 +181,13 @@ navigation; every rule binds regardless of its group.
     distinct self-authored downstream decision can earn credit if it creates a
     new opportunity to fail that construct and passes the framing and dual-use
     floors. Where it is unclear whether a family was engaged at all, the label is
-    not_evidenced: the default for an unengaged family is never absent.
+    not_evidenced: the default for an unengaged family is never absent. The
+    standard is symmetric: the engagement that earns absent is the same
+    engagement that would ground present had it gone wrong, and credit is not
+    held to a stricter standard of demonstration than error. An act that would
+    have been routed as this family's error had it come out wrong earns this
+    family's absent when it comes out right, the floors and supply rules
+    permitting.
   - **Floors evaluated before the gate (order of operations):** the engagement
     gate is assessed only after three floors, and an act caught by a floor is
     **not_evidenced** regardless of how much reasoning it displays.
@@ -182,7 +229,10 @@ navigation; every rule binds regardless of its group.
       irrelevant given is not an act and earns nothing; relevance engagement
       requires an articulated selection, naming which information matters or
       explicitly setting a piece aside. Silence is never a positive act, in
-      symmetry with the silent-omission rule on the present side.
+      symmetry with the silent-omission rule on the present side. The earn
+      side, stated in balance: an articulated selection that comes out right
+      earns absent exactly as the same articulated selection gone wrong would
+      count present, one standard for the act in either direction.
   Put as a one-liner, absent means the student engaged the family's target
   reasoning and handled it correctly, present means they engaged it but
   exhibited the misconception, and not_evidenced means the turn did not engage
@@ -538,10 +588,19 @@ trial passed.
   The same two-condition test settles fresh versus carried for any
   re-derivation mid-dialogue: a re-derivation is fresh where it introduces at
   least one operation, premise, or relation absent from the prior chain, or
-  restructures the derivation's order; it is carried where its content is a
-  subset or reordering of the prior chain, and carried content earns nothing
-  however fluent. Where the two conditions genuinely tie, the act is carried:
-  the fresh side bears the establishment burden.
+  where it genuinely restructures the derivation, assembling the same content
+  through a different relational organisation rather than merely permuting
+  sentence order; it is carried where the prior chain demonstrably contains
+  its full content, as a subset or a mere permutation, and carried content
+  earns nothing however fluent. Any genuinely new relation, premise, or
+  restructuring makes the act fresh; a fired fresh condition is never
+  overridden by the default. The carried default decides only the true
+  remainder: where neither fresh condition fires and the prior chain contains
+  the full content, the act is carried. Where containment itself cannot be
+  established, the act has, by that fact, introduced something the prior
+  chain does not contain, and is fresh. This is the gate-versus-defaults
+  precedence applied to credit: defaults settle ties after the tests, never
+  in place of them.
   The two endorsement effects are
   unaffected, since they are acts rather than trials: a verbatim replay of a
   wrong chain still re-exhibits the thread, and a verbatim replay of a
@@ -557,7 +616,10 @@ trial passed.
   is absent; this is the same principle, the turn's content re-exhibits the
   (defensible) reading.
 - **Dual-use still applies.** A named computation that is the error's own
-  token earns nothing by being narrated.
+  token earns nothing by being narrated. Symmetrically, a named computation
+  beyond the error's own token remains eligible on its own construct, judged
+  by the same standard as any act: dual-use removes exactly the token's own
+  derivation from the credit ledger, nothing more.
 
 *Worked pair.* Credit-card dialogue (280), turn 1: "I calculated that the
 interest charged would be 20% of $150.00 = $30.00. Then, I added the interest
@@ -1470,8 +1532,10 @@ endpoint check, and persistence analysis.
    family whose independent error was simply missed.
 5. **Thread-independent credit.** Apply the ordinary engagement gates for
    absent credit unrelated to any thread (the symmetric standard, the
-   re-articulation standard, dual-use). Most absent labels arise here, not in
-   step 3.
+   re-articulation standard, dual-use), in the fixed order of the binding
+   protocol's credit procedure (step 7 there): floors, supply, shadow and
+   dual-use, recitation, fresh versus carried, the symmetric standard,
+   commitment. Most absent labels arise here, not in step 3.
 6. **Emit the five labels.** A family is present if any of its threads
    re-exhibits or newly originates in the turn; otherwise absent if the turn
    correctly engages the family's construct on the student's belief;
@@ -1479,14 +1543,6 @@ endpoint check, and persistence analysis.
 7. **Record.** Emit the turn's grid row (statuses with source attributions)
    and update the thread table (new rows, appended exhibitions with event
    tags, re-attribution entries stating what changed).
-
-**Quality assurance.** Human and LLM annotations compare at the thread level as
-well as the cell level: same sources found, same origins, same re-emergence
-patterns. Thread-level disagreement localises failures that cell agreement
-averages away. Development data may diagnose a rule, but estimates of
-generalisation must come from an untouched holdout and should be reported both
-overall and by family so a gain in one boundary cannot hide regressions in
-another.
 
 **Worked rendering (video-game hours dialogue, 1159).** Thread table: S1,
 comprehension, belief "the derived 6 is hours per game-day, the mislabelled
@@ -2792,7 +2848,11 @@ notes. This is a consistency check, not a new source of labels.
    student author, and what plausible error could they have made at that
    decision? If the tutor supplied the answer, corrected interpretation, or
    operation and operands, or if the act merely carried a value, change the
-   cell to not_evidenced unless genuinely new content remains.
+   cell to not_evidenced unless genuinely new content remains. Run the same
+   check in mirror: for every not_evidenced cell on a turn containing
+   self-authored reasoning, confirm that no construct-level decision with a
+   real opportunity to fail was overlooked. Withholding by default is the
+   same audit failure as granting by default.
 7. **Temporal integrity:** did later evidence alter an earlier family or
    candidate provenance? Restore the origin and record any changed cause only
    prospectively as a new thread or re-attribution event.
@@ -2808,5 +2868,4 @@ wording does not clearly match one of the five above, do not force a mapping:
 flag it, describe the observable construct in abstract terms, and adjudicate it
 through the binding execution protocol. Do not add an item-specific exception.
 If the construct cannot be routed without changing the family definitions,
-record it as a codebook-level issue to be evaluated on multiple development
-examples and then on an untouched holdout set.
+flag it and record the observable facts; do not invent a family for it.

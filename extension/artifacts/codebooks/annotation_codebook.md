@@ -1,40 +1,153 @@
 # Misconception Annotation Codebook
 
-*Changelog. The codebook was frozen before the full re-pass; six amendments
-were added afterwards, codifying the re-pass adjudications (anchored-output
-thread identity, the shown-operation first-occurrence rule, the produced-role
-label test, the silent-omission versus articulated-substitute tie-breaker,
-isomorph exhibition scope, and the supply-boundary judgments including
-tool-mediated authorship). The amendments change no stored labels; every
-amendment states a reading already applied in the corrected annotation set.
-A further five clarifications were added after a trace audit of an LLM
-grader's divergences (the principles-versus-wrong-operation tie-breaker, the
-framing, bare-execution, and silence floors at the engagement gate, and the
-framing-before-continuity ordering); these likewise state readings already
-applied in the corrected set and change no stored labels.
-Worked examples drawn from held-out validation dialogues were later
-rewritten as synthetic illustrations so the instrument can be deployed
-without exposing held-out content; the adjudication log preserves the
-original case references. Numeric dialogue ids appearing beside remaining
-worked examples (e.g. 1420, 1639) are citations into the MathDial
-development corpus and the adjudication log; each example's
-content is stated inline, and the ids require no lookup and resolve to
-nothing outside those records.*
+Worked examples throughout this codebook illustrate rules; the abstract
+tests govern. Where an item resembles an example but fails the rule's test,
+follow the test, never the resemblance: examples are not a similarity
+lookup.
 
-Rules for labelling each student turn as **present**, **absent**, or
-**not_evidenced** for **each of the five misconception families**. Every turn
-receives five labels, one per family, each judged by that family's own construct.
+## The binding execution protocol
 
-The codebook has three parts, applied in order. The **general rules** govern how
-any label is decided. The **cross-family adjudication** section fixes which
-family owns an error when more than one could claim it, so that one underlying
-error triggers exactly one family. The **family sections** define each family's
-construct and its present, absent, and not_evidenced conditions.
+This protocol is the authoritative order of operations for every unit. The
+longer sections below define the tests in detail and add edge cases, but a later
+description or example cannot overturn an earlier test that has already fired.
+Do not resolve uncertainty by choosing the family that makes the story most
+coherent; resolve it from what the student's text demonstrates.
 
-The label always tracks the **family's specific misconception**, not whether
-the turn is correct overall.
+1. **Solve and represent the task independently.** Record the requested role,
+   the problem-given quantities, their units and predicates, the relations, and
+   a valid solution route. Do this before reconstructing the student's belief.
+2. **Build a provenance-and-role ledger from the prefix.** For every quantity or
+   relation used by the student, record:
+   - its provenance: *problem-given*, *student-derived*, *tutor-supplied*, or
+     *imported/unsupported*;
+   - the role or predicate the student assigns it, using the student's own
+     label where one exists; and
+   - the earliest act that registers that meaning or role.
 
----
+   Provenance is historical and therefore frozen. Transforming a selected
+   problem-given candidate later does not turn the original selection into a
+   choice between derived candidates. Trace a disputed selection back to the
+   competing inputs at the moment of selection, then classify those inputs.
+3. **Inventory error tokens before choosing families.** Mark every committed
+   false claim, false equality, wrong selection, role mismatch, conceptual
+   relation, missing required act, and unnecessary act. After identifying the
+   most salient error, scan the rest of the unit again. For each pair of
+   candidate errors, correct one counterfactually while holding the student's
+   other commitments fixed:
+   - if the other error disappears, it is a downstream shadow of the same
+     token; route the root token once;
+   - if the other error remains, it is an independent token and must be routed
+     separately, even if the two tokens occur in one equation or sentence.
+
+   In particular, a conceptual error does not absorb a separate equality that
+   is false under the student's own stated quantities. Conversely, arithmetic
+   that is correct under a demonstrated wrong belief is only that belief's
+   downstream shadow.
+4. **Route each independent token in this fixed order.** Stop for that token as
+   soon as a test fires.
+   1. **Own-chain demonstration.** If the prefix correctly labels, defines, or
+      derives the same quantity, role, or relation later contradicted, a newly
+      invented comprehension story is barred. Route the contradictory act to
+      the appropriate selection, concept, or procedural test. The scope is
+      strict: a correct line about a different quantity, a different role, or
+      a different reading blocks nothing, and nearby correct work on other
+      parts of the problem never bars a comprehension belief about this one.
+   2. **Information ownership.** Choosing the wrong member of competing
+      problem-given candidates that can fill the same role is **relevance**.
+      Treating a stated quantity as a different kind, structural level,
+      referent, or requested role is **comprehension**, but only when that
+      interpretation is exhibited in the student's words or by a structurally
+      diagnostic act. A single act is diagnostic only when it is locally
+      coherent under the wrong reading and incompatible with an ordinary
+      execution slip under the student's demonstrated chain; otherwise require
+      consistent repetition or a rationale. An annotator's plausible
+      redescription is not evidence. This test is unreachable while an
+      own-chain demonstration stands: where test 1 of this ordering has fired
+      for the same quantity, role, or reading, no comprehension thread may be
+      founded on that content, however coherent the belief story reads, and
+      the token proceeds directly to the concept and procedural tests. An
+      idle correct line computing the very quantity later mishandled is such
+      a demonstration, whether or not the line was used downstream. Note that
+      comprehension here is narrower than the everyday sense of the word: not
+      every misunderstanding is comprehension, only a demonstrated wrong
+      reading of what the problem states or asks, and the ordinary-language
+      pull to file any rationalisable mistake under comprehension is exactly
+      what this ordering exists to resist.
+   3. **Concept structure.** A deviant rule is **principles** only when it
+      preserves the governing concept's structure while setting a component of
+      that structure incorrectly. A flat or isolated arithmetic operation does
+      not become principles merely because a conceptual rule can be invented to
+      describe it.
+   4. **Procedural role.** Use the role ledger. A required construction whose
+      operation or operands are wrong is **wrong operation**. An omitted,
+      unnecessary, or invalidly sequenced construction is **steps**. Apply the
+      more detailed produced-role and component-duplication tests below.
+5. **Fix family at origin, then track prospectively.** Assign a thread's family
+   at its first demonstrated exhibition. Later evidence may found a new thread
+   or re-attribute the cause from that later turn forward under the source-ledger
+   rules; it never rewrites earlier cells or silently changes the original
+   family. Merely using a quantity somewhere does not prove that its role was
+   understood. Registration is specific to the meaning or role enacted.
+6. **Run authorship and engagement separately for every family.** First ask
+   what construct-relevant content the tutor supplied; then ask what decision
+   the student made. Use this binding matrix:
+
+   | Preceding context and student act | Eligible credit |
+   |---|---|
+   | Tutor states the corrected interpretation, answer, or operation together with its operands; student repeats or executes it | **not_evidenced** for that supplied construct |
+   | Tutor gives a leading yes/no or forced choice whose correct arm contains the corrected content; student selects it | **not_evidenced** for that supplied construct |
+   | Tutor supplies only a result; student independently supplies a previously unstated relation, interpretation, operation, or justification that derives it | The supplied result earns nothing, but each genuinely new construct-level decision is eligible for **absent** |
+   | Tutor points to an area or names a fault but leaves the corrected content open; student independently constructs the correction | Eligible for **absent** in each construct genuinely decided |
+   | Student performs bare arithmetic with no self-authored concept-level choice | Operation may be engaged; principles is **not_evidenced** |
+   | A correct value is merely carried from an earlier act or supplied premise | **not_evidenced** for constructs not newly decided |
+   | Student makes a distinct, self-authored downstream decision with a real opportunity to fail, even though an earlier premise is wrong | Eligible for **absent** for that distinct decision, subject to dual-use and framing floors |
+
+   Logical entailment alone is not supply. The question is whether the tutor
+   authored the construct-relevant content: after the tutor's words, could the
+   student still choose that content incorrectly? If yes, the content remains
+   the student's; if no, it was supplied.
+7. **Decide credit for each family in this fixed order.** This procedure
+   mirrors the token-routing order of step 4: run the tests in sequence, stop
+   for that cell as soon as a test settles it, and never let a later test or
+   a default reopen an earlier verdict. Each test below names a rule defined
+   in full elsewhere; this step fixes only their firing order.
+   1. **Floors.** The framing, bare-execution, and silence floors, evaluated
+      before the engagement gate as the universal question provides. An act
+      caught by a floor is not_evidenced for that construct; an act that
+      clears the floors proceeds.
+   2. **Supply.** The authorship matrix of step 6. A supplied construct is
+      not_evidenced; a construct the student could still have chosen
+      incorrectly after the tutor's words proceeds.
+   3. **Shadow and dual-use.** Content that is the error token's own
+      derivation, or an automatic consequence of another family's fault,
+      earns nothing; a distinct self-authored decision with its own
+      opportunity to fail proceeds, eligible on its own construct.
+   4. **Recitation.** Sentence replay earns nothing; a genuine reformulation
+      proceeds, judged only on the constructs actually rebuilt, per the
+      re-articulation standard.
+   5. **Fresh versus carried.** The two-condition test with the softened
+      carried default: a fired fresh condition is decisive, and the carried
+      default settles only the true remainder where the prior chain contains
+      the full content.
+   6. **The symmetric standard.** The surviving act is judged by the same
+      engagement standard as the present side: handled correctly it is
+      absent, exhibiting the misconception it is present, per the universal
+      question's correctness judgment.
+   7. **Commitment.** Record the verdict and do not reopen the cell; where
+      two readings survive every test, the stated tie-breaks and defaults
+      decide, once, per the audit's commitment item.
+8. **Audit before output.** Confirm that:
+   - every comprehension presence has a direct quote, a structurally diagnostic
+     enactment, or consistent repetition, not an annotator-created belief;
+   - every displayed equality and assignment has been checked under the
+     student's own demonstrated beliefs;
+   - every distinct predicate or requested role is represented in the role
+     ledger;
+   - every multi-family presence passes the counterfactual independence test;
+   - every absent label identifies a self-authored, construct-level decision
+     with an opportunity to fail; and
+   - candidate provenance and thread family were not rewritten using later
+     transformations or hindsight.
 
 ## General rules (apply to all)
 
@@ -61,6 +174,20 @@ navigation; every rule binds regardless of its group.
     reasoning handles the family's target soundly, the turn is **absent**. If
     the reasoning is in play but exhibits the misconception, the turn is
     **present**.
+  - **The credit default.** Credit is act-based and per-construct: an absent
+    label requires a self-authored act this turn that engages the family's
+    own decision and comes out right. Ambient correctness, carried figures,
+    and automatic consequences of another family's fault earn nothing. A
+    distinct self-authored downstream decision can earn credit if it creates a
+    new opportunity to fail that construct and passes the framing and dual-use
+    floors. Where it is unclear whether a family was engaged at all, the label is
+    not_evidenced: the default for an unengaged family is never absent. The
+    standard is symmetric: the engagement that earns absent is the same
+    engagement that would ground present had it gone wrong, and credit is not
+    held to a stricter standard of demonstration than error. An act that would
+    have been routed as this family's error had it come out wrong earns this
+    family's absent when it comes out right, the floors and supply rules
+    permitting.
   - **Floors evaluated before the gate (order of operations):** the engagement
     gate is assessed only after three floors, and an act caught by a floor is
     **not_evidenced** regardless of how much reasoning it displays.
@@ -88,12 +215,24 @@ navigation; every rule binds regardless of its group.
       choice, that the student sets herself beyond what the prompt supplies;
       correctly performing division does not engage the equal-sharing concept
       where the only conceptual choice in play, such as who belongs in the
-      group, is elsewhere or is itself the error.
+      group, is elsewhere or is itself the error. The earn side, for
+      calibration: a scale factor the student derives herself and applies
+      correctly in her own chain is a self-set concept-level choice and earns
+      principles credit despite being arithmetic in form, and a unit rate she
+      derives herself at a posed question is likewise self-set, posed prompts
+      leaving the concept choice hers. The earn side is fenced to the
+      problem's live concept decision: it licenses credit only where the
+      concept-level choice (base, direction, scale, part-whole assignment)
+      was genuinely open at that point in this problem, never wherever a
+      factor or rate merely appears inside arithmetic.
     - *The silence floor (relevance):* silently not using a distractor or an
       irrelevant given is not an act and earns nothing; relevance engagement
       requires an articulated selection, naming which information matters or
       explicitly setting a piece aside. Silence is never a positive act, in
-      symmetry with the silent-omission rule on the present side.
+      symmetry with the silent-omission rule on the present side. The earn
+      side, stated in balance: an articulated selection that comes out right
+      earns absent exactly as the same articulated selection gone wrong would
+      count present, one standard for the act in either direction.
   Put as a one-liner, absent means the student engaged the family's target
   reasoning and handled it correctly, present means they engaged it but
   exhibited the misconception, and not_evidenced means the turn did not engage
@@ -219,9 +358,12 @@ tracking the belief behind it:
 
 - **Origin attribution:** at an error's first exhibition, reconstruct the
   belief behind it from the prefix available there and fix the family by the
-  usual machinery, defaults included. If that prefix cannot positively
-  establish an intact belief, the procedural labels are unavailable at the
-  origin, per burden of establishment.
+  binding routing protocol. Every family carries its own positive-evidence
+  burden: failure to establish an intact belief does not itself establish a
+  wrong belief, and failure to establish a wrong belief does not itself prove
+  intact understanding. If no family test fires, retain the act as unattributed
+  residue rather than forcing a family; later evidence may found a thread from
+  that later unit but never relabel the origin backward.
 - **Belief-continuity check at every later exhibition:** run the framing test
   first: if the act this turn performs has its content stated by the
   immediately preceding tutor turn, the operation with its operands, or the
@@ -419,30 +561,47 @@ motivated-falsehood machinery govern as usual, so a re-derivation whose
 arithmetic is bent to protect an anchored output remains a falsehood, not a
 trial passed.
 
-- **Reasoned re-articulation earns absent.** Accurately re-deriving one's own
-  work, with the operands, the relations, and the order intact, is a genuine
-  trial of the constructs it engages: it can fail, and in this corpus it does
-  (narrations that garble the student's own chain, stated operations that
-  contradict the enacted result, broken equations produced while describing
-  correct work). A walkthrough that re-articulates the reasoning therefore
-  earns absent for each construct it engages correctly on the student's
-  belief, exactly as the original performance did. Solving and accurately
-  re-explaining are two acts and two trials; their correlation is no different
-  from that of any adjacent-turn labels.
+- **Fresh, decision-bearing re-articulation earns absent.** A walkthrough may
+  re-derive the same mathematical route and still be a new trial when it
+  genuinely regenerates the account: it freshly states how quantities are
+  related, assembles operands, or explains the order of steps rather than
+  copying the earlier sentences. For each family, identify the decision
+  re-articulated—information selection, meaning or role, governing concept,
+  operation and operands, or step selection and sequence—and award credit only
+  for those decisions. A fresh account need not invent a different solution
+  method, but fluency or length alone earns nothing. Credit is construct by
+  construct, never blanket credit for the whole walkthrough.
 - **Bare figure-listing is a carried account.** A walkthrough that only lists
   outcomes ("I figured out X, then I got Y") re-articulates no reasoning,
   contains no opportunity to fail at any construct, and is not_evidenced for
   the non-error columns, per the carried-figures rule.
-- **Verbatim replay is recitation, not re-articulation.** Reproducing one's
-  own prior text verbatim or near-verbatim, with only trivial connective
-  changes, contains no opportunity to fail at any construct and is therefore
-  not a trial, exactly as bare figure-listing is not, whatever operands and
-  order the copied text happens to contain. Credit requires a fresh
-  formulation, reworded into new sentences, reordered, or shaped to answer
-  the specific question asked, which restores the opportunity to fail (the
-  games dialogue, 2233, turn 1 earns as a reworded first-person
-  re-derivation; the bunny dialogue, 1064, turn 2 repeats the previous turn
-  nearly unchanged and earns nothing). The two endorsement effects are
+- **Sentence replay is recitation; genuine reformulation is a new trial.**
+  Compare the current account with the prior work, not with an abstract ideal
+  solution. If its content sentences map one-to-one onto the prior sentences in
+  the same derivational order, with only copied equations, pronoun, tense,
+  connective, or minor fluency changes, it is recitation and earns nothing.
+  Do not use a numeric token-similarity threshold: the decision turns on whether
+  the reasoning was regenerated. A reformulation is eligible when the current
+  turn independently reconstructs at least one relation, operand assembly, or
+  step connection in fresh sentence structure, a reorganised derivation, or a
+  newly supplied explanation. Then judge only the constructs actually rebuilt.
+  The same two-condition test settles fresh versus carried for any
+  re-derivation mid-dialogue: a re-derivation is fresh where it introduces at
+  least one operation, premise, or relation absent from the prior chain, or
+  where it genuinely restructures the derivation, assembling the same content
+  through a different relational organisation rather than merely permuting
+  sentence order; it is carried where the prior chain demonstrably contains
+  its full content, as a subset or a mere permutation, and carried content
+  earns nothing however fluent. Any genuinely new relation, premise, or
+  restructuring makes the act fresh; a fired fresh condition is never
+  overridden by the default. The carried default decides only the true
+  remainder: where neither fresh condition fires and the prior chain contains
+  the full content, the act is carried. Where containment itself cannot be
+  established, the act has, by that fact, introduced something the prior
+  chain does not contain, and is fresh. This is the gate-versus-defaults
+  precedence applied to credit: defaults settle ties after the tests, never
+  in place of them.
+  The two endorsement effects are
   unaffected, since they are acts rather than trials: a verbatim replay of a
   wrong chain still re-exhibits the thread, and a verbatim replay of a
   defended solution still re-enacts the defence in the comprehension column.
@@ -457,7 +616,10 @@ trial passed.
   is absent; this is the same principle, the turn's content re-exhibits the
   (defensible) reading.
 - **Dual-use still applies.** A named computation that is the error's own
-  token earns nothing by being narrated.
+  token earns nothing by being narrated. Symmetrically, a named computation
+  beyond the error's own token remains eligible on its own construct, judged
+  by the same standard as any act: dual-use removes exactly the token's own
+  derivation from the credit ledger, nothing more.
 
 *Worked pair.* Credit-card dialogue (280), turn 1: "I calculated that the
 interest charged would be 20% of $150.00 = $30.00. Then, I added the interest
@@ -470,7 +632,7 @@ turtle would need 18 seconds... so I divided 18 by 2" lists outcomes, and the
 one operation it names is the error's own token (dual-use), so the non-error
 columns stay not_evidenced.
 
-### One error, one family (exclusivity and layering)
+### One error token, one family; one turn may contain several tokens
 
 - **A turn can genuinely exhibit more than one misconception, and they can
   layer.** This rule concerns turns that *genuinely* exhibit several
@@ -479,6 +641,13 @@ columns stay not_evidenced.
   confusable families apart, use the cross-family adjudication rules below; a
   turn that is really one misconception dressed to look like another is resolved
   there, not here.
+
+  **Mandatory residual scan.** The first or most salient error is never assumed
+  to explain the entire turn. Check every remaining equality, assignment,
+  selection, and procedural act after routing it. If a remaining falsehood is
+  still false after the first error is counterfactually corrected, it is a
+  separate token. This requirement applies even when both errors contribute to
+  the same final answer and even when their families differ.
 
   **The governing principle is that the families are mutually exclusive at the
   level of a single underlying error.** One underlying error triggers exactly
@@ -707,9 +876,13 @@ columns stay not_evidenced.
   - If the student only echoes the supplied content or acknowledges it, with no
     reasoning of their own, it is **not_evidenced** (the correctness is the
     tutor's, not the student's).
-  - If the student adds reasoning that demonstrates they now understand,
-    including restating the corrected idea in their own terms or correctly
-    characterising what was wrong before, it is **absent**.
+  - If the student makes a new construct-level decision that the tutor did not
+    supply, and that decision demonstrates the corrected understanding, it is
+    eligible for **absent** for the construct actually decided. Restating
+    the corrected idea in the student's own terms, or correctly
+    characterising what was wrong before, is added reasoning and earns
+    **absent**; only a verbatim or near-verbatim echo of the tutor's words,
+    with nothing recast and nothing diagnosed, stays **not_evidenced**.
   - If the student reproduces the supplied content but their reasoning still
     exhibits the misconception (a contradictory wrong value or explanation
     remains), it is **present**. This third outcome is the
@@ -717,6 +890,12 @@ columns stay not_evidenced.
     this codebook.
   This is the parroting-versus-comprehending test, and it applies whatever the
   tutor supplied.
+  - **Leading-question supply.** A grammatical question can supply content. A
+    yes/no prompt or forced choice supplies the corrected construct when the
+    correct response merely accepts content already stated in the prompt.
+    Conversely, an imperative or hint can be only pointing when it identifies
+    an area to revisit but leaves the corrected content open. Judge authorship,
+    not punctuation.
   - **Fluency is not comprehension (referent and application, not wording):**
     do not treat fluent reasoning or phrases like "I understand now" as evidence
     of comprehension by themselves. Check whether the restatement actually
@@ -752,10 +931,11 @@ columns stay not_evidenced.
     result, without adding reasoning that demonstrates grasp, is not_evidenced
     rather than absent. A clean, corrected answer is not by itself evidence of
     understanding when the correction was handed over in full. Absent still
-    requires the student to add something, restating the corrected idea in their
-    own terms, explaining why the fix is right, or applying it beyond the literal
-    instruction. Added reasoning means content the student supplies that the
-    tutor did not state, so to decide whether the student added something, compare
+    requires the student to add something, restating the corrected idea in
+    their own terms, explaining why the fix is right, or applying it beyond
+    the literal instruction. Added reasoning means content the student
+    supplies that the tutor did not state, so to decide whether the student
+    added something, compare
     the content of the student's turn against the content of the tutor's turn. If
     the student articulates reasoning the tutor did not spell out, such as why the
     corrected quantity is the right one, that is added reasoning and the turn is
@@ -1285,10 +1465,10 @@ endpoint check, and persistence analysis.
    closes it again. The two poles: a corrected element named early,
    re-exhibited through the middle turns, and self-performed at the close
    resolves; an adopted correction that never re-exhibits leaves its later
-   deployment executing named content, resolving nothing. Such
-   executions still earn ordinary absent credit where the engagement gates
-   pass; the resolution status is the stronger claim and is what this step
-   withholds. One act can resolve more than one thread: where a single
+   deployment executing named content, resolving nothing. Such executions
+   still earn ordinary absent credit where the engagement gates pass; the
+   resolution status is the stronger claim and is what this step withholds.
+   One act can resolve more than one thread: where a single
    self-performed act commits the corrected counterpart of two threads'
    tokens, each thread records its own resolution event at that turn (the
    games dialogue 1538, turn 4, where 7 - 5 = 2 corrects both the inverted
@@ -1326,9 +1506,12 @@ endpoint check, and persistence analysis.
    attributable route and no engagement creates no thread and is
    not_evidenced, since a present label requires a reconstructable family. An
    anchored recombination, an old output recombined with a newly supplied
-   figure into a committed claim, does engage the problem within the existing
-   error context and is present, comprehension by the burden default, with
-   the anchor as its signature. The recombination rule is a residual,
+   figure into a committed claim, engages the problem within the existing
+   error context. First match any protected output or structural signature;
+   otherwise route the new construction from its observable provenance, role,
+   concept structure, or procedure. Where none fires, the burden default
+   stands: present, comprehension, with the anchor as its signature. The
+   recombination rule is a residual,
    reachable only for content the step-2 scan leaves unattributed. At any
    turn where an old output or a supplied figure appears inside a fresh
    committed construction, two questions are asked in order. First, does the
@@ -1338,10 +1521,21 @@ endpoint check, and persistence analysis.
    splice, and creation is closed. Second, only where neither matcher fires
    and an old output sits as a mere ingredient in an otherwise
    unattributable claim does this rule found the new thread.
+4b. **Individuation and the residual scan.** Threads are individuated by
+   belief, not by family or by turn: distinct wrong beliefs get distinct
+   threads even in the same family, and a single unit may commit or exhibit
+   several. Re-scan every equality, assignment, selection, and procedure after
+   attributing the most salient error. Correct each attributed error
+   counterfactually in turn. Wrong content that remains unexplained founds or
+   exhibits its own thread rather than being absorbed into the dominant story.
+   This scan occurs before credit so a correct-looking act is not credited in a
+   family whose independent error was simply missed.
 5. **Thread-independent credit.** Apply the ordinary engagement gates for
    absent credit unrelated to any thread (the symmetric standard, the
-   re-articulation standard, dual-use). Most absent labels arise here, not in
-   step 3.
+   re-articulation standard, dual-use), in the fixed order of the binding
+   protocol's credit procedure (step 7 there): floors, supply, shadow and
+   dual-use, recitation, fresh versus carried, the symmetric standard,
+   commitment. Most absent labels arise here, not in step 3.
 6. **Emit the five labels.** A family is present if any of its threads
    re-exhibits or newly originates in the turn; otherwise absent if the turn
    correctly engages the family's construct on the student's belief;
@@ -1349,11 +1543,6 @@ endpoint check, and persistence analysis.
 7. **Record.** Emit the turn's grid row (statuses with source attributions)
    and update the thread table (new rows, appended exhibitions with event
    tags, re-attribution entries stating what changed).
-
-**Validation use.** Human and LLM annotations compare at the thread level as
-well as the cell level: same sources found, same origins, same re-emergence
-patterns. Thread-level disagreement localises failures that cell agreement
-averages away.
 
 **Worked rendering (video-game hours dialogue, 1159).** Thread table: S1,
 comprehension, belief "the derived 6 is hours per game-day, the mislabelled
@@ -1439,7 +1628,7 @@ beliefs is procedural, per this test.
 ### Derived and intermediate quantities (route by the cluster test)
 
 The family constructs speak of the problem's stated information and described
-structure, but the most frequent error mechanism in the development data involves
+structure, but a recurring error mechanism in dialogue data involves
 quantities the *student herself derived*: an intermediate re-enters the
 computation in the wrong role, a factor or component is applied twice, or a
 derived total is relabelled as one of its parts. Examples include re-multiplying
@@ -1470,9 +1659,9 @@ execution under that belief.**
   the end, justifying both doublings by the same fact she plainly knows. The
   belief inventory is correct, so the duplication is an execution lapse.
 
-**Default for unreconstructable cases.** Sometimes the prefix never reveals
-what the student thinks the derived quantity is, and both stories fit everything
-she wrote. *Worked case (video-game hours dialogue):* the student writes 2
+**Unreconstructable cases: ordered tests, then the burden default.** Sometimes the prefix
+never reveals what the student thinks the derived quantity is, and both stories
+fit everything she wrote. *Worked case (video-game hours dialogue):* the student writes 2
 hours x 3 days = 6 hours and, in the same turn, 6 x 3 = 18. Read in isolation
 this looks unresolvable: the first half suggests she knows the 6 is the weekly
 total (procedural), while the persistence of the re-multiplication under
@@ -1487,15 +1676,17 @@ discount); and the 2 x 3 = 6 itself fills in a formula the tutor dictated in
 the preceding turn. The single belief explaining every exhibition is that the 6
 is a per-day quantity, her solution's mislabelled 4 + 2, so the origin is a
 wrong belief about a derived quantity, comprehension, and every exhibition
-inherits it. Where even prefix-scoped reconstruction genuinely fails (no stable
-act, no rationale, no consistent enactment),
-**default to the conceptual side (comprehension)**. The rationale is burden of
-establishment: the procedural label requires positively establishing that the
-belief is intact, since a demonstrably intact belief is what makes the error
-bookkeeping rather than misconception, and where the belief cannot be
-reconstructed that requirement fails. This mirrors the logic of the other
-default clauses in this section, where the side carrying the
-positive-establishment burden loses ties.
+inherits it. That conclusion comes from repeated structural evidence, not from a
+default. Where prefix-scoped reconstruction genuinely fails, no stable act,
+no rationale, no consistent enactment, route first by any observable test
+that fires: a false equality under the student's stated inputs, a
+provenance-defined information selection, or an unlicensed act under the
+role ledger. Where no observable test fires, the burden default applies:
+**default to the conceptual side (comprehension)**. The rationale is burden
+of establishment: the procedural label requires positively establishing that
+the belief is intact, and where the belief cannot be reconstructed that
+requirement fails. The default decides ties only; it never overrides a test
+that has fired.
 
 **Relation to the independence test.** If granting the student her wrong belief
 about the derived quantity would make the computation correct, there is one
@@ -1510,16 +1701,32 @@ confusion involving a derived quantity (an earlier derived count migrating into
 a same-kind slot) routes under this clause, not under the dimensional-slot
 clause's same-kind arm, which governs the problem's stated quantities only.
 
-**Referent-to-derived-base errors are comprehension (the ordered provenance
-test).** When a stated relation's referent binds to the wrong base, the
+**Referent-to-derived-base errors use the ordered provenance-and-belief
+test.** When a stated relation's referent binds to the wrong base, the
 routing is fixed by an ordered test on the provenance of the two candidate
 quantities, checked before any mechanism reading.
 
-- **A derived quantity on either side routes here, comprehension.** Where a
-  derived quantity stands where a given belongs, or a given stands where a
-  derived belongs, the error is a wrong belief about what the phrase refers
-  to, comprehension, even though the arithmetic performed on the misbound
-  base is locally correct.
+**Freeze candidate provenance at the disputed choice.** Identify the upstream
+candidates that competed for the role when the student selected the base. Their
+provenance does not change when the selected candidate is subsequently
+discounted, scaled, summed, or otherwise transformed. Thus a choice between two
+problem-given candidates remains a two-given choice even if the chosen input
+later produces a derived result. The derived-result arm below applies only when
+a genuinely student-derived quantity was itself one of the competing bases at
+the moment of selection. This is a historical-source test, not a test of which
+numbers appear in the final equation.
+
+- **A genuinely derived competing base routes here by demonstrated binding.**
+  Where a student-derived quantity itself competes with a given or another
+  derived quantity for the stated referent, run the role-aware belief test. An
+  explicit equation or narration that installs the derived quantity in the
+  referent's semantic slot is itself a demonstrated binding when the subsequent
+  arithmetic coherently executes that mapping; repetition is not required.
+  This routes to comprehension because the error is in what the stated relation
+  attaches to. If the student's prefix already labels the competing quantities
+  in their correct roles and the deviant occurrence contradicts those labels,
+  it is instead a one-off operand pairing and routes procedurally. Derived
+  provenance without an identifiable referent slot establishes neither side.
 - **Two given candidates route to relevance.** Where both candidates are the
   problem's stated quantities, the case is same-kind misassignment under the
   same-kind arm of the comprehension-relevance entry, whether or not the
@@ -1531,6 +1738,12 @@ quantities, checked before any mechanism reading.
 - **Two derived candidates route by belief.** Where both candidates are
   derived, relevance is unavailable by the remit above, and the case routes
   by the belief test of this clause, conceptual or procedural.
+
+Once the source is founded, its family is fixed at origin. A later transformed
+value, tutor explanation, or simpler re-expression cannot retroactively
+reclassify the original selection. If later work demonstrates a genuinely new
+cause, record a prospective re-attribution or a new thread under the source
+ledger instead of editing the origin.
 
 The signature at origin is the misbound referent and its base. Worked
 instances, each with a derived quantity on one side:
@@ -1582,13 +1795,11 @@ rescued by correct arithmetic inside it: judge the model the strategy
 presupposes, not whether intermediate numbers come out right along the way.
 When a wrong-information error and a wrong-looking strategy coincide, the wrong
 information is usually the cause, so relevance. When it is unclear whether the
-reading behind a strategy was intact, the burden defaults apply as usual
-(comprehension).
-
-**Validation note.** The thirteen problem-type-profiled dialogues remain in the
-development set; their profiled errors annotate under the five families via
-this routing rule, and the thirteen-per-profiled-family sampling stratification
-stands as provenance.
+reading behind a strategy was intact, route first from positive evidence: a
+demonstrated wrong reading, a provenance-defined information choice, a
+structurally faithful alternative principle, or an observable procedural
+fault under the role ledger. Where none fires, the burden default applies as
+usual (comprehension), per the origin-attribution rule.
 
 **How to read the entries.** Each boundary is written once, under one pair, in a
 uniform shape: the cluster relationship, the deciding question, a compressed
@@ -1603,7 +1814,15 @@ misunderstand what a correctly chosen piece represents?**
 
 - If the error is in the *selection* of information, choosing a distractor,
   ignoring a stated value or quantity, or attaching a value to the wrong
-  condition among those the problem states, it is **relevance**. *Worked
+  condition among those the problem states, it is **relevance**. Relevance
+  owns which of the problem's information enters the model: a stated given
+  left unused, displaced by an invented quantity or an assumed value, or a
+  foreign quantity imported, is a relevance fault even where it yields a
+  false model of the situation, and even where the problem contains no
+  distractor at all. Comprehension owns what the text is taken to state or
+  ask. The silence floor governs credit only and never blocks a presence: a
+  given silently omitted or displaced, with visible effect in the model, is
+  an act on the present side under the silent-omission rule. *Worked
   example (egg-collection dialogue, 1420):* the one-hour collection duration is
   a stated quantity with no role in any correct chain; multiplying it into the
   egg count (270 x 60) is the inclusion face of the same selection failure whose
@@ -1666,7 +1885,21 @@ scheme, so comprehension. This test applies only to never-registered
 conditions; if the condition was registered and then dropped, the
 coincident-case tie-breaker routes the error to the procedural families before
 this question arises.
-Registration is not purpose-relative: a value used anywhere in the unit's working counts as registered, whatever role it served there, so a quantity employed as one computation's base and omitted from another's aggregation is registered-then-dropped, procedural, not never-registered (the phone dialogue, 1095, where the 1000 serves as the percentage base and is dropped from the sum; the cake dialogue, 1900, where the snack 1 derives the 2 and is dropped from the add-back).
+**Registration has two fields: source and role.** A value used anywhere is
+source-registered, so it is not a silently ignored datum; however, only the
+meaning or predicate enacted by that use is role-registered. If the student
+uses the stated value under the wrong structural role, the positive wrong-role
+enactment routes to comprehension rather than being treated as an omitted
+datum, with the ownership test governing the boundary: where the wrong-role
+use consists in selecting the wrong member of competing stated candidates
+for a slot, or attaching a stated value to the wrong condition among those
+the problem states, it is relevance, not comprehension; the comprehension
+arm here is for a single stated quantity treated as a different kind,
+structural level, or referent (a part as a whole, a subtotal as a total).
+If the student first uses it in the correct role and later drops it from a
+licensed construction, the error is procedural. Thus “used somewhere” blocks
+the never-selected account but does not prove correct understanding of every
+role the value could occupy.
 Where a never-registered given's role is occupied by a mislabelled derived quantity, the derived-mislabel account governs and the thread files comprehension, by parsimony: one belief, that the derived quantity is that thing, explains both the occupation and the ignoring at once (the sandwich dialogue 98, the derived 40 in the eaten slot with the given 28 absent; the terrier dialogue 990, the structure-derived 3 with the six hushes absent). The relevance arm applies where the ignored given's role is simply unfilled, nothing standing in it (the chips dialogue 1639).
 
 **The dimensional-slot clause.** The two constructs overlap on
@@ -1748,13 +1981,12 @@ belief from the dialogue up to the turn being judged, per the general
 reconstruction rule
 ("Reconstruct the student's mistake before labelling ambiguous turns"), then
 judge the turn against that reconstructed belief. If after reconstruction the
-belief is still genuinely ambiguous, the turn is not an operation-family
-error, since operation requires a demonstrated wrong execution under a clear
-belief. The error then routes conceptual, comprehension by the burden
-default: the procedural labels require the intact belief positively
-established, and where reconstruction cannot establish it that requirement
-fails, per the origin-attribution rule of the stability section and the
-default of the derived-and-intermediate-quantities clause.
+belief is still genuinely ambiguous, comprehension requires positive
+evidence of a wrong reading and wrong operation requires a demonstrated
+execution fault under the student's belief, so apply any other observable
+routing test that fires first. Where none fires, the burden default of the
+derived-and-intermediate-quantities clause applies (comprehension): the side
+carrying the positive-establishment burden loses the tie.
 
 **Both can be present, but only as genuine co-occurrence.** This note is bounded,
 because this pair is exactly where an annotator is tempted to mark both. Two
@@ -1803,6 +2035,31 @@ Compressed: wrong operation is a wrong move *within* a step; steps is a wrong se
 or order *of* steps. Ask whether the fault is inside one operation or in the
 scaffolding of operations. Inside one operation is wrong operation; in the
 scaffolding is steps.
+
+**Role-ledger discriminator.** Apply the following table before
+reasoning from the surface number of operations:
+
+| State immediately before the deviant act | Localisation | Family |
+|---|---|---|
+| The target role is not yet produced; a construction is required, but the student chooses a wrong relation, operation, operand, or operand order | Fault inside a licensed construction | **wrong operation** |
+| The exact target role is already produced under the student's own predicate; the student begins a new derivation or applies another whole stage to produce it again | The act itself is unlicensed | **steps** |
+| A named component is already contained in a subtotal, and that same component is explicitly added or otherwise inserted again while forming a still-needed aggregate | Duplicated operand inside a licensed aggregation | **wrong operation** |
+| A completed whole is passed through an unnecessary transformation after its requested role is filled | Redundant whole procedure | **steps** |
+
+The component-duplication row has precedence over the generic filled-role row:
+when the error localises to an explicit repeated operand inside a recognisable,
+still-needed aggregation, it is wrong operation. Steps is reserved for adding a
+redundant derivation or stage at the level of the whole. This distinction is
+about mathematical role, not numerical equality. Two equal values with
+different predicates do not fill the same role; one value reworded without a
+new predicate does.
+
+*Synthetic minimal pair.* If a student labels a quantity “the requested total”
+and then starts a second method that transforms that completed total, the extra
+method is steps. If the student is still constructing the requested total and
+writes “subtotal + component” even though the labelled subtotal already
+contains that component, the repeated component is a wrong operand and hence
+wrong operation.
 
 **Tie-breaker (a missing operation).** A missing operation can look like either a
 missing step or a wrong operation. Resolve it by presence versus correctness of
@@ -1940,12 +2197,14 @@ clause. The full routing for a rate applied to the wrong base is ordered, and
 is stated once here for landing. First, a failure of the base concept itself,
 as above, is principles. Otherwise the ordered provenance test of the
 referent-to-derived-base rule governs: two given same-kind candidates are
-relevance, as above, and derived involvement on either side routes into the
-referent rule's belief arms, comprehension by default and burden of
-establishment, or wrong operation where the intact referent belief is
-demonstrated in the prefix and the act is an operand pairing slip against it,
-the white part scaled on the green amount while the student's own blue
-derivation shows the scale grasped (2150).
+relevance, as above, and genuine derived involvement routes into the referent
+rule's belief arms. Comprehension requires a demonstrated wrong referent; wrong
+operation requires a demonstrated intact referent plus an operand-pairing slip.
+Where neither burden is met, the referent rule's burden default applies
+(comprehension). One procedural pole is
+where the intact referent belief is demonstrated in the prefix and the act is an
+operand-pairing slip against it: the white part is scaled on the green amount
+while the student's own blue derivation shows the scale was grasped (2150).
 
 **The principles-versus-wrong-operation tie-breaker (own-chain demonstration).**
 A transportable-concept failure routes by what the deviant act itself
@@ -1959,9 +2218,96 @@ direction inverted, a percentage re-based, sequential percentages flattened
 onto one base, the demonstrated-belief pole governs and the thread is
 principles even beside correct enactments of the neighbouring concept
 elsewhere in the chain: correct work nearby does not immunise a coherent
-wrong rule. Naming the underlying concept the act offends ("this is really
-about proportionality") never routes the family by itself; the route runs
-through what the student's own act demonstrates.
+wrong rule. An alternative concept is demonstrated only where the deviant
+act retains the concept's own structure with one component set contrary, the
+fraction inverted inside an otherwise intact scaling, the percentage applied
+with its structure intact to a re-chosen base, successive percentages
+composed with the base held fixed. Mere statability never suffices: any
+operand mispairing can be phrased as a rule ("multiply by the ratio
+number"), and phrasing an act as a rule is redescription, not demonstration.
+An act that abandons the demonstrated concept's structure for a flat
+operation, a raw multiplication standing beside a two-step
+find-the-factor-then-apply scaling, demonstrates no alternative concept and
+is wrong operation.
+
+**The comprehension admission gate.** Before any comprehension thread is
+founded, the admission gate runs. Comprehension requires **positive student
+evidence** of a wrong reading, with one carve-out stated in advance: the
+burden defaults of the named clauses (unreconstructable derived quantities,
+strategy readings, the ambiguous-belief clause, anchored recombination, the
+referent arms) are part of this gate, and where a clause's conditions hold,
+no observable test firing, its default supplies the routing that positive
+evidence otherwise would; the defaults decide ties, never override fired
+tests, and are never a licence to invent a belief where a test has routed
+the act elsewhere. Positive evidence means: either an explicit student statement of what the
+text states or asks; an explicit symbolic or narrated binding between semantic
+roles; a structurally diagnostic act that is locally coherent only under that
+wrong reading; or consistent enactment of the same meaning or role across acts.
+A single labelled equation can therefore suffice when its arithmetic correctly
+executes the displayed semantic mapping. A one-off unlabelled operation
+compatible with an ordinary execution slip is not diagnostic merely because an
+annotator can invent a coherent reading for it.
+
+**Semantic model versus execution.** When a student's words, variable
+definitions, units, or labelled equation explicitly construct a relation among
+problem roles, treat that relation as the student's model. If the arithmetic
+correctly executes the displayed model but the model assigns a time direction,
+scope, referent, part, whole, or requested role incorrectly, the error is
+comprehension. If the displayed model is correct and the computation violates
+it, the error is procedural. This rule is evidence-based, not a conceptual
+default: an unlabelled numerical expression with several plausible readings
+does not establish a semantic model.
+
+The gate also requires that the student's own chain contain no demonstration
+of the correct reading for the same quantity and role: no correct label,
+definition, idle correct line, or correctly derived component later
+contradicted. Registration is role-aware. Using a value somewhere registers
+only the meaning and predicate enacted there; it neither proves every possible
+role was understood nor permits a later act to rewrite the origin. If the
+student has already demonstrated the correct meaning of the disputed role, a
+contradictory act routes to selection, principles, or procedure under the
+ordered tests.
+
+Finally, the belief must concern what the text states or asks rather than which
+problem-given candidate satisfies a condition. A selection or operation fault
+can always be redescribed as a belief about the problem, but redescription is
+not evidence. Coherence alone is not evidence; the student's explicit binding,
+diagnostic structure, or consistent enactment is. *Synthetic minimal pair.*
+Two stated prices compete for the cheaper-item slot and the student installs
+the wrong one, defending it with a story about how cheapness ought to be
+judged: the story is redescription and the misselection is relevance. The
+same student instead misreading which item the question asks about, stated
+in her own words before any selection, is comprehension: the belief there
+concerns what is asked, not which stated candidate satisfies the condition. Naming the concept an act offends (for example, saying that an
+item is “about proportionality”) never routes the family by itself.
+
+**The routing procedure (ordered).** The binding execution protocol at
+the head of this codebook is the authoritative order of tests; the
+passages below state each test in full and add the edge cases.
+
+**The family routing principle (own-chain demonstration).** The same logic
+governs the comprehension boundary. A comprehension thread's belief misstates
+what the text says or asks, and the student's acts follow that wrong reading
+coherently. Where the student's own labels, definitions, or prefix work
+demonstrate the correct reading, an idle correct line computing the very
+quantity later mishandled, a component derived correctly and then dropped or
+contradicted, the deviant act is an operational fault against her own chain,
+however easily a hypothetical misreading could rationalise it. Routing runs
+through what her own chain demonstrates, never through what a misreading
+could explain: nearly every operational fault can be redescribed as a belief
+about the problem, and that redescription is not evidence. Within the
+operational cluster the licensed-step discriminator completes the routing:
+an excess or misplaced operand inside a licensed construction (a total that
+must be formed, a difference that must be taken) is wrong operation, while
+an act with no license at all, including any further derivation performed
+after the asked quantity already stands produced in her own chain, is steps
+unless the act enacts a statable belief of its own. Belief-enactment takes
+priority over the post-answer test: an act that enacts an existing thread's
+belief, including a re-derivation defending an anchored or protected
+output, exhibits that thread whatever its position in the chain; the steps
+routing for post-answer acts applies only to acts enacting no statable
+belief, and the anchor machinery is consulted before the post-answer
+clause, never after.
 
 ### Across-cluster pairs (conceptual versus procedural)
 
@@ -2277,6 +2623,21 @@ when to apply it.
 forgetting to convert is not this misconception). The tutor-supplied-answer
 rule is central for this family.
 
+**Structural-fidelity admission test.** Principles is present only when the
+student's deviant act preserves the governing concept's recognisable structure
+while assigning one of its conceptual components incorrectly: for example,
+choosing a reversed ratio while still constructing a ratio, or choosing the
+wrong base while still enacting a percentage-of-base relation. An isolated
+addition, multiplication, division, or operand pairing that abandons that
+structure is wrong operation if procedurally licensed, not principles. The fact
+that an annotator can verbalise the arithmetic as a “rule” is not evidence that
+the student held an alternative principle.
+
+The same grain controls absent credit. Principles is absent only when the
+student herself selects or applies the concept-level relation. Correct bare
+arithmetic, including arithmetic that a tutor has already framed, can engage
+operation but does not by itself engage principles.
+
 **Selecting the operation when the tutor names only a rate or operand.**
 Recognising which operation to apply, when the tutor has stated a rate or an
 operand but has not named the operation, is applying the principle and is
@@ -2461,10 +2822,50 @@ wrong sequencing, is steps/procedures.
   conceptual error, provided the premise it operates on was accepted rather
   than misread.
 
+## Pre-output audit
+
+Do not emit the five labels until all answers below are explicit in the working
+notes. This is a consistency check, not a new source of labels.
+
+1. **Evidence:** for every comprehension thread, what exact student statement,
+   structurally diagnostic act, or consistent repeated enactment demonstrates
+   the belief? If a one-off act is equally compatible with a procedural slip,
+   it is not diagnostic. If no positive evidence remains, remove the invented
+   belief and reroute the observable act.
+2. **Provenance:** what were the competing inputs at the instant of each
+   disputed selection? Confirm that no later transformation changed their
+   historical source class.
+3. **Roles:** which predicates has the student assigned to every produced
+   quantity? Confirm that equal numbers were not treated as equal roles, or
+   different phrasings as different roles without a predicate change.
+4. **Residual errors:** after correcting each attributed token alone, does any
+   false equality, assignment, selection, or unnecessary act remain? Route each
+   survivor as its own thread.
+5. **Procedure grain:** for every operation/steps boundary, was the exact target
+   role already filled? If a component was duplicated inside a still-needed
+   aggregate, apply the component-duplication precedence rule.
+6. **Credit:** for every absent cell, what construct-level decision did the
+   student author, and what plausible error could they have made at that
+   decision? If the tutor supplied the answer, corrected interpretation, or
+   operation and operands, or if the act merely carried a value, change the
+   cell to not_evidenced unless genuinely new content remains. Run the same
+   check in mirror: for every not_evidenced cell on a turn containing
+   self-authored reasoning, confirm that no construct-level decision with a
+   real opportunity to fail was overlooked. Withholding by default is the
+   same audit failure as granting by default.
+7. **Temporal integrity:** did later evidence alter an earlier family or
+   candidate provenance? Restore the origin and record any changed cause only
+   prospectively as a new thread or re-attribution event.
+8. **Commitment:** where two readings survive every test above, apply the
+   stated tie-breaks and defaults, record the decision, and do not reopen a
+   settled unit; re-argument without new evidence is not analysis.
+
 ## Pending / unmatched profiles
 
 These five families cover the core family map, and every turn is labelled for
 all five regardless of the dialogue's profile metadata. If a dialogue's profile
 wording does not clearly match one of the five above, do not force a mapping:
-flag it and settle its reading on a real dialogue, the same way each of the
-above was settled.
+flag it, describe the observable construct in abstract terms, and adjudicate it
+through the binding execution protocol. Do not add an item-specific exception.
+If the construct cannot be routed without changing the family definitions,
+flag it and record the observable facts; do not invent a family for it.
