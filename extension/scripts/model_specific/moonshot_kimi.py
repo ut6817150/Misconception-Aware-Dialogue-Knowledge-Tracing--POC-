@@ -22,7 +22,9 @@ Configuration facts (from platform.kimi.ai's K3 quickstart):
   no cost field: cost_usd is recorded 0.0, meaning unaccounted, per the
   project convention
 
-Records cache under a backend-and-effort-qualified slug,
+Responses are consumed as SSE streams so long reasoning runs continue to
+deliver data instead of waiting for one buffered response. Records cache under
+a backend-and-effort-qualified slug,
 ``moonshot-direct/kimi-k3-{effort}``, so they never mix with OpenRouter
 K3 records or across efforts. The cache record follows the shared
 OpenRouter layout; Moonshot's raw usage is retained in ``meta.usage`` and a
@@ -36,6 +38,7 @@ from __future__ import annotations
 
 import json
 import os
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -58,7 +61,19 @@ DEFAULT_EFFORT = "max"
 MAX_COMPLETION_TOKENS: Optional[int] = None  # None = server default 131,072;
                                              # set an int (<= 1,048,576) to
                                              # raise it for deadlock cells
+NO_TOKEN_TIMEOUT_SECONDS: Optional[float] = 300.0
 # ----------------------------------------------------------------------------
+
+
+class MoonshotStreamError(RuntimeError):
+    """An incomplete stream together with any response received so far."""
+
+    def __init__(self, message: str, text: str = "", reasoning: str = "",
+                 meta: Optional[dict] = None):
+        super().__init__(message)
+        self.text = text
+        self.reasoning = reasoning
+        self.meta = meta or {}
 
 
 def resolve_effort(reasoning_effort: str) -> str:
@@ -124,9 +139,31 @@ def _token_summary(usage: dict) -> dict[str, int]:
     }
 
 
+def _iter_sse_data(response):
+    """Yield complete payloads from ``data:`` fields in an SSE response."""
+    data_lines: List[str] = []
+    for raw_line in response.iter_lines(decode_unicode=True):
+        if raw_line is None:
+            continue
+        if isinstance(raw_line, bytes):
+            raw_line = raw_line.decode("utf-8")
+        line = raw_line.rstrip("\r")
+        if not line:
+            if data_lines:
+                yield "\n".join(data_lines)
+                data_lines = []
+            continue
+        if line.startswith(":"):  # SSE comment/keep-alive
+            continue
+        if line.startswith("data:"):
+            data_lines.append(line[5:].lstrip())
+    if data_lines:
+        yield "\n".join(data_lines)
+
+
 def llm_call_moonshot(messages: List[dict],
                       reasoning_effort: str = DEFAULT_EFFORT) -> Tuple[str, str, dict]:
-    """One Moonshot chat completion. Returns (content, reasoning_trace, meta).
+    """Stream one Moonshot completion. Return content, reasoning, and metadata.
 
     Sampling parameters are deliberately absent: Moonshot fixes them
     server-side and documents that they be omitted.
@@ -139,36 +176,131 @@ def llm_call_moonshot(messages: List[dict],
         headers={
             "Authorization": f"Bearer {_api_key()}",
             "Content-Type": "application/json",
+            "Accept": "text/event-stream",
         },
         json={
             "model": MODEL_ID,
             "messages": messages,
             "reasoning_effort": reasoning_effort,
-            "stream": False,
+            "stream": True,
+            "stream_options": {"include_usage": True},
             **({"max_completion_tokens": MAX_COMPLETION_TOKENS}
                if MAX_COMPLETION_TOKENS else {}),
         },
+        stream=True,
         timeout=None,
     )
     resp.raise_for_status()
-    data = resp.json()
-    if "choices" not in data or not data["choices"]:
-        err = data.get("error") or {}
-        raise RuntimeError(
-            f"no choices in response: {err.get('message', json.dumps(data)[:300])}"
+    content_parts: List[str] = []
+    reasoning_parts: List[str] = []
+    usage: dict = {}
+    finish_reason = None
+    event_count = 0
+    saw_done = False
+    first_event_s: Optional[float] = None
+    first_token_s: Optional[float] = None
+    last_token_at = time.monotonic()
+    stream_finished = threading.Event()
+    no_token_timed_out = threading.Event()
+
+    def no_token_watchdog() -> None:
+        """Close the response if meaningful model output stops arriving."""
+        if not NO_TOKEN_TIMEOUT_SECONDS:
+            return
+        while not stream_finished.is_set():
+            remaining = NO_TOKEN_TIMEOUT_SECONDS - (
+                time.monotonic() - last_token_at
+            )
+            if remaining <= 0:
+                no_token_timed_out.set()
+                resp.close()
+                return
+            stream_finished.wait(min(remaining, 1.0))
+
+    watchdog = threading.Thread(target=no_token_watchdog, daemon=True)
+    watchdog.start()
+
+    def metadata() -> dict:
+        return {
+            "latency_s": time.time() - t0,
+            "first_event_s": first_event_s,
+            "first_token_s": first_token_s,
+            "usage": usage,
+            "tokens": _token_summary(usage),
+            "cost_usd": 0.0,  # unaccounted: Moonshot returns tokens, not cost
+            "provider": "moonshot (direct)",
+            "finish_reason": finish_reason,
+            "stream": True,
+            "stream_events": event_count,
+            "stream_done": saw_done,
+            "no_token_timeout_s": NO_TOKEN_TIMEOUT_SECONDS,
+        }
+
+    try:
+        for event_payload in _iter_sse_data(resp):
+            if event_payload == "[DONE]":
+                saw_done = True
+                break
+            try:
+                event = json.loads(event_payload)
+            except json.JSONDecodeError as exc:
+                raise RuntimeError(
+                    f"invalid SSE JSON: {event_payload[:300]}"
+                ) from exc
+            event_count += 1
+            if first_event_s is None:
+                first_event_s = time.time() - t0
+            if event.get("error"):
+                error = event["error"]
+                message = error.get("message") if isinstance(error, dict) else error
+                raise RuntimeError(f"Moonshot stream error: {message}")
+            if event.get("usage"):
+                usage = event["usage"]
+            choices = event.get("choices") or []
+            if not choices:
+                continue
+            choice = choices[0]
+            if choice.get("usage"):
+                usage = choice["usage"]
+            delta = choice.get("delta") or choice.get("message") or {}
+            content = delta.get("content")
+            reasoning = delta.get("reasoning_content") or delta.get("reasoning")
+            if content:
+                content_parts.append(content)
+            if reasoning:
+                reasoning_parts.append(reasoning)
+            if (content or reasoning) and first_token_s is None:
+                first_token_s = time.time() - t0
+            if content or reasoning:
+                last_token_at = time.monotonic()
+            if choice.get("finish_reason") is not None:
+                finish_reason = choice["finish_reason"]
+        if no_token_timed_out.is_set():
+            raise TimeoutError(
+                f"no model token received for {NO_TOKEN_TIMEOUT_SECONDS:g}s"
+            )
+    except Exception as exc:
+        error = exc
+        if no_token_timed_out.is_set():
+            error = TimeoutError(
+                f"no model token received for {NO_TOKEN_TIMEOUT_SECONDS:g}s"
+            )
+        raise MoonshotStreamError(
+            str(error), "".join(content_parts), "".join(reasoning_parts),
+            metadata(),
+        ) from exc
+    finally:
+        stream_finished.set()
+        resp.close()
+        watchdog.join(timeout=0.1)
+
+    text = "".join(content_parts)
+    reasoning = "".join(reasoning_parts)
+    if not saw_done:
+        raise MoonshotStreamError(
+            "Moonshot stream ended without [DONE]", text, reasoning, metadata()
         )
-    message = data["choices"][0]["message"]
-    text = message.get("content") or ""
-    reasoning = message.get("reasoning_content") or ""
-    usage = data.get("usage", {}) or {}
-    return text, reasoning, {
-        "latency_s": time.time() - t0,
-        "usage": usage,
-        "tokens": _token_summary(usage),
-        "cost_usd": 0.0,  # unaccounted: Moonshot returns tokens, not cost
-        "provider": "moonshot (direct)",
-        "finish_reason": data["choices"][0].get("finish_reason"),
-    }
+    return text, reasoning, metadata()
 
 
 def generate_annotation(prompt_name: str, dialogue: dict,
@@ -198,10 +330,21 @@ def generate_annotation(prompt_name: str, dialogue: dict,
         "cost_usd": 0.0,
         "latency_s": 0.0,
     }
+    started = time.time()
     try:
         text, reasoning, meta = llm_call_moonshot(messages, reasoning_effort)
+    except MoonshotStreamError as exc:
+        record["attempts"].append({
+            "transport_error": str(exc)[:2000],
+            "raw": exc.text[-4000:],
+            "reasoning": exc.reasoning,
+            "errors": [f"incomplete stream: {exc}"],
+            "meta": exc.meta,
+        })
+        record["latency_s"] = exc.meta.get("latency_s", time.time() - started)
     except Exception as exc:  # noqa: BLE001 (recorded, not retried)
         record["attempts"].append({"transport_error": f"{exc}"[:2000]})
+        record["latency_s"] = time.time() - started
     else:
         try:
             obj = extract_json(text)

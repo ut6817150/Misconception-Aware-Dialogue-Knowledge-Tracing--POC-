@@ -2,10 +2,11 @@
 
 Reads only the extraction cache. Cell-level agreement is scored on the
 five-family P/A/N grid; thread-level agreement on per-family resolution
-status, which is where the strict authorship rule lives. F1 for a family with
-no gold and no predicted positives in a sample is undefined and excluded from
-macro averages (verified: gold scored against itself gives exactly 1.0), and
-all bootstrap uncertainty resamples dialogues, never turns.
+status, which is where the strict authorship rule lives. The scorer reports
+macro, micro, and gold-positive-support-weighted F1 for detecting P. F1 for a
+family with no gold and no predicted positives in a sample is undefined and
+excluded from macro averages (verified: gold scored against itself gives
+exactly 1.0), and all bootstrap uncertainty resamples dialogues, never turns.
 """
 
 from __future__ import annotations
@@ -154,14 +155,30 @@ def score_config(
         "latency_s": (sum(latencies) / len(latencies)) if latencies else float("nan"),
     }
     if frame.empty:
-        out.update({"macro_f1_P": float("nan"), "alpha": float("nan")})
+        out.update({
+            "macro_f1_P": float("nan"),
+            "micro_f1_P": float("nan"),
+            "weighted_f1_P": float("nan"),
+            "alpha": float("nan"),
+        })
         out.update({f"f1_{fam}": float("nan") for fam in FAMILIES})
         return out
-    f1s = {}
+    f1s, supports = {}, {}
     for fam in FAMILIES:
         sub = frame[frame.family == fam]
         f1s[fam] = prf(sub.gold.tolist(), sub.pred.tolist())[2]
+        supports[fam] = int((sub.gold == "P").sum())
     out["macro_f1_P"] = macro(f1s.values())
+    micro_f1 = prf(frame.gold.tolist(), frame.pred.tolist())[2]
+    out["micro_f1_P"] = (
+        micro_f1 if micro_f1 is not None else float("nan")
+    )
+    total_support = sum(supports.values())
+    out["weighted_f1_P"] = (
+        sum(f1s[fam] * supports[fam] for fam in FAMILIES if supports[fam])
+        / total_support
+        if total_support else float("nan")
+    )
     for fam in FAMILIES:
         out[f"f1_{fam}"] = round(f1s[fam], 3) if f1s[fam] is not None else float("nan")
     out["alpha"] = kripp_alpha(list(zip(frame.gold, frame.pred)))

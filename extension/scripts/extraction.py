@@ -167,8 +167,9 @@ def llm_call(model_slug: str, messages: List[dict],
     pins the call to one named provider (spelled as on the OpenRouter model
     page); None falls back to PROVIDER_ORDER, and free routing if that is
     also unset. ``reasoning_effort`` sets OpenRouter's reasoning effort
-    ("low", "medium", "high", "xhigh" where the model supports them); None
-    sends no reasoning field, leaving the provider's default in force."""
+    (including "low", "medium", "high", "xhigh", and "max" where the model
+    supports them); None sends no reasoning field, leaving the provider's
+    default in force."""
     order = [provider] if provider else PROVIDER_ORDER
     t0 = time.time()
     resp = requests.post(
