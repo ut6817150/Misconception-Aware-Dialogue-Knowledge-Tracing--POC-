@@ -160,7 +160,8 @@ def validate(obj: dict, units: List[str]) -> List[str]:
 
 def llm_call(model_slug: str, messages: List[dict],
              provider: Optional[str] = None,
-             reasoning_effort: Optional[str] = None) -> Tuple[str, str, dict]:
+             reasoning_effort: Optional[str] = None,
+             reasoning_enabled: Optional[bool] = None) -> Tuple[str, str, dict]:
     """One OpenRouter chat completion against the given slug (e.g.
     'moonshotai/kimi-k3'). Returns (content, reasoning_trace, meta) where
     meta carries latency, usage, and OpenRouter's accounted cost. ``provider``
@@ -168,8 +169,20 @@ def llm_call(model_slug: str, messages: List[dict],
     page); None falls back to PROVIDER_ORDER, and free routing if that is
     also unset. ``reasoning_effort`` sets OpenRouter's reasoning effort
     (including "low", "medium", "high", "xhigh", and "max" where the model
-    supports them); None sends no reasoning field, leaving the provider's
-    default in force."""
+    supports them). For models that expose reasoning but no effort selector,
+    ``reasoning_enabled=True`` explicitly enables model-managed reasoning.
+    The two controls are mutually exclusive; when both are None, no reasoning
+    field is sent and the provider default remains in force."""
+    if reasoning_effort is not None and reasoning_enabled is not None:
+        raise ValueError(
+            "set reasoning_effort or reasoning_enabled, not both"
+        )
+    reasoning = (
+        {"effort": reasoning_effort}
+        if reasoning_effort is not None
+        else ({"enabled": reasoning_enabled}
+              if reasoning_enabled is not None else None)
+    )
     order = [provider] if provider else PROVIDER_ORDER
     t0 = time.time()
     resp = requests.post(
@@ -189,8 +202,7 @@ def llm_call(model_slug: str, messages: List[dict],
             **({"provider": {"order": order,
                              "allow_fallbacks": ALLOW_FALLBACKS}}
                if order else {}),
-            **({"reasoning": {"effort": reasoning_effort}}
-               if reasoning_effort else {}),
+            **({"reasoning": reasoning} if reasoning is not None else {}),
         },
         timeout=None,
     )
@@ -224,7 +236,8 @@ def llm_call(model_slug: str, messages: List[dict],
 
 def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
                         provider: Optional[str] = None,
-                        reasoning_effort: Optional[str] = None) -> str:
+                        reasoning_effort: Optional[str] = None,
+                        reasoning_enabled: Optional[bool] = None) -> str:
     """Annotate one dialogue under one prompt with one model.
 
     ``dialogue`` is a record from dialogues_from: {'dialogue_id', 'split',
@@ -237,8 +250,9 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
     Returns 'cached', 'ok', or 'invalid'. ``provider`` optionally pins this
     call to one OpenRouter provider; omitted, routing behaves as configured
     at module level (PROVIDER_ORDER, or free routing). ``reasoning_effort``
-    optionally overrides the model's reasoning effort for this call; None
-    keeps the provider default. The record stores the effort sent.
+    optionally overrides the model's reasoning effort for this call.
+    ``reasoning_enabled`` supports models whose reasoning can be enabled but
+    whose effort cannot be selected. The record stores both controls.
     """
     if not model_slug or "/" not in model_slug:
         raise ValueError(f"{model_slug!r} does not look like an OpenRouter slug "
@@ -257,6 +271,7 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
         "model": model_slug,
         "prompt": prompt_name,
         "reasoning_effort": reasoning_effort,
+        "reasoning_enabled": reasoning_enabled,
         "dialogue_id": did,
         "split": split,
         "attempts": [],
@@ -266,8 +281,10 @@ def generate_annotation(prompt_name: str, model_slug: str, dialogue: dict,
         "latency_s": 0.0,
     }
     try:
-        text, reasoning, meta = llm_call(model_slug, messages, provider,
-                                         reasoning_effort)
+        text, reasoning, meta = llm_call(
+            model_slug, messages, provider, reasoning_effort,
+            reasoning_enabled,
+        )
     except Exception as exc:  # noqa: BLE001 (transport layer; recorded, not retried)
         record["attempts"].append({"transport_error": str(exc)})
         json.dump(record, open(cache_path(model_slug, prompt_name, did, split), "w"), indent=1)
@@ -295,6 +312,7 @@ def generate_annotations(
     provider: Optional[str] = None,
     max_workers: int = 4,
     reasoning_effort: Optional[str] = None,
+    reasoning_enabled: Optional[bool] = None,
 ) -> Dict[int, str]:
     """Run generate_annotation over many dialogue records in parallel.
 
@@ -309,7 +327,7 @@ def generate_annotations(
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
         futures = {
             pool.submit(generate_annotation, prompt_name, model_slug, dlg,
-                        provider, reasoning_effort):
+                        provider, reasoning_effort, reasoning_enabled):
             dlg["dialogue_id"] for dlg in dialogues
         }
         for fut in as_completed(futures):

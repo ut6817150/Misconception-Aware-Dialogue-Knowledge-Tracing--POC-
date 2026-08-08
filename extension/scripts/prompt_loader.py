@@ -1,11 +1,11 @@
 """Prompt discovery, assembly, and leave-one-out redaction.
 
 Prompt templates are markdown files in ``extension/artifacts/annotation_prompts``;
-the filename stem is the prompt's name (files named ``P1_...``, ``P2_...``, and
-so on). Templates may contain ``{CODEBOOK_FULL}`` or ``{CODEBOOK_CONDENSED}``
-placeholders, filled from ``extension/artifacts/codebooks``. Keeping prompts as
-files means new variants are added by dropping a file in the folder, and the
-extraction cache keys results by prompt name so variants never collide.
+the filename stem is the prompt's name. Templates contain a
+``{CODEBOOK_FULL_Vn}`` placeholder, filled from the matching
+``codebook_full_vn.md`` file in ``extension/artifacts/codebooks``. Keeping
+prompts as files means new variants are added by dropping a file in the folder,
+and the extraction cache keys results by prompt name so variants never collide.
 
 The full codebook cites validation dialogues as worked examples, sometimes
 stating their gold reading. ``system_for`` therefore applies block-aware
@@ -37,14 +37,15 @@ def load_prompt(name: str, prompts_dir: Path = PROMPTS_DIR) -> str:
     if not path.exists():
         raise FileNotFoundError(f"No prompt named {name!r} in {prompts_dir}")
     text = path.read_text()
-    if "{CODEBOOK_FULL}" in text:
-        text = text.replace(
-            "{CODEBOOK_FULL}", (CODEBOOK_DIR / "codebook_full.md").read_text()
-        )
-    if "{CODEBOOK_CONDENSED}" in text:
-        text = text.replace(
-            "{CODEBOOK_CONDENSED}",
-            (CODEBOOK_DIR / "codebook_condensed.md").read_text(),
+    for version in range(7):
+        placeholder = f"{{CODEBOOK_FULL_V{version}}}"
+        if placeholder in text:
+            codebook = CODEBOOK_DIR / f"codebook_full_v{version}.md"
+            text = text.replace(placeholder, codebook.read_text())
+    unresolved = re.findall(r"\{CODEBOOK_[A-Z0-9_]+\}", text)
+    if unresolved:
+        raise ValueError(
+            f"Unresolved codebook placeholder(s) in {path}: {unresolved}"
         )
     return text
 

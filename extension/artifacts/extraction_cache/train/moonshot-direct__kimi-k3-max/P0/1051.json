@@ -1,0 +1,142 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P0",
+ "reasoning_effort": "max",
+ "dialogue_id": 1051,
+ "split": "train",
+ "attempts": [
+  {
+   "raw": "{\"dialogue_id\": 1051, \"threads\": [{\"id\": \"S1\", \"family\": \"comprehension\", \"belief\": \"the day-3 figure is a running total that already contains the earlier days' steps (day 3 = 1000+100 = 1100, later the cumulative 1600 spliced into the day-3 slot), so the grand total adds daily values to a cumulative one\", \"signature\": \"cumulative value (1100, then 1600) occupying the day-3 addend of the total; protected total 2600\", \"origin\": \"solution\", \"resolved_at\": null}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"A\", \"steps\": \"A\", \"srcs\": {\"comprehension\": \"S1\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}}, {\"unit\": \"turn 3\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}}, {\"unit\": \"turn 4\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}}, {\"unit\": \"turn 5\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}}, {\"unit\": \"turn 6\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}}]}",
+   "reasoning": "Let me work through the problem first.\n\nProblem: Day 1: Eliana walked 200 steps, then added 300 more steps. So day 1 = 200 + 300 = 500 steps.\nDay 2: twice the number of steps she walked on the first day = 2 \u00c3\u0097 500 = 1000 steps.\nDay 3: she walked an additional 100 steps. Additional to what? The natural reading: on the third day she walked an additional 100 steps (on top of... hmm). This is ambiguous: \"walked an additional 100 steps\" could mean day 3 = 1000 + 100 = 1100 (additional over day 2), or just 100 steps. The intended reading in the dataset: the tutor says \"Day 3 is 1500 + 100 steps\" \u00e2\u0080\u0094 the tutor computes a running total: Day 1 + 2 = 1500, Day 3 adds 100 \u00e2\u0086\u0092 1600. So the intended answer is 500 + 1000 + 100 = 1600. Day 3 she walked 100 steps.\n\nStudent's solution: Day 1 = 500, Day 2 = 1000, Day 3 = \"additional 100 steps, bringing her total to 1000+100 = 1100\" \u00e2\u0080\u0094 she treats day 3 as 1100 (adding 100 to day 2's 1000), then totals 500 + 1000 + 1100 = 2600.\n\nThe error: the student interprets \"additional 100 steps\" as day 3 = day 2 + 100 = 1100. Actually wait \u00e2\u0080\u0094 \"additional 100 steps\" \u00e2\u0080\u0094 additional to what? If day 3 she walked an additional 100 steps, the most natural reading is that on day 3 she walked 100 steps (additional to her previous days' counts, i.e., added to her cumulative count). The tutor's correction says total = 500 + 1000 + 100 = 1600. So the intended reading: day 3 = 100 steps.\n\nAlternatively, the student's reading (day 3 = 1100) is a possible misreading but the \"correct\" answer is 1600 per the tutor.\n\nIs the student's reading defensible? \"And on the third day, Eliana walked an additional 100 steps.\" Additional relative to the second day? That would be \"100 more steps than the second day\" \u00e2\u0080\u0094 usually phrased as \"100 more steps than the day before\". \"Additional 100 steps\" more naturally means she added 100 steps to her count (like day 1: \"added some 300 more steps to her count\"). On day 1, she walked 200 steps then added 300 more steps to her count, totaling 500. On day 3, she walked an additional 100 steps \u00e2\u0080\u0094 i.e., 100 steps that day. So day 3 = 100. The student instead computed 1000 + 100 = 1100 as day 3, which double-counts: she adds day 2's total into day 3.\n\nSo the error is a comprehension error: misreading what day 3's count is \u00e2\u0080\u0094 treating the \"additional 100\" as added to day 2's steps to form day 3's steps, i.e., a cumulative/running-total confusion. Actually, let's think about what the student's belief is. She says \"On the third day, she walked an additional 100 steps, bringing her total to 1000+100 = 1100 steps.\" So she believes day 3's walk = 1100 steps (day 2's 1000 plus 100 more). That's a wrong belief about what day 3's quantity is: she treats the day-3 count as including day 2's count. Then she sums 500 + 1000 + 1100 = 2600, double-counting day 2 (and implicitly day 1).\n\nThis is comprehension: misreading the described structure \u00e2\u0080\u0094 the \"additional 100\" refers to her total count (cumulative across days), not to day 3's walk being day 2 + 100. Alternatively, one could view this as a part-whole/principles issue (double-counting). But per the codebook's derived-and-intermediate-quantities clause: the student derived day 2 = 1000, then uses it inside day 3's value. The belief: day 3's steps = day 2's steps + 100. That's a wrong belief about what the day-3 quantity represents \u00e2\u0086\u0092 comprehension. The signature: \"1100 in the day-3 slot of the total sum\" or \"day 3 = 1000 + 100\".\n\nActually let's reconsider: is it comprehension or wrong_operation? The cluster test: is the working wrong given what the student believes, or correct given a wrong belief? If she believes day 3 = 1100, then 500 + 1000 + 1100 = 2600 is correct arithmetic on her belief. The belief is wrong (day 3 is 100, not 1100). So conceptual, comprehension. Yes, S1 = comprehension, belief \"day 3's walk is day 2's 1000 plus 100 more (=1100)\", signature \"1100 in day-3 slot\", origin solution.\n\nNow the turns:\n\nTurn 1: Tutor says \"Look at your last equation. You have an extra addition.\" Student: \"Oh, I see. I should have said: 1000 + 100 = 1100 steps. So the total ... is 500 + 1000 + 1100 = 2600 steps.\" The student re-exhibits the error: still day 3 = 1100, total 2600. The tutor pointed at \"an extra addition\" \u00e2\u0080\u0094 ambiguous pointing, no content supplied. Student re-commits the 1100/2600. Comprehension present [S1].\n\nOther families in turn 1: The student restates her chain. Is there any operation selection or steps engagement? She just re-asserts. The 1000+100=1100 is the error token's derivation (dual-use). Non-error columns not_evidenced. Relevance: no wrong given selection; not_evidenced. Principles: not engaged. Steps: not engaged.\n\nTurn 2: Tutor: \"Day one is 500 steps. Day 2 is 1000 steps. Day 1 + 2 = 1500 steps. Day 3 is 1500 + 100 steps.\" Student: \"That makes sense. So the total ... is 500 + 1000 + 1100 = 2600 steps.\" The tutor stated day 3 is 1500 + 100 (cumulative 1600). The student acknowledges (\"that makes sense\") but still asserts 1100 and 2600. This is parrot-with-contradiction: accepting supplied content while re-exhibiting the error. Comprehension present [S1].\n\nTurn 3: Tutor: \"1500+100=1600 steps\". Student: \"Right, so the total ... is 500 + 1000 + 1600 = 3100 steps.\" Now the student splices the supplied 1600 into her sum: 500 + 1000 + 1600 = 3100. This is a splice: supplied figure bolted onto retained wrong structure. The 1600 (which is the cumulative total through day 3) is added to 500 + 1000, double-counting. The error persists \u00e2\u0080\u0094 the same belief that the day-3 contribution includes the prior days' counts. Actually now she's adding the total-so-far (1600) to days 1 and 2. The belief enacted: the third term of the sum includes the previous days' totals. Same thread S1 (identity: the third addend carries prior days inside it). It's a splice event of S1. Comprehension present [S1].\n\nCould this be a new thread? The anchor 2600 is dropped; now 3100. The signature of S1: day-3 slot filled with a value that includes prior days (1100 = day2+100; now 1600 = day1+day2+100). The belief \"the third day's contribution is cumulative\" persists. Parsimony: one belief \u00e2\u0080\u0094 she keeps treating the last term as a running total. I'd keep it as S1 re-exhibited (splice). The codebook's splice: \"a supplied figure bolted onto retained wrong structure\" \u00e2\u0080\u0094 yes. Comprehension present [S1].\n\nTurn 4: Tutor: \"No. 500+ 1000 + 100\". Student: \"Oh, I see. The total ... is 500 + 1000 + 100 = 2600 steps.\" The tutor has now fully named the corrected sum: 500 + 1000 + 100. The student reproduces it but asserts = 2600, which is false (500+1000+100 = 1600). The student applies the named fix in surface but the result is wrong \u00e2\u0080\u0094 motivated falsehood? She writes the correct expression 500+1000+100 but claims it equals 2600 (her anchored answer). This is parrot-with-contradiction or motivated-falsehood: asserting 500 + 1000 + 100 = 2600 protects the anchored 2600. The thread S1's protected output is 2600. The falsehood lands on the protected output. So comprehension present [S1], event motivated-falsehood (or parrot-with-contradiction). The stated-vs-enacted conflict: she writes the correct sum but asserts the old total \u00e2\u0080\u0094 the enacted belief (anchored 2600) governs. Present.\n\nHmm, but wait: could the 2600 here be a genuine arithmetic slip (miscomputing 500+1000+100)? The direction test: it lands on the prior committed answer 2600. Motivated. Present for S1 (the comprehension thread whose protected output is 2600). Per the codebook, motivated falsehood is present for the family whose belief the falsehood protects \u00e2\u0080\u0094 S1 comprehension.\n\nAlternatively, is the belief here still \"day 3 = 1100\"? No \u00e2\u0080\u0094 she now writes 100 as the third addend but keeps 2600. The anchored composition rule: \"Where a committed output survives while its own derivation mutates around it, the thread's belief is the anchored composition.\" The output 2600 is protected. Present [S1].\n\nTurn 5: Tutor: \"You haven't added correctly.\" Student: \"Oh, I see. The total ... is 500 + 1000 + 1100 = 2600 steps.\" She reverts to 1100 and 2600 \u00e2\u0080\u0094 re-exhibits the original error (reversion). Comprehension present [S1].\n\nTurn 6: Tutor: \"1600\". Student: \"Oh, I see. The total ... is 500 + 1000 + 1600 = 3100 steps.\" Again splice of the supplied 1600 into the wrong structure: 500 + 1000 + 1600 = 3100. Present [S1] (splice/reversion).\n\nNow other families across turns \u00e2\u0080\u0094 any engagement?\n\nRelevance: The student uses all given values (200, 300, twice, 100) in their roles... The error is interpretation of \"additional 100 steps\", which is comprehension (misreading what the quantity means/structure), not relevance. No relevance engagement that fails. Do any turns engage relevance correctly? The student uses the 200, 300, 2\u00c3\u0097, 100 \u00e2\u0080\u0094 correct selection of information. In the solution, does she engage relevance? She uses all pieces; the form-of-quantity choice isn't at issue. I'd say relevance not_evidenced throughout, or absent in the solution? Hmm. The solution uses each given in some role: 200, 300, \u00c3\u00972, 100. The selection of which information to use isn't the failure; the interpretation is. Per the engagement gate, relevance reasoning isn't really in play distinctly. I'll mark N for relevance everywhere.\n\nPrinciples: Is there a part-whole principle issue? The double-counting of day 2 inside day 3 could be seen as part-whole. But per the derived-quantities clause, this routes to comprehension (wrong belief about what the derived quantity/day-3 quantity represents). The tie-breaker comprehension vs principles: when the idea is inseparable from reading the problem, default comprehension. Here it's about this problem's structure. So principles not_evidenced throughout.\n\nWrong operation: The student's arithmetic on her own belief is correct (500+1000+1100 = 2600 \u00e2\u009c\u0093; 500+1000+1600 = 3100 \u00e2\u009c\u0093; 500+1000+100 = 1600 but she says 2600 \u00e2\u009c\u0097). Turn 4: she writes 500 + 1000 + 100 and asserts 2600 \u00e2\u0080\u0094 false arithmetic, but it's motivated, protecting the anchored output, so present for S1 (comprehension), not a separate operation thread. Per the motivated-falsehood rule, it's present for the family whose belief it protects. Do we also need a wrong_operation label? No \u00e2\u0080\u0094 one error, one family; the falsehood is attributed to S1.\n\nBut wait \u00e2\u0080\u0094 is there an independent operation error anywhere? In turns 3 and 6, 500 + 1000 + 1600 = 3100: is that arithmetic correct? 500+1000+1600 = 3100 \u00e2\u009c\u0093 correct given her (wrong) operands. So no independent op error. The operand choice (1600 as third addend) is the comprehension error itself (splice). So wrong_operation: N everywhere? Let me check whether any turn genuinely engages operation selection correctly to merit absent. The solution: she selects operations \u00e2\u0080\u0094 addition for day 1 (200+300 \u00e2\u009c\u0093), multiplication for day 2 (2\u00c3\u0097500 \u00e2\u009c\u0093), addition for the total. These are correct selections of operations. Hmm \u00e2\u0080\u0094 the day-3 construction (1000+100) is the error token (comprehension), dual-use excluded. But day 1 = 200+300 and day 2 = 2\u00c3\u0097500 are distinct correct operation selections. Does the solution earn absent for wrong_operation? The engagement gate: the student assembles operands and selects operations for day 1 and day 2 correctly. That is genuine operational work distinct from the error. Per \"one act, several floors\", a single act may earn absent in each family it genuinely engages and handles soundly; dual-use excludes only the error token. Day 1 and day 2 constructions are correct operation selections not part of the error token (the token is day 3 = 1000+100 \u00e2\u0086\u0092 1100). Actually, the token is the first false content: \"1000 + 100 = 1100\" as day 3. Everything before is true. Day 1 (500) and day 2 (1000) are true acts.\n\nSo for the solution: wrong_operation \u00e2\u0080\u0094 she selects and arranges operations correctly for day 1, day 2, and the final sum structure (adding three days). The day-3 construction is the error token (comprehension via belief). Under own belief, day 3's arithmetic is correct. So operational execution is sound throughout relative to belief. I think A for wrong_operation in the solution is defensible: she correctly selects multiply for \"twice\", add for combining. Hmm, but is the construct engaged \u00e2\u0080\u0094 the family targets \"struggles to put numbers in correct order or determine correct operation\". The solution demonstrates correct operation selection on day 1 and day 2. Yes, I'd say A.\n\nSteps: The solution's procedure: compute day 1, day 2, day 3, sum. On her belief the procedure is complete and validly sequenced. The error is not a missing/extra step on her belief \u00e2\u0080\u0094 it's a wrong belief about day 3's value (comprehension). Per comprehension-vs-steps: a broken procedure that is the shadow of a misread is comprehension; the procedure is right for the problem as she understood it. So steps not present. Does the solution engage steps correctly? She performs the multi-step procedure (three daily values then total). On her belief, the steps are complete and in valid order. That could earn absent for steps. Hmm. The worked rendering example (1159): \"SOL reads comprehension present [S1] with operation and steps absent [independent]\". So yes, in a solution where the error is comprehension but the procedure and operations are otherwise sound, operation and steps earn absent [independent]. I'll follow that: solution: comprehension P [S1], operation A, steps A, relevance N, principles N.\n\nWait, but is steps genuinely engaged with an opportunity to fail? The solution has multiple steps in sequence; she could have omitted the final summation, etc. She includes all steps on her model. I'll grant A, mirroring the 1159 worked rendering.\n\nTurn 1: student re-asserts. \"I should have said: 1000 + 100 = 1100 steps. So the total ... is 500 + 1000 + 1100 = 2600.\" This is mostly a replay of the solution's chain (near-verbatim). Verbatim replay is recitation \u00e2\u0086\u0092 not_evidenced for non-error columns. The error side: re-exhibits S1 \u00e2\u0086\u0092 comprehension P. Other columns N.\n\nTurn 2: \"That makes sense. So the total ... is 500 + 1000 + 1100 = 2600 steps.\" Re-asserts error; the rest is a bare re-statement. Comprehension P [S1]; others N.\n\nTurn 3: \"Right, so the total ... is 500 + 1000 + 1600 = 3100 steps.\" Splice: supplied 1600 bolted onto her sum. Comprehension P [S1]. Other columns: she assembles 500 + 1000 + 1600 = 3100 \u00e2\u0080\u0094 arithmetic correct given operands; but the operand assembly here is the error (the third addend includes cumulative). Is there operation engagement distinct from the error? The act is the error's own re-derivation (dual-use). N for others.\n\nTurn 4: \"Oh, I see. The total ... is 500 + 1000 + 100 = 2600 steps.\" Motivated falsehood (500+1000+100 \u00e2\u0089\u00a0 2600; lands on protected 2600). Comprehension P [S1]. Others N. Wait \u00e2\u0080\u0094 could this turn be a resolution attempt? She adopts the tutor's named fix (500+1000+100) but reports 2600. The working re-exhibits the error (the false result protecting the anchor). Per \"the clause applies only when the student actually applies the fix\" \u00e2\u0080\u0094 she verbally accepts but the result is wrong \u00e2\u0086\u0092 present under parrot-with-contradiction / motivated-falsehood. Present.\n\nTurn 5: reverts to 1100/2600 \u00e2\u0080\u0094 reversion. Comprehension P [S1]. Others N.\n\nTurn 6: \"500 + 1000 + 1600 = 3100\" \u00e2\u0080\u0094 splice again. Comprehension P [S1]. Others N.\n\nresolved_at: null; resolved_by_end false.\n\nOne thread: S1, comprehension, belief: \"the third day's contribution includes the prior days' steps (day 3 = 1000+100 = 1100; later the cumulative 1600 occupies the day-3 slot; protected output 2600)\", signature: \"cumulative value (1100 or 1600) in the day-3 addend; protected total 2600\", origin: solution, resolved_at: null.\n\nLet me double-check the ambiguity-defence possibility for the solution. Is \"on the third day, Eliana walked an additional 100 steps\" genuinely ambiguous such that day 3 = 1100 is a defensible reading? \"Walked an additional 100 steps\" \u00e2\u0080\u0094 additional to her count, mirroring day 1's \"added some 300 more steps to her count\". The parallel structure (\"added 300 more steps to her count for the first day\" \u00e2\u0086\u0092 200+300 = 500 day-1 total) suggests \"additional 100 steps\" on day 3 means 100 steps that day. A reading where day 3 = day 2 + 100 = 1100 would require \"additional\" to mean \"on top of the previous day's count\" \u00e2\u0080\u0094 but she didn't walk 1000 steps on day 3; \"walked an additional 100 steps\" describes walking 100 steps. The student's model has day 3's walk = 1100 steps walked that day, which contradicts the text (she walked 100 steps that day). Is the student's reading physically possible? It would mean on day 3 she walked 1100 steps (1000 + 100)? No \u00e2\u0080\u0094 her statement \"bringing her total to 1000+100 = 1100\" treats day 3 as a cumulative total. Actually re-read: \"On the third day, she walked an additional 100 steps, bringing her total to 1000+100 = 1100 steps.\" Hmm, \"her total\" \u00e2\u0080\u0094 she seems to treat 1100 as a running total but then adds all three \"day\" values. The reading isn't coherent as a model of the situation (1100 as day-3 steps walked is textually unsupported; 1100 as cumulative total is then double-added). Given the impossibility/incoherence, no ambiguity defence. Even at best, the defence would expire once the tutor states the intended reading (turn 2 onwards). So comprehension present from the solution.\n\nAlso check: is there a second thread, e.g., the arithmetic claim 500+1000+100 = 2600 in turn 4? Per anchor identity rule: a false assertion landing on the existing thread's protected output is that thread's motivated act, not a new thread. So no S2.\n\nWhat about turn 3/6's 3100 \u00e2\u0080\u0094 a fresh value not matching the 2600 anchor. Does it found a new thread? Step-4 order: first check whether the construction instantiates a live thread's structural signature. S1's signature: the day-3 slot filled with a cumulative quantity (1100 = day2+day3-walk; 1600 = day1+day2+day3-walk). The 3100 is produced by that same structural error \u00e2\u0080\u0094 the third addend includes prior days. So it's an exhibition of S1 (splice: supplied 1600 bolted onto retained wrong structure \u00e2\u0080\u0094 her sum of three \"day\" values where the last is cumulative). The belief continuity: the enacted belief \"the final term of the total is the running cumulative count\" is the same. So S1, not a new thread. Good.\n\nAlternatively one might argue the belief shifted from \"day 3 = 1100\" to \"add 1600 to 500+1000\". But parsimony: single belief \u00e2\u0080\u0094 the day-3 addend is the cumulative total through day 3. Both 1100 (partial cumulative: day2+100) and 1600 (full cumulative) fit \"the last term contains earlier days' steps\". The protected composition: a total built by adding a cumulative term to daily terms. I'll record one thread.\n\nGrid:\n\nsolution: comprehension P [S1]; relevance N; principles N; wrong_operation A; steps A.\n\nHmm, let me reconsider wrong_operation A for the solution. The dual-use exclusion: the error token is day 3 = 1000 + 100. Day 1 and day 2 selections are distinct work: 200+300 (correct operation, correct operands), 2\u00c3\u0097500 (correct). The final assembly 500+1000+1100: adding the three day-values is the correct operation (sum) given her belief; the operands include the erroneous 1100 but that's the error token's output. Judged relative to belief, the operation selection is sound. So A for wrong_operation. Steps similarly A: the procedure (per-day values then total) is complete and validly ordered on her belief. A.\n\nActually, wait \u00e2\u0080\u0094 should I be more conservative and mark N for steps/operation in the solution? The worked rendering in the codebook (1159) explicitly shows \"SOL reads comprehension present [S1] with operation and steps absent [independent]\". That sets precedent for granting A in the solution for constructs genuinely engaged and handled soundly on the student's belief. Here the solution displays correct operation selection for days 1 and 2 and a complete procedure on her belief. I'll grant A for both wrong_operation and steps in the solution.\n\nTurn 1: comprehension P [S1]; others N. (Near-verbatim replay; the only computation named is the error token's \u00e2\u0080\u0094 dual-use.)\n\nTurn 2: comprehension P [S1]; others N.\n\nTurn 3: comprehension P [S1]; others N.\n\nTurn 4: comprehension P [S1]; others N.\n\nTurn 5: comprehension P [S1]; others N.\n\nTurn 6: comprehension P [S1]; others N.\n\nresolved_at: null.\n\nLet me sanity-check turn 2 for parrot-with-contradiction: tutor stated \"Day 3 is 1500 + 100 steps\" (i.e., cumulative 1600), student says \"that makes sense\" then writes 500+1000+1100 = 2600, contradicting the supplied content (she keeps 1100). Yes, present.\n\nTurn 4 check: tutor: \"No. 500+ 1000 + 100\" \u00e2\u0080\u0094 names the corrected sum. Student writes \"500 + 1000 + 100 = 2600\". Surface adopts the named expression but asserts false result 2600 = anchored output. Present (motivated falsehood / parrot-with-contradiction). The stated-vs-enacted conflict rule: enacted belief (2600 protected) governs. Present [S1].\n\nTurn 5: tutor: \"You haven't added correctly.\" Student reverts to 1100/2600 \u00e2\u0080\u0094 reversion to the original chain. Present [S1].\n\nTurn 6: tutor: \"1600\". Student: 500+1000+1600 = 3100 \u00e2\u0080\u0094 splice. Present [S1].\n\nsrcs: include for each P cell: {\"comprehension\": \"S1\"}.\n\nThreads: S1 only. resolved_at null.\n\nSignature: \"day-3 addend carries prior days' steps (1100 = 1000+100; later 1600 spliced in); protected total 2600\". Keep one line.\n\nBelief: \"the day-3 figure is a running total that includes the earlier days' steps, so the three-day total adds 500 + 1000 + (cumulative)\".\n\nOutput JSON only.",
+   "errors": [],
+   "meta": {
+    "latency_s": 203.6385622024536,
+    "first_event_s": 3.885221242904663,
+    "first_token_s": 3.8852312564849854,
+    "usage": {
+     "prompt_tokens": 35673,
+     "completion_tokens": 6233,
+     "total_tokens": 41906,
+     "cached_tokens": 34816,
+     "completion_tokens_details": {
+      "reasoning_tokens": 5682
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 34816
+     }
+    },
+    "tokens": {
+     "prompt": 35673,
+     "cached_prompt": 34816,
+     "uncached_prompt": 857,
+     "completion": 6233,
+     "reasoning": 5682,
+     "visible_completion": 551,
+     "total": 41906
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 6221,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 1051,
+  "threads": [
+   {
+    "id": "S1",
+    "family": "comprehension",
+    "belief": "the day-3 figure is a running total that already contains the earlier days' steps (day 3 = 1000+100 = 1100, later the cumulative 1600 spliced into the day-3 slot), so the grand total adds daily values to a cumulative one",
+    "signature": "cumulative value (1100, then 1600) occupying the day-3 addend of the total; protected total 2600",
+    "origin": "solution",
+    "resolved_at": null
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "A",
+    "steps": "A",
+    "srcs": {
+     "comprehension": "S1"
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    }
+   },
+   {
+    "unit": "turn 3",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    }
+   },
+   {
+    "unit": "turn 4",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    }
+   },
+   {
+    "unit": "turn 5",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    }
+   },
+   {
+    "unit": "turn 6",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    }
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 203.6385622024536
+}

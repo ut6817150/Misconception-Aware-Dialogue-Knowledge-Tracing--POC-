@@ -3,10 +3,18 @@
 Reads only the extraction cache. Cell-level agreement is scored on the
 five-family P/A/N grid; thread-level agreement on per-family resolution
 status, which is where the strict authorship rule lives. The scorer reports
-macro, micro, and gold-positive-support-weighted F1 for detecting P. F1 for a
-family with no gold and no predicted positives in a sample is undefined and
-excluded from macro averages (verified: gold scored against itself gives
-exactly 1.0), and all bootstrap uncertainty resamples dialogues, never turns.
+the original five-family metrics and a coarse two-family view that collapses
+comprehension/relevance/principles into ``conceptual`` and
+wrong_operation/steps into ``procedural``. Within a pooled turn, P takes
+precedence over A, which takes precedence over N. Thus a pooled family is P
+when any constituent family is P, rather than counting the same turn several
+times.
+
+Both views report exact P/A/N accuracy and macro, micro, and
+gold-positive-support-weighted F1 for detecting P. F1 for a family with no
+gold and no predicted positives in a sample is undefined and excluded from
+macro averages (verified: gold scored against itself gives exactly 1.0), and
+all bootstrap uncertainty resamples dialogues, never turns.
 """
 
 from __future__ import annotations
@@ -20,6 +28,12 @@ from typing import Dict, List, Optional, Tuple
 import pandas as pd
 
 from .extraction import FAMILIES, cache_path
+
+
+POOLED_FAMILIES = {
+    "conceptual": ("comprehension", "relevance", "principles"),
+    "procedural": ("wrong_operation", "steps"),
+}
 
 
 # ---------------------------------------------------------------------------
@@ -75,6 +89,60 @@ def prf(golds: List, preds: List, pos="P") -> Tuple[Optional[float], ...]:
 def macro(values) -> float:
     vals = [v for v in values if v is not None]
     return sum(vals) / len(vals) if vals else float("nan")
+
+
+def accuracy(golds: List, preds: List) -> float:
+    """Exact P/A/N agreement across the supplied cells."""
+    return (
+        sum(g == p for g, p in zip(golds, preds)) / len(golds)
+        if golds else float("nan")
+    )
+
+
+def _collapse_labels(labels) -> str:
+    """Collapse constituent P/A/N labels using presence-first precedence."""
+    values = set(labels)
+    for label in ("P", "A", "N"):
+        if label in values:
+            return label
+    raise ValueError(f"cannot pool labels without P/A/N values: {values}")
+
+
+def pooled_frame(frame: pd.DataFrame) -> pd.DataFrame:
+    """Collapse the five family cells at each turn into two coarse cells.
+
+    Conceptual comprises comprehension, relevance, and principles;
+    procedural comprises wrong_operation and steps. Gold and predictions are
+    collapsed independently so the coarser evaluation never uses gold labels
+    to transform predictions (or vice versa).
+    """
+    rows = []
+    for pooled_family, members in POOLED_FAMILIES.items():
+        subset = frame[frame["family"].isin(members)]
+        for (did, unit), group in subset.groupby(["did", "unit"], sort=False):
+            rows.append({
+                "did": did,
+                "unit": unit,
+                "family": pooled_family,
+                "gold": _collapse_labels(group["gold"]),
+                "pred": _collapse_labels(group["pred"]),
+            })
+    return pd.DataFrame(rows, columns=["did", "unit", "family", "gold", "pred"])
+
+
+def pooled_resolutions(res: pd.DataFrame) -> pd.DataFrame:
+    """A pooled family resolves when any constituent thread resolves."""
+    rows = []
+    for pooled_family, members in POOLED_FAMILIES.items():
+        subset = res[res["family"].isin(members)]
+        for did, group in subset.groupby("did", sort=False):
+            rows.append({
+                "did": did,
+                "family": pooled_family,
+                "gold": int(group["gold"].max()),
+                "pred": int(group["pred"].max()),
+            })
+    return pd.DataFrame(rows, columns=["did", "family", "gold", "pred"])
 
 
 def kripp_alpha(pairs: List[Tuple[str, str]]) -> float:
@@ -159,15 +227,42 @@ def score_config(
             "macro_f1_P": float("nan"),
             "micro_f1_P": float("nan"),
             "weighted_f1_P": float("nan"),
+            "accuracy": float("nan"),
             "alpha": float("nan"),
+            "res_prec": float("nan"),
+            "res_rec": float("nan"),
+            "f1_ci_lo": float("nan"),
+            "f1_ci_hi": float("nan"),
+            "pooled_macro_f1_P": float("nan"),
+            "pooled_micro_f1_P": float("nan"),
+            "pooled_weighted_f1_P": float("nan"),
+            "pooled_accuracy": float("nan"),
+            "pooled_alpha": float("nan"),
+            "pooled_res_prec": float("nan"),
+            "pooled_res_rec": float("nan"),
+            "pooled_f1_ci_lo": float("nan"),
+            "pooled_f1_ci_hi": float("nan"),
         })
         out.update({f"f1_{fam}": float("nan") for fam in FAMILIES})
+        out.update({f"accuracy_{fam}": float("nan") for fam in FAMILIES})
+        out.update({
+            f"pooled_f1_{fam}": float("nan") for fam in POOLED_FAMILIES
+        })
+        out.update({
+            f"pooled_accuracy_{fam}": float("nan")
+            for fam in POOLED_FAMILIES
+        })
         return out
+
+    # Original five-family view.
     f1s, supports = {}, {}
     for fam in FAMILIES:
         sub = frame[frame.family == fam]
         f1s[fam] = prf(sub.gold.tolist(), sub.pred.tolist())[2]
         supports[fam] = int((sub.gold == "P").sum())
+        out[f"accuracy_{fam}"] = accuracy(
+            sub.gold.tolist(), sub.pred.tolist()
+        )
     out["macro_f1_P"] = macro(f1s.values())
     micro_f1 = prf(frame.gold.tolist(), frame.pred.tolist())[2]
     out["micro_f1_P"] = (
@@ -179,26 +274,90 @@ def score_config(
         / total_support
         if total_support else float("nan")
     )
+    out["accuracy"] = accuracy(frame.gold.tolist(), frame.pred.tolist())
     for fam in FAMILIES:
         out[f"f1_{fam}"] = round(f1s[fam], 3) if f1s[fam] is not None else float("nan")
     out["alpha"] = kripp_alpha(list(zip(frame.gold, frame.pred)))
     rprec, rrec, _ = prf(res.gold.tolist(), res.pred.tolist(), pos=1)
     out["res_prec"] = rprec if rprec is not None else float("nan")
     out["res_rec"] = rrec if rrec is not None else float("nan")
+
+    # Coarse two-family view. Each dialogue-turn contributes exactly one
+    # conceptual cell and one procedural cell.
+    pooled = pooled_frame(frame)
+    pooled_res = pooled_resolutions(res)
+    pooled_f1s, pooled_supports = {}, {}
+    for fam in POOLED_FAMILIES:
+        sub = pooled[pooled.family == fam]
+        pooled_f1s[fam] = prf(sub.gold.tolist(), sub.pred.tolist())[2]
+        pooled_supports[fam] = int((sub.gold == "P").sum())
+        out[f"pooled_f1_{fam}"] = (
+            round(pooled_f1s[fam], 3)
+            if pooled_f1s[fam] is not None else float("nan")
+        )
+        out[f"pooled_accuracy_{fam}"] = accuracy(
+            sub.gold.tolist(), sub.pred.tolist()
+        )
+    out["pooled_macro_f1_P"] = macro(pooled_f1s.values())
+    pooled_micro_f1 = prf(
+        pooled.gold.tolist(), pooled.pred.tolist()
+    )[2]
+    out["pooled_micro_f1_P"] = (
+        pooled_micro_f1 if pooled_micro_f1 is not None else float("nan")
+    )
+    pooled_total_support = sum(pooled_supports.values())
+    out["pooled_weighted_f1_P"] = (
+        sum(
+            pooled_f1s[fam] * pooled_supports[fam]
+            for fam in POOLED_FAMILIES if pooled_supports[fam]
+        ) / pooled_total_support
+        if pooled_total_support else float("nan")
+    )
+    out["pooled_accuracy"] = accuracy(
+        pooled.gold.tolist(), pooled.pred.tolist()
+    )
+    out["pooled_alpha"] = kripp_alpha(
+        list(zip(pooled.gold, pooled.pred))
+    )
+    pooled_rprec, pooled_rrec, _ = prf(
+        pooled_res.gold.tolist(), pooled_res.pred.tolist(), pos=1
+    )
+    out["pooled_res_prec"] = (
+        pooled_rprec if pooled_rprec is not None else float("nan")
+    )
+    out["pooled_res_rec"] = (
+        pooled_rrec if pooled_rrec is not None else float("nan")
+    )
+
     if n_boot == 0:
         out["f1_ci_lo"] = out["f1_ci_hi"] = float("nan")
+        out["pooled_f1_ci_lo"] = out["pooled_f1_ci_hi"] = float("nan")
         return out
     by_dialogue = {d: g for d, g in frame.groupby("did")}
+    pooled_by_dialogue = {d: g for d, g in pooled.groupby("did")}
     dialogue_ids = list(by_dialogue)
-    stats = []
+    stats, pooled_stats = [], []
     for _ in range(n_boot):
-        sample = pd.concat([by_dialogue[random.choice(dialogue_ids)] for _ in dialogue_ids])
+        sampled_ids = [random.choice(dialogue_ids) for _ in dialogue_ids]
+        sample = pd.concat([by_dialogue[d] for d in sampled_ids])
+        pooled_sample = pd.concat([pooled_by_dialogue[d] for d in sampled_ids])
         vals = [
             prf(sample[sample.family == fam].gold.tolist(), sample[sample.family == fam].pred.tolist())[2]
             for fam in FAMILIES
         ]
         stats.append(macro(vals))
+        pooled_vals = [
+            prf(
+                pooled_sample[pooled_sample.family == fam].gold.tolist(),
+                pooled_sample[pooled_sample.family == fam].pred.tolist(),
+            )[2]
+            for fam in POOLED_FAMILIES
+        ]
+        pooled_stats.append(macro(pooled_vals))
     stats.sort()
+    pooled_stats.sort()
     out["f1_ci_lo"] = stats[int(0.025 * n_boot)]
     out["f1_ci_hi"] = stats[int(0.975 * n_boot) - 1]
+    out["pooled_f1_ci_lo"] = pooled_stats[int(0.025 * n_boot)]
+    out["pooled_f1_ci_hi"] = pooled_stats[int(0.975 * n_boot) - 1]
     return out
