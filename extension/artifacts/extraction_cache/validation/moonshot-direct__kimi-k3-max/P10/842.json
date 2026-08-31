@@ -1,0 +1,498 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P10",
+ "reasoning_effort": "max",
+ "dialogue_id": 842,
+ "split": "validation",
+ "attempts": [
+  {
+   "raw": "ts S3\"}], \"threads\": [{\"id\": \"S1\", \"family\": \"comprehension\", \"belief\": \"the ages the problem fixes when Jayson is 10 are taken to hold unchanged when he was born, so his mom's age at his birth is the same as her age when he is 10\", \"signature\": \"mom's age at birth asserted identical to her age at Jayson-10; protected output 38 as the birth age\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 2\", \"re-exhibited\"], [\"turn 4\", \"re-exhibited\"], [\"turn 5\", \"re-exhibited\"]], \"resolved_at\": null, \"quote\": \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\"}, {\"id\": \"S2\", \"family\": \"comprehension\", \"belief\": \"the stated relations, dad is four times Jayson's age and mom is two years younger than dad, are taken to hold when Jayson was born, so they can be evaluated at age 0\", \"signature\": \"the age-10 relations evaluated at Jayson-age-0: 0 x 4 for dad, 0 - 2 for mom\", \"origin\": \"turn 6\", \"exhibitions\": [[\"turn 6\", \"committed\"]], \"resolved_at\": null, \"quote\": \"his dad was 4 times his age, so his dad was 0 x 4 = 0 years old\"}, {\"id\": \"S3\", \"family\": \"relevance\", \"belief\": \"the stated 2-years-younger figure is the amount to subtract to move from mom's age at Jayson-10 to her age at his birth, selected over the stated 10-year span\", \"signature\": \"the 2 seated in the elapsed-years operand slot of the birth-age subtraction (38 - 2)\", \"origin\": \"turn 7\", \"exhibitions\": [[\"turn 7\", \"committed\"], [\"turn 8\", \"reversion\"]], \"resolved_at\": null, \"quote\": \"I would need to subtract 2 from her age when he was 10\"}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"A\", \"steps\": \"A\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\"}, \"triggers\": {\"wrong_operation\": \"his dad was 10 x 4 = 40 years old\", \"steps\": \"then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Since his mom was 38 when Jayson was 0 years old (born), she was 38 years old.\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\"}}, {\"unit\": \"turn 3\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}, {\"unit\": \"turn 4\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Yes, I still think Jayson's mom was 38 when he was 0.\"}}, {\"unit\": \"turn 5\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"So, if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\"}}, {\"unit\": \"turn 6\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S2\"}, \"quotes\": {\"comprehension\": \"When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0 years old.\"}}, {\"unit\": \"turn 7\", \"comprehension\": \"N\", \"relevance\": \"P\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"relevance\": \"S3\"}, \"quotes\": {\"relevance\": \"I would need to subtract 2 from her age when he was 10.\"}}, {\"unit\": \"turn 8\", \"comprehension\": \"N\", \"relevance\": \"P\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"relevance\": \"S3\"}, \"quotes\": {\"relevance\": \"So, if she was 38 when he was 10, then she must have been 38 - 2 = 36 years old when he was 0.\"}}]}",
+   "reasoning": "Let me solve the problem first.\n\nProblem: When Jayson is 10, his dad is four times his age, so dad is 40 when Jayson is 10. Mom is 2 years younger than dad, so mom is 38 when Jayson is 10. How old was mom when Jayson was born? Mom is 38 when Jayson is 10, so when Jayson was 0 (10 years earlier), mom was 38 - 10 = 28.\n\nCorrect answer: 28.\n\nStudent's solution: computes dad = 40, mom = 38 at Jayson age 10, then asserts mom was 38 when Jayson was 0 (born). The error: failing to subtract 10 years \u2014 treating mom's age at Jayson-10 as her age at Jayson-0. This is a comprehension/reading issue? Let's think about the routing.\n\nThe student's chain: dad at 10 = 40, mom at 10 = 38, then \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" The departure: mom at 0 = 38, contradicting the problem's timeline (mom is 38 at Jayson-10, so at Jayson-0 she was 28).\n\nWhat family? The belief: \"mom's age when Jayson was 0 equals mom's age when Jayson was 10\" \u2014 ages are constant across time? Or a misreading of what the problem asks? This looks like a comprehension error: the student treats the age computed at Jayson-10 as the age at Jayson-0, failing to account for the 10-year difference. It's a wrong model of the situation \u2014 ages don't stay fixed. Actually, this is about temporal structure: the student's model doesn't shift ages with time. Could be comprehension (misreading what the problem asks \u2014 \"when he was born\" requires subtracting 10 years), or steps (omitting the subtraction step), or wrong operation.\n\nLet's run the construction gate: the reading question \u2014 does a coherent reading generate this act? The student reads \"how old was mom when he was born\" and answers with mom's age at Jayson-10. That's a wrong reading of the temporal structure \u2014 she takes the age at Jayson-10 as the age at birth. Hmm, but is there an exhibited wrong reading? The student says \"Since Jayson's mom was 38 when Jayson was 0 years old (born)\". This asserts mom was 38 at Jayson-0. This is a wrong belief about the situation: ages at different times. The problem states the ages when Jayson is 10; the question asks about when he was born (0). The student ignores the 10-year gap.\n\nRouting: comprehension vs steps. Steps would be: she understood the problem but omitted the subtraction step. But the omission is driven by a wrong understanding \u2014 she believes mom's age at birth equals her age at Jayson-10, i.e., she treats the computed age as time-invariant. The \"execution under belief\" test: is her working wrong on her own belief? Her belief appears to be \"mom is 38 when Jayson is 0\" \u2014 under that belief, answering 38 is correct. So the error is the belief itself, which is conceptual. Comprehension: a wrong reading of the problem's temporal structure \u2014 the stated ages are at Jayson-10, and the ask is at Jayson-0; she reads the computed age as the answer to the birth question.\n\nIs there positive evidence of a wrong reading? Yes: the explicit claim \"Jayson's mom was 38 when Jayson was 0 years old (born)\". That's a stated proposition about the situation, held wrongly. The reading: the age when Jayson is 10 is also the age when he was born \u2014 effectively ages don't change over the 10 years, or the question asks the same thing as the computed age. The belief statement should be a reading: \"the mom's age computed for when Jayson is 10 is her age when he was born\" \u2014 i.e., the 10-year difference doesn't enter; the problem's ages are treated as timeless.\n\nHmm, but a belief must not state an equality or computed total. \"Mom's age at Jayson-10 is her age at Jayson-0\" \u2014 that's a reading claim about the situation, not an equality of computed totals? It's a claim about the problem situation. I think it's fine: she takes the ages given for Jayson-10 to hold when Jayson was born.\n\nActually the deeper belief: \"the question asks for mom's age when Jayson was born, and the problem's stated relationships give that directly; no adjustment for the 10 years is needed.\" The enacted reading: mom was 38 when Jayson was 0.\n\nAlternatively, this could be a steps error (missing the subtract-10 step). But per the comprehension-versus-steps test: is the procedure wrong given what she believes, or correct given her belief but built on a wrong understanding? She believes mom was 38 at birth, so no subtraction step is needed \u2014 the procedure is right for her wrong understanding. So comprehension.\n\nSignature: the 38 seated as mom's age at Jayson's birth; protected output 38. Hmm, the output 38 is also the correct mom-at-10 value. The signature should name the act: \"mom's age at Jayson-10 asserted as her age at Jayson-0\".\n\nNow let's scan each unit.\n\nSolution (turn 0):\nLine 1: \"If Jayson was 10, then his dad was 4 times his age, which means his dad was 10 x 4 = 40 years old.\" \u2014 correct on the problem. Match.\nLine 2: \"his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old.\" \u2014 correct: mom at Jayson-10 is 38. Match.\nLine 3: \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" \u2014 departure: mom at 0 should be 38 - 10 = 28. The claim contradicts the problem (ages advance 10 years over 10 years). This founds S1 (comprehension).\n\nTurn 1: Walkthrough. \"Since his mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" \u2014 re-commits the error. It's a walkthrough replay; error side: re-commits the wrong chain in a walkthrough is a live act of endorsement: the error re-exhibits. So comprehension present, exhibits S1 (re-exhibited). The walkthrough re-articulates: \"I knew that since Jayson was 10, his dad was 4 times his age, so I multiplied 10 x 4 to get 40. Then, I subtracted 2 from his dad's age to get his mom's age\" \u2014 this re-derives relations in fresh-ish structure. Does it earn any credit? The walkthrough re-articulates the operand assembly and relations: dad = 4\u00d7age, mom = dad \u2212 2. These are restatements of stated relations; comprehension credit requires resolving an interpretation the problem did not spell out \u2014 restating stated relationships is not comprehension engagement (video-game hours example: restating \"half as long\" is not_evidenced). Wrong operation: assembling 10\u00d74 and 40\u22122 correctly \u2014 but these were already in the solution; walkthrough replay is recitation? The re-articulation standard: compare with prior work; the sentences map one-to-one onto the solution's. \"I multiplied 10 x 4 to get 40\" reports copied content \u2014 naming an operation the prior chain already displayed is narration. So recitation, earns nothing. Steps: same. Relevance: no articulated selection. Principles: no concept-level choice; the relations are stated in the problem. So all non-error columns not_evidenced; comprehension present.\n\nTurn 2: Tutor asks how she deduced mom was 38 when Jayson was 0. Student: \"if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" \u2014 re-asserts the error under challenge. Present, exhibits S1 (re-exhibited). This is a rationale-ish defence; tag: re-exhibited or motivated-falsehood? It's not a false arithmetic equality; it's a re-assertion of the wrong reading. Tag \"re-exhibited\". Actually the precedence list includes \"rationale\": spontaneous articulation of the belief behind the error. Here she's asked to justify, and she states the belief. It's not fully spontaneous; the tutor prompted. \"re-exhibited\" seems right.\n\nOther families: nothing else engaged. N.\n\nTurn 3: Tutor asks: how old is mom when Jayson is 10? Student: \"Jayson's mom would be 38 when he is 10 since she is 2 years younger than his dad.\" \u2014 correct. Does this engage anything? Comprehension: the tutor's question invites reasoning about what the problem asks at this sub-question (mom's age at Jayson-10). The student answers 38, correct. Is this a re-asserted result? The tutor asks for the quantity; student commits to 38. But wait \u2014 the comprehension construct: grasping what is being asked. The sub-question asks mom's age at Jayson-10, which is directly derivable from stated relations (dad 40, mom 2 younger). Is answering it an engagement that earns absent? Per the resolving-versus-restating rule: restating a relationship the problem gives directly and computing it is execution, not comprehension engagement \u2014 not_evidenced. The video-game hours turn 4 example: asked how long Mike plays on a video game day, student restates the problem's wording and computes 4/2=2 \u2014 not_evidenced. Here the tutor's question essentially restates the problem's givens (\"If Jayson's Dad is 40 when he is 10, and Jayson's mom is 2 years younger...\"). The student's answer 40-2=38 executes stated relations. Comprehension not_evidenced.\n\nBut wait \u2014 does this turn engage the thread? The thread's token is the claim \"mom was 38 when Jayson was 0\". Turn 3 says mom is 38 when Jayson is 10 \u2014 that's correct and does not re-commit the error. Does it count as a resolution? No, resolution requires the corrected counterpart at the token's site: mom at 0 = 28. Not here. So S1 not exhibited here.\n\nWrong operation: 40\u22122=38 \u2014 the operands are supplied in the tutor's question (dad 40, 2 years younger). Fully specified \u2192 not_evidenced. Steps: no procedure engagement. N.\n\nHmm, but the tutor's question states both operands and relation; student executes. All N.\n\nTurn 4: Tutor: \"you said mom is 38 when he is 10 and dad is 40 when he is 10. Do you still think mom was 38 when he was 0?\" Student: \"Yes, I still think Jayson's mom was 38 when he was 0.\" \u2014 re-asserts the error against the tutor's stated contrast. Present, exhibits S1. Tag: reversion? Reversion = re-exhibition immediately following the corrected content being named, adopted, or performed. The tutor named the correct temporal separation implicitly (\"mom is 38 when he is 10\"), but did he name the corrected content (28, or subtract 10)? He named that mom is 38 at 10 \u2014 which the student already had. The corrected element (subtract 10 years / 28) was not named. So it's a re-exhibited, perhaps \"post-reveal contradiction\"? No reveal of the answer. I'd tag \"re-exhibited\". Actually, the tutor's turn makes the conflict explicit (38 at 10 vs 38 at 0), and the student persists. That's a committed re-assertion under challenge \u2014 re-exhibited. Good.\n\nTurn 5: Tutor asks how it's possible for mom to be 38 at 0 when she's 38 at 10. Student: \"Yes, it is possible because his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad. So, if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" \u2014 re-exhibits S1 again, with a rationale-ish defence. The defence: ages don't change? She just restates the derivation. Present. Tag re-exhibited. Any motivated falsehood? No false equality. Re-exhibited.\n\nTurn 6: Tutor: \"How old was Jayson's dad when he was 0?\" Student: \"When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0 years old. Since his dad was 0 when Jayson was 0, his mom must have been 2 years younger than his dad, so she was 0 - 2 = -2 years old.\"\n\nThis is interesting. The student applies \"4 times his age\" at Jayson-0 \u2192 dad = 0, then mom = 0 \u2212 2 = \u22122. Two things here:\n\n1. Applying the \"dad is four times his age\" relation at Jayson-0: this treats the stated relation (given for when Jayson is 10) as holding at all times. That's a wrong reading \u2014 the four-times relation holds when Jayson is 10, not at birth. Is this the same thread S1? S1's belief: the ages/relations stated for Jayson-10 are treated as timeless \u2014 mom's age at 10 is her age at 0. Turn 6: the student applies the relations at age 0 mechanically, producing dad 0 and mom \u22122. This is a different act: instead of carrying the age-10 values forward unchanged, she now re-evaluates the stated relations at age 0. Hmm.\n\nUnder S1's belief (mom's age at birth = mom's age at 10), turn 6 should produce mom = 38, not \u22122. So turn 6 departs from S1. It's a new error: applying the stated \"when Jayson is 10\" relations at Jayson-0. The belief: the stated conditions (dad = 4\u00d7Jayson's age; mom = dad \u2212 2) hold when Jayson was born. That's a misreading of the temporal scope of the stated conditions \u2014 comprehension again. But it's a genuinely different belief from S1? S1: mom at 0 = mom at 10 = 38 (ages timeless). Turn 6: the relations re-evaluated at age 0 give dad 0, mom \u22122. These are inconsistent beliefs \u2014 mom can't be both 38 and \u22122 at birth. But a student can hold incoherent positions across turns; the question is whether turn 6 re-exhibits S1 or founds a new thread.\n\nThe identity test: same wrong quantity, operand, or omission in the same role? S1's signature: mom's age at Jayson-10 asserted as her age at Jayson-0 (the 38 at birth). Turn 6: mom at 0 computed as \u22122 by re-applying stated relations at age 0. Different act, different output. The belief-continuity: has the enacted belief changed? Yes \u2014 the act changes form. So root-cause re-investigation: turn 6 founds a new thread S2, comprehension, belief: \"the relations stated for when Jayson is 10 (dad = 4\u00d7age, mom = dad\u22122) hold when Jayson is 0\" \u2014 a temporal-scope misreading of the stated conditions.\n\nWait \u2014 but is turn 6 possibly a reductio the student performs sarcastically? No, she states it as her answer. The tutor's question \"How old was Jayson's dad when he was 0?\" invites this. The student's act: 0 \u00d7 4 = 0, 0 \u2212 2 = \u22122. Both are departures? Let's scan.\n\nLine: \"his dad was 4 times his age, so his dad was 0 x 4 = 0 years old\" \u2014 on the problem's mathematics, the 4\u00d7 relation holds at Jayson-10, not at 0. Dad at Jayson-0 = 40 \u2212 10 = 30. The claim dad at 0 = 0 contradicts the problem. Departure, founds S2.\n\nLine: \"she was 0 - 2 = -2 years old\" \u2014 on her own committed chain (dad at 0 = 0), mom = 0 \u2212 2 = \u22122 is consistent with her (wrong) belief that the relations hold at 0. Is this a shadow of S2? The belief \"stated relations hold at birth\" generates both dad=0 and mom=\u22122. The mom=\u22122 line is generated by the same belief. But is it an independent token? Correct the first error (dad at 0 = 30): then mom = 30 \u2212 2 = 28. The second error (applying mom = dad\u22122 at age 0) disappears too, because applying the relation at age 0 is only wrong because the relation's temporal scope is wrong \u2014 the same belief generates both. Actually the two lines are one belief applied twice: \"the stated relations hold at Jayson-0.\" The mom = dad \u2212 2 application is the shadow of the dad = 4\u00d7age application? Hmm. The belief is one: \"the age-10 relations hold at age 0.\" Both applications flow from it. Under the independence test: correct the dad=4\u00d7age-at-0 error \u2014 would mom=dad\u22122-at-0 remain? The mom relation also holds only at age 10. If the student's belief that relations hold at 0 is corrected, both go. But counterfactually, correcting only the dad relation (dad at 0 = 30), the student would still compute mom = 30 \u2212 2 = 28 \u2014 the mom-minus-2 application at age 0 remains wrong in form (it applies an age-10 relation at age 0) but its output becomes correct (28). \"Rendered invisible rather than removed\" \u2014 does the first fault's belief generate the second act's value? The second act's value \u22122 is generated by her own wrong dad=0. The mom = dad \u2212 2 application at age 0 is itself an instance of the same temporal-scope belief. I think both applications are exhibitions of the single belief S2 (\"the stated age-10 conditions hold at birth\"). The founding departure is the first (0\u00d74=0); the second (0\u22122=\u22122) is a shadow of S2 \u2014 the belief generates it. Actually shadow: \"disposition 'shadow of S#' is legitimate only where S#'s belief itself generates the departure's content\" \u2014 yes, the belief that mom=dad\u22122 holds at birth generates 0\u22122=\u22122. Both departures in turn 6: the first founds S2, the second is a shadow of S2. Both cells: comprehension present citing S2.\n\nHmm wait, but one could argue the whole turn is one token: applying the relations at age 0. The two lines are two acts, each a departure; the first founds, the second shadow. Good.\n\nAlso note: turn 6's mom = \u22122 contradicts her own committed S1 output (mom at 0 = 38). But that's a consequence of the changed belief; S1 is not exhibited here (its signature content \u2014 38 as birth age \u2014 is not re-committed; she abandons it here). Fine; threads stay live, but no exhibition.\n\nAlso, is turn 6 perhaps the student demonstrating the absurdity, i.e., not genuinely believing \u22122? She states it as the answer: \"so she was 0 - 2 = -2 years old.\" Committed. Present.\n\nOther families at turn 6: wrong operation? The constructions 0\u00d74 and 0\u22122 are correct executions of her wrong belief (the relations at age 0). Under the cluster test, working is correct on her belief \u2192 conceptual. No procedural error. Principles: the relation is stated in the problem, not student-supplied. Not principles. N for others.\n\nTurn 7: Tutor: \"You said earlier that Jayson's mother's age was 38 when he is 10. To figure out how old she was when he was 0, you would need to subtract how much from her age?\" Student: \"I would need to subtract 2 from her age when he was 10. So, if Jayson's mom was 38 when he was 10, then she was 38 - 2 = 36 years old when he was 0.\"\n\nNew error: subtract 2 instead of 10. The tutor's question points to the subtraction stage (you need to subtract something) \u2014 this invites the student to supply the amount. The student supplies 2. Where does 2 come from? The \"2 years younger\" figure. She misselects the 2 (the age gap) as the amount to subtract for the 10-year time shift. Belief: \"the amount to subtract to move from Jayson-10 to Jayson-0 is the 2-year age difference\" \u2014 i.e., she conflates the 2-year mom-dad gap with the 10-year time shift. What family?\n\nOptions: comprehension (wrong reading of the situation \u2014 the temporal difference between Jayson-10 and birth is 10 years; she takes it as 2?), relevance (choosing the wrong piece of information \u2014 the stated 2 instead of the stated 10), or wrong operation (operand error within a licensed construction: the subtraction of the elapsed years is needed; she picks 2 as the operand).\n\nThe tutor's prompt names the operation (subtract) and the base (her age at 10); the student selects the operand: 2. The correct operand is 10 (the years from birth to age 10). Both 2 and 10 are problem-stated quantities. Choosing the wrong member of competing problem-given candidates that can fill the same role \u2192 relevance. Hmm: \"Choosing the wrong member of competing problem-given candidates that can fill the same role is relevance.\" The role: the number of years between Jayson-10 and Jayson-0. Candidates: 2 (stated: mom 2 years younger than dad) and 10 (stated: Jayson's age at which the relations hold). The student picks 2. That's a same-kind (both are year counts) misselection among stated givens \u2192 relevance.\n\nBut wait \u2014 is there a reading generating the choice? Could the student believe the time difference is 2 years? That would be a fabricated scenario assumption, comprehension. But more plausibly, she grabs the most salient number \u2014 the 2 she'd been subtracting. There's no stated reading of the situation; she doesn't say \"Jayson was born 2 years ago.\" In fact at turn 8, asked \"Why would you need to subtract 2 when Jayson was born 10 years ago?\", she doesn't defend a 2-year timeline; she re-derives 38 and then says 38 \u2212 2 = 36 at birth \u2014 she persists in subtracting 2. Hmm.\n\nLet me consider the own-chain demonstration: has her prefix demonstrated the correct content (that the birth was 10 years earlier)? The problem states Jayson is 10 when the relations hold; \"when he was born\" = age 0. The student herself wrote \"when Jayson was 0 years old (born)\" \u2014 she registers birth as age 0. The difference 10 \u2212 0 = 10 is the needed operand. Did she ever compute or use the 10-year gap? No. So no own-chain demonstration of subtracting 10.\n\nRouting: construction gate first (for wrong_operation/steps): the reading question \u2014 does a coherent reading of a stated sentence generate this act? Not really; no reading of \"when Jayson is 10... when he was born\" yields \"subtract 2\". The act is an operand choice within a licensed construction (the tutor licensed the subtraction). Relation question: the problem doesn't state \"subtract the elapsed years,\" but the tutor supplied the operation; the student's fault is the operand. Witness question: is there a prefix span showing the model her construction failed to realise (that the gap is 10 years)? Her own \"when Jayson was 0 years old (born)\" plus the problem's \"when Jayson is 10\" \u2014 but is that her own demonstration of the 10-year gap? She stated both ages (10 and 0). Hmm, the witness for wrong_operation: an exact prefix span in which she states, derives, or correctly applies the model her construction then fails to realise. She never derived the 10-year gap. The model \"birth is 10 years before age 10\" is problem-stated (Jayson is 10; born = 0 \u2014 she stated the 0 herself). Weak witness.\n\nInformation ownership: choosing the wrong member of competing problem-given candidates that can fill the same role \u2192 relevance. This is step 9.2 in the routing order, fired before concept structure and procedural. The role: the amount to subtract to shift from Jayson-10 to birth. Competing stated candidates: 2 and 10. She picks 2. Relevance.\n\nHmm, but let me double-check the relevance gate. Relevance requires \"the ignored, omitted, or misplaced item to exist as a stated given independent of any reading.\" The 10 is a stated given (Jayson's age). The 2 is a stated given. The misassignment: attaching the 2 (mom-dad gap) to the time-shift role. Same-kind (years). So relevance, per the dimensional-slot clause's same-kind arm: \"a confusion between two quantities of the same kind... this timeframe versus that, is relevance misassignment.\" Here: the 2-year age gap attached to the 10-year time-shift slot. Yes, relevance.\n\nActually wait \u2014 should I also consider that this could be comprehension (goal/structure misread)? The student might believe the question asks something else. But she enacts the right frame: mom at 0 = mom at 10 \u2212 (something). The something should be the elapsed years, 10. She picks 2. The wrong selection of which stated quantity fills the subtraction role \u2192 relevance. I'll found S3, relevance, at turn 7.\n\nBelief: \"the quantity to subtract for the shift from Jayson-age-10 to birth is the stated 2 (the mom-dad age gap)\" \u2014 a selection rule: the 2 fills the elapsed-years role. Hmm, but the belief for relevance must name role and basis. Belief: \"the 2-year figure fills the years-to-subtract role\" \u2014 i.e., which stated information fills the named role. Let me phrase: \"the stated '2 years younger' figure is the amount to subtract to move from Jayson's age-10 to his birth, in place of the stated 10 years.\" That's a selection belief.\n\nSignature: the 2 in the operand slot of 38 \u2212 2 (the elapsed-years slot); protected output 36? The output 36 is produced by the wrong operand. Signature names the act: the 2 seated in the time-shift operand slot of the birth-age computation.\n\nTurn 7 scan: Line \"I would need to subtract 2 from her age when he was 10\" \u2014 departure: expected subtract 10 (the elapsed years). Contradicts problem. Founds S3. Line \"she was 38 - 2 = 36 years old when he was 0\" \u2014 same act continued; is this a separate departure or the same token's output? The 36 is the output of the wrong-operand act. The departure is the operand 2; the 36 is downstream shadow of S3. Should the scan list the second line separately? The line \"38 - 2 = 36\" has operand 2 departing (shadow of S3) and result 36 (downstream). Since S3's belief generates 36, the second line is a shadow. I'll record both lines: first founds S3, second shadow of S3. Or treat the whole turn as one act. The scan requires each line compared. I'll give two rows: the \"subtract 2\" claim (departure, founds S3) and \"38 - 2 = 36\" (departure, shadow of S3 \u2014 the operand and output generated by S3's belief). Hmm, but is the second line a separate departure? Its content is generated by the first; the wrong operand reappears. To be safe: the second line's operand slot departs; disposition shadow of S3.\n\nAlso note turn 7 asserts mom at 0 = 36, abandoning 38 \u2014 so S1 is not exhibited at turn 7 (she no longer holds 38 as birth age; she now performs the subtraction the tutor prompted). Good \u2014 S1's last exhibition is turn 5 (or 6? No \u2014 turn 6 changes to \u22122, so S1 not exhibited at 6).\n\nWait, turn 6: does the student still commit S1's content? No, she says mom was \u22122 at birth. S1 not exhibited. And S1 never resolves (38-at-birth is abandoned, but never corrected to 28 by her own act at the site; also abandonment isn't resolution). Actually does S1 exhibit at turn 7? She says \"if Jayson's mom was 38 when he was 10\" \u2014 correct use \u2014 and 36 at 0. S1's signature is 38-at-birth; not re-committed. Not exhibited.\n\nTurn 8: Tutor: \"Why would you need to subtract 2 when Jayson was born 10 years ago?\" \u2014 this states the corrected content: born 10 years ago \u2192 the amount is 10. Student: \"I needed to subtract 2 because Jayson's dad was 4 times his age when he was 10, which means his dad was 40 years old. Since his mom is 2 years younger than his dad, she must have been 40 - 2 = 38 years old when Jayson was 10. So, if she was 38 when he was 10, then she must have been 38 - 2 = 36 years old when he was 0.\"\n\nShe re-asserts subtracting 2 against the tutor's explicit \"born 10 years ago.\" This re-exhibits S3 (the 2 in the time-shift slot). Tag: reversion (re-exhibition immediately following the corrected content being named) \u2014 the tutor named \"10 years ago,\" the corrected content. So reversion. Or motivated-falsehood? No false equality; 38\u22122=36 is true arithmetic. Reversion.\n\nAlso, does turn 8 re-exhibit S1? She says \"she must have been 40 - 2 = 38 years old when Jayson was 10\" \u2014 correct (38 at age 10). And 36 at 0. S1's content (38 at birth) not re-committed. Not exhibited.\n\nCells for turn 8: relevance present (S3). Others: she re-derives dad 40 and mom 38 correctly \u2014 but these restate stated relations; comprehension not engaged (no reading resolution); wrong operation: 40\u22122 = 38 executing stated relation; steps: no. The tutor's question invited a defence; her response defends with recitation. N for all others.\n\nNow check turn 7's other cells. The tutor's prompt: \"To figure out how old she was when he was 0, you would need to subtract how much from her age?\" \u2014 this supplies the operation (subtract) and the base; leaves the operand open. The student selects the operand: 2 (wrong). For wrong_operation family: \"A tutor who supplies an operand but not the operation... still leaves the operation selection to the student.\" Here the tutor supplies operation + one operand, leaving the second operand open. The student selects 2. Is this a wrong-operation exhibition instead of relevance? The routing order: information ownership (relevance) fires before procedural tests. The choice is between two stated givens (2 and 10) for the same role \u2192 relevance. The wrong-operation family would require the reading/wiring intact and a procedural slip. Here it's a misselection among stated candidates \u2192 relevance. I'm fairly confident: relevance.\n\nHmm, but let me reconsider: is 10 \"competing\" for the role? The role is \"the elapsed years from birth to age 10.\" The problem states \"When Jayson is 10...\" and the ask \"when he was born.\" The 10 is stated; the 2 is stated. She picks 2 for the shift-amount slot. Yes, two stated candidates, same kind (years), wrong one selected \u2192 relevance misassignment. Also the stated-conditions tie-breaker: \"if the confusion is between two conditions the problem explicitly states, it is relevance misassignment.\" Fits.\n\nAlternatively, one might argue S3 is a steps error: the plan now has the right stage (subtract elapsed years) but wrong operand \u2014 no, wrong operand within a step is wrong_operation at most, not steps. And relevance outranks wrong_operation per the routing order (step 9.2 before 9.4).\n\nNow, one more consideration for S3: could it be comprehension \u2014 a belief that the age difference and time shift are the same thing, i.e., she thinks \"mom is 2 years younger\" implies the birth was 2 years earlier? At turn 8, asked why subtract 2 when born 10 years ago, she doesn't say she thought it was 2 years; she re-derives the 2 from the mom-dad gap (\"Since his mom is 2 years younger than his dad... then she must have been 38 - 2 = 36\"). Her rationale at turn 8: she needed to subtract 2 \"because... his mom is 2 years younger than his dad.\" So she articulates the basis: the 2 comes from the age-gap condition. This supports relevance (the 2-year-gap information misassigned to the time-shift role) with an articulated basis. Good \u2014 relevance with the basis stated: she takes the \"2 years younger\" figure to be the thing to subtract.\n\nNow turn 6's family \u2014 let me double-check comprehension vs something else. The act: apply \"4 times his age\" at age 0, and \"2 years younger\" at age 0. The belief: the stated conditions hold at birth (temporal scope misread). This is a wrong reading of what the problem states \u2014 the problem states these relations for when Jayson is 10. Positive evidence: the enacted act itself (\"When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0\"). Is a single act diagnostic? It's locally coherent under the wrong reading (relations hold at all ages / at birth) and... incompatible with an ordinary execution slip under her demonstrated chain? Hmm. A slip-compatible single act doesn't found. Is 0\u00d74=0 a plausible execution slip? No \u2014 it's a deliberate re-application of the stated relation to a new age. The act enacts the reading \"the 4\u00d7 relation applies when Jayson is 0.\" That's a structurally diagnostic act: choosing to evaluate the relation at 0 is locally coherent only under the temporal-scope misread. Also she states it: \"When Jayson was 0, his dad was 4 times his age\" \u2014 words about the problem's sentence, asserting the relation holds at 0. That founds comprehension.\n\nWait \u2014 but could the tutor's question \"How old was Jayson's dad when he was 0?\" be supplying the frame such that applying the relations is licensed by the tutor? The tutor asks for dad's age at birth. The correct route: dad at 10 is 40, so at 0 he was 30. The tutor doesn't state how. The student's choice to re-apply \"4\u00d7\" is her own. Not tutor-supplied. The imprecise-tutor rule: is her move a defensible reading of the tutor's turn? The tutor just asks the question; nothing licenses re-applying 4\u00d7. So her own act. Comprehension present, founds S2.\n\nBut hold on \u2014 is S2 really distinct from S1, or is it S1 re-exhibiting? S1's belief: \"mom's age at birth is the same as at age 10 (ages timeless)\" \u2192 output 38 at birth. S2's belief: \"the stated relations hold at birth\" \u2192 outputs dad 0, mom \u22122. Different beliefs, different outputs. The identity test for re-emergence: same wrong quantity/operand in the same role \u2014 no. So new thread S2. Fine.\n\nAlso, does turn 6 exhibit S1? The student's turn 6 abandons 38-at-birth. Not exhibited. But note the thread-set coherence audit: S1 and S2 live simultaneously? S1: mom at 0 = 38. S2: relations hold at 0 \u2192 mom at 0 = \u22122. These assign incompatible values to mom-at-0 at the same point. But S1 is not exhibited at turn 6 \u2014 the student has (temporarily) abandoned S1's content under the tutor's questioning. Threads that succeed one another because the belief changed are not in conflict. OK.\n\nDoes S2 get exhibited again later? Turn 7-8 move to subtract-2 (S3). S2's content (dad 0, mom \u22122 at birth) never reappears. Exhibitions length 1. Resolved? Never resolved by her own act; abandoned. resolved_by_end false, resolved_at null.\n\nS1: exhibitions at solution (committed), turn 1 (re-exhibited), turn 2 (re-exhibited), turn 4 (re-exhibited), turn 5 (re-exhibited). Resolved? Never \u2014 she never states mom at 0 = 28 as her own corrected act. At turn 7 she changes to 36 \u2014 that's not a resolution of S1 (the corrected counterpart of \"mom at 0 = mom at 10\" would be recognizing the 10-year shift and computing 28; the tutor's prompt supplies the subtract-something frame; her 36 isn't the corrected content). Actually, does S1's belief (mom at birth = mom at 10) get corrected at turn 7? She now accepts that mom at 0 differs from mom at 10 (she subtracts something). Is that a resolution of S1? Resolution = the student's own act committing the corrected counterpart of the thread's token: the corrected element itself, performed by her, at the token's structural position. The token: asserting mom at 0 = 38 (same as at 10). Corrected counterpart: mom at 0 = 28 (via subtracting 10). She commits 36, not 28 \u2014 not the corrected content. And the tutor supplied the subtract frame. So no resolution. S1 resolved_by_end false. Interesting \u2014 the dialogue ends unresolved (correct; the dataset likely marks this unresolved).\n\nS3: exhibitions turn 7 (committed), turn 8 (reversion). Never resolved. resolved_at null.\n\nNow the grid.\n\nSolution: comprehension P [S1]. Others: relevance \u2014 the solution uses the stated givens (10, 4, 2) correctly in their stated roles at the age-10 computation; the error is the birth-age claim. Is there articulated selection? No distractors really; relevance engagement: no articulated selection \u2192 N. Principles: the relations are problem-stated; no concept-level choice \u2192 N. Wrong_operation: 10\u00d74 and 40\u22122 are correct constructions \u2014 do they earn absent? The student selected operations and operands herself (in the solution, her own work). Symmetric standard: acts that would route as wrong_operation had they gone wrong earn absent when right. 10\u00d74=40: applying \"4 times his age\" \u2014 selecting multiplication. 40\u22122=38: selecting subtraction. These are genuine constructions. But are they \"bare execution\"? The relations are stated in the problem (\"four times his age\", \"2 years younger\"), so the operation is essentially named by the text. Per the bare-execution floor and the \"restating a stated relationship\" rule (that's for comprehension). For wrong_operation: the absent condition is \"the student selects the correct operation and places the operands correctly.\" The problem states \"four times his age\" \u2014 the text names the multiplication. Hmm. In the first-performance solution, the student reads the text and builds the expressions. I'd say this engages operation: she assembles 10\u00d74 and 40\u22122. Comparable to worked examples where a first-performance solution row earns several families beside a present cell \"where distinct acts engage each construct.\" The solution here: the only error is the final claim; the two constructions are correct. I'll grant wrong_operation A with trigger \"10 x 4 = 40\" / \"40 - 2 = 38\". Steps: the procedure \u2014 compute dad at 10, mom at 10, then birth age. The student's plan omits the elapsed-years subtraction. Is that a steps error? No \u2014 the omission is the comprehension error's shadow (she believes mom at 0 = mom at 10, so no step is missing on her belief). Per comprehension-vs-steps: procedure wrong for her reading \u2192 comprehension. Steps cell: is there creditable step engagement? Her two-step plan (dad, then mom) is correctly sequenced for what it does. Does steps engagement occur? The plan is thin; I could grant steps A for the correct sequencing of the two computations she performs? The procedure she follows (compute dad's age at 10, then mom's at 10) is valid as far as it goes. But the ask requires a third stage. Since the missing stage is the comprehension shadow, steps isn't charged. Is it engaged at all? The student does perform a sequenced multi-step computation. Per the symmetric standard, a correctly handled procedure earns absent. Her procedure for the age-10 part is fine. I'll grant steps A, trigger: the sequenced computation \"his dad was 10 x 4 = 40... his mom was 40 - 2 = 38\". Hmm, but is that too generous? The steps family: \"absent: the student engages the correct procedural steps.\" Her procedure is incomplete relative to the problem, but the incompleteness is the comprehension error. Judged relative to her belief, the procedure is right. The example grid in the task (the worked example JSON) grants steps A on a solution with a comprehension error. I'll grant steps A.\n\nWait, but the trigger requirement: \"triggers: present exactly where a cell is A... Each value is an exact contiguous span, from this unit or the tutor turn immediately before it, that engaged the construct.\" For solution, the student's own committed assertion brings it into play. I'll use the span \"his dad was 10 x 4 = 40 years old\" for wrong_operation and the full sequence for steps. Let me pick exact spans from the solution text.\n\nSolution text: \"If Jayson was 10, then his dad was 4 times his age, which means his dad was 10 x 4 = 40 years old.\" and \"which means his mom was 40 - 2 = 38 years old.\"\n\nFor wrong_operation trigger: \"his dad was 10 x 4 = 40 years old\" (operand assembly). Steps trigger: maybe the same or the sequence; I'll use \"his mom was 40 - 2 = 38 years old\"? Hmm, steps is about set/sequence. The two-stage derivation is the engagement. I'll quote \"his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old\" \u2014 that's a plan statement (find mom from dad after finding dad). OK.\n\nHmm, actually, should I grant these absents at all? Let me reconsider. The audit: \"for every absent cell, what construct-level decision did the student author, and what plausible error could they have made?\" For wrong_operation: she authored 10\u00d74 (choosing multiplication and operands 10 and 4) and 40\u22122. Plausible errors: divide, or 4+10, or wrong operands. Yes, real decisions. Grant A.\n\nComprehension cell: P with S1.\n\nTurn 1: walkthrough recitation. Comprehension P [S1] (re-commits the error; error side unchanged by recitation floor). Other families: recitation earns nothing \u2192 N. The walkthrough re-articulates the relations, but the sentences map one-to-one onto the solution's content in the same order \u2192 recitation \u2192 N for Wo/steps/etc.\n\nHmm wait \u2014 is turn 1 a genuine reformulation? \"I knew that since Jayson was 10, his dad was 4 times his age, so I multiplied 10 x 4 to get 40. Then, I subtracted 2 from his dad's age to get his mom's age, which was 40 - 2 = 38.\" vs solution \"his dad was 4 times his age, which means his dad was 10 x 4 = 40 years old... his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38.\" Same content, same order, narrated \u2014 recitation. N.\n\nTurn 2: comprehension P [S1]. Others N.\n\nTurn 3: The tutor's question invites mom-at-10. Student answers 38, correct, executing stated relations with tutor-supplied operands (40 and 2 stated in the tutor's question). Comprehension: restating stated relationship \u2192 N. Wo: tutor supplied operation+operands \u2192 N. All N.\n\nHmm \u2014 but wait: could turn 3 be an absent for comprehension (correctly grasping the sub-question)? The sub-question is directly answered by stated relations; per the video-game-hours rule, restating a stated relationship and computing is not comprehension engagement \u2192 N. Yes.\n\nTurn 4: P [S1], others N.\n\nTurn 5: P [S1], others N.\n\nTurn 6: comprehension P [S2] (founds). Others: Wo \u2014 the constructions 0\u00d74, 0\u22122 are correct on her wrong belief; no procedural fault \u2192 N. All others N.\n\nTurn 7: relevance P [S3]. Others N? Let's see: the student performs 38\u22122=36 \u2014 executing the tutor-named operation (subtract) with tutor-supplied base (her age at 10 = 38, which the tutor stated: \"Jayson's mother's age was 38 when he is 10\") and self-selected operand 2 (wrong \u2014 the S3 error, dual-use: the token's own derivation earns nothing). So Wo N, steps: the tutor supplied the step (subtract); steps prompt-selected \u2192 N. Comprehension: does she engage task comprehension? She addresses mom at 0 \u2014 the goal reading is now correct (she's computing birth age via subtraction). But is that a self-authored resolution of anything? The tutor's prompt stated the frame. The comprehension error S1 (38-at-birth) \u2014 she no longer commits it, but \"not re-committing an error is not comprehension\" and the frame came from the tutor \u2192 N. Principles N.\n\nTurn 8: relevance P [S3, reversion]. Others N. She re-derives 40 and 38 \u2014 recitation of stated relations; the operands and relations tutor-stated or problem-stated; no self-authored construct decisions beyond the error. N.\n\nNow the scan details.\n\nSolution lines:\n1. \"If Jayson was 10, then his dad was 4 times his age, which means his dad was 10 x 4 = 40 years old.\" Expected: 10 \u00d7 4 = 40. Match.\n2. \"then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old.\" Match.\n3. \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" Expected: mom at 0 = 38 \u2212 10 = 28. Departure: the claim that mom was 38 when Jayson was 0. Contradicts: problem (the stated ages hold when Jayson is 10; birth is 10 years earlier). Founds S1.\n4. \"38\" \u2014 the final answer, same content as line 3's claim \u2014 output of the token. Is it a separate row? It's the committed answer, restating the wrong claim. I'd fold it into line 3's row; but the scan says every act committing checkable content. The bare \"38\" is the answer echo. I'll include it as a row with verdict departure? Hmm \u2014 it's the same token's output. To keep clean, I could mark line 3 as the departure and \"38\" as part of the same span. Let me just quote line 3 and not separately scan the trailing \"38\" \u2014 actually the instruction: lines covers every act that commits checkable content. The bare 38 commits the same content. I'll add a row: written \"38\", expected \"28\", verdict departure, slot \"the reported birth age\", contradicts \"problem\", disposition shadow of S1 (S1's belief generates it). That's safer for completeness. Hmm, but \"in a thread's own origin unit... a span's containing the thread's protected output does not instantiate its signature at the origin\" \u2014 the trailing 38 is the output being created. Shadow is fine: S1's belief generates it. Actually the founding row and the shadow row both sit at origin; the rule says only the founding departure carries the thread at origin; other departures dispose on their own merits \u2014 shadow of S1 is a valid disposition. OK.\n\nWait, is the trailing \"38\" really a separate act? It's the answer line. I'll include it as shadow of S1.\n\nTurn 1 lines:\n- \"since Jayson was 10, his dad was 4 times his age, so I multiplied 10 x 4 to get 40\" \u2014 match.\n- \"I subtracted 2 from his dad's age to get his mom's age, which was 40 - 2 = 38\" \u2014 match.\n- \"Since his mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" \u2014 departure: mom at 0 = 38; expected 28. Exhibits S1.\n\nTurn 2 lines:\n- \"I knew that Jayson's dad was 40 when Jayson was 10, and that his mom was 2 years younger than his dad.\" \u2014 match (restatement of correct content).\n- \"if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" \u2014 departure, exhibits S1.\n\nTurn 3 lines:\n- \"Jayson's mom would be 38 when he is 10 since she is 2 years younger than his dad. So, when Jayson is 10, his mom is 38 years old.\" \u2014 match (40\u22122=38 at age 10). Expected: 38. Match.\n\nTurn 4 lines:\n- \"Yes, I still think Jayson's mom was 38 when he was 0.\" \u2014 departure, exhibits S1.\n- \"Since his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad, then his mom must have been 38 when Jayson was 0.\" \u2014 same claim re-derived; the departure is the same content. One row or two? The second sentence re-commits the same claim. I'll add a second row also exhibiting S1? The schema: one departure entry per scan row. Two rows, both disposition \"exhibits S1\"? That would double-count the same act arguably. Simpler: treat the whole turn's commitment as one row quoting the fuller span. I'll do one row: \"Yes, I still think Jayson's mom was 38 when he was 0. Since his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad, then his mom must have been 38 when Jayson was 0.\" Hmm, exact contiguous span \u2014 the turn text: \"Yes, I still think Jayson's mom was 38 when he was 0. Since his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad, then his mom must have been 38 when Jayson was 0.\" I can quote a contiguous span covering both. But expected/slot for the row... I'll keep two rows for clarity: the first sentence and the derivation sentence, both exhibiting S1? The rule \"every departure needs a disposition\" \u2014 multiple rows can share a disposition. It's allowed: one entry per scan row whose verdict is departure. Two rows both \"exhibits S1\" \u2014 that's fine; exhibitions list just has one entry for turn 4. OK. Actually to reduce clutter, I'll use one row with the contiguous two-sentence span. Both acceptable; I'll go with two rows for line-by-line fidelity. Hmm, \"A line is any act in the unit that commits checkable content.\" The derivation sentence commits the same claim. I'll do two rows: sentence 1 (claim), sentence 2 (derivation re-committing). Both exhibit S1.\n\nWait, sentence 2's first half \"his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad\" is true; the departing slot is the conclusion \"his mom must have been 38 when Jayson was 0.\" One row for that sentence with the slot named.\n\nTurn 5 lines:\n- \"his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad\" \u2014 match.\n- \"if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" \u2014 departure, exhibits S1.\n\nTurn 6 lines:\n- \"When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0 years old.\" \u2014 departure: the 4\u00d7 relation applied at age 0; expected dad at 0 = 40 \u2212 10 = 30. Founds S2.\n- \"his mom must have been 2 years younger than his dad, so she was 0 - 2 = -2 years old.\" \u2014 departure: the mom=dad\u22122 relation applied at age 0, consuming her own wrong 0; expected mom at 0 = 28 (or on her committed chain with dad=0, \u22122 follows). It contradicts the problem; its content is generated by S2's belief \u2192 shadow of S2. Slot: the \"2 years younger\" relation applied at birth.\n\nHmm, actually is the second line a shadow or a second exhibition? At the origin unit, \"only its founding departure carries that thread: any other departure there disposes on its own merits.\" On its own merits: applying mom = dad \u2212 2 at age 0 \u2014 the same belief (stated relations hold at birth) generates it. So shadow of S2. Good.\n\nTurn 7 lines:\n- \"To figure out how old Jayson's mom was when he was 0, I would need to subtract 2 from her age when he was 10.\" \u2014 departure: expected subtract 10. Founds S3. Slot: the operand 2 in the time-shift role. Contradicts: problem.\n- \"if Jayson's mom was 38 when he was 10, then she was 38 - 2 = 36 years old when he was 0.\" \u2014 departure: the 2 operand and result 36, generated by S3's belief \u2192 shadow of S3. Actually also the operand 2 re-seated. Shadow of S3.\n\nHmm, or should the second line be an exhibition? At origin, only founding departure carries the thread; other departures dispose on their own merits. On its own merits, the 36-line is generated by S3's belief (subtract the 2) \u2192 shadow. Yes.\n\nTurn 8 lines:\n- \"Jayson's dad was 4 times his age when he was 10, which means his dad was 40 years old.\" \u2014 match.\n- \"Since his mom is 2 years younger than his dad, she must have been 40 - 2 = 38 years old when Jayson was 10.\" \u2014 match.\n- \"if she was 38 when he was 10, then she must have been 38 - 2 = 36 years old when he was 0.\" \u2014 departure: the 2 in the time-shift slot against the tutor's stated \"born 10 years ago\"; exhibits S3 (reversion).\n- Also the opening \"I needed to subtract 2 because...\" \u2014 commits the same. I could include it as a row: \"I needed to subtract 2 because Jayson's dad was 4 times his age when he was 10\" \u2014 the claim \"needed to subtract 2\" is the error content. I'll fold: quote the span \"she must have been 38 - 2 = 36 years old when he was 0\" as the exhibition. Add a row for \"I needed to subtract 2\"? It's the same commitment. To be thorough: two rows, both exhibits S3? One is enough if the span captures the act. I'll include the \"38 - 2 = 36\" row as the exhibition row and also a row for \"I needed to subtract 2 because Jayson's dad was 4 times his age when he was 10\" \u2014 the claim that subtracting 2 was needed. Both departures exhibiting S3. Fine \u2014 but each departure entry must have a scan row with same span. OK, two rows.\n\nActually, let me simplify: one row per line that commits the error content. Turn 8's error-carrying lines: the \"I needed to subtract 2\" claim and the \"38 - 2 = 36\" conclusion. Two rows, both exhibits S3.\n\nNow threads:\n\nS1: family comprehension. Belief: \"the mom's age computed for when Jayson is 10 is her age when Jayson was born \u2014 the 10-year shift from age 10 to birth does not change her age\" \u2014 as a reading: she takes the problem's stated age relations (at Jayson-10) as giving mom's age at birth directly. Belief one line: \"the stated ages for when Jayson is 10 are read as the ages when he was born; mom was 38 at his birth.\" Hmm, avoid stating computed total in belief. \"A belief field containing an equality or a computed total has described her arithmetic.\" So: \"the mom's age at Jayson-age-10 is also her age at his birth; the ten years between do not bear on the question.\" That's a reading of the situation/ask. Good.\n\nSignature: \"mom's age at birth asserted as the same value as her age at Jayson-10; protected output 38-as-birth-age.\" Witness: not needed (comprehension). Quote from origin: \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\"\n\nExhibitions: (solution, committed), (turn 1, re-exhibited), (turn 2, re-exhibited), (turn 4, re-exhibited), (turn 5, re-exhibited). resolved_at null.\n\nWait \u2014 turn 2's tag: the student articulates the belief under challenge; \"re-exhibited\" fits. Turn 4: after tutor names the contrast \u2014 is the corrected content \"named\"? The tutor names that mom is 38 at 10 and asks if she still thinks 38 at 0. The corrected content (that you must subtract 10 / answer 28) is not named. So \"re-exhibited\". OK.\n\nS2: family comprehension. Belief: \"the stated relations (dad is four times Jayson's age, mom is two years younger than dad) hold when Jayson was born, so they can be evaluated at age 0.\" Reading of temporal scope. Signature: \"the age-10 relations evaluated at Jayson-0 (0 x 4 for dad, 0 - 2 for mom)\". Quote: \"his dad was 4 times his age, so his dad was 0 x 4 = 0 years old\". Exhibitions: (turn 6, committed). resolved_at null.\n\nHmm \u2014 wait. Should S2 instead be routed as something else? Let me reconsider. The construction gate question 1: does a coherent reading of a stated sentence generate this act? Yes: reading \"his dad is four times his age\" as age-invariant (holding at all times, hence at birth) generates 0\u00d74. That reading is a wrong reading of the stated sentence's temporal scope \u2192 comprehension. The evidence: her own words \"When Jayson was 0, his dad was 4 times his age\" \u2014 a stated binding of the relation to the birth time. Yes, comprehension. Good.\n\nAlso check the ambiguity defence: is \"dad is four times his age [at all times]\" a defensible reading? The problem says \"When Jayson is 10 his dad is four times his age\" \u2014 explicitly scoped to age 10. Reading it as holding at birth contradicts the text (a 0-year-old father is impossible \u2014 physically impossible model). Fails genuine ambiguity (physically impossible) \u2192 chargeable. Good.\n\nS3: family relevance. Belief: \"the amount to subtract to shift from mom's age at Jayson-10 to her age at his birth is the stated 2 (the '2 years younger' figure), selected over the stated 10-year span.\" Role + basis: the 2 fills the elapsed-years role because it's the number associated with age differences in the problem. One line: \"the stated '2 years younger' figure fills the years-between-birth-and-age-10 role, in place of the stated 10.\"\n\nSignature: \"the 2 seated in the elapsed-years operand slot of the birth-age subtraction (38 - 2)\". Quote from origin: \"I would need to subtract 2 from her age when he was 10.\"\n\nExhibitions: (turn 7, committed), (turn 8, reversion). resolved_at null.\n\nCheck S3 isn't comprehension: is there a reading generating \"subtract 2\"? A reading that birth was 2 years ago would contradict \"when Jayson is 10\" \u2014 she never states that; her turn-8 rationale grounds the 2 in the \"2 years younger\" condition. So it's a misassignment of the stated 2 to the time-shift role \u2014 relevance (same-kind confusion: both are year quantities). The dimensional-slot clause: same-kind \u2192 relevance. Yes.\n\nNow the audit checks:\n\n1. Comprehension evidence: S1 \u2014 explicit claim in her words \"Jayson's mom was 38 when Jayson was 0 years old (born)\" \u2014 positive. S2 \u2014 explicit act + words \"When Jayson was 0, his dad was 4 times his age\" \u2014 positive. Beliefs stated as readings, no bare equalities. S1's belief mentions no equality/total: \"the ages the problem fixes at Jayson-10 are taken to be the ages at his birth\" \u2014 fine.\n\n2. Founding: available-reading defence tested: S1's reading (mom's age at birth = at age 10) \u2014 is it defensible? The problem explicitly asks \"how old was mom when he was born\" with relations at age 10; reading 38 as the birth age contradicts the temporal structure (birth \u2260 age 10; ages advance). Physically impossible (mom doesn't age over 10 years) \u2192 unavailable. Chargeable. S2's reading fails possibility (dad aged 0 fathering). Chargeable. S3 \u2014 not a reading; relevance.\n\n3. Provenance: S3's competing inputs: 2 (stated) and 10 (stated) \u2014 both problem-given at the moment of selection. Good.\n\n4. Roles: 38 labelled \"mom when Jayson is 10\" (turn 3) and \"mom when born\" (S1) \u2014 different predicates; the S1 error treats them as one. 36 at turns 7-8: mom at 0.\n\n5. Residual errors: after S1, S2, S3 attributed \u2014 solution's trailing \"38\" is S1's shadow; turn 6's \u22122 line is S2's shadow; turn 7's 36-line is S3's shadow. No unhandled departures.\n\n6. Procedure grain: no Wo/steps threads.\n\n7. Credit: absents only at solution (Wo, steps). Triggers required. Let me double check the solution steps A. The steps construct: set and sequence. Her plan: (1) dad at 10 via 4\u00d7, (2) mom at 10 via \u22122, (3) report birth age. The omission of the subtraction stage is S1's shadow (comprehension). Does she \"engage the correct procedural steps\"? For the stages she performs, sequence is valid. The judged-on-her-belief standard: her procedure is correct for her wrong reading. Steps present? No \u2014 the missing stage follows from the misread (comprehension-versus-steps). Steps absent? The universal question: does the turn contain reasoning bearing on the steps construct \u2014 the set and sequence of steps? Her solution lays out a sequenced plan and executes it. She handles the sequencing of the performed stages soundly. I'll grant steps A with trigger being the plan-narrating span. Hmm, actually, let me reconsider \u2014 is granting steps A here defensible? The example grid in the task statement granted steps A on a solution with comprehension and Wo present. The plan she executes: find dad's age, then mom's age \u2014 a valid sub-procedure. The failure (no \u221210 stage) is comprehension's. Yes, A with trigger.\n\nFor Wo at solution: the two constructions are correct, self-assembled. A with trigger.\n\nShould solution relevance be A? Relevance engagement requires articulated selection. She uses all stated givens appropriately; no distractor exists. Silence floor: silently not using a distractor earns nothing; here there's no distractor at all. Did she articulate a selection? No. N.\n\nPrinciples at solution: relations stated by problem; no concept-level choice beyond executing stated relations. N.\n\nTurn 3: any credit? She answers the tutor's sub-question with operands the tutor stated \u2192 N everywhere.\n\nTurn 7: any credit? The tutor supplied operation and base; operand selection was the error. No credit. Comprehension: she now treats birth age as different from age-10 age \u2014 is that a self-authored correction of S1's reading? The tutor's question \"you would need to subtract how much from her age?\" supplies that subtraction is needed (the frame). Executing within supplied frame \u2192 N. Good.\n\nTurn 8: N except relevance P.\n\nTurn 1, 2, 4, 5: comprehension P, others N.\n\nNow, one more check on turn 3: does the student's correct \"38 when he is 10\" engage S1's thread as a resolution? No \u2014 S1's token is about birth age; mom-at-10 = 38 was always correct in her chain. Not a resolution. And the cell isn't A because operands/relations are tutor-stated (N, not A). The trigger rule: \"Where... the tutor stated the content so nothing was the student's selection, no span can trigger it and the cell is N.\"\n\nNow also double-check turn 2's other families: she restates dad 40 and the 2-years-younger relation \u2014 recitation, N.\n\nTurn 6: any credit? Everything in the turn is the S2 error's enactment. N except comprehension P.\n\nNow the exhibitions/tags:\nS1: solution committed; turn 1 re-exhibited; turn 2 re-exhibited; turn 4 re-exhibited; turn 5 re-exhibited.\nS2: turn 6 committed.\nS3: turn 7 committed; turn 8 reversion.\n\nGrid:\nsolution: C P [S1], R N, P N, Wo A, steps A. triggers: Wo and steps.\nturn 1: C P [S1], rest N.\nturn 2: C P [S1], rest N.\nturn 3: all N.\nturn 4: C P [S1], rest N.\nturn 5: C P [S1], rest N.\nturn 6: C P [S2], rest N.\nturn 7: R P [S3], rest N.\nturn 8: R P [S3], rest N.\n\nQuotes:\n- solution C: \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" \u2014 exact from solution. Check the solution text: \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" Yes.\n- solution Wo trigger: \"his dad was 10 x 4 = 40 years old\" \u2014 exact span. Steps trigger: \"his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old\" \u2014 exact? Solution: \"then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old.\" I'll quote a subspan: \"his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old\". Must be contiguous \u2014 yes.\n\nHmm, actually for steps trigger, better to show the sequence: \"Let's start by finding Jayson's dad's age when Jayson was 10.\" \u2014 that's a plan statement showing step organization. Combined with execution. I'll use \"his mom's age can be found by subtracting 2 from his dad's age\" as it shows the ordered dependency. Either works; I'll go with the longer span covering both stages? Must be contiguous: \"Let's start by finding Jayson's dad's age when Jayson was 10. If Jayson was 10, then his dad was 4 times his age, which means his dad was 10 x 4 = 40 years old.\" That's contiguous. Hmm, simpler: for steps, the trigger is the student's own committed plan. I'll quote: \"Let's start by finding Jayson's dad's age when Jayson was 10.\" Wait \u2014 does that show steps engagement adequately? It shows the first step selection. The whole plan (dad \u2192 mom) is the engagement. I'll quote \"then his mom's age can be found by subtracting 2 from his dad's age\" \u2014 shows she sequences mom after dad. OK.\n\n- turn 1 C quote: \"Since his mom was 38 when Jayson was 0 years old (born), she was 38 years old.\"\n- turn 2 C quote: \"if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" Exact from turn 2: \"So, I reasoned that if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" The subspan is contiguous. Good.\n- turn 4 C quote: \"Yes, I still think Jayson's mom was 38 when he was 0.\"\n- turn 5 C quote: \"if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" Turn 5 text: \"So, if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" Contiguous subspan. Good.\n- turn 6 C quote: \"his dad was 4 times his age, so his dad was 0 x 4 = 0 years old\" \u2014 turn 6: \"When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0 years old.\" Good.\n- turn 7 R quote: \"I would need to subtract 2 from her age when he was 10.\" Turn 7: \"To figure out how old Jayson's mom was when he was 0, I would need to subtract 2 from her age when he was 10.\" Good.\n- turn 8 R quote: \"she must have been 38 - 2 = 36 years old when he was 0.\" Turn 8: \"So, if she was 38 when he was 10, then she must have been 38 - 2 = 36 years old when he was 0.\" Good.\n\nThread quotes: S1: solution span. S2: turn 6 span. S3: turn 7 span.\n\nScan rows \u2014 let me now write them carefully with exact spans.\n\nSolution lines:\n1. written: \"If Jayson was 10, then his dad was 4 times his age, which means his dad was 10 x 4 = 40 years old.\" \u2014 match. expected: \"10 x 4 = 40, the problem's stated rate at age 10\".\n2. written: \"then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old.\" \u2014 match. expected \"40 - 2 = 38 at Jayson-10\".\n\nHmm the written span \"then his mom's...\" \u2014 the solution has \"If Jayson's dad was 40 when Jayson was 10, then his mom's age can be found...\" I'll quote the full sentence: \"If Jayson's dad was 40 when Jayson was 10, then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old.\"\n\n3. written: \"Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" \u2014 departure; slot: \"mom's age at birth asserted as 38, her age at Jayson-10\"; contradicts: \"problem\" (birth is 10 years before the stated age-10 snapshot; expected 38 \u2212 10 = 28). Disposition: founds S1.\n4. written: \"38\" \u2014 departure; slot: \"the final answer\"; contradicts \"problem\"; shadow of S1.\n\nHmm \u2014 is including row 4 wise? It must appear in departures with disposition \"shadow of S1\". The rule: \"'shadow of S#' is legitimate only where S#'s belief itself generates the departure's content\" \u2014 S1's belief generates 38-as-birth-age. Yes. But \"in a thread's own origin unit, only its founding departure carries that thread: any other departure there disposes on its own merits, and a span's containing the thread's protected output does not instantiate its signature at the origin, where the output is being created, not defended.\" Shadow is not \"carrying\" the thread \u2014 it's disposed as generated. Fine.\n\nActually, could I instead treat the trailing \" 38\" as part of the same act as line 3? It is the reported answer. I'll keep it as a separate row with shadow \u2014 safer for \"every line scanned.\"\n\nTurn 1 lines:\n1. \"I knew that since Jayson was 10, his dad was 4 times his age, so I multiplied 10 x 4 to get 40.\" \u2014 match.\n2. \"Then, I subtracted 2 from his dad's age to get his mom's age, which was 40 - 2 = 38.\" \u2014 match.\n3. \"Since his mom was 38 when Jayson was 0 years old (born), she was 38 years old.\" \u2014 departure, exhibits S1. Slot: mom's age at birth = 38; contradicts problem.\n\nTurn 2 lines:\n1. \"I knew that Jayson's dad was 40 when Jayson was 10, and that his mom was 2 years younger than his dad.\" \u2014 match.\n2. \"if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" \u2014 departure, exhibits S1. Full sentence: \"So, I reasoned that if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" Quote the subspan.\n\nTurn 3 lines:\n1. \"Jayson's mom would be 38 when he is 10 since she is 2 years younger than his dad. So, when Jayson is 10, his mom is 38 years old.\" \u2014 match. Expected: 40 \u2212 2 = 38 at age 10.\n\nTurn 4 lines:\n1. \"Yes, I still think Jayson's mom was 38 when he was 0.\" \u2014 departure, exhibits S1.\n2. \"Since his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad, then his mom must have been 38 when Jayson was 0.\" \u2014 departure, exhibits S1. Slot: the conclusion seating mom-at-birth at her age-10 value. Contradicts problem.\n\nTurn 5 lines:\n1. \"Yes, it is possible because his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad.\" \u2014 the true part; but the sentence packages the defence. The claim \"it is possible\" (mom 38 at 0 and at 10) is the error content. I'd mark: departure? The sentence asserts possibility of the impossible identity. Slot: the claim that mom being 38 at both ages is possible; contradicts problem. Exhibits S1.\n2. \"So, if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.\" \u2014 departure, exhibits S1.\n\nTurn 6 lines:\n1. \"When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0 years old.\" \u2014 departure; slot: the four-times relation evaluated at age 0; contradicts problem (the relation is stated for age 10; dad at 0 would be 30). Founds S2.\n2. \"Since his dad was 0 when Jayson was 0, his mom must have been 2 years younger than his dad, so she was 0 - 2 = -2 years old.\" \u2014 departure; slot: the two-years-younger relation evaluated at age 0 (consuming her committed dad-at-0 = 0); contradicts problem; shadow of S2.\n\nTurn 7 lines:\n1. \"I would need to subtract 2 from her age when he was 10.\" \u2014 departure; slot: the operand 2 in the years-to-subtract role (expected 10); contradicts problem; founds S3. Full sentence: \"To figure out how old Jayson's mom was when he was 0, I would need to subtract 2 from her age when he was 10.\"\n2. \"So, if Jayson's mom was 38 when he was 10, then she was 38 - 2 = 36 years old when he was 0.\" \u2014 departure; slot: operand 2 and result 36 in the birth-age computation; contradicts problem; shadow of S3.\n\nTurn 8 lines:\n1. \"I needed to subtract 2 because Jayson's dad was 4 times his age when he was 10, which means his dad was 40 years old.\" \u2014 the \"needed to subtract 2\" claim: departure; slot: the operand 2 in the time-shift role; contradicts problem (and the tutor's just-stated \"born 10 years ago\"). Exhibits S3.\n\nHmm \u2014 is the first sentence's claim separable from line 3's? Both carry the 2. I'll mark line 1 as departure (exhibits S3) for the \"needed to subtract 2\" claim.\n\n2. \"Since his mom is 2 years younger than his dad, she must have been 40 - 2 = 38 years old when Jayson was 10.\" \u2014 match (at age 10).\n3. \"So, if she was 38 when he was 10, then she must have been 38 - 2 = 36 years old when he was 0.\" \u2014 departure; exhibits S3.\n\nNow departures list (one per departure row, in unit order):\nsolution: line3 founds S1; \"38\" shadow of S1.\nturn 1: exhibits S1.\nturn 2: exhibits S1.\nturn 4: two rows, both exhibits S1.\nturn 5: two rows, both exhibits S1.\nturn 6: founds S2; shadow of S2.\nturn 7: founds S3; shadow of S3.\nturn 8: exhibits S3; exhibits S3.\n\nThreads:\nS1: comprehension; belief: \"the mom's age computed at Jayson-age-10 is read as her age at his birth: the question asks for the same age the stated relations already give, and the ten years between birth and age 10 do not bear on it.\" Hmm \u2014 keep it as a reading, no computed totals. Maybe: \"the ages the problem fixes when Jayson is 10 still hold when he was born; his mom's age at his birth is the same as her age when he is 10.\" That's a reading of the situation. Signature: \"mom's age at birth asserted identical to her age at Jayson-10; protected output 38 as the birth age\". Origin solution. Exhibitions as above. resolved_at null.\n\nS2: comprehension; belief: \"the stated relations, dad is four times Jayson's age and mom is two years younger than dad, are taken to hold when Jayson was born, so they can be evaluated at age 0.\" Signature: \"the age-10 relations evaluated at age 0: 0 x 4 for dad, 0 - 2 for mom\". Quote: \"his dad was 4 times his age, so his dad was 0 x 4 = 0 years old\". Origin turn 6. Exhibitions [(turn 6, committed)]. resolved_at null.\n\nS3: relevance; belief: \"the stated '2 years younger' figure is the amount to subtract to move from mom's age at Jayson-10 to her age at his birth, selected over the stated 10-year span.\" Signature: \"the 2 seated in the elapsed-years operand slot of the birth-age subtraction (38 - 2 = 36)\". Quote: \"I would need to subtract 2 from her age when he was 10\". Origin turn 7. Exhibitions [(turn 7, committed), (turn 8, reversion)]. resolved_at null.\n\nGrid triggers: only solution has A cells (Wo, steps). \n\nLet me double-check the solution Wo absent against the dual-use rule: the token is the birth-age claim; the constructions 10\u00d74 and 40\u22122 are distinct acts, correctly performed. They earn absent. Trigger spans from the solution.\n\nAlso, should solution comprehension be anything but P? It's P.\n\nOne consideration: turn 3 \u2014 the student correctly states mom is 38 at age 10 in response to the tutor's question. Could this be an \"A\" for comprehension as correctly grasping a decomposed sub-question? The family says \"absent: the student correctly grasps what is being asked, including on a decomposed sub-question.\" But the resolving-versus-restating rule: restating a relationship the problem gives directly and computing it is execution, not_evidenced. The tutor's question itself stated both givens (\"If Jayson's Dad is 40 when he is 10, and Jayson's mom is 2 years younger than his dad. How old is Jayson's mom when Jayson is 10?\"). Everything is supplied; the student executes 40\u22122. Not_evidenced. Yes, N.\n\nAlso turn 3 Wo: tutor supplied operands and relation \u2192 N.\n\nNow check invariants: every P cell's cited thread exhibited by a departure in that unit \u2014 yes. Every founds at origin \u2014 yes. Exhibitions entries land on P cells citing the thread \u2014 S1: solution P, t1 P, t2 P, t4 P, t5 P \u2014 yes. S2: t6 P \u2014 yes. S3: t7 P, t8 P \u2014 yes.\n\nsrcs format: single id strings.\n\nquotes object keys must match srcs keys. For solution: srcs has comprehension S1; quotes has comprehension span. Wo and steps are A without srcs (independent credit) \u2014 no quotes needed; triggers for Wo and steps.\n\nJSON emission. Also expected fields: keep them concise.\n\nOne more re-examination of S3's family \u2014 relevance vs wrong_operation. The routing order: step 9.2 information ownership: \"Choosing the wrong member of competing problem-given candidates that can fill the same role is relevance.\" Candidates for the elapsed-years role: the stated 10 (Jayson's age in the snapshot; birth = 0) and the stated 2 (mom-dad gap). Both are stated givens; same kind (years). The student selects 2. Relevance. The own-chain demonstration bar (step 9.1): has the prefix correctly derived the 10-year gap? No \u2014 she never computed it; the tutor states \"born 10 years ago\" only at turn 8's question (after turn 7). At turn 7 the prefix has no demonstration. So no bar. Relevance stands.\n\nAlso check S3 against the comprehension arm of the registration note: is the 2 \"role-registered\" correctly elsewhere (as the mom-dad gap)? Yes \u2014 she uses 2 correctly as the mom-dad gap at solution and turn 3. At turn 7 she uses the same value under a different role (time-shift). \"If the student uses the stated value under the wrong structural role, the positive wrong-role enactment routes to comprehension rather than being treated as an omitted datum, with the ownership test governing the boundary: where the wrong-role use consists in selecting the wrong member of competing stated candidates for a slot... it is relevance.\" Here she selects the 2 (a stated candidate) for the time-shift slot, competing against the stated 10 \u2192 relevance. Yes.\n\nEdge: is the 10 actually \"competing for the role\" as a stated given? The role needs \"years between birth and age 10\" = 10 \u2212 0 = 10. The 10 is stated (Jayson's age); the 0 (birth) she stated herself. So the correct operand is a stated given. Both candidates stated \u2192 relevance. Good.\n\nAlso consider: could turn 7's act be a steps error (wrong amount = wrong operation)? No \u2014 operand selection within a licensed construction is Wo at most, and relevance outranks it for stated-given misselection.\n\nNow, tags vocabulary check: \"reversion: a re-exhibition immediately following the corrected content being named, adopted, or performed.\" At turn 8, the tutor named \"Jayson was born 10 years ago\" \u2014 the corrected content (the 10-year span). The student re-asserts subtract-2. Reversion. Yes.\n\nTurn 4 tag: the tutor named \"mom is 38 when he is 10\" \u2014 that's not the corrected content; it's her own correct sub-result. Re-exhibited. Turn 5: tutor asks how it's possible; re-exhibited.\n\nLet me also double check turn 6 doesn't earn steps/Wo N only \u2014 yes.\n\nAlso, does turn 7 exhibit S1? She says \"Jayson's mom was 38 when he was 10\" \u2014 true; and 36 at 0 \u2014 not S1's content (38 at 0). S1 not exhibited. Good. But hmm \u2014 is 36 a \"migration\" around S1's protected output? No, 36 \u2260 38. S1's output isn't defended anymore. Fine.\n\nWrite the final JSON. Keep expected strings brief.\n\nFor the scan of turn 5 line 1: written: \"Yes, it is possible because his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad.\" \u2014 the departure slot: the claim \"it is possible\" (that mom was 38 at both ages). contradicts: \"the problem's timeline: ten years separate the two ages\". OK.\n\nAlso the trailing \" 38\" in solution: the text shows \" 38\" on its own line. Written: \"38\". expected: \"28\". verdict departure. Slot: \"the reported answer\". contradicts: \"problem\". Disposition: shadow of S1.\n\nActually, hmm: could the \"38\" row also be considered part of line 3's act? The scan rule says one row per line committing checkable content. Including it with shadow is fine.\n\nGrid entries with triggers only where A: solution Wo and steps triggers.\n\nLet me make sure quotes for triggers are exact:\n- \"his dad was 10 x 4 = 40 years old\" \u2014 from \"which means his dad was 10 x 4 = 40 years old.\" Exact subspan (without period). Good.\n- steps trigger: \"then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old\" \u2014 from \"If Jayson's dad was 40 when Jayson was 10, then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old.\" Exact subspan. Good.\n\nFinal check of scan expected values:\n- Turn 6 line 1 expected: dad at 0 = 40 \u2212 10 = 30; the 4\u00d7 relation holds at age 10, not at birth.\n- Turn 6 line 2 expected: mom at 0 = 28; on her own committed chain (dad at 0 = 0), \u22122 is internally consistent \u2014 but contradicts problem. The departure's content is generated by S2's belief \u2192 shadow. Expected: \"the relation is not live at birth; mom at 0 = 28\".\n\nAlright, emit JSON.",
+   "errors": [],
+   "meta": {
+    "latency_s": 730.3131783008575,
+    "first_event_s": 4.665334224700928,
+    "first_token_s": 4.665347099304199,
+    "usage": {
+     "prompt_tokens": 58721,
+     "completion_tokens": 23282,
+     "total_tokens": 82003,
+     "cached_tokens": 57344,
+     "completion_tokens_details": {
+      "reasoning_tokens": 19425
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 57344
+     }
+    },
+    "tokens": {
+     "prompt": 58721,
+     "cached_prompt": 57344,
+     "uncached_prompt": 1377,
+     "completion": 23282,
+     "reasoning": 19425,
+     "visible_completion": 3857,
+     "total": 82003
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 23270,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 842,
+  "scan": [
+   {
+    "unit": "solution",
+    "lines": [
+     {
+      "written": "If Jayson was 10, then his dad was 4 times his age, which means his dad was 10 x 4 = 40 years old.",
+      "expected": "10 x 4 = 40, the problem's stated rate at Jayson-age-10",
+      "verdict": "match"
+     },
+     {
+      "written": "If Jayson's dad was 40 when Jayson was 10, then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old.",
+      "expected": "40 - 2 = 38, mom's age at Jayson-age-10",
+      "verdict": "match"
+     },
+     {
+      "written": "Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.",
+      "expected": "mom at birth = 38 - 10 = 28, the stated ages hold at Jayson-age-10 and birth is ten years earlier",
+      "verdict": "departure",
+      "slot": "mom's age at birth asserted as her age-10 value 38",
+      "contradicts": "problem"
+     },
+     {
+      "written": "38",
+      "expected": "28, on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "the reported answer for mom's age at birth",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 1",
+    "lines": [
+     {
+      "written": "I knew that since Jayson was 10, his dad was 4 times his age, so I multiplied 10 x 4 to get 40.",
+      "expected": "10 x 4 = 40, on the problem's mathematics",
+      "verdict": "match"
+     },
+     {
+      "written": "Then, I subtracted 2 from his dad's age to get his mom's age, which was 40 - 2 = 38.",
+      "expected": "40 - 2 = 38 at Jayson-age-10, on the problem's mathematics",
+      "verdict": "match"
+     },
+     {
+      "written": "Since his mom was 38 when Jayson was 0 years old (born), she was 38 years old.",
+      "expected": "mom at birth = 38 - 10 = 28, on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "mom's age at birth asserted as 38",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 2",
+    "lines": [
+     {
+      "written": "I knew that Jayson's dad was 40 when Jayson was 10, and that his mom was 2 years younger than his dad.",
+      "expected": "restates the stated givens correctly",
+      "verdict": "match"
+     },
+     {
+      "written": "if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.",
+      "expected": "mom at birth = 38 - 10 = 28, on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "mom's age at birth asserted as 38",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 3",
+    "lines": [
+     {
+      "written": "Jayson's mom would be 38 when he is 10 since she is 2 years younger than his dad. So, when Jayson is 10, his mom is 38 years old.",
+      "expected": "40 - 2 = 38 at Jayson-age-10, on the problem's mathematics",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 4",
+    "lines": [
+     {
+      "written": "Yes, I still think Jayson's mom was 38 when he was 0.",
+      "expected": "mom at birth = 28, on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "mom's age at birth re-asserted as 38",
+      "contradicts": "problem"
+     },
+     {
+      "written": "Since his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad, then his mom must have been 38 when Jayson was 0.",
+      "expected": "mom at birth = 38 - 10 = 28, on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "the conclusion seating mom's birth age at her age-10 value",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 5",
+    "lines": [
+     {
+      "written": "Yes, it is possible because his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad.",
+      "expected": "it is not possible: the two ages are ten years apart, so mom cannot be 38 at both",
+      "verdict": "departure",
+      "slot": "the claim that mom being 38 at both ages is possible",
+      "contradicts": "problem"
+     },
+     {
+      "written": "So, if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.",
+      "expected": "mom at birth = 38 - 10 = 28, on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "mom's age at birth re-derived as 38",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 6",
+    "lines": [
+     {
+      "written": "When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0 years old.",
+      "expected": "the four-times relation is stated for Jayson-age-10 only; dad at birth = 40 - 10 = 30",
+      "verdict": "departure",
+      "slot": "the four-times relation evaluated at Jayson-age-0",
+      "contradicts": "problem"
+     },
+     {
+      "written": "Since his dad was 0 when Jayson was 0, his mom must have been 2 years younger than his dad, so she was 0 - 2 = -2 years old.",
+      "expected": "the two-years-younger relation is stated for Jayson-age-10 only; mom at birth = 28",
+      "verdict": "departure",
+      "slot": "the two-years-younger relation evaluated at Jayson-age-0",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 7",
+    "lines": [
+     {
+      "written": "To figure out how old Jayson's mom was when he was 0, I would need to subtract 2 from her age when he was 10.",
+      "expected": "subtract 10, the years between birth and age 10",
+      "verdict": "departure",
+      "slot": "the operand 2 seated in the elapsed-years role",
+      "contradicts": "problem"
+     },
+     {
+      "written": "So, if Jayson's mom was 38 when he was 10, then she was 38 - 2 = 36 years old when he was 0.",
+      "expected": "38 - 10 = 28, on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "the operand 2 and the resulting 36 in the birth-age computation",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 8",
+    "lines": [
+     {
+      "written": "I needed to subtract 2 because Jayson's dad was 4 times his age when he was 10, which means his dad was 40 years old.",
+      "expected": "the amount to subtract is 10, the just-stated years since birth",
+      "verdict": "departure",
+      "slot": "the claim that the needed subtraction is 2",
+      "contradicts": "problem"
+     },
+     {
+      "written": "Since his mom is 2 years younger than his dad, she must have been 40 - 2 = 38 years old when Jayson was 10.",
+      "expected": "40 - 2 = 38 at Jayson-age-10, on the problem's mathematics",
+      "verdict": "match"
+     },
+     {
+      "written": "So, if she was 38 when he was 10, then she must have been 38 - 2 = 36 years old when he was 0.",
+      "expected": "38 - 10 = 28, on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "the operand 2 in the elapsed-years role, re-seated",
+      "contradicts": "problem"
+     }
+    ]
+   }
+  ],
+  "departures": [
+   {
+    "unit": "solution",
+    "written": "Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old.",
+    "disposition": "founds S1"
+   },
+   {
+    "unit": "solution",
+    "written": "38",
+    "disposition": "shadow of S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "Since his mom was 38 when Jayson was 0 years old (born), she was 38 years old.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 2",
+    "written": "if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 4",
+    "written": "Yes, I still think Jayson's mom was 38 when he was 0.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 4",
+    "written": "Since his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad, then his mom must have been 38 when Jayson was 0.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 5",
+    "written": "Yes, it is possible because his dad was 40 when Jayson was 10, and his mom is 2 years younger than his dad.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 5",
+    "written": "So, if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 6",
+    "written": "When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0 years old.",
+    "disposition": "founds S2"
+   },
+   {
+    "unit": "turn 6",
+    "written": "Since his dad was 0 when Jayson was 0, his mom must have been 2 years younger than his dad, so she was 0 - 2 = -2 years old.",
+    "disposition": "shadow of S2"
+   },
+   {
+    "unit": "turn 7",
+    "written": "To figure out how old Jayson's mom was when he was 0, I would need to subtract 2 from her age when he was 10.",
+    "disposition": "founds S3"
+   },
+   {
+    "unit": "turn 7",
+    "written": "So, if Jayson's mom was 38 when he was 10, then she was 38 - 2 = 36 years old when he was 0.",
+    "disposition": "shadow of S3"
+   },
+   {
+    "unit": "turn 8",
+    "written": "I needed to subtract 2 because Jayson's dad was 4 times his age when he was 10, which means his dad was 40 years old.",
+    "disposition": "exhibits S3"
+   },
+   {
+    "unit": "turn 8",
+    "written": "So, if she was 38 when he was 10, then she must have been 38 - 2 = 36 years old when he was 0.",
+    "disposition": "exhibits S3"
+   }
+  ],
+  "threads": [
+   {
+    "id": "S1",
+    "family": "comprehension",
+    "belief": "the ages the problem fixes when Jayson is 10 are taken to hold unchanged when he was born, so his mom's age at his birth is the same as her age when he is 10",
+    "signature": "mom's age at birth asserted identical to her age at Jayson-10; protected output 38 as the birth age",
+    "origin": "solution",
+    "exhibitions": [
+     [
+      "solution",
+      "committed"
+     ],
+     [
+      "turn 1",
+      "re-exhibited"
+     ],
+     [
+      "turn 2",
+      "re-exhibited"
+     ],
+     [
+      "turn 4",
+      "re-exhibited"
+     ],
+     [
+      "turn 5",
+      "re-exhibited"
+     ]
+    ],
+    "resolved_at": null,
+    "quote": "Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old."
+   },
+   {
+    "id": "S2",
+    "family": "comprehension",
+    "belief": "the stated relations, dad is four times Jayson's age and mom is two years younger than dad, are taken to hold when Jayson was born, so they can be evaluated at age 0",
+    "signature": "the age-10 relations evaluated at Jayson-age-0: 0 x 4 for dad, 0 - 2 for mom",
+    "origin": "turn 6",
+    "exhibitions": [
+     [
+      "turn 6",
+      "committed"
+     ]
+    ],
+    "resolved_at": null,
+    "quote": "his dad was 4 times his age, so his dad was 0 x 4 = 0 years old"
+   },
+   {
+    "id": "S3",
+    "family": "relevance",
+    "belief": "the stated 2-years-younger figure is the amount to subtract to move from mom's age at Jayson-10 to her age at his birth, selected over the stated 10-year span",
+    "signature": "the 2 seated in the elapsed-years operand slot of the birth-age subtraction (38 - 2)",
+    "origin": "turn 7",
+    "exhibitions": [
+     [
+      "turn 7",
+      "committed"
+     ],
+     [
+      "turn 8",
+      "reversion"
+     ]
+    ],
+    "resolved_at": null,
+    "quote": "I would need to subtract 2 from her age when he was 10"
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "A",
+    "steps": "A",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Since Jayson's mom was 38 when Jayson was 0 years old (born), she was 38 years old."
+    },
+    "triggers": {
+     "wrong_operation": "his dad was 10 x 4 = 40 years old",
+     "steps": "then his mom's age can be found by subtracting 2 from his dad's age, which means his mom was 40 - 2 = 38 years old"
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Since his mom was 38 when Jayson was 0 years old (born), she was 38 years old."
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0."
+    }
+   },
+   {
+    "unit": "turn 3",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   },
+   {
+    "unit": "turn 4",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Yes, I still think Jayson's mom was 38 when he was 0."
+    }
+   },
+   {
+    "unit": "turn 5",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "So, if his dad was 40 when Jayson was 10, then his mom must have been 38 when Jayson was 0."
+    }
+   },
+   {
+    "unit": "turn 6",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S2"
+    },
+    "quotes": {
+     "comprehension": "When Jayson was 0, his dad was 4 times his age, so his dad was 0 x 4 = 0 years old."
+    }
+   },
+   {
+    "unit": "turn 7",
+    "comprehension": "N",
+    "relevance": "P",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "relevance": "S3"
+    },
+    "quotes": {
+     "relevance": "I would need to subtract 2 from her age when he was 10."
+    }
+   },
+   {
+    "unit": "turn 8",
+    "comprehension": "N",
+    "relevance": "P",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "relevance": "S3"
+    },
+    "quotes": {
+     "relevance": "So, if she was 38 when he was 10, then she must have been 38 - 2 = 36 years old when he was 0."
+    }
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 730.3131783008575
+}
