@@ -1,0 +1,532 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P11",
+ "reasoning_effort": "max",
+ "dialogue_id": 1264,
+ "split": "train",
+ "attempts": [
+  {
+   "raw": " \"threads\": [{\"id\": \"S1\", \"family\": \"wrong_operation\", \"belief\": \"Bill's stick count is constructed by subtraction: 10 - 6 is seated in the Bill-sticks slot, displacing the 10 + 6 her own stated 'Bill throws 6 more sticks' commits her to\", \"signature\": \"the subtraction 10 - 6 seated in the Bill-sticks slot; protected outputs 4 (Bill's sticks) and 9 (Bill's total)\", \"witness\": \"Bill throws 6 more sticks\", \"witness_check\": \"the inversion belief produces 10 - 6, never the clause 'Bill throws 6 more sticks'; the clause states the direction the construction then violates, so the span discriminates\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 5\", \"reversion\"], [\"turn 6\", \"motivated-falsehood\"], [\"turn 7\", \"motivated-falsehood\"], [\"turn 8\", \"resolved\"], [\"turn 10\", \"reversion\"], [\"turn 11\", \"motivated-falsehood\"], [\"turn 12\", \"premise-conclusion decoupling\"]], \"resolved_at\": null, \"quote\": \"then Bill throws 10 - 6 = 4 sticks into the river\"}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"A\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"then Bill throws 10 - 6 = 4 sticks into the river\"}, \"triggers\": {\"steps\": \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"Bill throws 4 sticks into the river.\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}, {\"unit\": \"turn 3\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}, {\"unit\": \"turn 4\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"A\", \"steps\": \"N\", \"triggers\": {\"wrong_operation\": \"Good and how many rocks get thrown in?\"}}, {\"unit\": \"turn 5\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\"}}, {\"unit\": \"turn 6\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"So the total is 16 sticks and 5 rocks, which is 9 objects.\"}}, {\"unit\": \"turn 7\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"Bill also throws 5 rocks into the river, for a total of 9 objects.\"}}, {\"unit\": \"turn 8\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"A\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"Bill must throw in 10 + 6 = 16 sticks into the river.\"}, \"triggers\": {\"wrong_operation\": \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\"}}, {\"unit\": \"turn 9\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}, {\"unit\": \"turn 10\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\"}}, {\"unit\": \"turn 11\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects\"}}, {\"unit\": \"turn 12\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks)\"}}]}",
+   "reasoning": "Let me solve the problem first.\n\nProblem: Bill throws 6 more sticks than Ted. Ted tosses twice as many rocks as Bill. Ted tosses 10 sticks and 10 rocks. How many objects did Bill toss?\n\nCorrect route:\n- Ted sticks = 10. Bill sticks = 10 + 6 = 16.\n- Ted rocks = 10, Ted = 2 \u00d7 Bill, so Bill rocks = 10 / 2 = 5.\n- Bill total = 16 + 5 = 21.\n\nStudent's solution:\n- Bill sticks = 10 - 6 = 4 (wrong; should be 10 + 6 = 16). This is the direction error on \"6 more sticks than Ted.\"\n- Bill rocks = 10/2 = 5 (correct).\n- Total = 4 + 5 = 9 (correct given her wrong 4, shadow).\n\nSo the token: \"10 - 6 = 4\" \u2014 Bill throws 6 MORE than Ted, so Bill should have more, but student subtracts. Is this comprehension or wrong operation?\n\nThe student's belief: \"Bill throws 6 more sticks than Ted\" construed such that Bill has fewer. Actually the arithmetic: she computes 10 - 6 = 4. Under a correct reading, Bill has 16. Her act is 10 - 6 = 4. Is the arithmetic correct on her belief? What belief would make 10 - 6 correct? The belief that Bill throws 6 fewer, i.e., \"6 more than\" misread as \"6 fewer than.\" That's a comprehension misreading of the stated relation \u2014 or is it a wrong-direction operation error?\n\nPer the codebook: \"A wrong-direction operation with a stated rationale routes by what the rationale construes.\" In the solution, she states: \"Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks.\" She restates the condition correctly (\"Bill throws 6 more sticks\") and then divides... subtracts anyway. Per the codebook: \"where she states that it increases and divides anyway, the belief is intact, only the move is inverted, and the family is wrong operation.\"\n\nHere she restates \"Bill throws 6 more sticks into the river\" \u2014 that's a true restatement of the condition. Then computes 10 - 6 = 4. The construal as stated is correct (6 more), the move is inverted (subtraction instead of addition). So per the wrong-direction clause: \"where the rationale shows the condition construed correctly in its direction and role and only the move inverted... the inversion is wrong operation.\"\n\nHmm, but wait. Let me check persistence: she persists through the dialogue, even at turn 12 after admitting 16+5=21 she reverts to 9. Persistence past correction and reassertion \"in the same breath as naming its corrected counterpart, are evidence the driver is a construal rather than a move choice, and must be consulted before the procedural filing is made.\"\n\nAt turn 12: \"16 sticks and 5 rocks adds up to 21, but Ted also throws 10 sticks into the river, so Bill only throws 6 more sticks than Ted. Therefore, Bill throws a total of 9 objects (4 sticks and 5 rocks).\" This is a motivated defense \u2014 she acknowledges 16+5=21 yet returns to 9. Hmm, but what's the driver? Her final answer 9 is anchored. The 4 sticks is the origin token.\n\nLet me think about the origin classification carefully.\n\nThe founding standard at the solution: She writes \"Bill throws 6 more sticks, then Bill throws 10 - 6 = 4.\" The stated condition in her own words: \"Bill throws 6 more sticks\" \u2014 construed correctly. The move: subtract. So wrong operation per the wrong-direction clause: \"where she states that it increases and divides anyway, the belief is intact, only the move is inverted, and the family is wrong operation.\"\n\nActually, let me re-read: \"Where she states that a condition reduces and she divides, the belief is the construal and the family is comprehension; where she states that it increases and divides anyway, the belief is intact, only the move is inverted, and the family is wrong operation.\"\n\nShe states \"Bill throws 6 more sticks\" (increases) and subtracts anyway \u2192 wrong operation. The belief for the construction family: the inverted move, seating 10 - 6 in the Bill-sticks slot where her own committed content (6 more than Ted) requires 10 + 6.\n\nHmm, but wait \u2014 is there a coherent reading available? \"Bill throws 6 more sticks into the river than Ted does\" \u2014 no ambiguity, it's clearly Bill = Ted + 6. No available reading defense.\n\nSo S1: wrong_operation, belief: inverts the \"6 more than\" relation, computing Bill's sticks as 10 \u2212 6 = 4 where her own stated condition (Bill throws 6 more than Ted) requires 10 + 6. Signature: 10 - 6 = 4 in the Bill-sticks slot; protected output 9 (Bill's total)? Hmm \u2014 is the output defended? Yes, massively. The 9 is defended through turns 5, 6, 7, 10, 11, 12. Also the 4 is defended at turns 1, 5, 10, 12.\n\nSignature: \"the subtraction 10 \u2212 6 seated in the Bill-sticks slot; protected outputs 4 (Bill's sticks) and 9 (Bill's total)\". The anchored-composition/output-anchored clause: the thread becomes output-anchored, defending 9 and 4. Signature can name both.\n\nWitness for the construction thread: her own statement in the origin unit: \"Bill throws 6 more sticks into the river\" \u2014 wait, the exact span: \"If Ted throws 10 sticks into the river, and Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks into the river.\" The witness must be the student's own content showing the model the act failed to realize: \"Bill throws 6 more sticks\" \u2014 her own restatement of the condition showing she registered the direction as \"more\". The witness_check: on the candidate wrong belief (that Bill has fewer / that subtraction is licensed), what would the witness span produce? Hmm \u2014 the candidate wrong-operation belief is \"invert the more-than relation\". Would that belief itself generate the witness \"Bill throws 6 more sticks\"? No \u2014 the belief is about the move, and the witness states the condition correctly. Actually the witness check asks: what would the candidate wrong belief itself produce at the witness span? The candidate belief \"subtract 6 from Ted's count\" would not produce the statement \"Bill throws 6 more sticks\"; it produces 10 \u2212 6. So the witness discriminates: her own words state the correct direction, showing the model was intact and the inversion was an execution fault. Good.\n\nWait, but I should double-check the routing once more. The construction gate: reading question first \u2014 does a coherent reading of a stated sentence generate this act? A reading \"Bill throws 6 fewer than Ted\" would generate 10 \u2212 6 = 4. Is that reading available in the problem text? \"Bill throws 6 more sticks into the river than Ted does\" \u2014 no, \"fewer\" contradicts \"more\". Is the reading exhibited in her words? No \u2014 her words say \"6 more\". So the reading question doesn't route to comprehension. Relation question: the problem states the relation (6 more), so no principles. Witness question: the witness \"Bill throws 6 more sticks\" discriminates. So wrong operation. Good.\n\nNow turn by turn.\n\nSolution (turn 0):\nLines:\n1. \"If Ted throws 10 sticks into the river, and Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks into the river.\" \u2014 departure: 10 \u2212 6 in the Bill-sticks slot; expected 10 + 6 = 16 on the problem and her own stated condition. Founds S1. Also the result 4 contradicts problem \u2014 carried by the founding row (slot departure is the token; the result 4 is its output). I'll write one departure row for the expression, slot \"10 - 6\", contradicts \"her own stated condition 'Bill throws 6 more sticks'\" (and problem).\n\nActually, per scan instructions: a line may carry several rows, one per departing slot. Here the departure is the operand arrangement 10 \u2212 6; the result 4 follows from it. I'll treat the line as one departure (the construction). Maybe also the result 4 as a slot \u2014 but the result is generated by the departing construction, so it's the same token's output, not a second departure. I'll do one row.\n\n2. \"If Ted throws 10 rocks into the river, and Ted tosses twice as many rocks as Bill, then Bill throws 10/2 = 5 rocks into the river.\" \u2014 match. Ted = 2 \u00d7 Bill \u2192 Bill = 10/2 = 5. Correct.\n\n3. \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\" \u2014 on her committed chain (4 sticks, 5 rocks), 4 + 5 = 9 is correct arithmetic. Correct on the committed chain, wrong on the problem \u2014 not a departure here; content carried by founding row. Match (on committed chain). Expected: 4 + 5 = 9 on her chain. Verdict match.\n\n4. \"9\" \u2014 bare answer, same. On committed chain it's the output; not a departure. Match? It's a stated quantity. Expected on committed chain: 9. Match.\n\nTurn 1: \"Bill throws 4 sticks into the river.\" Tutor asks how many sticks Bill throws \u2014 the construct quantity (Bill's sticks) is in play; she commits to 4, the protected output. Re-asserted result \u2192 present, exhibits S1. Scan: line \"Bill throws 4 sticks into the river.\" expected 16 on problem; departure slot 4, contradicts problem (and her own stated condition from the solution \u2014 but provenance: the committed chain has her belief; the departure here is a re-commitment of the wrong value). Disposition: exhibits S1.\n\nTurn 2: \"Ted throws 10 sticks into the river.\" Correct. Match. Grid: any engagement? Relevance? Stating Ted's sticks correctly \u2014 reading a given off the problem, bare fact, no selection articulation. N all.\n\nTurn 3: \"In total, 16 sticks get thrown into the river.\" Tutor: \"So Ted's 10 and then bill throws in 6 more, how many sticks get thrown in total?\" The tutor's framing asks for total sticks (both). Student computes 10 + 6 = 16 as the total \u2014 which actually matches Bill's correct stick count but is framed as the combined total. Hmm. On the problem: total sticks thrown by both = Ted 10 + Bill 16 = 26. The tutor's question is loosely framed (\"Ted's 10 and then bill throws in 6 more, how many sticks get thrown in total?\"). The student answers 16. This is a wrong claim? She says \"In total, 16 sticks get thrown into the river.\" Given the tutor's framing (\"Ted's 10 and then bill throws in 6 more\"), 16 is the natural sum of 10 + 6. Is this a departure? On the committed chain (her belief: Bill throws 4), total sticks would be 10 + 4 = 14. She says 16. Hmm. But the tutor's turn frames it: 10 + 6. The student executes 10 + 6 = 16 within the tutor's frame. Is this supplied content? The tutor said \"Ted's 10 and then bill throws in 6 more, how many sticks get thrown in total?\" \u2014 the operation and operands are essentially stated (10 and 6 more, total). So executing gives 16. This is a framed execution \u2192 not_evidenced for the thread? But wait \u2014 does it contradict her protected 4? The framing floor: \"an act whose content the immediately preceding tutor turn states... earns nothing, whichever label direction is at issue.\" But also \"the floor never shields a motivated falsehood: a false result inside any frame that lands on a protected output is the protecting thread's act.\" Here 16 is not the protected output; it's a correct computation of the tutor's framed sum. And the claim \"16 sticks thrown in total\" is false on the problem (26) \u2014 but within the tutor's licensed frame it's the defensible execution. Actually, is it even false? The tutor's question is ambiguous/sloppy; \"how many sticks get thrown in total\" after \"Ted's 10 and then Bill throws in 6 more\" invites 10 + 6 = 16. The imprecise-tutor-turn rule: a defensible reading of the tutor's turn, content is tutor's contribution, not present. So turn 3: not_evidenced everywhere. Scan: \"In total, 16 sticks get thrown into the river.\" Expected on prevailing baseline: ambiguous; under tutor's frame 10 + 6 = 16. I'd mark it match (10 + 6 = 16 correct arithmetic on the frame). Hmm, but expected on the committed chain: the tutor's frame updates the chain? The committed chain includes her belief Bill=4, but the tutor just reframed. The baseline: the problem's math updated by her committed outputs and beliefs. Total sticks per problem = 26; per tutor frame = 16; per her belief = 14. The safest: verdict match with expected \"10 + 6 = 16 on the tutor's framed sum\". I'll write expected as \"10 + 6 = 16, the tutor's framed sum\". Match. Not a departure. Good.\n\nTurn 4: \"10 rocks get thrown in by Ted and 5 rocks get thrown in by Bill, for a total of 15 rocks.\" All correct: Ted 10, Bill 5, total 15. Match. Engagement? The tutor asked \"how many rocks get thrown in?\" \u2014 she computes totals. Any family construct? This is arithmetic on given/derived values; the rock computation was already hers from the solution (carried). Total 15 = 10 + 5, a fresh sum but simple. Steps/operation? Constructing the combined rock total \u2014 prompted by the tutor (\"how many rocks get thrown in?\"). She assembles 10 + 5 = 15. Is that a self-authored construction? The tutor's prompt asks for the total rocks but doesn't name operands or operation. She retrieves 10 and 5 from prior work and sums. This could earn wrong_operation absent? Hmm. The reassembly-after-correction clause: assembling operands into a total earns wrong_operation credit where fresh. But the values are carried from her solution; the sum 10 + 5 = 15 is a new construction not in the prior chain (the solution never computed total rocks). It's a genuine, if small, construction: selecting the two rock quantities and summing them. Under the symmetric standard, an act that would have been routed as wrong operation had it gone wrong earns absent when right. If she'd written 10 + 5 = 12, that'd be a slip, not a thread; if she'd summed 10 + 4, wrong operand. There is an opportunity to fail (operand selection). Hmm, but is this \"bare arithmetic with no self-authored concept-level choice\"? For wrong_operation, \"absent: the student selects the correct operation and places the operands correctly, including when a tutor question prompts toward an operation without naming it (e.g., 'how many trips is that?' \u2192 divide)\". Here tutor asks \"how many rocks get thrown in?\" \u2014 prompts toward summing both students' rocks without naming it. She selects the operands (Ted's 10, Bill's 5) and sums. That's eligible for absent in wrong_operation. I'll grant A for wrong_operation at turn 4 with trigger the tutor's prompt \"Good and how many rocks get thrown in?\" plus her act.\n\nHmm, wait \u2014 but also steps? Summing both throwers' rocks is a step of a \"total thrown\" computation \u2014 but the overall problem doesn't need total rocks; the tutor's sub-question defines the task. The procedure for \"total rocks\" is one step. I'd say no steps engagement. Principles? No concept-level choice. Comprehension? Does she grasp what's asked \u2014 \"how many rocks get thrown in\" (by both)? She answers both and total. That's restating/computing; comprehension of the sub-question \u2014 the problem stated the data; no interpretation resolved. N. Relevance: she selects Ted's 10 and Bill's 5 \u2014 but silently; silence floor: relevance engagement requires articulated selection. She does articulate \"10 rocks by Ted and 5 by Bill\" \u2014 naming which information matters? It's a restatement of roles more than a selection among candidates. Hmm. There are no distractors competing. I'll say N for relevance.\n\nActually, let me reconsider wrong_operation credit at turn 4 more carefully. The carried-figures rule: restating earlier outputs without fresh reasoning passes no gate. The 10 and 5 are carried; the 15 is fresh. The act of summing is fresh construction. Under \"Reassembly after a correction is fresh\" \u2014 no correction here, but the sum is new. I think A is defensible. Alternatively N as too trivial. The codebook warns both ways. The tutor's question invites assembling two quantities into a total; she does it correctly. I'll grant A wrong_operation, trigger: tutor's \"how many rocks get thrown in?\" Hmm, wait, actually, let me think again. Is 10 + 5 = 15 \"the quantity the construct produces\"? The wrong_operation construct: selecting operation and arranging operands within a step. Summing two named quantities to get a combined total is an operation selection with operands. The tutor didn't name \"add\". So she selected addition and the operands. That's the earn-side example exactly (\"how many trips is that?\" \u2192 divide). So A. Trigger span: \"Good and how many rocks get thrown in?\" \u2014 that's the tutor prompt inviting the operation. OK.\n\nTurn 5: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" Tutor just said \"we only need to know how many things Bill throws in, in total though.\" Student re-commits to 9 with 4 sticks \u2014 protected output re-asserted. Present, exhibits S1 (reversion \u2014 after the corrected content was performed at turn 3 where she computed 16 sticks in the tutor frame? The corrected content \"16\" was named/performed at turn 3 (by her, in frame). Reversion: a re-exhibition immediately following the corrected content being named, adopted, or performed. Between turn 3 and turn 5, turn 4 is rocks. Turn 5 re-commits 4 and 9. Tag: reversion. Hmm, but the 16 at turn 3 was framed execution, not adopted correction of Bill's sticks per se. Still, the corrected content (16 sticks) was performed. I'll tag reversion. Or re-exhibited. The most specific applicable: reversion. Let me use reversion.\n\nScan turn 5: line \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" Departure: 4 sticks contradicts problem (16); 9 contradicts problem (21). Slot: the 4 (and the 9 total). Disposition: exhibits S1.\n\nTurn 6: \"That's correct, 16 sticks were thrown in by Ted and Bill together, and 5 rocks were thrown in by Bill. So the total is 16 sticks and 5 rocks, which is 9 objects.\" The tutor said \"you said 16 sticks get thrown into the river 16 sticks plus 5 rocks\". The student: 16 sticks total (both), 5 rocks Bill, then \"which is 9 objects\" \u2014 asserting 16 + 5 = 9, a facially false equality landing on the protected output 9. Motivated falsehood. Present, exhibits S1, tag motivated-falsehood.\n\nScan: lines: \"16 sticks were thrown in by Ted and Bill together\" \u2014 matches the tutor's frame (and turn 3). OK match on frame. \"5 rocks were thrown in by Bill\" \u2014 correct, match. \"So the total is 16 sticks and 5 rocks, which is 9 objects.\" \u2014 departure: the equality 16 + 5 = 9 is false; contradicts arithmetic (21) \u2014 and contradicts problem. Slot: the result 9. Contradicts: her own operands 16 and 5 (16 + 5 = 21). Disposition: exhibits S1 (motivated falsehood landing on protected output 9).\n\nTurn 7: \"That's correct, Ted throws 10 sticks into the river and Bill throws 6 more, for a total of 16 sticks. Bill also throws 5 rocks into the river, for a total of 9 objects.\" Tutor: \"Bill throws 6 more sticks than ted, so he throws the same amount as ted then 6 more.\" The student affirms: total sticks 16 (Ted 10 + 6 more \u2014 ambiguous whether Bill=16 or combined=16), then \"Bill also throws 5 rocks... for a total of 9 objects.\" Again lands on 9: asserting Bill's total is 9 while naming 16 sticks and 5 rocks. If \"16 sticks\" is Bill's, then 16 + 5 = 9 is the falsehood. If 16 is combined, then Bill's sticks are... unstated, and total 9 is unsupported. Either way, committed output 9 against the components named. Present, motivated-falsehood (or reversion). The false equality landing on protected output \u2192 motivated-falsehood tag fits: \"for a total of 16 sticks. Bill also throws 5 rocks into the river, for a total of 9 objects.\" 16 + 5 = 9 implicitly. Exhibits S1, motivated-falsehood.\n\nScan: \"Ted throws 10 sticks into the river and Bill throws 6 more, for a total of 16 sticks.\" \u2014 on the tutor's frame (Bill = same as Ted then 6 more \u2192 Bill = 16; or combined = 16). Ambiguous but matches frame; not a departure. \"Bill also throws 5 rocks into the river, for a total of 9 objects.\" \u2014 departure: total 9 false under named components. Exhibits S1.\n\nTurn 8: \"Bill must throw in 10 + 6 = 16 sticks into the river.\" Tutor: \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\" The student writes 10 + 6 = 16 \u2014 the corrected construction! Is this a resolution? The tutor's prompt: \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\" \u2014 does this supply the operation and operands? It states the relation (6 more than Ted) and Ted's 10, asks what Bill throws. The operation (add) is not named; \"6 more than\" is the problem's own condition restated. Hmm. Is restating the problem's clause supply? The boundary: \"restating the problem's own text is supply, not pointing, when the clause restated is the contested content itself.\" The contested content here is the direction of the relation \u2014 more vs. the inversion. The tutor restates \"Bill throws in 6 more than ted\" and sets up \"if ted throws in 10 bill must throw in?\" The student must still choose the operation (addition) and produce 16. Choosing addition enacts the correct direction \u2014 the very thing her token inverted. After the tutor's sentence, could she still get it wrong? Yes \u2014 she could still subtract (she has been, repeatedly). So the content (add the 6) was not supplied; the relation was restated but the operation selection remained hers. Hmm, but the \"supply\" test: \"could the student still choose that content incorrectly? If yes, the content remains the student's.\" She could still write 10 \u2212 6. So her 10 + 6 = 16 is her own corrected construction at the fault's site \u2192 resolution? \n\nBut wait \u2014 resolution requires \"the corrected element itself, performed by her, at the token's structural position, act-for-act with the token.\" The token: 10 \u2212 6 in the Bill-sticks slot. Here she performs 10 + 6 = 16 in the Bill-sticks slot. That's the corrected counterpart, self-performed at the site. However \u2014 was the corrected content named in the thread's correction sequence? At turn 3 she computed 16 (as combined total, framed); at turns 6, 7 the tutor discussed 16 sticks; the tutor at turn 8's prompt frames it. Thread-scoped supply: \"once the corrected element's content has been stated in the thread's correction sequence, later performances of it execute named content and do not resolve.\" Was 16-as-Bill's-sticks stated? At turn 3 the tutor framed combined total; the 16 there was combined. The tutor's turn 7 statement: \"Bill throws 6 more sticks than ted, so he throws the same amount as ted then 6 more\" \u2014 this states the decomposition (same as Ted, then 6 more) but not the value 16 as Bill's. Turn 8 prompt: \"if ted throws in 10 bill must throw in?\" \u2014 leaves the value and operation to her. She produces 10 + 6 = 16. I think this is a genuine self-performed correction... but then she relapses at turn 10 and 12. The reopening rule: \"An intervening re-exhibition of the thread reopens resolvability\" \u2014 that concerns resolvability after naming. Here the question is whether turn 8 resolves and later re-exhibitions void it. If turn 8 is a resolution, then turn 9 (26 objects total \u2014 new error?), turn 10 (relapse to 9), turn 11, turn 12 (relapse). A voided resolution: the event recorded as resolved in exhibitions with A cell, but resolved_at stays null.\n\nHmm, but is turn 8 really a resolution or a framed execution? Let's apply the framing floor: \"an act whose content the immediately preceding tutor turn states, the operation named together with its operands, or the corrected content itself, earns nothing.\" Did the tutor name the operation? \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\" \u2014 the operation (addition) is not explicitly named; \"6 more than\" entails addition. \"A pointing or posed prompt that merely entails what to do next does not trigger this floor, in harmony with the supply-versus-pointing boundary: entailment is not authorship.\" The tutor poses a question entailing addition. So the act is self-authored. Then the continuity question is live: does she exhibit the error? No \u2014 she performs the corrected act. So turn 8 is a candidate resolution/absent.\n\nResolution step: \"A pointing prompt that locates the area while supplying no content does not block resolution.\" The prompt \"bill must throw in?\" supplies no corrected value. The relation restated is the problem's own clause. Restating the problem's text is supply \"when the clause restated is the contested content itself.\" Is the contested content \"6 more than Ted\"? The thread's fault is the inversion of the move, not the reading of the clause (we established she always stated \"6 more\" correctly). The corrected element is the addition construction 10 + 6 = 16. The tutor did not state \"add\" or \"16\". So the corrected content is hers. I'd judge turn 8 a resolution: A in wrong_operation, srcs S1, tag resolved. Then turn 10/12 relapses void it (resolved_at null), but events recorded.\n\nHmm, wait. Let me reconsider. There's a subtlety: at turn 9 she says Bill throws 16 sticks and 5 rocks, total 26 objects (combined total of both: 10+10+16+5 = 41? No \u2014 she says 26. Ted 10 sticks + Bill 16 sticks = 26 sticks? She says \"for a total of 26 objects\" \u2014 Ted throws 10 sticks and 10 rocks, Bill throws 16 sticks and 5 rocks: total = 41. 26 is wrong. Or 10 + 16 = 26 (sticks only)? She says \"Ted throws 10 sticks and 10 rocks into the river, and Bill throws 16 sticks and 5 rocks into the river, for a total of 26 objects.\" 26 could be 10 + 16 = 26 (Ted's sticks + Bill's sticks) mislabeled objects, or 21 + 5 = 26 (Bill's 21 + Bill's rocks again?), or... The tutor asked \"So the amount of sticks and rocks?\" \u2014 ambiguous: total for both? Student gives 26. Hmm, 26 = 10 + 16, Ted's sticks plus Bill's sticks. That's a garble. Or maybe she meant Bill's 16 sticks + Ted's 10 rocks = 26? Unknowable. Route recoverable? 10 + 16 = 26 \u2014 the two stick counts. Hmm.\n\nBut wait \u2014 does turn 9 exhibit S1? No: it uses Bill = 16 sticks, the corrected value. It's not a reversion. The question at turn 9 from the tutor: \"So the amount of sticks and rocks?\" \u2014 after she computed Bill = 16 sticks. The tutor probably means Bill's sticks and rocks (21). She answers 26, naming all four quantities. 26 is a committed false claim. Derivation: possibly 16 + 10 = 26 (Bill's sticks + Ted's sticks? or Bill's sticks + Ted's rocks). Recoverable as 16 + 10 = 26. Under the incoherence three-limb: route test \u2014 26 = 16 + 10, a sum of two of the named components with others dropped. Is that a \"pointable derivation\"? Kind of. But which two? 16 + 10 = 26 works with either 10. Hmm. The live thread's protected output is 9; 26 doesn't land on it. Structural signature (10 \u2212 6)? No. So turn 9's 26 is residue unless it founds a thread. It's a one-off garble \u2014 \"a total whose value equals the sum with one component dropped\" has a recoverable route per the codebook's example (route test first limb). 26 = 16 + 10. But which belief? The tutor asked \"the amount of sticks and rocks\" \u2014 ambiguous. If she summed Bill's sticks (16) + Ted's rocks (10) = 26 \"objects\" total... or she summed both stick counts. It's a one-off; no repetition. Hmm.\n\nActually, wait: maybe she computed 21 + 5 = 26? Bill's total 21 + 5 rocks again = 26? Also possible. Or 10 + 10 + 16 + 5 = 41, not 26. The most plausible: 16 (Bill sticks) + 10 (Ted sticks) = 26 sticks, mislabeled \"objects\" \u2014 but she listed all four quantities then said total 26 objects. Alternatively the tutor's question \"the amount of sticks and rocks?\" might have been interpreted as sticks-and-rocks combined for both = 41, and 26 is just wrong.\n\nGiven the route is recoverable-ish (16 + 10 = 26), but the semantic is garbled and it never recurs, I lean: residue, not_evidenced, recorded in note. The recurrence upgrade would need a repeated form; none comes. But hold on \u2014 is it present for anything? The tutor's question scope: \"So the amount of sticks and rocks?\" following \"we only want Bill's total\" context? Actually turn 9 tutor says \"So the amount of sticks and rocks?\" right after turn 8 where Bill = 16 sticks. The intended: Bill's sticks + Bill's rocks = 16 + 5 = 21. The student answers with a total of 26 including Ted's amounts. This misreads what's asked (Bill's total vs. everything)? Hmm \u2014 \"the amount of sticks and rocks\" is vague. The student lists Ted's and Bill's quantities and totals 26. Could be a scope misreading (comprehension: asked for Bill's, she gives combined). But 26 \u2260 combined (41). 26 = sticks only (10 + 16) labeled objects. That's internally inconsistent: she names rocks but doesn't add them coherently. Stated-versus-enacted: no coherent belief reconstructable \u2192 judge committed final claim: 26 objects. It's false. Under what family? No statable reading (not comprehension without evidence), no witnessed intact model... The arithmetic 10 + 16 = 26 is a correct partial sum; the claim \"total of 26 objects\" omits rocks from a total she describes as objects while listing rocks. An omission of terms from a sum her own model includes? Her sentence lists all four quantities as the content of the total \u2014 then the sum includes only two. That's an operand omission in a licensed construction (the total she committed to build) \u2192 wrong operation? Hmm. Her own sentence: \"Ted throws 10 sticks and 10 rocks into the river, and Bill throws 16 sticks and 5 rocks into the river, for a total of 26 objects.\" The listed components: 10, 10, 16, 5 \u2192 expected 41; she writes 26. The equation as committed omits 10 rocks and 5 rocks. Is this the correctness-failure clause? \"a committed value that is simply a miscomputation of the construction the student has written\" \u2014 but here the construction as written (in words) is the four-term sum; 26 miscomputes it. The clause: \"where the expression is the right one and only its evaluation is wrong, no family's construct has failed and no thread founds.\" The expression is right (all four components named), evaluation 26 wrong (should be 41). That fits the correctness-failure clause \u2192 no thread, correctness record. Good: turn 9 all N. Actually wait \u2014 is the expression \"the right one\"? The task at that point (Bill's total) would be 16 + 5 = 21, and including Ted's amounts is a scope error... but the tutor's question \"So the amount of sticks and rocks?\" is itself vague about whose. Given ambiguity, the four-term total is a defensible target. So the 26 is a mis-evaluation of her stated four-component total. Correctness failure, no thread. N all.\n\nTurn 10: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" Tutor: \"remember we only want bills total.\" She relapses to 9 with 4 sticks \u2014 reversion after she herself performed 16 at turn 8. Exhibits S1, reversion. Present.\n\nTurn 11: \"That's correct, Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects.\" Tutor: \"Bill throws in 16 sticks and 5 rocks.\" She accepts 16 and 5 but asserts total 9 \u2014 16 + 5 = 9 falsehood landing on protected output. Parrot-with-contradiction: supplied content (16 sticks and 5 rocks) accepted while her working re-exhibits the error (the 9, which embodies the old 4 + 5). Tag: most specific \u2014 parrot-with-contradiction vs motivated-falsehood. The precedence: resolved > motivated-falsehood > parrot-with-contradiction > splice > reversion. The 16+5=9 is a facially false assertion preserving 9 \u2192 motivated-falsehood. Also it's parroting supplied 16 with contradiction. The falsehood aspect: she doesn't write \"16 + 5 = 9\" explicitly, she says \"for a total of 9 objects\" after naming 16 sticks and 5 rocks. That's the false equality (implicit) landing on the protected output \u2192 motivated-falsehood. I'll tag motivated-falsehood. Present.\n\nTurn 12: \"That's correct, 16 sticks and 5 rocks adds up to 21, but Ted also throws 10 sticks into the river, so Bill only throws 6 more sticks than Ted. Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" Tutor: \"16 plus 5 is not 9 jian.\" She concedes 16 + 5 = 21, then reverts: Bill throws 4 sticks... wait, she says \"Bill only throws 6 more sticks than Ted. Therefore, Bill throws a total of 9 objects (4 sticks and 5 rocks).\" The \"4 sticks\" contradicts \"6 more than Ted's 10\" which is 16. She re-commits the original token value 4 and the output 9. This is a reversion + premise-conclusion decoupling: affirms corrected premise (16 + 5 = 21) and redraws old conclusion (9). Tag options: reversion, motivated-falsehood, parrot-with-contradiction, premise-conclusion decoupling (listed in the task's allowed vocabulary). She affirms the corrected premise (21) then redraws 9 with 4 sticks. The 4 re-commits the origin token explicitly. I'll tag reversion (immediately following corrected content named/performed) or premise-conclusion decoupling. The most specific: she both affirms 21 and asserts 9 \u2014 decoupling. But she also re-derives 4 sticks, re-committing the token. The precedence in the codebook: resolved, motivated-falsehood, parrot-with-contradiction, splice, reversion, rationale, re-exhibited. Premise-conclusion decoupling isn't in the precedence list but is in the task's allowed tags. The essence: affirming corrected premise and redrawing old conclusion \u2192 premise-conclusion decoupling. I'll use that. Actually, let me think: is there a falsehood? \"16 sticks and 5 rocks adds up to 21\" \u2014 true. \"Bill only throws 6 more sticks than Ted\" \u2014 true relation. \"Therefore Bill throws a total of 9 objects (4 sticks and 5 rocks)\" \u2014 false conclusion, contradicting her own affirmed components. The 4 sticks contradicts her own \"6 more than Ted\" (\u219216). It's the old conclusion redrawn \u2192 premise-conclusion decoupling fits. Present, exhibits S1.\n\nNow, turn 8 resolution and the voiding: exhibitions: [solution, committed], [turn 1, re-exhibited], [turn 5, reversion], [turn 6, motivated-falsehood], [turn 7, motivated-falsehood], [turn 8, resolved], [turn 10, reversion], [turn 11, motivated-falsehood], [turn 12, premise-conclusion decoupling]. resolved_at: null (voided by later re-exhibitions).\n\nWait \u2014 turn 3: does it exhibit S1? No \u2014 she computed 16 in the tutor's frame; no re-commitment of 4 or 9. Not an exhibition. Turn 4: no. Turn 9: no.\n\nHmm, but wait: is turn 1 a reversion? Turn 1 follows only the tutor's question, no corrected content named. Just re-exhibited. Fine.\n\nNow double-check turn 8 as resolution vs. not_evidenced (framed execution). The tutor: \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\" Compare the codebook's dictating boundary: \"A tutor turn that names an operation and points at an operand by description while leaving its value for the student to retrieve... leaves real content.\" Here the operation isn't named either; only the relation. The example for earned credit: \"if the tutor says 'he needs another 30 seconds per trip, so that gives what?' \u2014 supplies operand but not operation \u2192 absent.\" Similarly here: relation + operand given, operation selected by student \u2192 absent, and since it's the corrected counterpart at the token's site \u2192 resolved. But the framing-floor \"corrected content itself\": did the tutor state the corrected content (16)? No. So resolution stands. Also note she writes \"10 + 6 = 16\" \u2014 the operation is visibly hers (she could have written 10 \u2212 6 as before). Good: A wrong_operation at turn 8, srcs S1, tag resolved, trigger: her \"10 + 6 = 16\" or the tutor's posed prompt. Trigger must be from this unit or the immediately preceding tutor turn. I'll use the tutor's prompt: \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\" Hmm \u2014 triggers document what engaged the construct: the tutor's prompt inviting the reasoning, or the student's committed assertion. Her assertion \"Bill must throw in 10 + 6 = 16 sticks\" is the engagement. I'll use her span.\n\nAlso, should turn 8 carry any other family? Comprehension: does she demonstrate grasp of what the problem states? She performs the corrected construction \u2014 that's operation-family. Comprehension was never the thread. N. Steps: single-step correction; no. N.\n\nNow grid cells per unit:\n\nSolution: S1 founded \u2192 wrong_operation P. Other families? The rock line is correct and self-derived: 10/2 = 5 \u2014 does it engage anything? It applies the \"twice as many\" relation correctly: Bill = Ted/2. Principles? The problem states the relation (\"Ted tosses twice as many rocks as Bill\"), so applying a stated relation is execution/comprehension-of-text, not principles (the problem states the relation). Comprehension: \"resolving vs restating\" \u2014 she restated and computed a stated relation \u2192 not_evidenced for comprehension. Wrong operation: the rock construction is a correct operation selection with operands \u2014 absent? The unit contains an error (S1 in the sticks line) but other acts judged on their merits: the rocks line selects division correctly on a stated relation. Hmm \u2014 but is selecting 10/2 an operation-selection with opportunity to fail? Yes (she could have written 10 \u00d7 2). Under the symmetric standard, wrong_operation absent for that act. But wait \u2014 the unit is P for wrong_operation (S1). Can a cell be both P (S1) and note credit? The cell is P; the credit for the rock line doesn't change the cell. The schema: one status per family per unit. P with srcs S1. Fine.\n\nSteps: the solution's overall plan: compute Bill's sticks, Bill's rocks, sum. Correct procedure, all steps present, valid order. Is steps engaged? The walkthrough... this is the initial solution (first performance). The plan is self-authored and correct in structure: two components then total. That engages steps? The procedure required: derive Bill's sticks, derive Bill's rocks, add. She did all three stages. Steps absent? Hmm \u2014 the floors: did the tutor supply anything? No, it's the initial solution. A first-performance solution row can earn several families beside a present cell. Steps: the stages are all present and validly ordered \u2192 A. Trigger: her chain e.g. \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\" Hmm, but the aggregation is on her wrong 4 \u2014 correct on her chain. Steps' construct: the set and sequence of stages. She included both component derivations and the aggregation. A. But wait \u2014 is this too generous? The steps family credit: \"a unit where the family's decision was live and the student took it.\" The decomposition into sticks + rocks then summing is the procedure. She took it correctly. I'll grant steps A with trigger. Hmm, actually, is there a real opportunity to fail at steps here? She could have omitted the aggregation or a component. The plan is simple but multi-stage. The codebook's example of first-performance rows earning multiple cells supports granting. I'll grant steps A. Trigger: \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\" Actually the trigger should engage the construct \u2014 the aggregation step advance. OK.\n\nRelevance: all givens used (10 sticks, 10 rocks, 6, twice). She used every stated given; silently. Silence floor \u2192 not_evidenced (silence earns nothing). N.\n\nPrinciples: the relations are stated in the problem; no supplied general relation. N.\n\nComprehension: she read the goal correctly (Bill's total). Any interpretation resolved? The \"twice as many rocks as Bill\" \u2192 divide by 2: that's a stated relation restated \u2192 not_evidenced per the resolving-vs-restating rule. The \"6 more\" she mis-... no, she stated it correctly and inverted the move (operation). So comprehension N at solution? Hmm \u2014 wait. Is there a comprehension angle on the sticks error? We filed wrong_operation based on her correct restatement \"Bill throws 6 more sticks\". The admission gate for comprehension: her words state the condition correctly; no contrary reading worded; the single act 10 \u2212 6 is slip-compatible... under the fixed routing, wrong_operation with witness \"Bill throws 6 more sticks\". OK, comprehension N.\n\nBut hold on \u2014 let me reconsider whether the origin should be comprehension after all. The wrong-direction rule: \"where she states that it increases and divides anyway, the belief is intact, only the move is inverted, and the family is wrong operation.\" She states \"Bill throws 6 more sticks\" then subtracts. Textbook wrong operation. And persistence evidence: \"Persistence past the student's own correct performance of the counterpart operation, and reassertion of the inverted move in the same breath as naming its corrected counterpart, are evidence the driver is a construal rather than a move choice, and must be consulted before the procedural filing is made.\" Turn 12: she says 16 + 5 = 21, then reasserts 4 sticks + 5 = 9 \u2014 reassertion of the inverted move's output in the same breath as naming its corrected counterpart (21). Hmm! This is evidence the driver is a construal \u2192 comprehension? \n\nLet me think carefully. At turn 12 she says: \"16 sticks and 5 rocks adds up to 21, but Ted also throws 10 sticks into the river, so Bill only throws 6 more sticks than Ted. Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\"\n\nWhat's the construal here? She seems to think: the 16 is the combined sticks (Ted's 10 + 6 more), Bill's own sticks = 4? No wait: \"Bill only throws 6 more sticks than Ted. Therefore Bill throws 9 objects (4 sticks and 5 rocks).\" The 4 sticks: where from? 10 \u2212 6 = 4. She's protecting the 9. The construal candidate: \"the 6 more is the difference, so Bill's sticks = Ted's \u2212 6\"? That makes no sense with \"more\". Or she believes the 16 counts Ted's sticks too, so Bill's portion is... 16 \u2212 10 = 6? No, she says 4. The 4 only comes from 10 \u2212 6.\n\nHonestly, the driver looks like answer-anchoring: the 9 is protected; the 4 is its component. The codebook's anchored-composition clause: \"a thread's family is fixed at its founding... the anchored-composition diagnosis is a later description of that same thread's persistence.\" So the persistence doesn't re-attribute; the thread stays wrong_operation with protected outputs 4 and 9, defenses recorded. The turn-12 \"same breath\" evidence is about distinguishing construal vs. move choice \u2014 but re-attribution forward would require the enacted belief to have genuinely changed. Here I read the late turns as pure anchor defense (9, 4), not a newly articulated construal. She never articulates a reading like \"Bill throws fewer\" \u2014 at turn 12 she says \"Bill only throws 6 more sticks than Ted\" (correct relation) then asserts 4. That's incoherent as a reading; it's decoupling/anchoring. So no re-attribution; wrong_operation stands throughout, with output-anchored signature.\n\nSignature: \"the inverted subtraction 10 \u2212 6 seated in the Bill-sticks slot; protected outputs 4 (Bill's sticks) and 9 (Bill's total)\". The codebook allows the signature to name the protected output where persistence is output-anchored. Here later exhibitions defend 9 and 4 while derivations mutate (turn 6: 16 sticks + 5 rocks = 9; turn 11: same; turn 12: 21 conceded yet 9). So output-anchored: yes.\n\nCan one signature name two outputs? \"A protected output may sit in at most one thread's signature per dialogue\" \u2014 only one thread here. I'll name both 4 and 9 as protected outputs since both are defended (turn 1 defends 4; turns 5, 10, 12 defend both).\n\nWitness: \"Bill throws 6 more sticks\" \u2014 from the origin unit. Witness check: \"the inverted-move belief cannot itself produce the statement that Bill throws 6 more; it produces 10 \u2212 6, so the witness discriminates.\" Good.\n\nNow, the scan for each unit, carefully.\n\nUnit \"solution\" (turn 0):\nLine 1: written \"If Ted throws 10 sticks into the river, and Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks into the river.\" Expected: 10 + 6 = 16 on the problem and her own stated condition. Departure, slot: \"10 - 6\" (the inverted operation/operand arrangement in the Bill-sticks construction), contradicts: \"her own stated condition 'Bill throws 6 more sticks' (and the problem)\". I'll put contradicts as the committed content: her own clause. Actually the slot departing is the operation: 10 - 6 where 10 + 6 belongs. Contradicts: her own stated condition. Also the result 4 is part of the same line \u2014 the output of the departing construction, not a separate slot row.\n\nLine 2: \"If Ted throws 10 rocks into the river, and Ted tosses twice as many rocks as Bill, then Bill throws 10/2 = 5 rocks into the river.\" Expected: 10/2 = 5. Match.\n\nLine 3: \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\" Expected on committed chain: 4 + 5 = 9. Match (correct on her chain).\n\nLine 4: \"9\" \u2014 same value, bare restatement. Match on chain. Hmm, do I need a row for it? It's a stated quantity. Expected 9 on chain. Match. I'll include it.\n\nUnit turn 1: \"Bill throws 4 sticks into the river.\" Expected 16 (problem; and her own condition). Departure, slot: the committed value 4, contradicts problem (and her stated condition). Exhibits S1.\n\nTurn 2: \"Ted throws 10 sticks into the river.\" Match.\n\nTurn 3: \"In total, 16 sticks get thrown into the river.\" Expected: 10 + 6 = 16 on the tutor's framed sum (the tutor stated the frame). Match. Disposition: none. Grid N all.\n\nHmm wait \u2014 should turn 3 be a departure against her committed chain (Bill = 4 \u2192 total = 14)? The committed chain baseline: \"the problem's mathematics updated by the student's own prior committed outputs and beliefs.\" Her belief: Bill = 4 \u2192 total sticks 14. She writes 16. A slot contradicting one of her own prior committed outputs is a departure even where its value matches the problem! Hmm. But the tutor's immediately preceding turn reframed the computation: \"So Ted's 10 and then bill throws in 6 more, how many sticks get thrown in total?\" \u2014 this supplies the frame 10 + 6. Her 16 executes the tutor's frame. The framing floor covers this: executing a stated move is the frame's act, not her commitment. For the scan: expected \u2014 the prevailing baseline. The tutor's frame enters the ledger as tutor-supplied content. Expected on the frame: 16. I'll mark match with expected \"10 + 6 = 16, the tutor's framed sum; executed, not committed as her own chain\". I think match is right; the frame updates what the chain predicts at that point. Not a departure.\n\nTurn 4: \"10 rocks get thrown in by Ted and 5 rocks get thrown in by Bill, for a total of 15 rocks.\" Match all. Grid: wrong_operation A (assembled the rock total, tutor prompt didn't name the operation). Trigger: tutor's \"Good and how many rocks get thrown in?\" Hmm \u2014 also could argue comprehension A? She grasped the sub-question asked for combined rocks. Eh \u2014 the sub-question is explicit; no interpretation resolved. N. Steps: single sum; the \"procedure\" for total rocks is trivially one step. N. I'll do just wrong_operation A.\n\nHmm, wait \u2014 actually let me reconsider. Is summing 10 + 5 = 15 at the tutor's \"how many rocks get thrown in?\" really construct-engaging for wrong_operation? The codebook's earn example: tutor asks \"how many trips is that?\" and student divides 28 by 4 \u2192 absent, because she selected the operation. Here, \"how many rocks get thrown in?\" \u2014 the student must recognize it asks for Ted's + Bill's rocks and sum them. She supplies \"10 rocks by Ted and 5 rocks by Bill, total 15.\" She selected addition and the operands. Yes, A. OK.\n\nTurn 5: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" Departure: 4 sticks contradicts problem (16); total 9 contradicts problem (21). Two slots? The line commits: total = 9, with components 4 and 5. The departing content: the 4 (her protected component) and the 9. Both carried by S1's belief (the anchor). One departure row citing the line, slot \"the 4 sticks and the total 9\". Actually per scan rules, one row per departing slot. Slot 1: \"4 sticks\" contradicts problem. Slot 2: \"9\" \u2014 expected 21 on problem; but on her committed chain (4 + 5) it's 9 \u2014 correct on chain. \"A slot that is correct on the committed chain but wrong on the problem is not a departure here.\" The 9 is correct on her committed chain (4+5). So only the 4 is a departure? But 16 was performed at turn 3 in the tutor's frame \u2014 not her committed output (framed execution). Her committed chain still has Bill = 4. So 9 = 4 + 5 matches her chain. Only one departure row: the 4. Disposition: exhibits S1. The 9 in this line \u2014 matches chain, no row? But the 9 is the protected output being defended; the exhibition is carried by the 4 and the 9 jointly. The scan row for the 4's departure suffices; the quote will include the whole line. Hmm, but at turns 6, 7, 11 the 9 appears without the 4, against components 16 and 5 \u2014 there the 9 IS a departure (contradicts the named components: 16 + 5 = 21). Good, those rows capture the anchor defense.\n\nTurn 6: lines:\n- \"16 sticks were thrown in by Ted and Bill together\" \u2014 expected 16 on the tutor's frame (turn 3 frame, tutor restated \"you said 16 sticks\"). Match.\n- \"5 rocks were thrown in by Bill\" \u2014 match (problem).\n- \"So the total is 16 sticks and 5 rocks, which is 9 objects.\" \u2014 expected: 16 + 5 = 21 on the named components. Departure, slot: the total 9, contradicts her own named components 16 and 5. Exhibits S1 (motivated falsehood).\n\nTurn 7:\n- \"Ted throws 10 sticks into the river and Bill throws 6 more, for a total of 16 sticks.\" \u2014 on the tutor's frame, 16 sticks total. Match (frame).\n- \"Bill also throws 5 rocks into the river, for a total of 9 objects.\" \u2014 expected: if the 16 sticks are the total sticks and 5 Bill's rocks, a \"total\" mixing scopes; on her named components, Bill's total would be... ambiguous, but the committed claim \"a total of 9 objects\" contradicts the components named (16 + 5 = 21, or Bill's 16 + 5). Departure: the total 9. Exhibits S1 (motivated-falsehood).\n\nTurn 8: \"Bill must throw in 10 + 6 = 16 sticks into the river.\" Expected 16. Match. Grid: wrong_operation A (resolution of S1), srcs S1, quotes: the span. Trigger: her own committed act \"10 + 6 = 16\" or tutor prompt. I'll set trigger to the tutor prompt \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\" \u2014 the posed prompt inviting the operation. Actually triggers: \"the tutor's prompt inviting the family's reasoning, or the student's own committed assertion bringing it into play.\" Either. I'll use her span \"Bill must throw in 10 + 6 = 16 sticks into the river.\" as the trigger \u2014 it's her self-authored corrected construction. Hmm, trigger is \"what engaged the construct\" \u2014 the tutor's prompt invited it. I'll use the tutor's prompt. Either validates; I'll take tutor's.\n\nTurn 9: lines: \"Ted throws 10 sticks and 10 rocks into the river, and Bill throws 16 sticks and 5 rocks into the river, for a total of 26 objects.\"\n- The four stated quantities: each correct (Ted 10 sticks, 10 rocks; Bill 16 sticks, 5 rocks). \n- \"for a total of 26 objects\": expected 41 on the named four components (or 21 for Bill). Departure: the total 26, contradicts her own named components (10 + 10 + 16 + 5 = 41). Disposition: correctness failure \u2014 the expression (four named components) is right; the evaluation 26 is wrong; no thread. But the disposition list is closed: founds/exhibits/shadow/slip/available-reading/tutor-supplied. \"Slip\": \"a correctly built expression whose computed number comes out wrong.\" The total of the four named components miscomputed as 26 \u2192 slip remit. Disposition: slip. Good \u2014 and slip founds nothing; grid all N.\n\nTurn 10: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" Departure: the 4 contradicts problem and her own performed 16 at turn 8 (committed? her turn 8 act was self-authored \u2014 she committed 16 as Bill's sticks at turn 8!). So at turn 10, her prior committed outputs include 16 (turn 8). The 4 contradicts her own committed 16 AND the problem. Slot: 4 (and the 9 contradicts her committed 16 + 5 = 21 chain... on her turn-8-updated chain, Bill's total = 21; the 9 contradicts it). Two departing slots? The 4 contradicts her committed 16; the 9 contradicts the chain 16 + 5 = 21. But the 9 is generated by the 4 under her old belief \u2014 the old belief is the live thread; the reversion re-commits both. Per scan: a slot contradicting her own prior committed outputs is a departure even where its value matches the problem. The 4: departure. The 9: on the thread-belief chain (4+5=9) it's consistent with the belief that governs it \u2014 \"its content is already carried by the row that founded the belief.\" The belief S1 generates 4 and 9. So one departure row (the 4) or two? The codebook: shadow by generation: S1's belief generates both. The departure here is the re-commitment of the anchor. I'll write one departure row for the line, slot: \"the 4 sticks (and with it the total 9)\" \u2014 hmm, cleaner: slot \"4\", contradicts \"her own committed 16 sticks of turn 8 (and the problem)\". Disposition: exhibits S1. And the 9: I'll add a second row? The scan says one row per departing slot. The 9 contradicts her committed chain (16+5=21) \u2014 but is \"correct on the committed chain\" judged against the belief-governed chain? \"A slot that is correct on the committed chain but wrong on the problem is not a departure here, because its content is already carried by the row that founded the belief.\" The belief chain gives 4+5=9. So the 9 is correct on the belief-governed chain \u2192 not a separate departure. But it contradicts her turn-8 committed 16... The belief is live; the turn-8 resolution was voided by this very reversion. I'll keep one row (the 4) at turn 10, and likewise at turn 5. At turns 6, 7, 11, the 9 appears against named 16 and 5 in the same line \u2014 there the 9 contradicts the same-line named components, so the row names that contradiction.\n\nTurn 11: \"That's correct, Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects.\"\n- \"Bill throws 16 sticks and 5 rocks\" \u2014 tutor-supplied (tutor just stated it), echoed. Match (tutor's content, correct). Do I scan it? It's checkable content: 16 sticks, 5 rocks \u2014 correct values. Match rows. Hmm, expected 16 and 5. Match.\n- \"for a total of 9 objects\" \u2014 expected 21 on the named components. Departure, slot 9, contradicts her named 16 and 5. Exhibits S1 (motivated-falsehood).\n\nTurn 12: lines:\n- \"16 sticks and 5 rocks adds up to 21\" \u2014 true. Match. (Also \"That's correct\" \u2014 not checkable.)\n- \"Ted also throws 10 sticks into the river\" \u2014 true. Match.\n- \"so Bill only throws 6 more sticks than Ted\" \u2014 true relation (problem). Match. Hmm \u2014 \"Bill only throws 6 more sticks than Ted\" \u2014 true. Match.\n- \"Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" \u2014 departure: the 4 contradicts her own just-affirmed \"6 more than Ted\" (=16) and the 21; the 9 likewise. Slot: the 4 sticks; contradicts her own affirmed 16 + 5 = 21 and \"6 more than Ted\". Exhibits S1 (premise-conclusion decoupling). Also the 9: carried by the belief; one row suffices \u2014 but here the 9 directly contradicts the 21 she affirmed in the same turn. The 4 also contradicts. Two slots, one line: I'll write two rows? Or one row naming the line with slot \"4 sticks (and the total 9)\". The mechanical validation needs departures entries matching scan rows. I'll write one row with the span \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks)\" and slot \"the 4 sticks and total 9\". Hmm \u2014 \"A line may appear in several rows, one per departing slot; give a line a single 'match' row only where no slot in it departs.\" It doesn't forbid one row covering... it says one per departing slot. To be safe, write two rows for that line at turn 12: slot \"4 sticks\" contradicts her affirmed \"6 more than Ted\" (\u219216); slot \"9 objects\" contradicts her affirmed \"16 + 5 = 21\". Both exhibits S1. Similarly at turn 11: \"for a total of 9 objects\" \u2014 one slot (9), one row. Turn 6: \"which is 9 objects\" \u2014 one row. Turn 7: \"for a total of 9 objects\" \u2014 one row. Turn 5: the 4 (one row); the 9 carried. Turn 10: the 4 (one row); 9 carried. Turn 1: the 4 (one row).\n\nHmm, wait, at turn 12, should I also reconsider: is \"Bill throws a total of 9 objects (4 sticks and 5 rocks)\" one line or part of \"Therefore...\"? One line. Two departure rows for it is fine.\n\nActually, for consistency, let me reconsider turn 5 and turn 10's 9. At turn 5: she says total 9 (4 sticks and 5 rocks). On the belief chain, 4+5=9 consistent. Not a departure (carried). OK, one row (the 4). At turn 10: same. One row (the 4). Good.\n\nNow exhibitions and tags for S1:\n- solution: committed\n- turn 1: re-exhibited\n- turn 5: reversion (corrected content 16 performed at turn 3, and tutor's turn 4... the most recent corrected content: turn 3's 16 sticks frame; also tutor at turn ~\"we only need Bill's total\". Reversion = re-exhibition immediately following the corrected content being named, adopted, or performed. Turn 3 performed 16 (framed). Turn 5 re-commits 4 and 9. I'll tag reversion.\n- turn 6: motivated-falsehood (16 + 5 = 9 asserted)\n- turn 7: motivated-falsehood (16 sticks + 5 rocks = 9 objects)\n- turn 8: resolved\n- turn 10: reversion\n- turn 11: motivated-falsehood (parroting 16 and 5, asserting 9) \u2014 could also be parrot-with-contradiction; precedence puts motivated-falsehood higher. The falsehood: \"16 sticks and 5 rocks... total of 9\" \u2014 the implied equality 16 + 5 = 9 is facially false and lands on the protected output. Motivated-falsehood. \n- turn 12: premise-conclusion decoupling (affirms 21, redraws 9/4).\n\nresolved_at: null (voided by turns 10\u201312).\n\nGrid:\n- solution: comprehension N, relevance N, principles N, wrong_operation P [S1], steps A. Quotes: wrong_operation: \"If Ted throws 10 sticks into the river, and Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks into the river.\" Triggers: steps \u2014 the span showing the procedure engagement: \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\" Hmm, wait \u2014 is steps A justified at the solution? The plan: derive Bill's sticks, derive Bill's rocks, sum. All required stages present, valid order. Self-authored (initial solution). The steps construct: \"the student engages the correct procedural steps.\" Yes, A. Trigger: her aggregation line. OK.\n\nHmm, actually let me double check whether steps should be A or N at solution. The procedure is multi-stage: two derivations + aggregation. She performed all stages. There's a real opportunity to omit a stage (e.g., answer with just sticks). The codebook's credit stance: first-performance rows can earn several cells. I'll keep A.\n\n- turn 1: wrong_operation P [S1]. Others N. Quote: \"Bill throws 4 sticks into the river.\"\n- turn 2: all N. (Stating Ted's 10 sticks \u2014 reading off a given; bare fact. No articulated selection.)\n- turn 3: all N. (Framed execution of 10 + 6 = 16; tutor stated the frame. Also no re-commitment of the thread.)\n- turn 4: wrong_operation A, trigger: tutor's \"Good and how many rocks get thrown in?\" Others N. No srcs (thread-independent credit; srcs only for cited threads; A without resolution \u2192 no srcs). Right: \"Include srcs only where a cell cites a thread... an A cell that records a resolution names the resolved thread. Omit srcs entirely for all other cells.\" So turn 4 A has no srcs. Quote not needed (quotes only where srcs present).\n- turn 5: wrong_operation P [S1]. Quote: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\"\n- turn 6: wrong_operation P [S1]. Quote: \"So the total is 16 sticks and 5 rocks, which is 9 objects.\"\n- turn 7: wrong_operation P [S1]. Quote: \"Bill also throws 5 rocks into the river, for a total of 9 objects.\"\n- turn 8: wrong_operation A [S1 resolved]. srcs {wrong_operation: S1}, quotes {wrong_operation: \"Bill must throw in 10 + 6 = 16 sticks into the river.\"}, triggers {wrong_operation: tutor's \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\"}. Others N.\n- turn 9: all N (26 = slip, correctness record).\n- turn 10: wrong_operation P [S1]. Quote: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\"\n- turn 11: wrong_operation P [S1]. Quote: \"That's correct, Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects.\"\n- turn 12: wrong_operation P [S1]. Quote: \"Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\"\n\nWait \u2014 one more consideration on turn 12: does it also engage comprehension? She says \"Ted also throws 10 sticks into the river, so Bill only throws 6 more sticks than Ted\" \u2014 could be read as a scope confusion (mixing Ted's amount into Bill's total question)? She affirms correct facts; the error is the conclusion redrawn. The S1 thread owns it. Comprehension N.\n\nAnd turn 9's comprehension: the tutor asked \"So the amount of sticks and rocks?\" \u2014 she includes Ted's amounts. Scope ambiguity; the tutor's question is vague; imprecise tutor turn, defensible reading. N. Good.\n\nNow, is there any second thread? Turn 9's 26 \u2014 slip, no thread. Turn 3's 16-as-total \u2014 tutor frame, no thread. The rocks line \u2014 correct. So one thread.\n\nLet me double-check the scan \"expected\" fields and the \"match\" rows.\n\nSolution:\nRow 1: written: \"If Ted throws 10 sticks into the river, and Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks into the river.\" expected: \"10 + 6 = 16 sticks, on the problem's stated relation and her own clause 'Bill throws 6 more sticks'\" verdict departure, slot: \"the subtraction 10 - 6 seated in the Bill-sticks construction\", contradicts: \"her own stated condition that Bill throws 6 more sticks than Ted\". \nRow 2: written: \"If Ted throws 10 rocks into the river, and Ted tosses twice as many rocks as Bill, then Bill throws 10/2 = 5 rocks into the river.\" expected: \"10/2 = 5 rocks\" match.\nRow 3: written: \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\" expected: \"4 + 5 = 9 on her committed chain (4 sticks, 5 rocks)\" match.\nRow 4: written: \"9\" expected: \"9 on her committed chain\" match.\n\nTurn 1: written: \"Bill throws 4 sticks into the river.\" expected: \"16 sticks, on the problem's relation\" departure, slot \"the committed 4\", contradicts \"problem\". Disposition exhibits S1.\n\nTurn 2: written: \"Ted throws 10 sticks into the river.\" expected \"10 sticks\" match.\n\nTurn 3: written: \"In total, 16 sticks get thrown into the river.\" expected: \"10 + 6 = 16 on the tutor's framed sum\" match.\n\nTurn 4: written: \"10 rocks get thrown in by Ted and 5 rocks get thrown in by Bill, for a total of 15 rocks.\" expected \"10 + 5 = 15 rocks\" match.\n\nTurn 5: written: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" expected: \"16 sticks and a total of 21 on the problem; on her belief chain 4 + 5 = 9\" \u2014 verdict departure, slot: \"the 4 sticks\", contradicts: \"problem\". (The 9 is carried by S1's belief.) One row.\n\nTurn 6:\nRow: written \"16 sticks were thrown in by Ted and Bill together\" expected \"16 on the tutor's frame\" match.\nRow: written \"5 rocks were thrown in by Bill\" expected \"5\" match.\nRow: written \"So the total is 16 sticks and 5 rocks, which is 9 objects.\" expected \"16 + 5 = 21 on her own named components\" departure, slot \"the total 9\", contradicts \"her own named components 16 sticks and 5 rocks\". exhibits S1.\n\nTurn 7:\nRow: \"Ted throws 10 sticks into the river and Bill throws 6 more, for a total of 16 sticks.\" expected \"16 sticks on the tutor's frame\" match.\nRow: \"Bill also throws 5 rocks into the river, for a total of 9 objects.\" expected \"Bill's total 16 + 5 = 21 on the components in play\" departure, slot \"the total 9\", contradicts \"her named components (16 sticks, 5 rocks)\". exhibits S1.\n\nTurn 8: \"Bill must throw in 10 + 6 = 16 sticks into the river.\" expected \"10 + 6 = 16\" match.\n\nTurn 9: \"Ted throws 10 sticks and 10 rocks into the river, and Bill throws 16 sticks and 5 rocks into the river, for a total of 26 objects.\" Two rows? The four quantities are correct; the total 26 departs. Row 1 (quantities clause): written \"Ted throws 10 sticks and 10 rocks into the river, and Bill throws 16 sticks and 5 rocks into the river\" expected \"all four values correct\" match. Row 2: written \"for a total of 26 objects.\" expected \"10 + 10 + 16 + 5 = 41 on her named components (or 21 for Bill)\" departure, slot \"the total 26\", contradicts \"her own named components\". Disposition: slip (correctly built expression \u2014 four named addends \u2014 whose computed number came out wrong). \n\nHmm \u2014 is 26 a slip or an operand arrangement? She named all four; 26 is a mis-sum. The written \"expression\" is verbal: the sum of the four named quantities. The evaluation 26 is wrong. Slip remit: \"a correctly built expression whose computed number comes out wrong.\" OK, slip. It founds nothing; correctness record.\n\nTurn 10: written \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" departure, slot \"the 4 sticks (and the total 9 it carries)\", contradicts \"her own committed 16 sticks of turn 8 and the problem\". exhibits S1. Hmm \u2014 contradicts field: \"her own committed 10 + 6 = 16 of turn 8\". Good.\n\nTurn 11: \nRow: \"Bill throws 16 sticks and 5 rocks into the river\" expected \"16 sticks and 5 rocks (tutor-stated, correct)\" match.\nRow: \"for a total of 9 objects.\" \u2014 part of the same sentence. Expected \"16 + 5 = 21\" departure, slot \"the total 9\", contradicts \"her named components 16 and 5\". exhibits S1.\n\nWritten spans must be exact contiguous spans from the unit. Turn 11 unit text: \"That's correct, Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects.\" I'll write row 1 span \"Bill throws 16 sticks and 5 rocks into the river\" and row 2 span \"for a total of 9 objects.\" \u2014 both exact contiguous spans. Good.\n\nTurn 12:\nRow: \"16 sticks and 5 rocks adds up to 21\" expected \"21\" match.\nRow: \"Ted also throws 10 sticks into the river, so Bill only throws 6 more sticks than Ted\" \u2014 true claim. Expected: consistent with problem. Match. Hmm, \"Bill only throws 6 more sticks than Ted\" \u2014 true. Match row.\nRow: \"Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" departure slot 1: \"the 4 sticks\", contradicts \"her own affirmed relation (6 more than Ted's 10 \u2192 16)\". departure slot 2: \"the total 9\", contradicts \"her own affirmed 16 + 5 = 21\". Both exhibits S1. So two rows, two departure entries.\n\nDepartures list (unit order):\n1. solution row 1 \u2192 founds S1.\n2. turn 1 \u2192 exhibits S1.\n3. turn 5 \u2192 exhibits S1.\n4. turn 6 \u2192 exhibits S1.\n5. turn 7 \u2192 exhibits S1.\n6. turn 9 \u2192 slip.\n7. turn 10 \u2192 exhibits S1.\n8. turn 11 \u2192 exhibits S1.\n9. turn 12 (slot 4) \u2192 exhibits S1.\n10. turn 12 (slot 9) \u2192 exhibits S1.\n\nEach with the same written span as its scan row.\n\nThread S1:\n- id S1, family wrong_operation.\n- belief: \"the '6 more sticks than Ted' relation is inverted in execution, Bill's sticks built as 10 \u2212 6 where her own stated '6 more' requires 10 + 6; the 4 and the total 9 are then defended as the answer\" \u2014 belief should name the construction act, the slot, and the committed content displaced, never an output value. So: \"Bill's stick count is constructed by subtracting 6 from Ted's 10, seating 10 \u2212 6 in the Bill-sticks slot where her own stated 'Bill throws 6 more sticks' commits her to 10 + 6.\" Good \u2014 names act, slot, displaced content.\n- signature: \"the subtraction 10 \u2212 6 seated in the Bill-sticks slot; protected outputs 4 (Bill's sticks) and 9 (Bill's total)\". Output-anchored persistence \u2014 allowed and warranted (defended through mutating derivations: 4+5=9, 16+5=9, 21-yet-9).\n- witness: \"Bill throws 6 more sticks\" \u2014 exact span from origin unit: \"and Bill throws 6 more sticks, then Bill throws\" \u2014 the full origin line: \"If Ted throws 10 sticks into the river, and Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks into the river.\" The witness span: \"Bill throws 6 more sticks\" (exact contiguous). Good.\n- witness_check: \"the inverted-move belief produces 10 \u2212 6, not the clause 'Bill throws 6 more sticks'; the clause states the direction the construction then violates, so the witness discriminates.\"\n- origin: solution.\n- exhibitions: as listed above.\n- resolved_at: null.\n- quote: \"then Bill throws 10 - 6 = 4 sticks into the river\" \u2014 instantiate signature: contains 10 - 6 and the 4. Good.\n\nQuotes for grid cells: exact spans.\n- solution wrong_operation quote: \"then Bill throws 10 - 6 = 4 sticks into the river\" (exact).\n- turn 1: \"Bill throws 4 sticks into the river.\"\n- turn 5: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\"\n- turn 6: \"So the total is 16 sticks and 5 rocks, which is 9 objects.\"\n- turn 7: \"Bill also throws 5 rocks into the river, for a total of 9 objects.\"\n- turn 8: \"Bill must throw in 10 + 6 = 16 sticks into the river.\"\n- turn 10: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\"\n- turn 11: \"for a total of 9 objects.\" Hmm \u2014 should instantiate the signature: protected output 9 with the named 16 and 5. Better span: \"Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects.\" Exact contiguous from the unit. Yes.\n- turn 12: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" Exact: \"Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" I'll include \"Therefore, \" \u2014 exact either way; use without \"Therefore, \"? The span must be exact contiguous \u2014 \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks)\" is contiguous within the sentence. Fine.\n\nTriggers:\n- solution steps: \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\" \u2014 her advancing the aggregation stage. OK.\n- turn 4 wrong_operation: tutor's \"Good and how many rocks get thrown in?\" \u2014 exact span from the tutor turn immediately before. Tutor's exact text: \"Good and how many rocks get thrown in?\" Yes.\n- turn 8 wrong_operation: tutor's \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\" \u2014 exact span of the tutor turn (turn before turn 8). Yes.\n\nCheck exhibition/label consistency:\n- exhibitions list: solution(committed) \u2192 grid solution WO P \u2713; turn 1(re-exhibited) \u2192 P \u2713; turn 5(reversion) \u2192 P \u2713; turn 6(motivated-falsehood) \u2192 P \u2713; turn 7(motivated-falsehood) \u2192 P \u2713; turn 8(resolved) \u2192 A with srcs \u2713; turn 10(reversion) \u2192 P \u2713; turn 11(motivated-falsehood) \u2192 P \u2713; turn 12(premise-conclusion decoupling) \u2192 P \u2713.\n\nresolved_at: null (later re-exhibitions void it).\n\nPre-output audit:\n1. Comprehension threads: none. OK.\n2. Founding: S1's departure tested against available-reading defense \u2014 \"Bill throws 6 more sticks than Ted\" admits no fewer-reading; defense unavailable. No token founded on live-thread-generated values (only one thread; turn 5/10's 9 not founded, carried). Signature names content the thread re-exhibits: 4 and 9 defended repeatedly. \u2713\n3. Provenance: the competing inputs at the stick construction: Ted's 10 (given), 6 more (given relation). No provenance shifts.\n4. Roles: Bill's sticks (4 vs 16), totals. The 16 at turn 3 is \"total sticks both\" under tutor's frame; her 4 is \"Bill's sticks\". Different predicates \u2014 but the thread's reversion at turn 5 re-seats 4 in Bill's-sticks slot. Fine.\n5. Residual errors: turn 9's 26 \u2014 routed as slip. Turn 3's 16 \u2014 tutor frame. All disposed.\n6. Procedure grain: no steps/operation boundary issues; single construction fault.\n7. Credit: turn 4 A \u2014 self-authored assembly of rock total; opportunity to fail (operand choice, operation). Turn 8 A \u2014 self-authored corrected construction at the fault's site (resolution). Solution steps A \u2014 self-authored three-stage plan. Check turn 4 isn't tutor-supplied: tutor named neither operation nor operands (\"how many rocks get thrown in?\"). The 10 and 5 are her own carried values; the assembly is fresh. \u2713. Check solution's steps: the plan was hers in the initial solution. \u2713.\n8. Temporal integrity: no rewrites.\n9. Coherence: single thread. \u2713\n10. Commitment: settled.\n11. Fold audit: no folds (no defended thread folding others).\n\nOne more check \u2014 turn 6 and 7: are these really motivated-falsehood vs. just the committed claim? Turn 6: \"So the total is 16 sticks and 5 rocks, which is 9 objects.\" The implied 16 + 5 = 9 is facially false and lands on the protected 9. Direction: protects the anchor. Motivated-falsehood \u2713. Turn 7 same shape \u2713.\n\nAlso, should turn 3 be an exhibition? No \u2014 16 doesn't re-commit 4/9. \u2713. Turn 4 no. Turn 8 resolves. Turn 9 no.\n\nWait, one concern: at turn 5, tag reversion vs re-exhibited. Reversion = \"a re-exhibition immediately following the corrected content being named, adopted, or performed.\" Turn 3 performed 16 (in frame); turn 4 is rocks; turn 5 re-commits 4/9. The corrected content (16 sticks) was performed at turn 3. Is turn 5 \"immediately following\"? Turns 3\u20134 intervene, but the reversion tag is about following correction. I'll tag reversion. Similarly turn 10 follows turn 8's self-performed correction \u2192 reversion. Turn 12 follows tutor's explicit \"16 plus 5 is not 9\" \u2014 corrected content named, she affirms then redraws \u2192 premise-conclusion decoupling (allowed tag). OK.\n\nAlso, turn 1 tag: re-exhibited (no correction named yet). \u2713\n\nAlso should I double check the steps A at solution vs. dual-use? The error token is the stick construction; the steps credit is for the overall plan (two derivations + aggregation), which is distinct work. Not dual-use. \u2713\n\nWhat about wrong_operation credit for the rock line at solution \u2014 the cell is already P; can't show both. Fine.\n\nComprehension at solution \u2014 one more pass: did she read the asked goal correctly? \"how many objects did Bill toss\" \u2014 she answers Bill's total. Yes, correct goal. N. Relevance: all givens used, silently \u2192 N. Principles: stated relations only \u2192 N.\n\nTurn 2: could stating \"Ted throws 10 sticks\" be relevance engagement? Reading a given off the problem \u2014 bare fact, not articulated selection. N. \u2713\n\nScan for turn 8: one match row. Turn 3: one match row. Turn 4: one match row. Turn 2: one match row. Units with no checkable content: none here \u2014 all turns have content. \n\nLet me also double check the \"expected\" wording for the solution line 3: \"Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.\" On her committed chain: 4 + 5 = 9. Match. \u2713 And \"9\" line \u2014 the standalone \" 9\" \u2014 I'll write \"9\". Exact span: the unit shows \" 9\" on its own line; I'll write \"9\".\n\nJSON assembly. Keep the expected/contradicts strings concise.\n\nOne more thought on turn 9 disposition \"slip\": the remit says \"a correctly built expression whose computed number comes out wrong.\" The expression here is verbal: the total of the four quantities. 26 \u2260 41. It's a mis-sum. Slip \u2713, founds nothing, correctness channel. Alternatively 26 = 16 + 10 (sum of two components) \u2014 an operand-drop would be an arrangement fault \u2192 wrong operation... The route test: \"a total whose value equals the sum with one component dropped\" has a recoverable route. Here two components dropped (or 16+10). Hmm. If it's 16 + 10 = 26, that's a sum of two of the four named quantities \u2014 an arrangement/omission fault, not a mis-evaluation. Which is it? 26 = 16 + 10 exactly. Also 26 = 21 + 5. Both pointable. The most natural: sticks total (10 + 16 = 26) labeled objects \u2014 dropping both rock quantities from an \"objects\" total her own sentence includes. That's an operand omission in a licensed construction \u2192 wrong operation founding? But: one-off, tutor's question vague (\"the amount of sticks and rocks?\" \u2014 maybe asking sticks-and-rocks count for both, or Bill). If the target is ambiguous, the four-component total is licensed; dropping the rocks is an omission her own model includes (she named them) \u2192 wrong operation. Hmm, but is the route \"recoverable\"? 26 = 10 + 16. Yes pointable. First limb fires \u2192 founds or exhibits a thread. Exhibits S1? 26 isn't the protected output (9) or the structural form (10 \u2212 6). No. Founds a new thread S2 wrong_operation? Belief: constructing the combined total from only the two stick counts while naming rocks. Witness: her own naming of the four quantities in the same line \u2014 the model the act failed to realize. Witness check: the candidate belief (sum only sticks) would produce... at the witness span (naming all four quantities)? The belief \"total = sticks only\" wouldn't generate the naming of rocks... hmm, actually it might: she could name quantities for the record and sum sticks. The witness must discriminate: the wrong belief itself would produce the witness span? The candidate construction fault is \"omitting the rock terms from the sum.\" Her naming the rocks shows intake; the omission contradicts it. Witness: \"Ted throws 10 sticks and 10 rocks into the river, and Bill throws 16 sticks and 5 rocks into the river\" \u2014 shows her model includes the rocks in the total's scope. The candidate wrong-operation belief... wait, for a wrong_operation thread the \"belief\" is the construction act description: \"the total is built from the stick counts alone, dropping the rock terms her own enumeration includes.\" Witness check: what would that belief produce at the witness span? The belief is about the sum; the witness is the enumeration. Enumerating four quantities is compatible with the faulty belief (she enumerates then sums two). Hmm \u2014 a witness must be a span the faulty belief could NOT have produced. Enumeration of four components: the faulty construction belief (sum sticks only) could still produce the enumeration. So the witness is void?? \n\nLet me think about this differently. The correctness-failure clause: \"a committed value that is simply a miscomputation of the construction the student has written, whether or not the correct result also appears on the page... where the expression is the right one and only its evaluation is wrong, no family's construct has failed and no thread founds; where the expression itself is misbuilt, the fault is in the construction and routes to wrong operation.\" Here the \"expression\" as committed in words is the four-quantity total. 26 is a miscomputation of it. The expression itself (four named addends) is right. So: correctness failure, no thread. That's the cleaner read, and matches the slip remit. Also this is a one-off garble in a vague-frame turn; founding a thread on it would over-split. The codebook's incoherence boundary: third limb \u2014 where neither route-test nor matchers fire cleanly, residue. Actually the route IS recoverable (16+10), so first limb... but the first limb says \"has a reconstructable belief and founds or exhibits a thread as usual.\" Hmm. The belief behind \"26 = sum of two stick counts labeled objects\"? That's not a belief; it's a bookkeeping fault. A wrong_operation token requires the construction fault; the fault would be \"omitting rock terms.\" But against the ambiguous tutor frame (\"the amount of sticks and rocks?\"), maybe she thought the question asked for sticks (10 + 16 = 26)? That's a scope reading \u2014 available? The tutor's question is imprecise; a defensible reading licenses her answer, and per the imprecise-tutor rule the content is the tutor's contribution / not present. Given the genuine unclarity, I dispose as slip (mis-sum of her named four) and note residue. The closed disposition list forces one choice; \"slip\" fits the mis-evaluation reading and founds nothing. I'll go with slip, and the grid turn 9 all N. This matches the correctness-independence doctrine: wrongness on the correctness channel, no diagnosable shape.\n\nAlso, note the scan requires \"a single match row only where no slot departs\" \u2014 for turn 9 I have the quantities clause (match) and the total clause (departure) as separate written spans, so each gets its own row. Fine.\n\nNow write the JSON. Unit names exactly: \"solution\", \"turn 1\", ..., \"turn 12\".\n\nDepartures array order: solution, turn 1, turn 5, turn 6, turn 7, turn 9, turn 10, turn 11, turn 12 (two entries).\n\nFor turn 12's two departure entries with the same written span \u2014 fine, same span twice with different dispositions? Both \"exhibits S1\". Same written span, both exhibits S1. OK.\n\nThreads array: one thread with origin_family? No re-attribution \u2192 omit.\n\nLet me write concise expected/contradicts.\n\nAlso quotes object in grid: only where srcs present. srcs present at: solution (WO), turn 1 (WO), turn 5 (WO), turn 6 (WO), turn 7 (WO), turn 8 (WO, resolution), turn 10 (WO), turn 11 (WO), turn 12 (WO). Triggers: solution (steps), turn 4 (wrong_operation), turn 8 (wrong_operation).\n\nFormat of srcs: {\"wrong_operation\": \"S1\"}. quotes: {\"wrong_operation\": \"...\"}. triggers: {\"steps\": \"...\"} etc.\n\nDouble-check exact spans from the units:\n- Turn 5 unit text: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" \u2713 exact.\n- Turn 6: \"That's correct, 16 sticks were thrown in by Ted and Bill together, and 5 rocks were thrown in by Bill. So the total is 16 sticks and 5 rocks, which is 9 objects.\" Span \"So the total is 16 sticks and 5 rocks, which is 9 objects.\" \u2713 exact. Also match spans \"16 sticks were thrown in by Ted and Bill together\" and \"5 rocks were thrown in by Bill\" \u2713.\n- Turn 7: \"That's correct, Ted throws 10 sticks into the river and Bill throws 6 more, for a total of 16 sticks. Bill also throws 5 rocks into the river, for a total of 9 objects.\" Spans \u2713.\n- Turn 8: \"Bill must throw in 10 + 6 = 16 sticks into the river.\" \u2713\n- Turn 9: \"Ted throws 10 sticks and 10 rocks into the river, and Bill throws 16 sticks and 5 rocks into the river, for a total of 26 objects.\" \u2713\n- Turn 10: \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" \u2713\n- Turn 11: \"That's correct, Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects.\" Span for quote: \"Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects\" \u2713.\n- Turn 12: \"That's correct, 16 sticks and 5 rocks adds up to 21, but Ted also throws 10 sticks into the river, so Bill only throws 6 more sticks than Ted. Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).\" Spans: \"16 sticks and 5 rocks adds up to 21\" \u2713; \"Bill throws a total of 9 objects into the river (4 sticks and 5 rocks)\" \u2713.\n- Tutor turn before 4: \"Good and how many rocks get thrown in?\" \u2713 exact.\n- Tutor turn before 8: \"Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?\" \u2713 exact.\n- Solution spans \u2713.\n\nWitness span: \"Bill throws 6 more sticks\" \u2014 exact contiguous within the solution's first line \u2713.\n\nThread quote: \"then Bill throws 10 - 6 = 4 sticks into the river\" \u2713 exact.\n\nBelief (no output values in belief for construction families): \"Bill's stick count is constructed by subtracting: she seats 10 \u2212 6 in the Bill-sticks slot, displacing the 10 + 6 her own stated 'Bill throws 6 more sticks' commits her to.\" Good.\n\nSignature: \"10 \u2212 6 seated in the Bill-sticks slot; protected outputs 4 (Bill's sticks) and 9 (Bill's total)\".\n\nwitness_check: \"the inversion belief produces 10 \u2212 6, never the clause 'Bill throws 6 more sticks'; the clause states the direction the construction violates, so the span discriminates.\"\n\nNow the scan's expected for turn 5: on the prevailing baseline \u2014 her belief chain is live; expected for the 4 slot is 16 per problem, and the departure contradicts \"problem\". At turn 10: contradicts her own committed 16 (turn 8) \u2014 the resolution was her own act. I'll write \"her own committed 16 sticks of turn 8\".\n\nAlright, also confirm solution grid steps A doesn't need srcs (independent credit) \u2713, needs triggers \u2713.\n\nWriting the JSON now. Keep it valid: no trailing commas, double quotes.",
+   "errors": [],
+   "meta": {
+    "latency_s": 640.9803218841553,
+    "first_event_s": 2.775251865386963,
+    "first_token_s": 2.7752597332000732,
+    "usage": {
+     "prompt_tokens": 60277,
+     "completion_tokens": 24549,
+     "total_tokens": 84826,
+     "cached_tokens": 59136,
+     "completion_tokens_details": {
+      "reasoning_tokens": 21219
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 59136
+     }
+    },
+    "tokens": {
+     "prompt": 60277,
+     "cached_prompt": 59136,
+     "uncached_prompt": 1141,
+     "completion": 24549,
+     "reasoning": 21219,
+     "visible_completion": 3330,
+     "total": 84826
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 24537,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 1264,
+  "scan": [
+   {
+    "unit": "solution",
+    "lines": [
+     {
+      "written": "If Ted throws 10 sticks into the river, and Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks into the river.",
+      "expected": "10 + 6 = 16 sticks, on the problem's stated relation and on her own clause 'Bill throws 6 more sticks'",
+      "verdict": "departure",
+      "slot": "the subtraction 10 - 6 seated in the Bill-sticks construction",
+      "contradicts": "her own stated condition that Bill throws 6 more sticks than Ted"
+     },
+     {
+      "written": "If Ted throws 10 rocks into the river, and Ted tosses twice as many rocks as Bill, then Bill throws 10/2 = 5 rocks into the river.",
+      "expected": "10/2 = 5 rocks, the problem's relation",
+      "verdict": "match"
+     },
+     {
+      "written": "Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river.",
+      "expected": "4 + 5 = 9 on her committed chain (4 sticks, 5 rocks)",
+      "verdict": "match"
+     },
+     {
+      "written": "9",
+      "expected": "9 on her committed chain",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 1",
+    "lines": [
+     {
+      "written": "Bill throws 4 sticks into the river.",
+      "expected": "16 sticks, on the problem's relation",
+      "verdict": "departure",
+      "slot": "the committed 4 in the Bill-sticks slot",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 2",
+    "lines": [
+     {
+      "written": "Ted throws 10 sticks into the river.",
+      "expected": "10 sticks, the problem's given",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 3",
+    "lines": [
+     {
+      "written": "In total, 16 sticks get thrown into the river.",
+      "expected": "10 + 6 = 16, the tutor's framed sum ('Ted's 10 and then bill throws in 6 more')",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 4",
+    "lines": [
+     {
+      "written": "10 rocks get thrown in by Ted and 5 rocks get thrown in by Bill, for a total of 15 rocks.",
+      "expected": "10 + 5 = 15 rocks, on the problem and her committed rock values",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 5",
+    "lines": [
+     {
+      "written": "Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).",
+      "expected": "16 sticks and a total of 21 on the problem; on her belief chain 4 + 5 = 9",
+      "verdict": "departure",
+      "slot": "the 4 sticks (the 9 it carries is generated by the same belief)",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 6",
+    "lines": [
+     {
+      "written": "16 sticks were thrown in by Ted and Bill together",
+      "expected": "16 on the tutor's standing frame",
+      "verdict": "match"
+     },
+     {
+      "written": "5 rocks were thrown in by Bill",
+      "expected": "5, on the problem and her committed chain",
+      "verdict": "match"
+     },
+     {
+      "written": "So the total is 16 sticks and 5 rocks, which is 9 objects.",
+      "expected": "16 + 5 = 21 on her own named components",
+      "verdict": "departure",
+      "slot": "the asserted total 9",
+      "contradicts": "her own named components 16 sticks and 5 rocks"
+     }
+    ]
+   },
+   {
+    "unit": "turn 7",
+    "lines": [
+     {
+      "written": "Ted throws 10 sticks into the river and Bill throws 6 more, for a total of 16 sticks.",
+      "expected": "16 sticks on the tutor's frame",
+      "verdict": "match"
+     },
+     {
+      "written": "Bill also throws 5 rocks into the river, for a total of 9 objects.",
+      "expected": "Bill's total 16 + 5 = 21 on the components in play",
+      "verdict": "departure",
+      "slot": "the asserted total 9",
+      "contradicts": "the named components 16 sticks and 5 rocks"
+     }
+    ]
+   },
+   {
+    "unit": "turn 8",
+    "lines": [
+     {
+      "written": "Bill must throw in 10 + 6 = 16 sticks into the river.",
+      "expected": "10 + 6 = 16 sticks, the problem's relation",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 9",
+    "lines": [
+     {
+      "written": "Ted throws 10 sticks and 10 rocks into the river, and Bill throws 16 sticks and 5 rocks into the river",
+      "expected": "all four values correct on the problem and her committed chain",
+      "verdict": "match"
+     },
+     {
+      "written": "for a total of 26 objects.",
+      "expected": "10 + 10 + 16 + 5 = 41 on her own named components (21 for Bill alone)",
+      "verdict": "departure",
+      "slot": "the total 26",
+      "contradicts": "her own four named components"
+     }
+    ]
+   },
+   {
+    "unit": "turn 10",
+    "lines": [
+     {
+      "written": "Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).",
+      "expected": "16 sticks and a total of 21, on the problem and on her own committed 10 + 6 = 16 of turn 8",
+      "verdict": "departure",
+      "slot": "the 4 sticks (the 9 it carries is generated by the same belief)",
+      "contradicts": "her own committed 16 sticks of turn 8"
+     }
+    ]
+   },
+   {
+    "unit": "turn 11",
+    "lines": [
+     {
+      "written": "Bill throws 16 sticks and 5 rocks into the river",
+      "expected": "16 sticks and 5 rocks, the tutor-stated correct content",
+      "verdict": "match"
+     },
+     {
+      "written": "for a total of 9 objects.",
+      "expected": "16 + 5 = 21 on her own named components",
+      "verdict": "departure",
+      "slot": "the asserted total 9",
+      "contradicts": "her own named components 16 sticks and 5 rocks"
+     }
+    ]
+   },
+   {
+    "unit": "turn 12",
+    "lines": [
+     {
+      "written": "16 sticks and 5 rocks adds up to 21",
+      "expected": "21, correct arithmetic",
+      "verdict": "match"
+     },
+     {
+      "written": "Ted also throws 10 sticks into the river, so Bill only throws 6 more sticks than Ted",
+      "expected": "consistent with the problem's givens and relation",
+      "verdict": "match"
+     },
+     {
+      "written": "Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).",
+      "expected": "Bill's sticks 10 + 6 = 16 on her own affirmed relation, total 21 on her own affirmed sum",
+      "verdict": "departure",
+      "slot": "the 4 sticks",
+      "contradicts": "her own affirmed 'Bill only throws 6 more sticks than Ted' (10 + 6 = 16)"
+     },
+     {
+      "written": "Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).",
+      "expected": "21 on her own affirmed 16 + 5",
+      "verdict": "departure",
+      "slot": "the total 9",
+      "contradicts": "her own affirmed '16 sticks and 5 rocks adds up to 21'"
+     }
+    ]
+   }
+  ],
+  "departures": [
+   {
+    "unit": "solution",
+    "written": "If Ted throws 10 sticks into the river, and Bill throws 6 more sticks, then Bill throws 10 - 6 = 4 sticks into the river.",
+    "disposition": "founds S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "Bill throws 4 sticks into the river.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 5",
+    "written": "Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 6",
+    "written": "So the total is 16 sticks and 5 rocks, which is 9 objects.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 7",
+    "written": "Bill also throws 5 rocks into the river, for a total of 9 objects.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 9",
+    "written": "for a total of 26 objects.",
+    "disposition": "slip"
+   },
+   {
+    "unit": "turn 10",
+    "written": "Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 11",
+    "written": "for a total of 9 objects.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 12",
+    "written": "Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 12",
+    "written": "Therefore, Bill throws a total of 9 objects into the river (4 sticks and 5 rocks).",
+    "disposition": "exhibits S1"
+   }
+  ],
+  "threads": [
+   {
+    "id": "S1",
+    "family": "wrong_operation",
+    "belief": "Bill's stick count is constructed by subtraction: 10 - 6 is seated in the Bill-sticks slot, displacing the 10 + 6 her own stated 'Bill throws 6 more sticks' commits her to",
+    "signature": "the subtraction 10 - 6 seated in the Bill-sticks slot; protected outputs 4 (Bill's sticks) and 9 (Bill's total)",
+    "witness": "Bill throws 6 more sticks",
+    "witness_check": "the inversion belief produces 10 - 6, never the clause 'Bill throws 6 more sticks'; the clause states the direction the construction then violates, so the span discriminates",
+    "origin": "solution",
+    "exhibitions": [
+     [
+      "solution",
+      "committed"
+     ],
+     [
+      "turn 1",
+      "re-exhibited"
+     ],
+     [
+      "turn 5",
+      "reversion"
+     ],
+     [
+      "turn 6",
+      "motivated-falsehood"
+     ],
+     [
+      "turn 7",
+      "motivated-falsehood"
+     ],
+     [
+      "turn 8",
+      "resolved"
+     ],
+     [
+      "turn 10",
+      "reversion"
+     ],
+     [
+      "turn 11",
+      "motivated-falsehood"
+     ],
+     [
+      "turn 12",
+      "premise-conclusion decoupling"
+     ]
+    ],
+    "resolved_at": null,
+    "quote": "then Bill throws 10 - 6 = 4 sticks into the river"
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "A",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "then Bill throws 10 - 6 = 4 sticks into the river"
+    },
+    "triggers": {
+     "steps": "Therefore, Bill tosses a total of 4 + 5 = 9 objects into the river."
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "Bill throws 4 sticks into the river."
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   },
+   {
+    "unit": "turn 3",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   },
+   {
+    "unit": "turn 4",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "A",
+    "steps": "N",
+    "triggers": {
+     "wrong_operation": "Good and how many rocks get thrown in?"
+    }
+   },
+   {
+    "unit": "turn 5",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "Bill throws a total of 9 objects into the river (4 sticks and 5 rocks)."
+    }
+   },
+   {
+    "unit": "turn 6",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "So the total is 16 sticks and 5 rocks, which is 9 objects."
+    }
+   },
+   {
+    "unit": "turn 7",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "Bill also throws 5 rocks into the river, for a total of 9 objects."
+    }
+   },
+   {
+    "unit": "turn 8",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "A",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "Bill must throw in 10 + 6 = 16 sticks into the river."
+    },
+    "triggers": {
+     "wrong_operation": "Bill throws in 6 more than ted so if ted throws in 10 bill must throw in?"
+    }
+   },
+   {
+    "unit": "turn 9",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   },
+   {
+    "unit": "turn 10",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "Bill throws a total of 9 objects into the river (4 sticks and 5 rocks)."
+    }
+   },
+   {
+    "unit": "turn 11",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "Bill throws 16 sticks and 5 rocks into the river, for a total of 9 objects"
+    }
+   },
+   {
+    "unit": "turn 12",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "Bill throws a total of 9 objects into the river (4 sticks and 5 rocks)"
+    }
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 640.9803218841553
+}

@@ -1,0 +1,287 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P11",
+ "reasoning_effort": "max",
+ "dialogue_id": 723,
+ "split": "train",
+ "attempts": [
+  {
+   "raw": "t\": \"departure\", \"slot\": \"the grabbed 4 added rather than subtracted\", \"contradicts\": \"problem\"}]}, {\"unit\": \"turn 2\", \"lines\": [{\"written\": \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\", \"expected\": \"the grab removes 4, 27 - 4 = 23\", \"verdict\": \"departure\", \"slot\": \"the addition of the grabbed 4, asserted as the right move\", \"contradicts\": \"problem\"}]}, {\"unit\": \"turn 3\", \"lines\": [{\"written\": \"There would be 10 - 2 = 8 chocolates left in the fridge.\", \"expected\": \"10 - 2 = 8 on the tutor's analogy\", \"verdict\": \"match\"}]}, {\"unit\": \"turn 4\", \"lines\": [{\"written\": \"He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\", \"expected\": \"27 - 4 = 23\", \"verdict\": \"match\"}]}], \"departures\": [{\"unit\": \"solution\", \"written\": \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\", \"disposition\": \"founds S1\"}, {\"unit\": \"solution\", \"written\": \"Therefore, Chris has 31 donuts left for his co-workers to share.\", \"disposition\": \"shadow of S1\"}, {\"unit\": \"solution\", \"written\": \"31\", \"disposition\": \"shadow of S1\"}, {\"unit\": \"turn 1\", \"written\": \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 2\", \"written\": \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\", \"disposition\": \"exhibits S1\"}], \"threads\": [{\"id\": \"S1\", \"family\": \"comprehension\", \"belief\": \"grabbing the 4 donuts for his afternoon snack adds them to what is left for the co-workers, the grab read as increasing the pool rather than reducing it\", \"signature\": \"the grabbed 4 seated with a plus in the final adjustment; protected output 31\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 2\", \"rationale\"], [\"turn 4\", \"resolved\"]], \"resolved_at\": \"turn 4\", \"quote\": \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\"}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"A\", \"steps\": \"A\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\"}, \"triggers\": {\"wrong_operation\": \"After eating, Chris has 30 - 3 = 27 donuts left.\", \"steps\": \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\\nAfter eating, Chris has 30 - 3 = 27 donuts left.\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\"}}, {\"unit\": \"turn 3\", \"comprehension\": \"A\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"triggers\": {\"comprehension\": \"If you had 10 chocolates is your fridge and you grabbed 2 for your lunch pack, howmany chocolates would be left in the fridge?\"}}, {\"unit\": \"turn 4\", \"comprehension\": \"A\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\"}, \"triggers\": {\"comprehension\": \"He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\"}}]}",
+   "reasoning": "Let me solve the problem first.\n\nProblem: Chris buys 2.5 dozen donuts = 30 donuts. He eats 10% while driving = 3 donuts. 30 - 3 = 27 left. Then he grabs another 4 donuts for his afternoon snack (i.e., takes 4 more for himself). How many left for co-workers? 27 - 4 = 23.\n\nStudent's solution: correctly computes 30, 3, 27, then adds 4: 27 + 4 = 31. The error: adding the 4 instead of subtracting. The 4 donuts he grabbed are taken away from the stock for co-workers, not added.\n\nNow route the error. Is this a comprehension error (misreading what \"grabs another 4 donuts for his afternoon snack\" means \u2014 treating the 4 as added to the pool rather than removed)? Or wrong operation (correct reading, wrong move)?\n\nThe deciding question: is the arithmetic wrong given what the student believes, or correct given a wrong belief? The student's turn 2 rationale: \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left.\" This states the condition's direction construed as an addition. Per the codebook: \"What the student believes includes what she takes a stated condition to do... An act that is incoherent on every belief about the quantities may still be the correct enactment of a belief about a condition's direction... where she states that a condition reduces and she divides, the belief is the construal and the family is comprehension.\"\n\nHmm. But wait \u2014 at the origin (solution), the student writes \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\" The belief candidate: the student takes \"grabs another 4 donuts for his afternoon snack\" as adding donuts to the pool (as if acquiring more). That's a misreading of the described situation \u2014 the condition's direction misread. Comprehension.\n\nBut there's also the alternative: she correctly understood that he grabbed them (took them away) but mis-operated. There's no witness of the correct reading in the prefix at the solution. The words \"Adding the 4 donuts he grabbed for his afternoon snack\" enact a construal that the grab adds to the left-for-coworkers stock. This is a reading about what the problem states \u2014 that the 4 donuts are added to what's left. That's comprehension: misreading a described situation, the direction of a condition.\n\nActually, let me think again. Is this the classic \"grabs for snack means subtract from co-workers' share\" reading error? Yes. The student's chain is internally coherent under the belief \"grabbing donuts for his snack adds them to the count left for co-workers\" \u2014 well, it's coherent as arithmetic for the wrong reading. The error is upstream: what the condition does. Comprehension present.\n\nCould it be available-reading defence? Is \"he grabs another 4 donuts for his afternoon snack\" ambiguous such that adding is defensible? No \u2014 grabbing for his snack removes them from the shared pool. The \"another\" ties to his eating; both reduce the co-workers' share. Adding makes no physical sense in the scenario: he doesn't acquire 4 more donuts. So the reading fails the physical-possibility bar. Chargeable comprehension.\n\nTurn 0 (solution): founds S1, comprehension. Belief: the 4 donuts Chris grabs for his afternoon snack are added to the donuts left for his co-workers (the grab increases the pool rather than reducing it). Signature: the 4 added rather than subtracted at the final step; protected output 31.\n\nAlso scan other lines: 2.5 x 12 = 30 correct. 0.1 x 30 = 3 correct. 30 - 3 = 27 correct. 27 + 4 = 31 \u2014 the departure.\n\nTurn 1: walkthrough replay. Recites the same chain verbatim essentially: \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\" Re-commits the wrong chain \u2014 re-exhibits S1, present (verbatim replay re-commits standing content, re-exhibits an already-founded thread). The rest is recitation; non-error columns: the walkthrough maps one-to-one onto the prior work, so recitation earns nothing. But wait \u2014 comprehension present via re-exhibition. Other families: not_evidenced.\n\nTurn 2: \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\" This is a rationale articulating the belief behind the error \u2014 spontaneous articulation of the belief. Event tag: rationale (a spontaneous articulation of the belief behind the error). It's a re-exhibition of S1 with the belief stated. Present comprehension. Tag \"rationale\" is in the vocabulary. Per precedence, resolved > motivated-falsehood > parrot-with-contradiction > splice > reversion > rationale > re-exhibited. So tag \"rationale\".\n\nActually turn 2 is a defense of the act in response to tutor's \"Why did you add 4 donuts?\" \u2014 an articulation that defends prior work is still an articulation. It re-exhibits the thread. Present comprehension.\n\nTurn 3: Tutor analogy: \"If you had 10 chocolates in your fridge and you grabbed 2 for your lunch pack, how many would be left in the fridge?\" Student: \"10 - 2 = 8 chocolates left.\" Is this analogy capable of eliciting the misconception? The analogy mirrors the structure exactly: items in a store, some removed for personal use, how many left. It is an isomorph of the grab-4 step. Per the analogy gate: if the analogy could elicit the misconception, the turn engages the construct; correct answer is absent. Here the student answers correctly: subtract. Does this earn comprehension absent? The analogy gate: \"If the analogy could elicit the misconception: the turn engages the construct, so a correct answer is absent.\" The analogy tests exactly the direction-of-condition reading: grabbing for oneself removes from what's left. The student handles it correctly. So comprehension absent at turn 3.\n\nBut wait \u2014 is the analogy an isomorph credit? \"A self-performed correct execution on a tutor-posed isomorph is evidence and clean engagement, never itself a resolution.\" The tutor posed the isomorph; the operation was not stated (the tutor asked \"how many chocolates would be left\", not \"subtract\"). The student selects subtraction. This is credit for comprehension? The analogy elicits the reading (grabbing reduces the stock). Yes \u2014 comprehension absent with trigger.\n\nHmm, but which family's construct does it engage? The student's error is comprehension (reading what the condition does). The isomorph asks her to read the analogous condition. Answering \"10 - 2 = 8\" correctly enacts the correct reading. So comprehension A, trigger: tutor's prompt \"If you had 10 chocolates is your fridge and you grabbed 2 for your lunch pack, howmany chocolates would be left in the fridge?\" or the student's assertion \"There would be 10 - 2 = 8 chocolates left in the fridge.\" The trigger can be from this unit or the tutor turn immediately before. I'll use the student's own committed assertion... actually the tutor's prompt inviting the family's reasoning is a fine trigger. Let me use the tutor's prompt since it invites the reading. Actually the trigger is \"the tutor's prompt inviting the family's reasoning, or the student's own committed assertion bringing it into play.\" Either works. I'll cite the student's assertion \"There would be 10 - 2 = 8 chocolates left in the fridge.\" Hmm, the tutor prompt is more precisely the invitation. Either is acceptable; I'll use the student's assertion as the engagement evidence. Actually, for the trigger field: \"Each value is an exact contiguous span, from this unit or the tutor turn immediately before it, that engaged the construct: the tutor's prompt inviting the family's reasoning, or the student's own committed assertion bringing it into play.\" The tutor prompt is from the immediately preceding tutor turn \u2014 fine. I'll use the student's own assertion since it demonstrates the engagement. Hmm, but the student-side trigger rule is about self-triggering the construct when the tutor didn't invite it. Here the tutor invited it. Either span evidences. I'll use the tutor's question.\n\nAlso wrong_operation on turn 3? The student selects the operation (subtraction) unprompted \u2014 but on the isomorph, does that earn operation credit? The wrong_operation family: absent where the student selects the correct operation. The isomorph is off-site; per exhibition/credit scope, \"transfer that stays on the isomorph\" \u2014 credit measures competence wherever shown, so a success can earn credit floors. But the analogy gate: an isomorph success earns credit floors only where the analogy is capable of eliciting the student's misconception. It is. But the misconception is comprehension, not operation. Does selecting subtraction on the isomorph engage wrong_operation's construct? The student was never operationally at fault per attribution \u2014 the error is comprehension. Credit per family: \"An act that would have been routed as this family's error had it come out wrong earns this family's absent when it comes out right.\" On the isomorph, had she written 10 + 2 = 12, would that be routed as wrong_operation? No \u2014 it would exhibit the same comprehension reading thread (though exhibition scope is the problem's own chain; a failure on a tutor-posed isomorph does not exhibit any thread). So it wouldn't be present for wrong_operation either \u2014 it'd be evidence of the same misreading. So wrong_operation N. The construct engaged is comprehension: what the grabbing condition does. So only comprehension A.\n\nTurn 4: \"Yes, I can apply this to Chris grabbing 4 donuts. He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\"\n\nResolution? Step 3 thread-linked resolution: \"a resolution is the student's own act committing the corrected counterpart of the thread's token: the corrected element itself, performed by her, at the token's structural position.\" The tutor's turn 3 prompt: \"So could you now apply this to Chris grabbing 4 donuts?\" \u2014 this is a pointing prompt: it locates the area (apply the analogy to Chris's 4 donuts) but supplies no content (doesn't state subtract, doesn't state 23). The student performs 27 - 4 = 23 at the fault's site. The tutor worked the isomorph, though \u2014 \"10 - 2 = 8\" was computed by the student herself, actually. The tutor asked the question; the student computed. Then tutor says apply it. The transfer: the student's own construction at the fault's address. The subtraction is her act (on the isomorph it was hers too \u2014 she computed 10 - 2). The tutor's \"apply this to Chris\" names the frame but leaves the corrected element production to her: she produces 27 - 4 = 23. Per the fishing dialogue 163 pole: transfer returns to the site and rebuilds \u2014 resolves. The corrected content (subtract the 4) was not stated by the tutor; the tutor stated the isomorph scenario but the student computed the isomorph answer herself. So resolution is available and enacted: S1 resolved at turn 4. Comprehension A with srcs S1, quote from turn 4, trigger span.\n\nCheck: \"A named frame within which the student produces the corrected element herself resolves (the beads dialogue 308...)\". Yes. The tutor named the frame (\"apply this\"), the student produced the corrected element (27 - 4 = 23). Resolves.\n\nAny new threads at turn 4? 27 - 4 = 23 is correct. Nothing else.\n\nNow the grid:\n\nSolution: comprehension P (S1). Other families? The other lines are correct execution: 2.5 x 12 = 30 (conversion, execution \u2014 not principles; conversion is execution). 0.1 x 30 = 3 \u2014 percentage application; does it engage principles? The bare-execution floor: applying a stated rate to a base the text identifies is execution, engages operation at most. The rate 10% is stated, the base is her own 30. Is there a concept-level choice? \"A base named by the problem or by the tutor is supplied, not chosen: applying a stated rate to a base the text identifies is execution.\" The problem says \"eats 10% of the donuts\" \u2014 the base (the donuts he bought, 30) is text-identified. So principles N. wrong_operation: the solution contains correct operation selections (30 - 3 = 27 correctly assembled; 2.5 x 12; 0.1 x 30). Does the unit earn wrong_operation absent? The error act itself (27 + 4) is routed comprehension \u2014 dual-use excludes the token's own derivation from credit. But other acts in the unit: selecting subtraction for the 10% removal (30 - 3) is a self-authored operation selection with opportunity to fail. Per \"labelling the other families on an erroneous unit\": downstream work genuinely engaging a construct and handling it soundly is absent. The 30 - 3 selection is self-authored and correct. So wrong_operation A? Trigger: \"After eating, Chris has 30 - 3 = 27 donuts left.\" Hmm. The student's selection of subtraction for the eating is her own act, correct. Yes, A for wrong_operation at the solution.\n\nWait \u2014 but is the 30 - 3 subtraction just restating the problem's stated relationship (he eats 10%)? For operation family, the engagement is assembling operands / selecting operation. The problem says \"eats 10% of the donuts\" \u2014 it doesn't state \"subtract 3 from 30\". The student computes 3 then subtracts. That's an operation she selects. Correct selection \u2192 absent. Trigger: \"After eating, Chris has 30 - 3 = 27 donuts left.\"\n\nSteps: the overall procedure \u2014 convert dozen, apply 10%, subtract, then handle the 4. The student's plan includes all stages except the final one is mis-built (comprehension). Is steps engaged? The procedure she uses: compute total, compute 10%, subtract, add 4. The plan itself is a valid shape except the last construction. Steps family is about set and sequence of stages. Her stages: derive count, derive eaten, subtract eaten, apply the snack grab. The set is right (she does apply the grab as a stage), sequence fine. So steps could be absent \u2014 the set and sequence are correct; the fault is within the final construction, routed comprehension. Hmm: is there a missing stage? No \u2014 she performs a stage for the 4 donuts, just with wrong direction (comprehension). So steps A at solution? The procedure includes all required stages in valid order. Under her belief the plan is faithful. Per the symmetric standard: an act that would have been routed as steps' error had it come out wrong earns absent when right. The stage set and sequence is correct. I'd say steps A. Trigger: the overall solution span? Triggers need an exact contiguous span. Perhaps \"After eating, Chris has 30 - 3 = 27 donuts left.\" Hmm, that's the same span. Actually, let me be careful about over-crediting. Let me reconsider.\n\nThe solution is a first-performance solution row; per codebook, \"a first-performance solution row can earn several families beside a present cell where distinct acts engage each construct.\" The distinct acts: (1) 2.5 x 12 = 30 \u2014 unit conversion, execution, not principles; does it engage wrong_operation? Selecting multiplication to convert dozen to count \u2014 she selects it. Hmm, conversion is execution per principles note. For operation, assembling 2.5 x 12 is an operation selection, correct. But is it \"bare arithmetic\"? It's a conversion; the engagement gate for operation requires assembling operands. She does. But floors: is it a sub-step the tutor dictated? No tutor before solution. So it's self-authored. But does it carry an opportunity to fail meaningfully? It's fine \u2014 operation credit could attach to the subtraction act more saliently.\n\n(2) 0.1 x 30 = 3 \u2014 applying the stated 10% rate; execution (rate and base text-identified) \u2192 principles N; operation: assembling 0.1 x 30 \u2014 selecting the percentage computation. She selects multiplication for \"10% of\". That's an operation selection; correct \u2192 could be A.\n\n(3) 30 - 3 = 27 \u2014 selects subtraction for the eating removal; correct.\n\n(4) 27 + 4 = 31 \u2014 the token, comprehension.\n\nSo wrong_operation A at solution is defensible. But caution: is the whole thing just straightforward execution with no real opportunity to fail? The codebook warns both ways. The subtraction for \"eats 10%\" is a genuine selection (she could have added, as she did for the snack!). Given she did add at the snack step, the subtraction at the eating step shows a real decision. A is fair.\n\nSteps at solution: the set/sequence of stages is right. A? I'd say A, but what's the trigger span? The student's own committed assertion bringing steps into play \u2014 the staged derivation. Maybe \"After eating, Chris has 30 - 3 = 27 donuts left.\" Honestly the walkthrough re-articulation standard would judge step selection. Let me think about whether steps is engaged at all in the solution. The solution is a full multi-stage derivation; each stage chosen. The sequence: convert, percent, subtract, snack-adjust. All required stages present, valid order \u2192 absent. Trigger could be the same subtraction line or the snack line... the snack line is the token (dual-use excludes it from credit). Use \"After eating, Chris has 30 - 3 = 27 donuts left.\" Hmm, but that's execution of a stage, not step selection per se. Alternatively use the whole solution narrative? A span must be contiguous. Let me pick \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\\nAfter eating, Chris has 30 - 3 = 27 donuts left.\" \u2014 that's contiguous in the solution text. Actually simpler: I'll consider whether to mark steps A or N.\n\nIs there a genuine steps decision? The required procedure: (a) convert 2.5 dozen to 30; (b) compute 10% eaten = 3; (c) subtract 3; (d) subtract 4. The student does (a), (b), (c), and a stage for (d) \u2014 so all stages present. Order valid. So steps handled correctly: A. The decision is live (she assembled a multi-stage plan). I'll mark A with trigger \"After eating, Chris has 30 - 3 = 27 donuts left.\" Hmm \u2014 but that same span is the wrong_operation trigger. Can two families share a trigger span? The schema allows it; each family's trigger is the span engaging that construct. The staged subtraction is both an operation selection and a stage advance. It's acceptable. Actually, maybe cleaner: wrong_operation trigger: \"0.1 x 30 = 3\" \u2014 no wait, that's a percentage application. Let me assign:\n\n- wrong_operation trigger: \"After eating, Chris has 30 - 3 = 27 donuts left.\" (selects subtraction, operands correctly arranged)\n- steps trigger: the staged sequence \u2014 \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\\nAfter eating, Chris has 30 - 3 = 27 donuts left.\" This span shows stage sequencing (percent then subtract). That's contiguous. OK.\n\nRelevance at solution: any distractors? All givens used: 2.5 dozen, 10%, 4 donuts. No distractors. Silence floor: silently not using a distractor earns nothing; there are no distractors anyway. N.\n\nPrinciples: N (execution of stated rates).\n\nTurn 1: comprehension P (S1 re-exhibited). Other columns: the walkthrough is recitation \u2014 maps one-to-one onto the solution's sentences, same derivational order. Recitation earns nothing \u2192 all others N. Note the replay re-commits the error \u2192 P for comprehension. Quote: \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\"\n\nTurn 2: comprehension P, S1, tag rationale. Quote: \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\" Others N.\n\nTurn 3: comprehension A. Trigger: tutor's prompt (immediately preceding tutor turn) \u2014 \"If you had 10 chocolates is your fridge and you grabbed 2 for your lunch pack, howmany chocolates would be left in the fridge?\" or student's assertion. I'll use the student's assertion: \"There would be 10 - 2 = 8 chocolates left in the fridge.\" Actually the trigger definition: \"the tutor's prompt inviting the family's reasoning, or the student's own committed assertion bringing it into play.\" The tutor's prompt is what invited it. Either fine. I'll use the tutor's prompt span, since the invitation is the engagement source, and it's from the immediately preceding tutor turn, which is allowed. Hmm, the student assertion also works and is in the unit itself. I'll go with the student's assertion: it commits the corrected reading (grabbing reduces the stock). Actually both are valid; pick the student span.\n\nDoes turn 3 resolve S1? No \u2014 isomorph success never resolves; resolution requires the fault's own site. So turn 3 is A (independent credit? or thread-linked?). It's thread-independent credit on the isomorph? Or is it engaging the same construct as the thread? The A cell doesn't cite S1 (no srcs) since it's not a resolution. Per srcs rules: \"an A cell that records a resolution names the resolved thread. Omit srcs entirely for all other cells.\" So turn 3 A has no srcs.\n\nHmm wait \u2014 but is the A at turn 3 an \"independent\" absent? In the grid, absents either cite resolved threads or are independent. No marker needed in this schema (the codebook mentions *independent* marker, but the output schema only uses srcs for resolutions). So just A with trigger.\n\nTurn 4: comprehension A, S1 resolved, srcs {comprehension: S1}, quote: \"27 - 4 = 23 donuts would be left for his co-workers to share.\" Trigger: tutor's pointing prompt \"So could you now apply this to Chris grabbing 4 donuts?\" or the student's assertion. The student applies at the site. Trigger: \"Yes, I can apply this to Chris grabbing 4 donuts. He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\"\n\nOther columns at turn 4: wrong_operation \u2014 the 27 - 4 selection... but wait, that's the resolution act itself; is it also operation credit? The corrected subtraction is the comprehension thread's resolution (reading the direction correctly). Dual-use: one act may earn absent in several families where distinct constructs are engaged. Here the act is a single decision: subtract. Which family's construct does it engage? The reading decision (what the condition does) \u2014 comprehension. The operation selection \u2014 but the tutor's analogy strongly framed subtraction (\"10 - 2 = 8\" was just computed in the isomorph). The framing floor: \"an act whose content the immediately preceding tutor turn states... earns nothing.\" Tutor's turn: \"So could you now apply this to Chris grabbing 4 donuts?\" \u2014 this doesn't state the operation explicitly, but the recent exchange (the isomorph) fully specified subtraction. For comprehension, the resolution machinery explicitly allows the named-frame pole: pointing prompt + self-produced corrected element resolves. The isomorph was student-computed, so the corrected element isn't tutor-stated content in the exchange... well, \"10 - 2 = 8\" is the student's own. The tutor never said \"subtract 4\" or \"23\". So comprehension A + resolved.\n\nFor wrong_operation at turn 4: the operation selection (subtract 4 from 27) \u2014 is it supplied? The tutor's analogy framed the structure; applying \"this\" strongly entails subtract. But the resolution doctrine says this act is the student's own for comprehension purposes. For operation: the same act \u2014 could it earn operation A? The analogy's subtraction was hers, and the transfer selection of subtraction is entailed by \"apply this\". I'd say the operation is heavily framed by the isomorph; and the distinct construct credited is comprehension. Dual-use: the token's own derivation is removed... the resolution act is the corrected counterpart of the token; crediting operation for it would be double-counting the same decision under two families where the decision is really one (direction reading). I'll keep wrong_operation N at turn 4. Steps: N.\n\nActually, let me reconsider turn 3 for other families. Student computes 10 - 2 = 8 on the isomorph. Operation selection on isomorph: tutor asked \"how many left\" without naming operation, student selects subtraction. Could earn wrong_operation A? The isomorph-credit rule: \"a success earns credit floors only where the analogy is capable of eliciting the student's misconception.\" The misconception is the reading; the operation selection here is intertwined with the reading decision. The single decision is \"grabbing removes\" \u2014 one construct, comprehension. Crediting operation for the same act would double-count one decision. Also, wrong_operation absent requires an act that would have routed as wrong_operation had it gone wrong; here a wrong answer (10 + 2) would route comprehension. So N. Good.\n\nNow the scan rows.\n\nSolution lines:\n1. \"2 and a half dozen donuts is equal to 2.5 x 12 = 30 donuts.\" expected: 30. match.\n2. \"0.1 x 30 = 3 donuts\" \u2014 match. Span: \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\"\n3. \"After eating, Chris has 30 - 3 = 27 donuts left.\" match.\n4. \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\" expected: 27 - 4 = 23; departure: the 4 added instead of subtracted; contradicts \"problem\".\n5. \"Therefore, Chris has 31 donuts left for his co-workers to share. 31\" \u2014 this restates the protected output. Is it a separate departure? It's the committed answer, the consequence of the token. The token is the input-side act (the addition); the output 31 is the consequence. The scan lists lines that commit checkable content; the final assertion re-commits the 31. Should I list it as a departure shadowed by S1? The scan should cover every act committing checkable content. \"Therefore, Chris has 31 donuts left\" \u2014 expected 23, departure, slot the final total, contradicts problem, disposition \"shadow of S1\" \u2014 S1's belief generates the 31 (via the addition). Hmm: \"shadow of S# is legitimate only where S#'s belief itself generates the departure's content\" \u2014 yes, the belief that the 4 are added generates 31. So the final line is a shadow. But is it a distinct line? It restates 31, and \"31\" alone too. I could fold them into one row: \"Therefore, Chris has 31 donuts left for his co-workers to share.\" and the bare \"31\". Both restate the output. I'll include one row for the therefore-line (with the 31) as shadow of S1. Actually the solution text: \"Therefore, Chris has 31 donuts left for his co-workers to share. \\n 31\". I'll scan it as one line: \"Therefore, Chris has 31 donuts left for his co-workers to share.\" and maybe skip the trailing bare \"31\"? The bare 31 is part of the answer statement. To be thorough, include both rows? The instruction: lines covers every act that commits checkable content. The trailing \"31\" is a bare restatement. I'll include it as a shadow row too. Hmm, that may be overkill but safer to be complete. Let me include both as one line each: row 5 \"Therefore, Chris has 31 donuts left for his co-workers to share.\" shadow of S1; row 6 \"31\" shadow of S1. Both departures with disposition shadow of S1.\n\nWait, but \"and in a thread's own origin unit, only its founding departure carries that thread: any other departure there disposes on its own merits\" \u2014 shadows are fine as dispositions. The output value 31 is generated by S1's belief, so shadow of S1 is legitimate.\n\nTurn 1 lines: the walkthrough has several lines:\n- \"2 and a half dozen donuts is equal to 2.5 x 12 = 30 donuts\" \u2014 match.\n- \"10% of the donuts is 0.1 x 30 = 3 donuts\" \u2014 match.\n- \"after eating, Chris had 30 - 3 = 27 donuts left\" \u2014 match.\n- \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\" \u2014 departure, exhibits S1.\n\nTurn 2 lines: \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\" \u2014 departure (re-commits the addition; the claim that adding is the right move). Exhibits S1. Also \"27 donuts that were left after he ate 10%\" \u2014 that's a correct restatement within the same sentence; the sentence is one line. The departing slot: the addition direction. contradicts \"problem\".\n\nTurn 3 lines: \"There would be 10 - 2 = 8 chocolates left in the fridge.\" \u2014 expected on the analogy: 8. match.\n\nTurn 4 lines: \"Yes, I can apply this to Chris grabbing 4 donuts.\" \u2014 no checkable numeric content? It's a claim of applicability; not checkable arithmetic. Could treat as no content. \"He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\" \u2014 expected 27 - 4 = 23. match.\n\nThread S1:\n- family: comprehension\n- belief: \"the 4 donuts Chris grabs for his snack are added to the pool left for his co-workers, the grab read as increasing what is left rather than reducing it\" \u2014 one line, as a reading. \"grabbing the 4 donuts adds them to what is left for the co-workers\" \u2014 reading of what the condition does. Good.\n- signature: \"the 4 seated with a plus in the final adjustment; protected output 31\"\n- origin: solution\n- exhibitions: [solution, committed], [turn 1, re-exhibited], [turn 2, rationale], [turn 4, resolved]\n- resolved_at: turn 4\n- quote: \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\"\n\nGrid:\n- solution: comprehension P (S1), relevance N, principles N, wrong_operation A, steps A. srcs {comprehension: S1}. quotes {comprehension: span}. triggers {wrong_operation: \"After eating, Chris has 30 - 3 = 27 donuts left.\", steps: ...}.\n\nHmm, let me reconsider whether to grant A for wrong_operation and steps at the solution. The token's own derivation (27 + 4) is excluded via dual-use. But 30 - 3 selection is distinct. The codebook's harvest/solution-row examples credit distinct acts. Also the trail dialogue 2063 solution row: \"comprehension present... the wrong-operation and steps columns judged clean, her 4 + 1 + 4 faithful to the misread half\" \u2014 i.e., A on construction columns beside comprehension P. Analogously here: her 30 - 3 faithful, stages right. So A for wrong_operation and steps. Good.\n\nsteps trigger: needs a span engaging step selection. The multi-stage derivation. Span: \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\\nAfter eating, Chris has 30 - 3 = 27 donuts left.\" That's contiguous (two consecutive sentences). OK.\n\nwrong_operation trigger: \"After eating, Chris has 30 - 3 = 27 donuts left.\"\n\n- turn 1: comprehension P (S1), others N. quote: \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\"\n- turn 2: comprehension P (S1), others N. quote: \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\"\n- turn 3: comprehension A, others N. trigger: \"There would be 10 - 2 = 8 chocolates left in the fridge.\" No srcs.\n- turn 4: comprehension A, srcs {comprehension: S1}, quote: \"He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\" trigger: same span or the tutor prompt \"So could you now apply this to Chris grabbing 4 donuts?\" I'll use the student span as trigger.\n\nWait \u2014 should turn 4's A also consider whether the framing floor blocks? The tutor's \"apply this\" plus the isomorph \u2014 but per resolution doctrine, named-frame with student-produced corrected element resolves (beads 308). The tutor worked nothing on the target; the student herself computed both the isomorph and the target rebuild. So resolution stands. The A is thread-linked with srcs.\n\nAlso check exhibitions tag for turn 2: \"rationale\" \u2014 \"a spontaneous articulation of the belief behind the error, per the root-cause trigger.\" She was asked why; her answer states the belief (grabbed \u2192 added). An articulation that defends prior work is still an articulation. Tag rationale. Good \u2014 rationale is more specific than re-exhibited per precedence.\n\nPre-output audit:\n1. Comprehension evidence: the student's own words \"Adding the 4 donuts he grabbed for his afternoon snack\" and turn 2 rationale \u2014 a reading of what the condition does, stated in her words. Belief is a reading, no equality in belief field. Good.\n2. Ambiguity defence tested: is \"grabs another 4 donuts for his afternoon snack\" ambiguous such that adding is defensible? No physically possible model makes grabbing add to the shared pool. Chargeable. No token founded on live-thread outputs (origin unit).\n3. Provenance: no competing givens.\n4. Roles: 27 labelled \"left after eating\" \u2014 predicates consistent.\n5. Residual: the \"Therefore... 31\" lines disposed as shadows.\n6. Procedure grain: the error is within one construction's direction, but routed comprehension via the reading gate (question 1 of construction gate: a coherent reading... actually the reading is strained but shown in her words \u2014 comprehension owns it). The witness question: her own 30 - 3 line? Does the candidate belief predict 30 - 3? The belief is about the snack-grab direction, not about eating, so her correct subtraction for eating doesn't refute. Anyway comprehension routed on her own words, not construction.\n7. Credit: solution's WO and steps A rest on distinct self-authored acts (30 - 3 selection; stage set) \u2014 opportunity to fail real (she failed the analogous one at the snack step). Turn 3 A: isomorph answer correct, analogy capable of eliciting the misconception. Turn 4 A: resolution, pointing prompt only.\n8. Temporal integrity: no rewrites.\n9. Coherence: single thread.\n10. Commitment: settled.\n11. Fold audit: no folds.\n\nOne more check: turn 1 grid \u2014 should any family get A from the walkthrough? Recitation floor: the account maps one-to-one onto the solution's sentences. Same order, same content. Recitation earns nothing. And dual-use: the error token re-committed. So N for others. Correct.\n\nAlso solution scan: line \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\" match. Line \"Adding the 4 donuts...\" \u2014 single departure row (slot: the operation/role of the 4). The result 31 is also wrong, but that's the consequence of the same act; one row with slot \"the 4 added rather than subtracted\". Should I add a second row for the result? The scan rows are per departing slot; the result slot departs as a consequence. The instructions allow one row per departing slot. I'll give the line one departure row (the operand arrangement) and treat 31 within expected text. Then the \"Therefore\" line separately as shadow.\n\nLet me also double check turn 4 scan: \"Yes, I can apply this to Chris grabbing 4 donuts.\" \u2014 commits a claim (that the analogy applies), not checkable numerically; I could include it as match? It's not checkable content; omit or match. I'll omit it \u2014 actually \"lines covers every act in that unit that commits checkable content: written expressions and stated quantities or claims.\" \"I can apply this\" is a claim but not checkable. I'll leave just the numeric line.\n\nNow format the JSON.\n\nScan entries:\n\nsolution:\n- {\"written\": \"2 and a half dozen donuts is equal to 2.5 x 12 = 30 donuts.\", \"expected\": \"2.5 x 12 = 30\", \"verdict\": \"match\"}\n- {\"written\": \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\", \"expected\": \"0.1 x 30 = 3\", \"verdict\": \"match\"}\n- {\"written\": \"After eating, Chris has 30 - 3 = 27 donuts left.\", \"expected\": \"30 - 3 = 27\", \"verdict\": \"match\"}\n- {\"written\": \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\", \"expected\": \"27 - 4 = 23, the grab removes 4 from the pool\", \"verdict\": \"departure\", \"slot\": \"the 4 added to the pool instead of subtracted\", \"contradicts\": \"problem\"}\n- {\"written\": \"Therefore, Chris has 31 donuts left for his co-workers to share.\", \"expected\": \"23 on the problem's mathematics\", \"verdict\": \"departure\", \"slot\": \"the final total\", \"contradicts\": \"problem\"}\n- {\"written\": \"31\", \"expected\": \"23\", \"verdict\": \"departure\", \"slot\": \"the final answer\", \"contradicts\": \"problem\"}\n\nturn 1:\n- {\"written\": \"I started by figuring out that 2 and a half dozen donuts is equal to 2.5 x 12 = 30 donuts.\", \"expected\": \"30\", \"verdict\": \"match\"}\n- {\"written\": \"Then I calculated that 10% of the donuts is 0.1 x 30 = 3 donuts.\", \"expected\": \"3\", \"verdict\": \"match\"}\n- {\"written\": \"So after eating, Chris had 30 - 3 = 27 donuts left.\", \"expected\": \"27\", \"verdict\": \"match\"}\n- {\"written\": \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\", \"expected\": \"27 - 4 = 23\", \"verdict\": \"departure\", \"slot\": \"the 4 added rather than subtracted\", \"contradicts\": \"problem\"}\n\nturn 2:\n- {\"written\": \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\", \"expected\": \"the grab removes 4, 27 - 4 = 23\", \"verdict\": \"departure\", \"slot\": \"the addition of the grabbed 4\", \"contradicts\": \"problem\"}\n\nturn 3:\n- {\"written\": \"There would be 10 - 2 = 8 chocolates left in the fridge.\", \"expected\": \"10 - 2 = 8 on the tutor's analogy\", \"verdict\": \"match\"}\n\nturn 4:\n- {\"written\": \"He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\", \"expected\": \"27 - 4 = 23\", \"verdict\": \"match\"}\n\nDepartures:\n- solution, \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\", founds S1\n- solution, \"Therefore, Chris has 31 donuts left for his co-workers to share.\", shadow of S1\n- solution, \"31\", shadow of S1\n- turn 1, \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\", exhibits S1\n- turn 2, \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\", exhibits S1\n\nThread:\n{\"id\": \"S1\", \"family\": \"comprehension\", \"belief\": \"grabbing the 4 donuts for his afternoon snack adds them to what is left for the co-workers, the grab read as increasing the pool rather than reducing it\", \"signature\": \"the grabbed 4 seated with a plus in the final adjustment; protected output 31\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 2\", \"rationale\"], [\"turn 4\", \"resolved\"]], \"resolved_at\": \"turn 4\", \"quote\": \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\"}\n\nGrid as decided.\n\nTriggers: solution wrong_operation: \"After eating, Chris has 30 - 3 = 27 donuts left.\"; steps: \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\\nAfter eating, Chris has 30 - 3 = 27 donuts left.\" \u2014 must be exact contiguous; in the source it's \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\\nAfter eating, Chris has 30 - 3 = 27 donuts left.\" The text has a newline between sentences. I'll include with \\n. Actually to be safe, maybe use a single-sentence span for steps too: \"After eating, Chris has 30 - 3 = 27 donuts left.\" But that's identical to WO trigger; is that a problem? Validation says each value is an exact contiguous span; no uniqueness requirement across families. But semantically steps trigger should show stage selection. Use the two-sentence span with \\n. The original: \"Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\\nAfter eating, Chris has 30 - 3 = 27 donuts left.\" Yes in the dialogue it's on separate lines. I'll write it with a newline character.\n\nHmm, actually maybe simpler and safer: for steps trigger use \"After eating, Chris has 30 - 3 = 27 donuts left.\" \u2014 the subtraction stage advancing the plan. It's fine.\n\nLet me reconsider: is steps A really right at the solution, or should it be N? The steps construct: \"the student engages the correct procedural steps\" \u2014 the plan includes all required stages in a valid order: total \u2192 eaten \u2192 subtract \u2192 snack-adjustment. The snack stage exists (its direction is comprehension's token). So the set and sequence are intact \u2192 A. Dual-use: the snack stage itself is the token's derivation \u2014 but the stage-set judgment is formed from the whole plan; the credited decision is the valid sequencing of the first three stages and including a snack stage. Hmm, including the snack stage is itself part of the token? The token is the addition (direction), not the existence of the stage. The stage set is: convert, percent, subtract, adjust-for-snack. All four needed; sequence valid. The direction within the fourth is comprehension. So steps A is justified. Fine.\n\nActually, let me double-check the \"resolving versus restating\" concern for turn 4 comprehension credit: the tutor's \"So could you now apply this to Chris grabbing 4 donuts?\" names the frame. Student produces 27 - 4 = 23. Named frame + self-produced element = resolves (beads 308 pole). Good.\n\nOne more: turn 3 A \u2014 is the isomorph too simple? The analogy mirrors the misconception exactly (grab-for-self removes from stock). It's capable of eliciting the misconception (she could have said 12). So A. Trigger from tutor's preceding turn: \"If you had 10 chocolates is your fridge and you grabbed 2 for your lunch pack, howmany chocolates would be left in the fridge?\" I'll use the student's own assertion instead \u2014 both allowed. I'll use the tutor prompt actually, since it's the invitation that made the construct live and it's verbatim from the preceding tutor turn: \"If you had 10 chocolates is your fridge and you grabbed 2 for your lunch pack, howmany chocolates would be left in the fridge?\" Copy exactly with \"howmany\" typo. Yes, copy character for character: \"If you had 10 chocolates is your fridge and you grabbed 2 for your lunch pack, howmany chocolates would be left in the fridge?\"\n\nTurn 4 trigger: tutor's \"So could you now apply this to Chris grabbing 4 donuts?\" or student's assertion. Use the student's: \"He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\"\n\nFinal JSON assembly. Make sure quotes in solution row and thread quote match exactly.\n\nSolution quote for comprehension: \"Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.\"\n\nTurn 1 quote: \"Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.\"\n\nTurn 2 quote: \"Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.\"\n\nTurn 4 quote: \"He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\" \u2014 must be exact; turn 4 text: \"Yes, I can apply this to Chris grabbing 4 donuts. He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.\" Good.\n\nDone.",
+   "errors": [],
+   "meta": {
+    "latency_s": 320.5255959033966,
+    "first_event_s": 5.648112773895264,
+    "first_token_s": 5.6481218338012695,
+    "usage": {
+     "prompt_tokens": 59957,
+     "completion_tokens": 11957,
+     "total_tokens": 71914,
+     "cached_tokens": 59136,
+     "completion_tokens_details": {
+      "reasoning_tokens": 10167
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 59136
+     }
+    },
+    "tokens": {
+     "prompt": 59957,
+     "cached_prompt": 59136,
+     "uncached_prompt": 821,
+     "completion": 11957,
+     "reasoning": 10167,
+     "visible_completion": 1790,
+     "total": 71914
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 11945,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 723,
+  "scan": [
+   {
+    "unit": "solution",
+    "lines": [
+     {
+      "written": "2 and a half dozen donuts is equal to 2.5 x 12 = 30 donuts.",
+      "expected": "2.5 x 12 = 30, the problem's conversion",
+      "verdict": "match"
+     },
+     {
+      "written": "Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.",
+      "expected": "0.1 x 30 = 3, the stated rate on the text-identified base",
+      "verdict": "match"
+     },
+     {
+      "written": "After eating, Chris has 30 - 3 = 27 donuts left.",
+      "expected": "30 - 3 = 27, the eating removes 3 from the pool",
+      "verdict": "match"
+     },
+     {
+      "written": "Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.",
+      "expected": "27 - 4 = 23, the grab removes 4 more from the co-workers' pool",
+      "verdict": "departure",
+      "slot": "the grabbed 4 seated with a plus, added to the pool instead of removed",
+      "contradicts": "problem"
+     },
+     {
+      "written": "Therefore, Chris has 31 donuts left for his co-workers to share.",
+      "expected": "23 on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "the final total",
+      "contradicts": "problem"
+     },
+     {
+      "written": "31",
+      "expected": "23",
+      "verdict": "departure",
+      "slot": "the final answer",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 1",
+    "lines": [
+     {
+      "written": "I started by figuring out that 2 and a half dozen donuts is equal to 2.5 x 12 = 30 donuts.",
+      "expected": "30",
+      "verdict": "match"
+     },
+     {
+      "written": "Then I calculated that 10% of the donuts is 0.1 x 30 = 3 donuts.",
+      "expected": "3",
+      "verdict": "match"
+     },
+     {
+      "written": "So after eating, Chris had 30 - 3 = 27 donuts left.",
+      "expected": "27",
+      "verdict": "match"
+     },
+     {
+      "written": "Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.",
+      "expected": "27 - 4 = 23, the grab removes 4 from the pool",
+      "verdict": "departure",
+      "slot": "the grabbed 4 added rather than subtracted",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 2",
+    "lines": [
+     {
+      "written": "Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.",
+      "expected": "the grab removes 4, 27 - 4 = 23",
+      "verdict": "departure",
+      "slot": "the addition of the grabbed 4, asserted as the right move",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 3",
+    "lines": [
+     {
+      "written": "There would be 10 - 2 = 8 chocolates left in the fridge.",
+      "expected": "10 - 2 = 8 on the tutor's analogy",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 4",
+    "lines": [
+     {
+      "written": "He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share.",
+      "expected": "27 - 4 = 23",
+      "verdict": "match"
+     }
+    ]
+   }
+  ],
+  "departures": [
+   {
+    "unit": "solution",
+    "written": "Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts.",
+    "disposition": "founds S1"
+   },
+   {
+    "unit": "solution",
+    "written": "Therefore, Chris has 31 donuts left for his co-workers to share.",
+    "disposition": "shadow of S1"
+   },
+   {
+    "unit": "solution",
+    "written": "31",
+    "disposition": "shadow of S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 2",
+    "written": "Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts.",
+    "disposition": "exhibits S1"
+   }
+  ],
+  "threads": [
+   {
+    "id": "S1",
+    "family": "comprehension",
+    "belief": "grabbing the 4 donuts for his afternoon snack adds them to what is left for the co-workers, the grab read as increasing the pool rather than reducing it",
+    "signature": "the grabbed 4 seated with a plus in the final adjustment; protected output 31",
+    "origin": "solution",
+    "exhibitions": [
+     [
+      "solution",
+      "committed"
+     ],
+     [
+      "turn 1",
+      "re-exhibited"
+     ],
+     [
+      "turn 2",
+      "rationale"
+     ],
+     [
+      "turn 4",
+      "resolved"
+     ]
+    ],
+    "resolved_at": "turn 4",
+    "quote": "Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts."
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "A",
+    "steps": "A",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Adding the 4 donuts he grabbed for his afternoon snack, Chris now has 27 + 4 = 31 donuts."
+    },
+    "triggers": {
+     "wrong_operation": "After eating, Chris has 30 - 3 = 27 donuts left.",
+     "steps": "Chris eats 10% of the donuts, which is 0.1 x 30 = 3 donuts.\nAfter eating, Chris has 30 - 3 = 27 donuts left."
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Then I added the 4 donuts he grabbed for his afternoon snack, so Chris now has 27 + 4 = 31 donuts left for his co-workers to share."
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Because Chris grabbed 4 donuts for his afternoon snack, so I added them to the 27 donuts that were left after he ate 10% of the donuts."
+    }
+   },
+   {
+    "unit": "turn 3",
+    "comprehension": "A",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "triggers": {
+     "comprehension": "If you had 10 chocolates is your fridge and you grabbed 2 for your lunch pack, howmany chocolates would be left in the fridge?"
+    }
+   },
+   {
+    "unit": "turn 4",
+    "comprehension": "A",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share."
+    },
+    "triggers": {
+     "comprehension": "He had 27 donuts left after eating 10%, so 27 - 4 = 23 donuts would be left for his co-workers to share."
+    }
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 320.5255959033966
+}

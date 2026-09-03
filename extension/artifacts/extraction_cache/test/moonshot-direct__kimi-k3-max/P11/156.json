@@ -1,0 +1,267 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P11",
+ "reasoning_effort": "max",
+ "dialogue_id": 156,
+ "split": "test",
+ "attempts": [
+  {
+   "raw": "ax, he can make 10 tapered candles and that one pound of beeswax and the wicks cost $10.00 in supplies\", \"expected\": \"the problem's stated rate and lot cost, restated correctly\", \"verdict\": \"match\"}, {\"written\": \"Charlie can make 10 x 1 = 10 candles from one pound of beeswax.\", \"expected\": \"10 x 1 = 10 candles per pound\", \"verdict\": \"match\"}, {\"written\": \"The cost of supplies per candle is $10.00 / 10 = $1.00.\", \"expected\": \"$10.00 / 10 = $1.00\", \"verdict\": \"match\"}, {\"written\": \"Charlie's profit per candle is $2.00 - $1.00 = $1.00.\", \"expected\": \"$2.00 - $1.00 = $1.00\", \"verdict\": \"match\"}, {\"written\": \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\", \"expected\": \"$2.00 x 20 = $40.00\", \"verdict\": \"match\"}, {\"written\": \"His total cost for supplies is $10.00.\", \"expected\": \"2 lots x $10.00 = $20.00, on her committed chain 20 candles x $1.00 = $20.00\", \"verdict\": \"departure\", \"slot\": \"the total cost seated as one $10.00 lot\", \"contradicts\": \"her committed per-candle cost of $1.00, restated this turn, which for 20 candles gives $20.00\"}, {\"written\": \"His total profit is $40.00 - $10.00 = $30.00.\", \"expected\": \"$40.00 - $20.00 = $20.00, on her committed chain the total cost is 20 x $1.00 = $20.00\", \"verdict\": \"departure\", \"slot\": \"the cost operand $10.00\", \"contradicts\": \"her committed per-candle cost of $1.00, which for 20 candles gives $20.00\"}]}, {\"unit\": \"turn 2\", \"lines\": [{\"written\": \"Charlie needs to buy two lots of wax/wicks.\", \"expected\": \"two lots, 20 candles / 10 candles per lot = 2\", \"verdict\": \"match\"}, {\"written\": \"So the cost of supplies for 20 candles is $20.00.\", \"expected\": \"2 x $10.00 = $20.00\", \"verdict\": \"match\"}, {\"written\": \"His total profit is then $40.00 - $20.00 = $20.00.\", \"expected\": \"$40.00 - $20.00 = $20.00\", \"verdict\": \"match\"}]}], \"departures\": [{\"unit\": \"solution\", \"written\": \"His total cost for supplies is $10.00.\", \"disposition\": \"founds S1\"}, {\"unit\": \"solution\", \"written\": \"His total profit is $40.00 - $10.00 = $30.00.\", \"disposition\": \"shadow of S1\"}, {\"unit\": \"turn 1\", \"written\": \"His total cost for supplies is $10.00.\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 1\", \"written\": \"His total profit is $40.00 - $10.00 = $30.00.\", \"disposition\": \"shadow of S1\"}], \"threads\": [{\"id\": \"S1\", \"family\": \"wrong_operation\", \"belief\": \"seating a single $10 lot in the total-cost slot of the profit construction for the 20-candle batch, displacing the two-lot cost her own $1.00-per-candle rate commits her to\", \"signature\": \"the single $10 lot seated as the total supplies cost for the 20-candle batch\", \"witness\": \"The cost of supplies per candle is $10.00 / 10 = $1.00.\", \"witness_check\": \"a belief that one $10 lot covers all 20 candles would put the per-candle cost at $10.00 / 20 = $0.50; it cannot produce her $1.00 line, so the line witnesses the intact per-pound rate model\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 2\", \"resolved\"]], \"resolved_at\": \"turn 2\", \"quote\": \"His total cost for supplies is $10.00.\"}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"A\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"His total cost for supplies is $10.00.\"}, \"triggers\": {\"steps\": \"The cost of supplies per candle is $10.00 / 10 = $1.00. Charlie's profit per candle is $2.00 - $1.00 = $1.00.\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"His total cost for supplies is $10.00.\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"A\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"So the cost of supplies for 20 candles is $20.00.\"}, \"triggers\": {\"wrong_operation\": \"How many lots of wax/wicks did Charlie need to buy?\"}}]}",
+   "reasoning": "Let me solve the problem first.\n\nProblem: Charlie makes candles. 1 pound of beeswax makes 10 tapered candles. One pound of beeswax + wicks costs $10.00. Sells each candle for $2.00. Net profit if he makes and sells 20 candles?\n\nCorrect route: 20 candles need 20/10 = 2 pounds of beeswax. Cost = 2 \u00d7 $10 = $20. Revenue = 20 \u00d7 $2 = $40. Profit = $40 \u2212 $20 = $20.\n\nStudent's solution:\n- 10 x 1 = 10 candles from one pound. Correct.\n- Cost per candle = $10/10 = $1. Correct.\n- Profit per candle = $2 \u2212 $1 = $1. Correct.\n- Total revenue = $2 \u00d7 20 = $40. Correct.\n- \"His total cost for supplies is $10.00.\" Wrong: 20 candles require 2 pounds, cost $20. This is the error: he used the cost for one pound ($10) instead of 2 pounds ($20).\n- Total profit = $40 \u2212 $10 = $30. Wrong as a consequence (shadow of the cost error).\n\nActually, interesting: the student even derived profit per candle $1.00, and 20 candles \u00d7 $1 = $20 profit. But instead she used revenue \u2212 total cost with total cost = $10. The error: total cost computed as $10 for one pound rather than $20 for two pounds.\n\nNow, routing: The student herself derived cost per candle $1, and 20 candles. Her own chain implies total cost 20 \u00d7 $1 = $20. She wrote total cost = $10. This is a departure from her own committed chain (her own $1/candle implies $20 for 20 candles). Alternatively it's a comprehension error: she thinks one pound suffices for 20 candles? But her own chain shows she computed cost per candle. The error is treating total supplies cost as $10 (one lot) when 20 candles need two lots.\n\nWhich family? Let me think. The token: \"His total cost for supplies is $10.00.\" This is the first false content. Then total profit $40 \u2212 $10 = $30 is downstream shadow.\n\nCandidate families:\n- comprehension: belief that one pound of wax makes 20 candles? But her own chain says 10 candles per pound. She stated 10 candles from one pound. So she knows a pound makes 10 candles. The own-chain demonstration: she derived cost per candle $1 and could compute 20 \u00d7 $1 = $20. The tutor asks \"How many lots of wax/wicks did Charlie need to buy?\" and she says two lots, $20.\n\nIs there a witness? Her own committed \"cost of supplies per candle is $1.00\" \u2014 multiplying by 20 candles gives $20, contradicting $10 total. The act of seating $10 as total cost contradicts her own derived per-candle cost. So this is an internal inconsistency: wrong on her own belief. That suggests procedural (wrong operation). The relation question: the problem states cost is per pound ($10 per pound); the student needs total cost = per-pound cost \u00d7 number of pounds, or per-candle cost \u00d7 number of candles. She wrote total cost = $10 directly.\n\nUnder the wrong-operation vs comprehension boundary: is the arithmetic wrong given what she believes, or right given a wrong belief? If she believed 20 candles need one pound, that contradicts her own statement (10 candles per pound \u2192 20 candles need 2 pounds). So no coherent wrong reading is available; her own chain demonstrates the correct model. This is a construction fault: the total cost should be 2 \u00d7 $10 = $20 (or 20 \u00d7 $1 = $20), and she wrote $10. The own-chain demonstration bars a comprehension story (protocol step 9.1: own-chain demonstration; the prefix correctly derives the same quantity/role later contradicted).\n\nWitness: \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" This shows she has the per-candle cost model; the total cost for 20 candles should be 20 \u00d7 $1 = $20. Witness check: what would the candidate wrong belief produce at the witness span? A wrong belief \"total cost is always $10 regardless of candles\" \u2014 hmm, that's not really a belief; it's just a failure to scale. The candidate belief \"one lot of supplies covers 20 candles\" would not produce the per-candle cost line? Actually it could: cost per candle $1 is consistent with one pound making 10 candles at $10. If she believed 20 candles need 2 pounds, per-candle cost is still $1. So the witness discriminates at the total-cost slot: her own per-candle cost $1 \u00d7 20 candles = $20, not $10. The belief that total cost is $10 for 20 candles would... at the witness span (per-candle cost computation), the wrong belief could still produce $1/candle. Hmm.\n\nActually the discriminating witness: the witness must show the model the act failed to realise. The model: total cost = per-candle cost \u00d7 number of candles, or = $10 per pound \u00d7 pounds needed. Her per-candle line realises the per-candle cost; the failing act is the total cost. Does the candidate wrong belief (that $10 covers 20 candles) generate the per-candle line? Yes, it could. So is the witness void?\n\nLet me think about what the right witness is. The model she failed to realise: that 20 candles require 2 pounds/2 lots. Where in her chain does she show she knows candles-to-pounds scaling? Line 1: \"Charlie can make 10 x 1 = 10 candles from one pound of beeswax.\" That's the rate. And \"cost per candle $1\" \u2014 20 candles \u00d7 $1 = $20. The total cost line should be $20. Her own derived $1/candle times the 20 candles she's making gives $20; seating $10 contradicts that.\n\nThe witness question asks: state what the candidate wrong belief itself would produce at the witness span; where it predicts that very span, the witness is void. The candidate wrong belief for a construction family here would be... what belief? For wrong operation, we don't need a wrong belief; we need intact belief demonstrated and a construction fault. The witness shows the intact model. The witness is her per-candle cost line (or her 10-candles-per-pound line). The witness_check asks what the candidate wrong belief would produce at the witness span. For wrong_operation threads, the \"candidate wrong belief\" would be the annotator-constructed reading story (e.g., \"she thought one pound covers all 20 candles\"). Would that belief produce \"cost per candle $1\"? If she thought one pound covers 20 candles, cost per candle would be $10/20 = $0.50, not $1. So the wrong belief would NOT produce her $1 line \u2014 her $1 line (cost per candle using 10 candles per pound) is incompatible with the \"one pound covers 20 candles\" belief. Good: the witness discriminates.\n\nActually more carefully: the belief \"the total supplies cost for the whole batch is one $10 lot\" \u2014 would it produce \"cost per candle = $10/10 = $1\"? If she believed the batch of 20 candles is covered by one $10 lot, per-candle cost would be $10/20 = $0.50. Her line divides by 10 (candles per pound), producing $1/candle. So the wrong belief cannot produce her per-candle line. The witness is valid.\n\nSo S1: wrong_operation. Belief: the total supplies cost for 20 candles seated as one $10 lot, failing to scale the per-pound/per-candle cost by the two lots her own chain implies. Signature: $10 seated as total cost in $40 \u2212 $10. Witness: \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" Hmm, but wait \u2014 is the total cost line a \"wrong operation\"? The role ledger: the target role (total cost of supplies for 20 candles) is not yet produced; a construction is required; she produced it wrongly ($10 instead of 2\u00d7$10 or 20\u00d7$1). That's a fault inside a licensed construction \u2192 wrong operation. Good.\n\nAlternatively, steps? No stage is missing per se; the total cost construction is present but built with the wrong operand ($10 instead of $20). Wrong operation.\n\nCould it be comprehension (reading that one pound makes 20 candles)? Her own line says 10 candles from one pound, and per-candle cost $1 \u2014 both contradict that reading. Own-chain demonstration bars comprehension. So wrong_operation S1.\n\nThen the profit line $40 \u2212 $10 = $30: the $10 operand is the shadow of S1 (the belief generates it). The result $30 is the protected output... well, $30 is the consequence. The scan: $40 \u2212 $10 = $30, expected $40 \u2212 $20 = $20 on the problem's math; on her committed chain, total cost should be 20 \u00d7 $1 = $20 as well. The $10 slot departs, contradicting her own committed per-candle cost (and the problem). Disposition: shadow of S1? The independence test: correcting the total cost line to $20 would make the profit line's $10 slot disappear. Yes \u2014 the $10 in the profit line is downstream of the same token. So shadow of S1.\n\nHmm, but the founding departure: which line founds the thread? \"His total cost for supplies is $10.00.\" That's the first false content. The profit line's $10 operand is the same wrong content re-committed \u2014 is that an exhibition or shadow? Within the same unit (origin unit), the codebook says the token is the first departure; downstream shadows route to the root token once. In the origin unit, only its founding departure carries the thread; other departures there dispose on their own merits. The $10 in the subtraction is generated by the same belief \u2192 shadow of S1.\n\nAlso check: \"Charlie's profit per candle is $2.00 - $1.00 = $1.00.\" Correct and unused later. Match.\n\nNow the solution's cells:\n- wrong_operation: P, src S1.\n- comprehension: is comprehension engaged? The unit contains reasoning about what the problem asks? She computes profit. There's no misreading (the own-chain bar). Comprehension not engaged in a way that fails; was there a comprehension decision taken correctly? The reading of the problem (profit = revenue \u2212 cost) is fine. But per the symmetric standard, an act that would route as this family's error had it gone wrong earns absent when right. Did she make a comprehension-relevant decision? She correctly understood the task (net profit for 20 candles). Hmm. The walkthrough/solution is a first performance. Credit is act-based: for comprehension, the target reasoning is what the problem asks. She computed the asked quantity (net profit) correctly in scope. But is resolving an interpretation live here? The problem is straightforward; the resolving-versus-restating clause: absent requires resolving an interpretation the problem did not spell out. The profit definition is essentially stated (\"net profit\"), and computing revenue \u2212 cost is execution. I'd say comprehension N. Actually, many first-performance solutions earn several absent cells where distinct acts engage each construct. Let me consider each:\n\n- comprehension: the goal reading is unambiguous; no interpretation resolution needed. N. Hmm, but she did correctly grasp what's asked and computed net profit. Per \"resolving versus restating\", absent requires resolving an unstated interpretation. The per-candle vs total structure... The problem's quantities' roles are all stated plainly. I'll go N.\n\n- relevance: did she select among givens? She used all givens (10 candles/pound, $10, $2, 20 candles) \u2014 actually did she use \"20 candles\"? Yes, in revenue. She used everything. Relevance engagement requires an articulated selection (silence floor). There's no distractor in this problem; all givens are relevant. Silent non-use of a distractor earns nothing; here there's no distractor at all. So relevance N.\n\n- principles: any concept-level choice? The rate application (10 candles per pound, cost per candle) \u2014 the problem states the rate; applying a stated rate to a base the text identifies is execution, engaging operation at most. The bare-execution floor: principles N.\n\n- wrong_operation: P (S1). But also, does she perform other constructions correctly that earn... no, a family cell is P when a thread exhibits; the P covers the family. The cell is P with src S1.\n\n- steps: the overall plan (per-candle cost, revenue, total cost, profit) is a valid sequence of stages. She omitted the \"scale cost to 2 pounds\" \u2014 but that omission is the error token itself (routed wrong_operation as a within-construction operand fault; the total-cost construction exists but with wrong operand). Is there a separate steps issue? The procedure's stages are all present and correctly ordered: revenue, cost, profit. The fault is inside the cost construction. So steps: engaged and handled soundly? The plan shape is right: compute revenue, compute total cost, subtract. That's a self-authored correct procedure. Steps A? For a solution (turn 0), first performance: steps construct = the set and sequence of stages. She produced all required stages in valid order. The error is operand-level within the cost stage (dual-use: the token's own derivation can't earn, but the overall staging is distinct from the token). Hmm \u2014 careful: is the staging a distinct act from the token? The token is seating $10 as total cost. The staging (revenue \u2192 cost \u2192 profit) is a separate aspect. Under \"one act, several floors\", one decision may earn several. But is the staging really self-authored with opportunity to fail? Yes: she could have omitted the cost stage entirely or done something weird. I think steps A is defensible. But let me be careful about the steps family's engagement: does the solution \"perform or advance a step\"? Yes, it performs the whole plan. And the plan is correct in set and sequence. So steps A.\n\nTrigger for steps A: a span from this unit \u2014 e.g., \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\" or the sequence. I'll use a span.\n\nHmm, actually let me reconsider comprehension for the solution. The symmetric standard: an act that would have been routed as this family's error had it come out wrong earns absent when it comes out right. The overall framing \u2014 total cost for 20 candles needs 2 pounds \u2014 is that comprehension? No, we routed it wrong_operation because her own chain demonstrates the model. Comprehension target reasoning (what the problem asks, what quantities mean): she correctly takes $10 as cost per pound-of-wax+wicks, 10 candles per pound, $2 per candle selling price, profit as revenue minus cost. These are readings of stated content \u2014 restating stated relationships is execution, not comprehension (resolving-versus-restating). N.\n\nTurn 1: walkthrough replay. It reproduces the solution verbatim, including the error \"His total cost for supplies is $10.00.\" This re-commits the wrong chain in a walkthrough \u2192 live act of endorsement, S1 re-exhibited, wrong_operation P. The rest is recitation; earns nothing. All other families N.\n\nWait \u2014 but does the replay re-exhibit S1 in wrong_operation? The re-articulation standard: \"Re-committing the wrong chain in a walkthrough is a live act of endorsement: the error inherits present as the stability section provides.\" Yes, wrong_operation P, src S1.\n\nScan for turn 1: the lines reproduce the solution. The departing lines: \"His total cost for supplies is $10.00.\" (departure, exhibits S1) and \"His total profit is $40.00 - $10.00 = $30.00.\" (shadow of S1). Other lines match. Note: in the scan, do I need to list every line? The instructions: \"lines covers, in order, every act in that unit that commits checkable content\". So yes, list all lines with match/departure verdicts. That's a lot of lines for turn 1, but fine.\n\nTurn 2: Tutor said: \"you've calculated the cost of supplies wrongly. How many lots of wax/wicks did Charlie need to buy?\" Student: \"Charlie needs to buy two lots of wax/wicks. So the cost of supplies for 20 candles is $20.00. His total profit is then $40.00 - $20.00 = $20.00.\"\n\nResolution? The resolution step: the student's own act committing the corrected counterpart of the thread's token. The tutor named the fault (\"cost of supplies wrongly\") \u2014 a named fault functions as a pointing prompt where the corrected assembly and content are the student's own. The tutor did not state the corrected content ($20 or two lots). He asked \"How many lots...?\" \u2014 the student answered \"two lots\" and derived $20 and rebuilt profit $40 \u2212 $20 = $20. The corrected element (2 lots, $20) is her own act at the fault's site. So S1 resolves at turn 2. The A sits in wrong_operation with src S1.\n\nActually wait \u2014 authorship: the tutor named the fault but not the fix. \"Named fault... functions as a pointing prompt: resolution is available where the corrected assembly and its content are the student's own, even where dropping the named fault one-step-entails the fix, since entailment is not authorship.\" The tutor asked \"how many lots did Charlie need to buy?\" \u2014 this points at the relevant quantity (lots) but the answer \"two\" is the student's, and the $20 cost assembly is hers. Resolution stands. S1 resolved_at turn 2.\n\nTurn 2 cells:\n- wrong_operation: A, src S1 (resolution), quote the turn-2 span. Trigger: tutor's question \"How many lots of wax/wicks did Charlie need to buy?\" or student's assertion. The trigger is for A cells: \"an exact contiguous span, from this unit or the tutor turn immediately before it, that engaged the construct\". I'll use the tutor's pointing prompt: \"How many lots of wax/wicks did Charlie need to buy?\"\n\n- Other families: N. Comprehension: nothing about reading engaged. Relevance: no selection articulated. Principles: no concept-level choice (the per-lot cost is stated; she just multiplies 2 \u00d7 $10... actually she doesn't even show the multiplication, just states $20). Steps: she rebuilds cost and profit \u2014 reassembly after correction. Per reassembly clause: \"Where a component of an aggregate is corrected and the student rebuilds the aggregate around the new value, the reassembly is a fresh act for the family whose construction it exercises... That family is wrong operation.\" Steps is not engaged by reassembly reusing prior stages. So steps N here.\n\nNow the scan in detail.\n\nSolution lines:\n1. \"Charlie can make 10 x 1 = 10 candles from one pound of beeswax.\" Expected: 10 candles per pound, 10 x 1 = 10. Match.\n2. \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" Expected: $10/10 = $1. Match.\n3. \"Charlie's profit per candle is $2.00 - $1.00 = $1.00.\" Match.\n4. \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\" Match.\n5. \"His total cost for supplies is $10.00.\" Expected: 2 lots \u00d7 $10 = $20 (problem), and on her committed chain 20 candles \u00d7 $1/candle = $20. Departure. Slot: total cost seated as one $10 lot. Contradicts: her committed per-candle cost of $1.00 for 20 candles (20 \u00d7 $1 = $20). I'll phrase contradicts as \"her committed $1.00 per-candle cost for 20 candles (20 x $1 = $20)\".\n6. \"His total profit is $40.00 - $10.00 = $30.00.\" Expected: $40 \u2212 $20 = $20 on the problem; on her committed chain, cost should be $20. The $10 operand departs, contradicting her own chain (the same committed per-candle cost). Disposition: shadow of S1 (the belief generates the $10 operand here; correcting the total-cost token removes it). Slot: the $10 cost operand; result $30 also wrong but it's the consequence. The departure: the cost operand $10 (and hence the result). I'll write one row with slot \"the cost operand $10\" contradicts \"her committed per-candle cost...\". Hmm, but also the result $30 contradicts the problem. One row per departing slot. The line $40 \u2212 $10 = $30: slot 1: $40 matches; slot 2: $10 departs (shadow of S1); result $30: false on the problem, but generated by the $10 slot \u2014 is the result a separate departing slot? The result is the consequence of the departing operand; the codebook says the token is the input-side act, never the output. So one departure row for the $10 operand. I'll include just that.\n\nActually, also \"30.00\" bare answer line \u2014 same content as line 6's result, consequence, no new departure. It's part of the solution text. Should I scan it? It's a stated quantity. It's the committed answer $30. It's false on the problem but generated by S1's belief \u2014 covered by the shadow row? To be safe, I could fold it into the line 6 row or add a row. The rules: every act committing checkable content gets a line. \" 30.00\" is a bare restatement of the result. I'll treat line 6 as including it or list it separately as shadow. Simpler: include the \"30.00\" within the written span of line 6? They're separate lines in the unit text (\"His total profit is $40.00 - $10.00 = $30.00.\\n 30.00\"). I'll make line 6's written span \"His total profit is $40.00 - $10.00 = $30.00.\" and not separately scan the bare \"30.00\" \u2014 hmm, but the instruction says every act. A bare repeated answer... The output value isn't a token (outputs are never tokens). I'll scan it as its own line with verdict match? No \u2014 it's wrong on the problem. But \"A slot that is correct on the committed chain but wrong on the problem is not a departure here, because its content is already carried by the row that founded the belief\". The $30 is correct on her committed chain ($40 \u2212 $10 = $30 given the $10). So not a departure. Verdict \"match\" with expected noting it's correct on committed chain ($40 \u2212 $10 = $30). Hmm, expected on committed chain = $30, so match. OK, I'll include it as a match row to be thorough. Actually, the bare \"30.00\" \u2014 I'll fold it: expected \"30.00, the committed chain's output\". Match. Fine.\n\nTurn 1 lines (verbatim replay):\n1. \"Charlie can make 10 x 1 = 10 candles from one pound of beeswax.\" Match.\n2. \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" Match.\n3. \"Charlie's profit per candle is $2.00 - $1.00 = $1.00.\" Match.\n4. \"Charlie's total revenue is $2.00 x 20 = $40.00.\" Match.\n5. \"His total cost for supplies is $10.00.\" Departure \u2014 exhibits S1. Contradicts her committed per-candle cost (restated this very turn). \n6. \"His total profit is $40.00 - $10.00 = $30.00.\" Departure \u2014 shadow of S1 (the $10 operand).\n\nTurn 2 lines:\n1. \"Charlie needs to buy two lots of wax/wicks.\" Expected: 2 lots. Match.\n2. \"So the cost of supplies for 20 candles is $20.00.\" Expected: 2 \u00d7 $10 = $20. Match.\n3. \"His total profit is then $40.00 - $20.00 = $20.00.\" Expected: $40 \u2212 $20 = $20. Match.\n\nDepartures list:\n- solution, \"His total cost for supplies is $10.00.\" \u2192 founds S1\n- solution, \"His total profit is $40.00 - $10.00 = $30.00.\" \u2192 shadow of S1\n- turn 1, \"His total cost for supplies is $10.00.\" \u2192 exhibits S1\n- turn 1, \"His total profit is $40.00 - $10.00 = $30.00.\" \u2192 shadow of S1\n\nThread S1:\n- family: wrong_operation\n- belief: \"the total supplies cost for the 20 candles is seated as a single $10 lot, the per-pound cost not scaled by the two lots her own chain implies\" \u2014 must name the construction act, slot, committed content displaced, never an output value. Belief: \"seating one $10 lot in the total-cost slot of the profit construction, displacing the two-lot cost her own $1-per-candle rate commits her to.\" \n- signature: \"the $10 single-lot cost in the total-cost slot; protected output 30\" \u2014 hmm, protected output? The $30 is defended? It's not defended later; turn 2 corrects immediately at the tutor's first probe. No defence. So signature just names the act: \"the $10 single lot seated as the total supplies cost for 20 candles\". No protected output needed. Actually the signature names content whose re-commitment constitutes re-exhibition. Turn 1 re-commits \"His total cost for supplies is $10.00.\" Good.\n- witness: \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" \u2014 shows the per-candle cost model that the total-cost construction failed to scale. Witness check: \"A belief that one $10 lot covers all 20 candles would put the per-candle cost at $10/20 = $0.50; it cannot produce her $1.00 line, so the line witnesses the intact rate model.\"\n- origin: solution\n- exhibitions: [[\"solution\",\"committed\"],[\"turn 1\",\"re-exhibited\"],[\"turn 2\",\"resolved\"]]\n- resolved_at: \"turn 2\"\n- quote: \"His total cost for supplies is $10.00.\"\n\nGrid:\n- solution: comprehension N, relevance N, principles N, wrong_operation P (S1), steps A.\n  - srcs: wrong_operation S1.\n  - quotes: wrong_operation \"His total cost for supplies is $10.00.\"\n  - triggers: steps \u2014 span from the unit engaging steps construct: the staged plan. Use \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\" Hmm, that's one stage. The steps construct is set/sequence; the trigger span should engage it. Maybe use the final-stage line \"His total profit is $40.00 - $10.00 = $30.00.\"? That's the token's own derivation (dual-use?). The steps credit is for the overall plan: per-candle cost \u2192 revenue \u2192 total cost \u2192 profit. A trigger could be the sequence. I'll use \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" \u2014 a stage she advanced. Hmm. Honestly, for a first-performance solution the plan is self-authored; trigger span: \"Charlie's profit per candle is $2.00 - $1.00 = $1.00.\" Any of these. Let me pick a span that shows staging: \"His total profit is $40.00 - $10.00 = $30.00.\" \u2014 but that contains the error operand. The steps construct (stage set and order) is handled soundly even there; but dual-use: the token's own derivation earns nothing. The token is the cost line, not the profit line; the profit line's $10 is a shadow. Shadow content earns nothing too (\"Content that is the error token's own derivation, or an automatic consequence of another family's fault, earns nothing\"). So don't use the profit line as the trigger. Use the revenue/cost-per-candle staging. I'll use \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" as the steps trigger? That shows she included the unit-cost stage. Or the revenue line. I'll go with \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\"\n\nHmm, wait. Let me reconsider whether steps should be A at all in the solution. Is there a plausible steps error she avoided? The required procedure: determine lots needed (2), cost (20), revenue (40), profit (20). Her procedure: per-candle cost, per-candle profit, revenue, total cost, profit. The stage \"scale the cost to the batch\" \u2014 she attempted it (total cost line) but built it wrong; that's the wrong_operation token. The set of stages she performed covers all required stages in valid order (the total-cost stage exists, just wrongly built). Per the missing-operation tie-breaker: \"if a required step is entirely absent \u2192 steps; if the step is present but performed with wrong operation/operand \u2192 wrong operation.\" The total-cost step is present with wrong operand \u2192 wrong operation only. So steps as a family: she engaged the procedure (performed all stages in valid order) and the steps construct itself is handled soundly. The symmetric standard: an act that would route as steps error had it gone wrong earns absent. If she'd omitted the total-cost stage entirely, that'd be steps present. She didn't. So steps A. OK.\n\nBut hold on \u2014 is steps \"engaged\" here per the floors? The framing floor: no tutor framing for turn 0 (solution precedes any tutor turn). Self-authored. Yes, A.\n\n- turn 1: comprehension N, relevance N, principles N, wrong_operation P (S1), steps N (recitation earns nothing; the walkthrough replays her chain \u2014 recitation, no fresh trial). \n  - srcs: wrong_operation S1; quotes: \"His total cost for supplies is $10.00.\"\n\n- turn 2: comprehension N, relevance N, principles N, wrong_operation A (S1 resolved), steps N.\n  - srcs: wrong_operation S1. quotes: wrong_operation \u2014 a span from turn 2 exhibiting the resolution: \"So the cost of supplies for 20 candles is $20.00.\" \n  - triggers: wrong_operation \u2014 tutor's pointing prompt: \"How many lots of wax/wicks did Charlie need to buy?\"\n\nWait \u2014 the quotes field: \"present exactly where srcs is present\". For the A cell citing S1 (resolution), quote = exact span from turn 2. \"So the cost of supplies for 20 candles is $20.00.\" Good.\n\nRelevance for turn 2: the tutor's question asks how many lots \u2014 does the student select information (2 lots, $10 per lot)? Not really a selection among givens; no distractor. N.\n\nComprehension turn 2: does she show grasp of what's asked? The tutor's question is narrow (how many lots). Answering it is responding to a decomposed sub-question... \"absent: the student correctly grasps what is being asked, including on a decomposed sub-question.\" Hmm. But the tutor's question essentially points at the structure; answering \"two lots\" \u2014 is that comprehension engagement? The comprehension construct: what the problem asks/states. The number of lots is derived from stated rates; answering the tutor's narrow question is more execution. I'll keep N. The resolution credit lives in wrong_operation.\n\nNow double-check the shadow dispositions. The profit line in solution: \"His total profit is $40.00 - $10.00 = $30.00.\" The $10 slot: S1's belief generates it (the single-lot cost). Shadow of S1 \u2014 \"legitimate only where S1's belief itself generates the departure's content\". Yes: the belief that total cost is one $10 lot generates the $10 operand in the subtraction. Good. Same in turn 1.\n\nAlso, should the turn-1 profit line be \"exhibits S1\" instead? It's the same wrong content re-committed, but it's downstream of the total-cost commitment within the same turn. The scan marks the $10 operand as generated by the belief \u2192 shadow. The total-cost line is the re-exhibition. Consistent with solution handling.\n\nNow, the expected fields. For solution line 5: expected on the problem: 20 candles need 2 pounds \u2192 2 \u00d7 $10 = $20; on her committed chain: 20 \u00d7 $1.00 = $20. I'll write \"2 x $10 = $20 (20 candles at her own $1.00 per candle)\". \n\nContradicts for line 5: her committed \"$10.00 / 10 = $1.00\" per-candle cost, which for 20 candles gives $20. So contradicts: \"her committed per-candle cost of $1.00 (20 candles x $1.00 = $20.00)\". \n\nFor the profit line: slot \"the cost operand $10.00\", contradicts same. Expected: \"$40.00 - $20.00 = $20.00, on her committed chain the total cost is 20 x $1.00 = $20.00\".\n\nTurn 1 rows similar.\n\nAlso in turn 1, the student writes the lines with \"So, I figured that...\" prefix. The exact spans: \"His total cost for supplies is $10.00.\" appears in turn 1 text. Let me check exact text: \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00. His total cost for supplies is $10.00. His total profit is $40.00 - $10.00 = $30.00.\" Yes.\n\nSolution exact text: \"His total cost for supplies is $10.00.\" and \"His total profit is $40.00 - $10.00 = $30.00.\" Good.\n\nTurn 2 exact: \"Oh, right. Charlie needs to buy two lots of wax/wicks. So the cost of supplies for 20 candles is $20.00. His total profit is then $40.00 - $20.00 = $20.00.\"\n\nScan lines for turn 2: all match.\n\nNow check steps for turn 1: N (recitation). Comprehension turn 1: N. Relevance turn 1: N. Principles turn 1: N.\n\nOne more consideration: should the solution also earn absent for comprehension or relevance? Let me apply the audit question 7: for every absent cell, what construct-level decision with opportunity to fail? For steps: the staging decision \u2014 she authored the plan (unit-cost, revenue, total-cost, profit), opportunity to fail (could have omitted a stage). OK. For comprehension: decision? The problem is unambiguous; nothing to resolve. N. Relevance: no distractor, no articulated selection. N. Principles: rate stated by problem; application is execution (bare-execution floor: \"a base named by the problem... is supplied, not chosen\"). N.\n\nNow thread fields. Belief must not name an output value. \"The total supplies cost for the batch is a single $10 lot\" \u2014 hmm, this names $10, which is an operand (given), not the output ($30). The rule: \"the belief names the act, the slot it occupies, and the committed content it displaces, never a value the act produces.\" The act produces $30 (the protected output); the $10 is the operand seated. So belief: \"seating a single $10 lot in the total-cost slot for the 20-candle batch, displacing the two-lot cost her own $1.00-per-candle rate commits her to\". Good.\n\nSignature: \"the single $10 lot in the total-cost slot for the 20-candle batch\". Re-exhibition at turn 1: the same $10 total cost. Good.\n\nWitness: \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" \u2014 exact span from the solution, at/before origin (origin is solution; the witness is in the same unit, earlier in the prefix \u2014 \"from the prefix, at or before the origin\" \u2014 the origin unit itself contains it, before the founding departure in the chain order; the committed chain at the founding departure includes the per-candle cost). Good.\n\nwitness_check: \"A belief that one lot covers all 20 candles would give a per-candle cost of $10.00 / 20 = $0.50; it cannot produce her $1.00 line, so the line witnesses the intact per-pound rate model.\"\n\nConstruction gate: reading question \u2014 is there a coherent reading generating the act? \"One pound supplies 20 candles\" contradicts her own first line (10 candles per pound) and her $1 per-candle line; own-chain demonstration bars it. Relation question \u2014 the problem states the cost relation per pound; the scaling relation (2 pounds for 20 candles) is implied by stated rates; no unstated relation supplied. Witness question \u2014 as above, witness discriminates. So wrong_operation founds.\n\nResolution at turn 2: tutor named the fault (\"you've calculated the cost of supplies wrongly\") and pointed with a question (\"How many lots of wax/wicks did Charlie need to buy?\"). Named fault = pointing prompt; corrected assembly (\"two lots\", \"$20.00\", \"$40.00 - $20.00 = $20.00\") is her own. Resolution stands. resolved_at turn 2, exhibitions include [\"turn 2\",\"resolved\"].\n\nEvent tag for turn 1: re-exhibited (no intervening correction event). Good.\n\nJSON assembly. Make sure quotes are exact contiguous spans.\n\nTurn 2 trigger for wrong_operation A: \"How many lots of wax/wicks did Charlie need to buy?\" \u2014 exact from tutor turn preceding turn 2: \"You've done rteally well on this and you're almost there but you've calculated the cost of supplies wrongly.  How many lots of wax/wicks did Charlie need to buy?\" I'll quote \"How many lots of wax/wicks did Charlie need to buy?\".\n\nSolution steps trigger: span from the unit. I'll use \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\" Hmm, does that engage steps (set and sequence)? It's one stage. The trigger is evidence the construct was engaged. The full chain shows staging. I could use a longer span covering multiple stages: \"Charlie's profit per candle is $2.00 - $1.00 = $1.00. If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\" That's contiguous. Actually any contiguous span. Let me use \"The cost of supplies per candle is $10.00 / 10 = $1.00. Charlie's profit per candle is $2.00 - $1.00 = $1.00.\" \u2014 shows staged decomposition. Fine, that's contiguous in the solution text.\n\nLet me double check turn 1 line texts for the scan: turn 1 student text: \"Hi! I understand that Charlie needs to make and sell 20 candles. I know that for every pound of beeswax, he can make 10 tapered candles and that one pound of beeswax and the wicks cost $10.00 in supplies. So, I figured that Charlie can make 10 x 1 = 10 candles from one pound of beeswax. The cost of supplies per candle is $10.00 / 10 = $1.00. Charlie's profit per candle is $2.00 - $1.00 = $1.00. If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00. His total cost for supplies is $10.00. His total profit is $40.00 - $10.00 = $30.00.\"\n\nCheckable lines: the restatements of givens (\"10 tapered candles per pound\", \"$10.00 in supplies\") are problem-given restatements \u2014 correct, match. I'll include the main computed lines and maybe the restatement lines as match. To be safe, include: \"for every pound of beeswax, he can make 10 tapered candles and that one pound of beeswax and the wicks cost $10.00 in supplies\" \u2014 match (correct restatement). And \"Charlie needs to make and sell 20 candles\" \u2014 match. These are checkable claims. Include them.\n\nSolution scan lines: 7 lines (including bare \"30.00\").\n\nTurn 1 scan lines: givens restatement, 6 computed lines.\n\nTurn 2 scan lines: 3.\n\nNow departures array: 4 entries in unit order.\n\nGrid rows: 3.\n\nThread table: 1 thread.\n\nCheck invariants: S1 founded at solution (founds S1 at solution \u2713). Exhibitions: solution committed \u2192 grid solution wrong_operation P srcs S1 \u2713; turn 1 re-exhibited \u2192 P srcs S1 \u2713; turn 2 resolved \u2192 A srcs S1 \u2713. resolved_at turn 2 \u2713.\n\nquotes: solution wrong_operation quote \"His total cost for supplies is $10.00.\" \u2713 exact. turn 1 same \u2713. turn 2 quote \"So the cost of supplies for 20 candles is $20.00.\" \u2713 exact contiguous.\n\ntriggers: solution steps trigger; turn 2 wrong_operation trigger.\n\nsrcs only where cited.\n\nWrite expected strings carefully.\n\nSolution:\nL1: written \"Charlie can make 10 x 1 = 10 candles from one pound of beeswax.\" expected \"10 x 1 = 10 candles per pound, the problem's stated rate\" match.\nL2: \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" expected \"$10.00 / 10 = $1.00, the stated lot cost over the stated yield\" match.\nL3: \"Charlie's profit per candle is $2.00 - $1.00 = $1.00.\" expected \"$2.00 - $1.00 = $1.00\" match.\nL4: \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\" expected \"$2.00 x 20 = $40.00\" match.\nL5: \"His total cost for supplies is $10.00.\" expected \"2 lots x $10.00 = $20.00, equivalently her own 20 candles x $1.00 per candle = $20.00\" departure, slot \"the total cost seated as one $10.00 lot\", contradicts \"her committed per-candle cost of $1.00, which for 20 candles gives $20.00\".\nL6: \"His total profit is $40.00 - $10.00 = $30.00.\" expected \"$40.00 - $20.00 = $20.00 on her committed chain, the total cost being 20 x $1.00 = $20.00\" departure, slot \"the cost operand $10.00\", contradicts \"her committed per-candle cost of $1.00, which for 20 candles gives $20.00\".\nL7: \"30.00\" expected \"30.00, the committed chain's own output ($40.00 - $10.00)\" match.\n\nTurn 1:\nL1: \"Charlie needs to make and sell 20 candles\" expected \"20 candles, the problem's ask\" match. Written span: \"I understand that Charlie needs to make and sell 20 candles\" \u2014 use exact. I'll use \"Charlie needs to make and sell 20 candles\".\nL2: \"for every pound of beeswax, he can make 10 tapered candles and that one pound of beeswax and the wicks cost $10.00 in supplies\" match.\nL3: \"Charlie can make 10 x 1 = 10 candles from one pound of beeswax.\" match.\nL4: \"The cost of supplies per candle is $10.00 / 10 = $1.00.\" match.\nL5: \"Charlie's profit per candle is $2.00 - $1.00 = $1.00.\" match.\nL6: \"Charlie's total revenue is $2.00 x 20 = $40.00.\" \u2014 full sentence \"If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.\" match.\nL7: \"His total cost for supplies is $10.00.\" departure, exhibits S1.\nL8: \"His total profit is $40.00 - $10.00 = $30.00.\" departure, shadow of S1.\n\nTurn 2:\nL1: \"Charlie needs to buy two lots of wax/wicks.\" expected \"two lots, 20 candles / 10 per lot\" match.\nL2: \"So the cost of supplies for 20 candles is $20.00.\" expected \"2 x $10.00 = $20.00\" match.\nL3: \"His total profit is then $40.00 - $20.00 = $20.00.\" expected \"$40.00 - $20.00 = $20.00\" match.\n\nEmit JSON.",
+   "errors": [],
+   "meta": {
+    "latency_s": 315.31854796409607,
+    "first_event_s": 8.791286945343018,
+    "first_token_s": 8.791298151016235,
+    "usage": {
+     "prompt_tokens": 59960,
+     "completion_tokens": 11724,
+     "total_tokens": 71684,
+     "cached_tokens": 59136,
+     "completion_tokens_details": {
+      "reasoning_tokens": 9866
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 59136
+     }
+    },
+    "tokens": {
+     "prompt": 59960,
+     "cached_prompt": 59136,
+     "uncached_prompt": 824,
+     "completion": 11724,
+     "reasoning": 9866,
+     "visible_completion": 1858,
+     "total": 71684
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 11712,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 156,
+  "scan": [
+   {
+    "unit": "solution",
+    "lines": [
+     {
+      "written": "Charlie can make 10 x 1 = 10 candles from one pound of beeswax.",
+      "expected": "10 x 1 = 10 candles per pound, the problem's stated rate",
+      "verdict": "match"
+     },
+     {
+      "written": "The cost of supplies per candle is $10.00 / 10 = $1.00.",
+      "expected": "$10.00 / 10 = $1.00, the stated lot cost over the stated yield",
+      "verdict": "match"
+     },
+     {
+      "written": "Charlie's profit per candle is $2.00 - $1.00 = $1.00.",
+      "expected": "$2.00 - $1.00 = $1.00",
+      "verdict": "match"
+     },
+     {
+      "written": "If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.",
+      "expected": "$2.00 x 20 = $40.00",
+      "verdict": "match"
+     },
+     {
+      "written": "His total cost for supplies is $10.00.",
+      "expected": "2 lots x $10.00 = $20.00, equivalently her own 20 candles x $1.00 per candle = $20.00",
+      "verdict": "departure",
+      "slot": "the total cost seated as one $10.00 lot",
+      "contradicts": "her committed per-candle cost of $1.00, which for 20 candles gives $20.00"
+     },
+     {
+      "written": "His total profit is $40.00 - $10.00 = $30.00.",
+      "expected": "$40.00 - $20.00 = $20.00, on her committed chain the total cost is 20 x $1.00 = $20.00",
+      "verdict": "departure",
+      "slot": "the cost operand $10.00",
+      "contradicts": "her committed per-candle cost of $1.00, which for 20 candles gives $20.00"
+     },
+     {
+      "written": "30.00",
+      "expected": "30.00, the committed chain's own output ($40.00 - $10.00)",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 1",
+    "lines": [
+     {
+      "written": "Charlie needs to make and sell 20 candles",
+      "expected": "20 candles, the problem's stated ask",
+      "verdict": "match"
+     },
+     {
+      "written": "for every pound of beeswax, he can make 10 tapered candles and that one pound of beeswax and the wicks cost $10.00 in supplies",
+      "expected": "the problem's stated rate and lot cost, restated correctly",
+      "verdict": "match"
+     },
+     {
+      "written": "Charlie can make 10 x 1 = 10 candles from one pound of beeswax.",
+      "expected": "10 x 1 = 10 candles per pound",
+      "verdict": "match"
+     },
+     {
+      "written": "The cost of supplies per candle is $10.00 / 10 = $1.00.",
+      "expected": "$10.00 / 10 = $1.00",
+      "verdict": "match"
+     },
+     {
+      "written": "Charlie's profit per candle is $2.00 - $1.00 = $1.00.",
+      "expected": "$2.00 - $1.00 = $1.00",
+      "verdict": "match"
+     },
+     {
+      "written": "If he makes and sells 20 candles, Charlie's total revenue is $2.00 x 20 = $40.00.",
+      "expected": "$2.00 x 20 = $40.00",
+      "verdict": "match"
+     },
+     {
+      "written": "His total cost for supplies is $10.00.",
+      "expected": "2 lots x $10.00 = $20.00, on her committed chain 20 candles x $1.00 = $20.00",
+      "verdict": "departure",
+      "slot": "the total cost seated as one $10.00 lot",
+      "contradicts": "her committed per-candle cost of $1.00, restated this turn, which for 20 candles gives $20.00"
+     },
+     {
+      "written": "His total profit is $40.00 - $10.00 = $30.00.",
+      "expected": "$40.00 - $20.00 = $20.00, on her committed chain the total cost is 20 x $1.00 = $20.00",
+      "verdict": "departure",
+      "slot": "the cost operand $10.00",
+      "contradicts": "her committed per-candle cost of $1.00, which for 20 candles gives $20.00"
+     }
+    ]
+   },
+   {
+    "unit": "turn 2",
+    "lines": [
+     {
+      "written": "Charlie needs to buy two lots of wax/wicks.",
+      "expected": "two lots, 20 candles / 10 candles per lot = 2",
+      "verdict": "match"
+     },
+     {
+      "written": "So the cost of supplies for 20 candles is $20.00.",
+      "expected": "2 x $10.00 = $20.00",
+      "verdict": "match"
+     },
+     {
+      "written": "His total profit is then $40.00 - $20.00 = $20.00.",
+      "expected": "$40.00 - $20.00 = $20.00",
+      "verdict": "match"
+     }
+    ]
+   }
+  ],
+  "departures": [
+   {
+    "unit": "solution",
+    "written": "His total cost for supplies is $10.00.",
+    "disposition": "founds S1"
+   },
+   {
+    "unit": "solution",
+    "written": "His total profit is $40.00 - $10.00 = $30.00.",
+    "disposition": "shadow of S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "His total cost for supplies is $10.00.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "His total profit is $40.00 - $10.00 = $30.00.",
+    "disposition": "shadow of S1"
+   }
+  ],
+  "threads": [
+   {
+    "id": "S1",
+    "family": "wrong_operation",
+    "belief": "seating a single $10 lot in the total-cost slot of the profit construction for the 20-candle batch, displacing the two-lot cost her own $1.00-per-candle rate commits her to",
+    "signature": "the single $10 lot seated as the total supplies cost for the 20-candle batch",
+    "witness": "The cost of supplies per candle is $10.00 / 10 = $1.00.",
+    "witness_check": "a belief that one $10 lot covers all 20 candles would put the per-candle cost at $10.00 / 20 = $0.50; it cannot produce her $1.00 line, so the line witnesses the intact per-pound rate model",
+    "origin": "solution",
+    "exhibitions": [
+     [
+      "solution",
+      "committed"
+     ],
+     [
+      "turn 1",
+      "re-exhibited"
+     ],
+     [
+      "turn 2",
+      "resolved"
+     ]
+    ],
+    "resolved_at": "turn 2",
+    "quote": "His total cost for supplies is $10.00."
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "A",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "His total cost for supplies is $10.00."
+    },
+    "triggers": {
+     "steps": "The cost of supplies per candle is $10.00 / 10 = $1.00. Charlie's profit per candle is $2.00 - $1.00 = $1.00."
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "His total cost for supplies is $10.00."
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "A",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "So the cost of supplies for 20 candles is $20.00."
+    },
+    "triggers": {
+     "wrong_operation": "How many lots of wax/wicks did Charlie need to buy?"
+    }
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 315.31854796409607
+}

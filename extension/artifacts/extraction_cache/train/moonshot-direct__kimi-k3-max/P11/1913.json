@@ -1,0 +1,529 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P11",
+ "reasoning_effort": "max",
+ "dialogue_id": 1913,
+ "split": "train",
+ "attempts": [
+  {
+   "raw": "n of $26880\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 8\", \"written\": \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 8\", \"written\": \"$2880 - $1728 = $10752\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 9\", \"written\": \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880 and then adding the remaining $1152 to her commission earnings of $2880\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 9\", \"written\": \"$2880 + $1152 = $10752\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 10\", \"written\": \"her personal needs of $16128 from her total earnings after commission of $26880\", \"disposition\": \"exhibits S1\"}], \"threads\": [{\"id\": \"S1\", \"family\": \"comprehension\", \"belief\": \"she reads 'all her earning' as the sales revenue plus her commission, so the 60/40 split of earnings is applied to the combined take rather than to the commission alone\", \"signature\": \"the sales-plus-commission 'total earning' seated as the base of the 60/40 split; protected output $10,752\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 3\", \"splice\"], [\"turn 4\", \"splice\"], [\"turn 5\", \"re-exhibited\"], [\"turn 6\", \"re-exhibited\"], [\"turn 7\", \"re-exhibited\"], [\"turn 8\", \"motivated-falsehood\"], [\"turn 9\", \"motivated-falsehood\"], [\"turn 10\", \"reversion\"]], \"resolved_at\": null, \"quote\": \"Her total earning after commission is $24000 + $2880 = $26880.\"}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"A\", \"steps\": \"A\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Her total earning after commission is $24000 + $2880 = $26880.\"}, \"triggers\": {\"wrong_operation\": \"12/100 x $24000 = $2880\", \"steps\": \"The amount she saved is $26880 - $16128 = $10752\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Her total earning after commission is $24000 + $2880 = $26880.\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}, {\"unit\": \"turn 3\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"$10752 + $1728 = $12480\"}}, {\"unit\": \"turn 4\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"$26880 - $1728 = $25152\"}}, {\"unit\": \"turn 5\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"her total earnings after commission ($26880)\"}}, {\"unit\": \"turn 6\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Christine saved $10752 in that 1 month.\"}}, {\"unit\": \"turn 7\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"her total earnings after commission of $26880\"}}, {\"unit\": \"turn 8\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"$2880 - $1728 = $10752\"}}, {\"unit\": \"turn 9\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"$2880 + $1152 = $10752\"}}, {\"unit\": \"turn 10\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"her total earnings after commission of $26880\"}}]}",
+   "reasoning": "Let me work through this carefully.\n\n**Problem:** Christine gets 12% commission on all items she sells. She sold $24,000 worth of items. 60% of all her earnings will be allocated to personal needs, the rest saved. How much did she save?\n\n**Correct solution:**\n- Commission = 12% \u00d7 $24,000 = $2,880. This is her earnings (her total earnings = her commission; the $24,000 is sales, not her earnings).\n- Personal needs = 60% \u00d7 $2,880 = $1,728.\n- Saved = $2,880 \u2212 $1,728 = $1,152.\n\n**Student's incorrect solution (turn 0):**\n- Commission: 12/100 \u00d7 $24,000 = $2,880. \u2713 correct.\n- \"Her total earning after commission is $24000 + $2880 = $26880.\" \u2717 This is the founding error: she adds the sales total to her commission as though Christine earns both the sales proceeds and the commission. Her earnings are just the commission $2,880. This is a wrong model of what \"her earnings\" are \u2014 treating the $24,000 sales revenue as part of Christine's earnings.\n- 60% \u00d7 $26,880 = $16,128. (correct arithmetic on her wrong base)\n- Saved = $26,880 \u2212 $16,128 = $10,752. (correct arithmetic on her wrong base)\n\nSo the error is: adding $24,000 (sales) to $2,880 (commission) to get \"total earning after commission\" $26,880. The student's belief: Christine's earnings include the $24,000 sales value plus the commission. This is a misreading of what \"her earnings\" means \u2014 a comprehension error about what quantity the problem's percentages attach to? Or is it a wrong-operation error (adding when she should not)?\n\nLet's think. The problem states: \"She gets a 12% commission on all items she sells. This month, she sold $24000 worth of items. Sixty percent of all her earning will be allocated to her personal needs and the rest will be saved.\"\n\nThe student's chain: commission $2,880; then \"total earning after commission is $24000 + $2880 = $26880\" \u2014 this adds the sales to the commission. Under the problem's structure, Christine's earnings are the commission only; the $24,000 is the value of items sold, not money Christine takes home. The student's act of adding sales to commission reflects a wrong model: that her total earnings = sales + commission.\n\nRouting: Is this comprehension (misreading what \"her earning\" refers to \u2014 the commission alone), or wrong operation (an unlicensed addition)?\n\nPer the codebook: comprehension is about what the problem states or asks \u2014 here, what \"her earnings\" denotes. The student seems to believe her earnings = sales + commission. Is there a witness? At origin (the solution), there's no prior correct label of \"earnings\" as commission alone. The first line computes commission correctly but doesn't label it as \"her earnings\" \u2014 it just says \"Christine's commission is... $2880.\" Hmm, does the first line witness that she knows her earnings are the commission? Not explicitly \u2014 she doesn't say \"her earnings are $2,880.\"\n\nThe founding gate for comprehension: the words question \u2014 does the student state the interpretation in her own words? \"Her total earning after commission is $24000 + $2880 = $26880.\" This states that her total earning is sales + commission. That's a stated binding of \"total earning\" to the sum of sales and commission. Is that a reading of the problem? The problem says \"Sixty percent of all her earning will be allocated...\" The student takes \"all her earning\" to be $24,000 + $2,880 = $26,880. That's a referent/scope reading of \"her earning\": she takes the sales revenue to be part of her earnings. This is a comprehension belief: \"her earnings\" includes the $24,000 sales plus the commission.\n\nAlternatively, one could route it as wrong operation: the unlicensed addition $24,000 + $2,880. But the construction gate: the reading question first \u2014 does a coherent reading of a stated sentence generate this act? Yes: reading \"all her earning\" as including the sales amount generates the addition. The belief is about what the problem's quantity \"her earning\" denotes. Under the codebook's comprehension construct: \"a stated quantity taken as a different kind, structural level, referent, or requested role\" \u2014 here the earnings referent. Also there's the derived-quantity clause: the derived $26,880 labelled \"total earning\" is a wrong model of a derived quantity, contradicting what the stated sentences jointly establish (earnings come only from commission). It's exhibited in her own words: \"Her total earning after commission is $24000 + $2880.\"\n\nSo comprehension, S1, belief: her total earnings are the $24,000 sales plus the $2,880 commission (i.e., \"all her earning\" refers to $26,880 rather than the commission alone). Signature: the $26,880 as \"total earning\" seated as the base for the 60% allocation; protected output $10,752.\n\nActually, let me think about whether to include a protected output. The student defends $10,752 across many turns, with mutating derivations (turn 9: $2,880 + $1,152 = $10,752, a facially false equality \u2014 wait, 2880 + 1152 = 4032, not 10752; turn 8: $2,880 \u2212 $1,728 = $10,752, false equality since 2880\u22121728 = 1152). These are motivated falsehoods landing on the protected output 10,752. So the thread is output-anchored: signature names the $26,880 \"total earning\" model and protected output $10,752.\n\nWait \u2014 but at turn 9, she writes \"$2880 + $1152 = $10752\". Actually 2880 + 1152 = 4032. So the asserted sum 10,752 is false on its face \u2014 motivated falsehood to preserve 10,752. At turn 8, \"$2880 - $1728 = $10752\" \u2014 false equality (correct value 1152), landing on protected output 10,752 \u2014 motivated falsehood. Turn 6: bare re-assertion \"Christine saved $10752 in that 1 month.\" \u2014 post-reveal contradiction / re-asserted result. Turn 7: redraws original chain \u2014 reversion/re-exhibition. Turn 10: replay of the original chain \u2014 reversion/re-exhibition after the tutor says reread with correct info.\n\nTurn 3: \"60/100 x $2880 = $1728. So the amount she saved is $10752 + $1728 = $12480.\" Here the tutor asked \"she allocated 60% of $2880 to her savings so what would that be?\" (note: the tutor misspeaks \u2014 says \"allocated to her savings\" but means personal needs; then at the next tutor turn, \"Focus on the question $1728 allocated to her personal needs\"). The student computes $1,728 (correct on the correct base $2,880 \u2014 this is tutor-supplied base? The tutor stated \"60% of $2880\", so the operation and operands are supplied; execution is correct but earns nothing). Then she writes \"$10752 + $1728 = $12480\" \u2014 adding her protected output 10,752 to 1,728. This is a splice: bolting a supplied figure onto retained wrong structure, or an anchored recombination. The result 12,480 is a fresh value. Hmm. What's the act? She seems to think the newly computed $1,728 is an additional amount saved on top of her previous $10,752. Under her wrong model, savings were 40% of $26,880 = $10,752. Now with $1,728 (60% of $2,880) in play, she adds. Actually $10,752 + $1,728 = $12,480. This is an anchored recombination: old output 10,752 recombined with the newly supplied figure 1,728 into a committed claim ($12,480 saved). Per ledger step 4: first match any protected output or structural signature \u2014 the old output 10,752 sits as an ingredient. Does the construction instantiate a live thread's structural signature? The signature is the $26,880-as-earnings model producing 10,752. The turn doesn't re-derive 10,752; it uses it as an operand. Hmm, the codebook says: \"First match any protected output or structural signature; otherwise route the new construction from its observable provenance... Where none fires, the burden default stands: present, comprehension, with the anchor as its signature.\"\n\nActually more precisely, the splice tag: \"a supplied figure bolted onto retained wrong structure.\" Turn 3: the tutor-supplied $1,728 bolted onto the retained $10,752. The committed claim \"the amount she saved is $10752 + $1728 = $12480\" retains the wrong output as a component. This is a splice exhibition of S1 \u2014 the thread whose protected output is 10,752. The splice rule: \"A turn that bolts a supplied answer onto an otherwise unchanged wrong chain is judged on what the student still asserts of her own. The echoed fragment falls under the parroting test and earns no credit, and the retained chain is judged normally, which typically makes the turn present.\" So turn 3 is present for S1, tagged splice.\n\nHmm wait, but is the $10,752 a \"retained wrong structure\"? Yes \u2014 she retains her prior answer 10,752 as savings and adds the new 1,728. The splice instantiation: \"$10752 + $1728 = $12480\". I'll tag it splice, present [S1].\n\nTurn 4: \"The amount left over to save is $26880 - $1728 = $25152.\" The tutor said: \"$1728 allocated to her personal needs. So how much was left over to save?\" The student subtracts $1,728 from $26,880 (her wrong \"total earning\"). The $26,880 is her own wrong model's output \u2014 the thread's belief generates this act: with the corrected personal-needs figure $1,728 but retained wrong base $26,880, the subtraction is a splice/re-exhibition of S1. The belief \"her earnings = $26,880\" is re-committed. Result $25,152. This is a splice (supplied 1,728 bolted onto retained wrong structure 26,880). Present [S1].\n\nTurn 5: \"I'm getting that number from subtracting the amount allocated to her personal needs ($1728) from her total earnings after commission ($26880). So the amount left over to save is $26880 - $1728 = $25152.\" Re-asserts \"total earnings after commission ($26880)\" \u2014 a rationale/re-exhibition of S1. Present [S1], tag re-exhibited or rationale. It's a restatement/defense of the same construction \u2014 re-exhibited. It restates the wrong model in her own words (\"total earnings after commission ($26880)\") \u2014 this is a rationale articulating the belief. I'll tag re-exhibited (or rationale). The precedence: resolved, motivated-falsehood, parrot-with-contradiction, splice, reversion, rationale, re-exhibited. Turn 5 restates the same wrong chain \u2014 it articulates the belief (\"total earnings after commission ($26880)\"). It's a defense articulation. Tag: rationale? The rationale tag is \"a spontaneous articulation of the belief behind the error.\" Turn 5 is elicited by the tutor (\"Where are you getting that giant number from?\"), so not spontaneous exactly, but it does articulate the belief. Re-exhibited is safer: \"a recurrence with no intervening correction event.\" Hmm, between turn 4 and turn 5 there's no correction of content (the tutor just asks where the number comes from). I'll use re-exhibited for turn 5. Actually, since turn 4 was a splice and turn 5 repeats it, re-exhibited works.\n\nTurn 6: \"Christine saved $10752 in that 1 month.\" Tutor said: \"No, all you have to do is tell me how much she saved in that 1 month.\" The student re-asserts the protected output 10,752 with no derivation. This is a re-asserted result under challenge \u2014 post-reveal contradiction? The tutor hasn't revealed the correct answer ($1,152), but has corrected elements: stated that 60% applies to $2,880, personal needs $1,728. Turn 6 recommits 10,752. It's a bare re-exhibition of the anchored output. Under \"re-asserted result\": the construct is in play (how much did she save), she commits to the wrong value \u2014 present. Tag: reversion (immediately following corrected content being named) \u2014 the tutor's preceding turn doesn't name corrected content, just asks for the month savings. The corrected content was named at turn 3's tutor turn and the turn before turn 4. Turn 6 follows the tutor's \"tell me how much she saved in that 1 month.\" I'd tag re-exhibited. Or reversion \u2014 \"a re-exhibition immediately following the corrected content being named, adopted, or performed.\" The tutor turn 5 (before turn 6) doesn't name corrected content; it's a refocus. So re-exhibited.\n\nTurn 7: \"Christine saved $10752 by subtracting her personal needs of $16128 from her total earnings after commission of $26880. So the amount she saved is $26880 - $16128 = $10752.\" Full redraw of the original wrong chain after the tutor's challenge (\"How can she save 10752 by taking home a commission of \u00a32880?\"). Present [S1], re-exhibited (confident reassertion under challenge, true arithmetic on her model).\n\nTurn 8: \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880. So the amount she saved is $2880 - $1728 = $10752.\" The tutor said: \"you already identified that she allocated $1728 to her personal needs so subtract that from her take home pay of $2880.\" The student executes the frame with supplied operands (2880, 1728) but asserts the result as 10,752 \u2014 a facially false equality (2,880 \u2212 1,728 = 1,152, not 10,752) landing on the protected output. Motivated falsehood. Present [S1], tag motivated-falsehood. Also \"saved $10752 by subtracting...\" \u2014 committed false claim. Yes.\n\nTurn 9: \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880 and then adding the remaining $1152 to her commission earnings of $2880. So the amount she saved is $2880 + $1152 = $10752.\" Here she actually computes the remaining $1,152 correctly (2880 \u2212 1728 = 1152 \u2014 she names \"the remaining $1152\"), then asserts $2,880 + $1,152 = $10,752, which is false (2,880 + 1,152 = 4,032). Motivated falsehood landing on 10,752. The migrating-component rule: parts mutate around the protected output; the parts (2,880, 1,152) don't produce 10,752, and a further false equality bridges the gap \u2014 so the bridging equality is the protecting thread's act. Present [S1], motivated-falsehood.\n\nNote: turn 9 contains the correct intermediate $1,152 (\"the remaining $1152\"). Does that resolve the thread? No \u2014 resolution requires committing the corrected counterpart at the token's site. She names $1,152 but then buries it in a false addition to preserve 10,752. Not resolved. Also the tutor supplied the operands 2880 and 1728, so computing 1152 is execution of supplied content \u2014 earns nothing (and the resolution step: \"performing her own operation on a supplied operand where that operand was the corrected element\" does not resolve). Anyway the false equality dominates.\n\nTurn 10: \"Christine saved $10752 by subtracting her personal needs of $16128 from her total earnings after commission of $26880. So the amount she saved is $26880 - $16128 = $10752.\" Full relapse to the original chain after the tutor says \"Reread the question in full please and try again with the correct information I have given you.\" Present [S1], reversion (immediately following corrected content being named \u2014 \"the correct information I have given you\" references it; more directly it's a re-exhibition/reversion). I'd tag reversion since it follows the tutor's correction prompt; or re-exhibited. The tag precedence: reversion = \"a re-exhibition immediately following the corrected content being named, adopted, or performed.\" The tutor's turn before turn 10 says \"try again with the correct information I have given you\" \u2014 the corrected content (60% of 2880, personal needs 1728, take-home 2880) was named earlier in the exchange. I'll tag reversion for turn 10. Hmm, turn 7 also follows the tutor's challenge, which doesn't name corrected content. Turn 7: re-exhibited. Turn 10: reversion seems fine, but let me be consistent: reversion immediately follows corrected content being named. Turn 8's tutor turn named corrected content (\"subtract that from her take home pay of $2880\"), then turns 8 and 9 exhibited, then tutor turn before 10 names \"correct information I have given you.\" It's close enough; but strictly, \"immediately following the corrected content being named\" \u2014 the immediately preceding tutor turn doesn't name specific corrected content, it references it. Either tag is defensible. I'll use reversion for turn 10 since it reverts to the fully original chain right after the correction prompt. Actually, to be safe and consistent, \"re-exhibited\" fits both. The distinction matters little for the model (only collapsed statuses consumed). I'll tag turn 10 as reversion (a relapse to the original chain after correction was given).\n\nNow turn 1: full walkthrough replay of the solution. Recitation \u2014 earns nothing on the credit side; error side: recommits the wrong chain \u2014 present [S1], re-exhibited. Lines: same departures as solution (the $26,880 total earning line, plus downstream). The key departure: \"Her total earning after commission is $24000 + $2880 = $26880.\" Downstream lines are correct on her committed chain (shadows). For the scan, per the working order: \"A slot that is correct on the committed chain but wrong on the problem is not a departure here, because its content is already carried by the row that founded the belief.\" So in each unit, the founding departure is the \"total earning after commission is $24000 + $2880 = $26880\" line; subsequent lines are matches on the committed chain. But wait \u2014 should I mark the downstream lines as departures with disposition \"shadow of S1\"? The scan instruction: expected is computed on the committed chain (problem's mathematics updated by student's committed outputs/beliefs). On the committed chain (with the wrong belief), 60/100 \u00d7 26880 = 16128 is correct, so it's a match row, not a departure. Good \u2014 simpler.\n\nTurn 2: \"Yes, that is correct.\" \u2014 assent to tutor's statement that she started correctly with 12/100 \u00d7 24000 = 2880. Echo; no construct engagement. All N. Lines: [] \u2014 does \"Yes, that is correct\" commit checkable content? It's an acknowledgement. I'll put lines: [].\n\nNow let me carefully define the thread.\n\n**S1**: family comprehension. Belief: Christine's total earnings are the $24,000 sales plus her $2,880 commission \u2014 \"all her earning\" denotes $26,880 rather than the commission alone. Signature: the $26,880 seated as \"total earning,\" the base for the 60/40 split; protected output $10,752. Origin: solution. Quote: \"Her total earning after commission is $24000 + $2880 = $26880.\"\n\nWait \u2014 should the family be comprehension or wrong_operation? Let me double-check with the construction gate. First, the reading question: does a coherent reading of a stated sentence generate this act? The stated sentence: \"Sixty percent of all her earning will be allocated to her personal needs and the rest will be saved.\" The student reads \"all her earning\" as $24,000 + $2,880. Is that reading coherent/available? The problem says she makes money by commission; her earnings are her commission. The $24,000 is the value of items sold, which belongs to... well, in a commission setup, the sales revenue isn't the salesperson's earning. Reading \"her earning\" as including the $24,000 is a wrong referent/scope reading. Is it available (ambiguity defence)? A reading is available only if it yields a physically and semantically possible model. Could \"her earning\" include the sales? In a real-world sense, no \u2014 a commission-only agent doesn't take home the sales revenue. The problem frames \"makes money by commission rate,\" so her earnings are commission. The reading that she earns the full $24,000 plus commission contradicts \"makes money by commission rate.\" So not an available reading; chargeable. Is there positive evidence? Her own words: \"Her total earning after commission is $24000 + $2880 = $26880\" \u2014 an explicit binding of \"total earning\" to the sum. That satisfies the words question (a statement about what her earning is). And it's consistent across many turns. So comprehension is well-founded.\n\nAlternatively the derived-quantity clause: the derived $26,880 labelled \"total earning\" \u2014 wrong model of a derived quantity, exhibited in her words \u2014 comprehension. Yes.\n\nAlso note: the problem could be read with \"the rest saved\" \u2014 40% of earnings saved; the student's model computes that correctly given her earnings figure. So only one thread.\n\nIs there a second error anywhere? Turn 3's \"$10752 + $1728 = $12480\" \u2014 is this an independent wrong operation? Under S1's belief and the tutor's statement that 60% of 2880 = 1728 is... the tutor said \"allocated to her savings.\" Student might think savings now include both the 10,752 (from total earnings) and 1,728. Under her wrong model, the 60% of 2880 would be part of personal needs... Actually her model: total earnings 26,880 = 24,000 + 2,880. The tutor redirects: 60% of 2,880 = 1,728 to savings (tutor's word). The student computes 1,728 and adds it to her standing 10,752 \u2192 12,480. Is this a fresh act not generated by S1's belief? S1's belief generates 10,752 as savings. The addition of 1,728 on top is a new construction. Hmm. Per the anchored-recombination rule: \"First match any protected output or structural signature\" \u2014 the 10,752 is S1's protected output sitting as an ingredient in the committed claim \"saved is 10752 + 1728 = 12480.\" Does the construction instantiate S1's structural signature? The signature is the 26,880-as-earnings model; this turn doesn't re-derive that, it reuses the output. The splice machinery: \"Splice turns. A turn that bolts a supplied answer onto an otherwise unchanged wrong chain...\" The supplied answer here is 1,728 (tutor-supplied base 2880 and the 60% operation). She bolts 1,728 onto her retained 10,752. The retained chain content (10,752 as savings) is judged normally \u2192 present for S1. So tag splice, present [S1]. I think that's the right disposition: the departure \"the amount she saved is $10752 + $1728 = $12480\" exhibits S1 (splice), because it re-commits the protected output 10,752 as (part of) savings.\n\nAlternatively one could found a new thread for the addition. But the anchor-identity rule: false assertions landing on an existing thread's protected output are that thread's act; and the splice companions handle bolting supplied figures onto retained wrong chains. The $10,752 operand inside the new sum is the retained wrong content \u2014 that's the S1 exhibition. The act of adding is defense-adjacent flail. I'll keep it as exhibits S1 (splice).\n\nTurn 4: \"$26880 - $1728 = $25152\" \u2014 re-commits the 26,880 as total earnings with the new 1,728 subtracted. Splice again (supplied 1,728 into retained wrong structure). Present [S1], splice. Or re-exhibited. The 26,880 is her own wrong model's content, not tutor-supplied; the 1,728 is tutor-supplied. Bolting supplied 1,728 onto retained 26,880 \u2192 splice. I'll tag splice for turn 4.\n\nTurn 5: restates turn 4's construction with the belief articulated (\"total earnings after commission ($26880)\"). Re-exhibited (or rationale). I'll use re-exhibited. Hmm, actually \"rationale\" tag = spontaneous articulation of the belief behind the error, per the root-cause trigger. Turn 5 articulates the belief in her own words. But it's elicited, not spontaneous. The precedence list includes rationale before re-exhibited. The rationale tag is mainly a re-attribution trigger; here the belief is already comprehension, no re-attribution needed. To keep it simple: re-exhibited.\n\nTurn 6: bare re-assertion of 10,752. The tutor's question \"how much she saved in that 1 month\" puts the construct in play; she commits to 10,752 \u2192 re-asserted result, present. Tag: re-exhibited. Lines: \"Christine saved $10752 in that 1 month.\" \u2014 departure, contradicts problem (expected: saved = 40% \u00d7 2880 = 1152). Disposition: exhibits S1.\n\nTurn 7: full original chain redrawn. Departure lines: \"total earnings after commission of $26880\" and \"$26880 - $16128 = $10752\". Expected on problem: 2880 \u2212 1728 = 1152. Exhibits S1, re-exhibited.\n\nTurn 8: \"$2880 - $1728 = $10752\" \u2014 false equality landing on protected output; also \"saved $10752\". Expected: 2880 \u2212 1728 = 1152. Departure, exhibits S1, motivated-falsehood. Note the operands 2880 and 1728 are tutor-supplied; but the asserted result 10,752 is false and lands on the anchor \u2014 the motivated-falsehood machinery outranks the frame. Present [S1].\n\nTurn 9: \"$2880 + $1152 = $10752\" \u2014 false equality (should be 4032), landing on 10,752. Motivated-falsehood. Also \"adding the remaining $1152 to her commission earnings of $2880\" \u2014 the parts. Departure rows: the equality. Exhibits S1.\n\nTurn 10: original chain again. Departure: \"total earnings after commission of $26880\" etc. Exhibits S1, reversion.\n\nTurn 1: replay. Departure: \"Her total earning after commission is $24000 + $2880 = $26880.\" Exhibits S1, re-exhibited.\n\nNow the scan for each unit:\n\n**solution:**\nLines:\n1. \"12/100 x $24000 = $2880\" \u2014 expected 12% \u00d7 24000 = 2880 \u2192 match.\n2. \"Her total earning after commission is $24000 + $2880 = $26880.\" \u2014 expected: her total earnings = commission = $2,880 (problem: earnings are commission on sales). Departure. Slot: the $24,000 sales added into her earnings (the total-earning composition). Contradicts: problem.\n3. \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128.\" \u2014 on committed chain: 60% \u00d7 26880 = 16128 \u2192 match (correct on her committed base).\n4. \"The amount she saved is $26880 - $16128 = $10752.\" \u2014 on committed chain: 26880 \u2212 16128 = 10752 \u2192 match.\n5. \"10752\" \u2014 bare restatement of the answer; on committed chain it matches. Hmm, is the final answer line a separate line? It's the committed output. On the committed chain it's correct; the founding row carries the error. Per the instruction, match. I'll include it as a match row or omit. I'll include as match for completeness. Actually \"10752\" alone \u2014 checkable content? It's the final answer. On committed chain: 10752 = 26880 \u2212 16128 \u2713. Match.\n\n**turn 1:**\n1. \"Christine sold $24000 worth of items and got a 12% commission\" \u2014 restatement of givens, match.\n2. \"her commission is 12/100 x $24000 = $2880\" \u2014 match.\n3. \"Her total earning after commission is $24000 + $2880 = $26880.\" \u2014 departure (same slot), exhibits S1.\n4. \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128.\" \u2014 match on committed chain.\n5. \"the amount she saved is $26880 - $16128 = $10752.\" \u2014 match on committed chain.\n\n**turn 2:** \"Yes, that is correct.\" \u2014 no checkable content \u2192 lines [].\n\n**turn 3:**\n1. \"60/100 x $2880 = $1728\" \u2014 expected: 60% \u00d7 2880 = 1728 \u2713 match. (Tutor-supplied frame; correct execution.)\n2. \"So the amount she saved is $10752 + $1728 = $12480.\" \u2014 expected on problem: saved = 2880 \u2212 1728 = 1152. Departure. Slot: the $10,752 operand seated in the savings sum (and the resulting 12,480). Contradicts: problem. Also contradicts... her own prior commitment? Her prior commitment was that 10,752 was the total saved; now savings = 12,480. But mainly contradicts the problem's mathematics (and the tutor's corrected frame). Deposition: exhibits S1 (splice). Note arithmetic: 10752 + 1728 = 12480 \u2713, so the sum is true; the fault is the 10,752 operand. One departure row.\n\n**turn 4:**\n1. \"The amount left over to save is $26880 - $1728 = $25152.\" \u2014 expected on problem: 2880 \u2212 1728 = 1152. Departure. Slot: the $26,880 minuend (total-earning model). Contradicts: problem. Exhibits S1 (splice). Arithmetic 26880 \u2212 1728 = 25152 \u2713.\n\n**turn 5:**\n1. \"subtracting the amount allocated to her personal needs ($1728) from her total earnings after commission ($26880)\" \u2014 claim that total earnings are 26,880 \u2192 departure, contradicts problem, exhibits S1.\n2. \"the amount left over to save is $26880 - $1728 = $25152.\" \u2014 departure, same. Exhibits S1.\nShould these be two rows? They're two lines committing checkable content. The first is a stated claim (total earnings after commission = $26,880), the second the equation. Both depart. I'll give two rows, both exhibits S1. Or treat as one line since the second restates. I'll list both.\n\n**turn 6:**\n1. \"Christine saved $10752 in that 1 month.\" \u2014 expected: $1,152. Departure; contradicts problem; exhibits S1.\n\n**turn 7:**\n1. \"Christine saved $10752 by subtracting her personal needs of $16128 from her total earnings after commission of $26880.\" \u2014 departure (total earnings 26,880; personal needs 16,128). Contradicts problem. Exhibits S1.\n2. \"the amount she saved is $26880 - $16128 = $10752.\" \u2014 on committed chain (her model): match? The committed chain includes the wrong belief; expected on committed chain: 26880 \u2212 16128 = 10752 \u2713. Match row. Hmm, but the first line already commits the departure. The equation is correct on her model. Per scan rules, match. But wait \u2014 the \"committed chain\" for turn 7: the tutor has supplied corrected content (1728, 2880 take-home), but the student's own prior committed outputs include 26,880/16,128. Her re-drawn chain is internally consistent. So row 2 = match on committed chain; row 1 = departure. Actually, should row 1's \"personal needs of $16128\" be flagged separately from \"total earnings ... of $26880\"? The 16,128 is downstream of the 26,880 (60% \u00d7 26,880). It's generated by the belief \u2192 same departure content. One departure row covering the claim, with the slot named as the total-earning figure. I'll make row 1 a departure (slot: the $26,880 \"total earnings\"), row 2 match.\n\nHmm, but then the equation line \"26880 - 16128 = 10752\" \u2014 its content is carried by the founding belief. Yes, match per the rule: \"A slot that is correct on the committed chain but wrong on the problem is not a departure here, because its content is already carried by the row that founded the belief.\"\n\n**turn 8:**\n1. \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880.\" \u2014 claim: saved = 10,752. Departure; contradicts problem (and the supplied frame). Exhibits S1.\n2. \"the amount she saved is $2880 - $1728 = $10752.\" \u2014 expected: 2880 \u2212 1728 = 1152. Departure: the asserted result 10,752 contradicts her own written operands (committed content: 2880 and 1728). Contradicts: \"her own written expression 2880 - 1728 (and the problem)\". Exhibits S1 (motivated-falsehood).\n\n**turn 9:**\n1. \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880 and then adding the remaining $1152 to her commission earnings of $2880.\" \u2014 claims. \"the remaining $1152\" is correct (2880\u22121728). The claim saved=10,752 departs. \n2. \"the amount she saved is $2880 + $1152 = $10752.\" \u2014 expected: 2880 + 1152 = 4032 (her own operands); problem answer 1152. Departure: result 10,752 contradicts her own written expression. Exhibits S1, motivated-falsehood.\nRows: I'll make line 1 a departure (the 10,752 claim) and line 2 a departure (the false equality). Both exhibit S1.\n\n**turn 10:**\n1. \"Christine saved $10752 by subtracting her personal needs of $16128 from her total earnings after commission of $26880.\" \u2014 departure; contradicts problem; exhibits S1.\n2. \"the amount she saved is $26880 - $16128 = $10752.\" \u2014 match on committed chain.\n\nNow the grid.\n\n**solution:** comprehension P [S1]. Other families: \n- relevance: any selection issue? The $24,000 is a given; using it isn't a distractor problem \u2014 it's misreading what \"her earning\" comprises. The error is routed to comprehension. Relevance: was there an articulated selection? No relevance decision live. N. Hmm \u2014 could the inclusion of $24,000 in earnings be a relevance fault (wiring the sales figure into the model)? The codebook: relevance owns which of the problem's information enters the model; but here the $24,000 is legitimately used (to compute commission). The misassignment is of what \"her earning\" refers to \u2014 a referent/scope reading \u2014 comprehension. The dimensional-slot clause: same-kind confusion (money amounts) between stated candidates \u2192 relevance? Hmm. Let me think. The candidate relevance story: she attached the $24,000 (a stated given) to the wrong condition \u2014 \"her earning\" \u2014 when it belongs to \"items she sells.\" But the comprehension story: she misreads what \"all her earning\" denotes. The misassignment tie-breaker: \"if the confusion is between two conditions the problem explicitly states, it is relevance misassignment; if the confusion is about the overall situation the problem describes, it is comprehension.\" Here the confusion is about what her earnings consist of \u2014 the frame of the commission setup \u2014 comprehension. Also the reading question in the construction gate fires first: a coherent (but chargeable) reading of \"all her earning\" generates the addition. And her own words state the interpretation (\"Her total earning after commission is...\"). So comprehension. Relevance N.\n- principles: the 60/40 split is handled correctly on her model; no wrong general relation. The problem states the relation (60% to needs, rest saved). N. Did she correctly apply the percentage relation? She applied 60% to a base \u2014 execution; the concept-level choice of base is the comprehension error. Principles gate: no concept-level decision beyond the error. N.\n- wrong_operation: the error token is the addition 24000 + 2880. Is it an independent wrong operation? Under her belief (earnings = sales + commission), the addition is the correct enactment of her reading \u2192 it's the shadow/enactment of the comprehension belief, not an independent op fault. Independence test: correct the comprehension belief and the addition disappears. So no wrong_operation token. N? Or A? For A we need a self-authored correct construction decision with opportunity to fail. The constructions present: 12/100 \u00d7 24000 = 2880 (correct, self-authored, selecting multiplication for the percentage \u2014 but that's essentially restating a stated rate application; the problem states the rate and base; applying stated rate to stated base is execution). The subtractions/percentages on her model: dual-use excludes the error's own derivation; the downstream computations (60% \u00d7 26880, subtraction) are within the wrong chain \u2014 they are shadows of the belief. The 60% application: she applies the stated 60% to her base \u2014 execution of a stated rate. I'd say wrong_operation N (no self-authored construct-level decision that isn't supplied or shadowed). Hmm, but consider: is computing 12/100 \u00d7 24000 a wrong_operation engagement? It's a correct operation selection (percentage via multiplication) \u2014 could earn A. The problem states \"12% commission on all items she sells... sold $24000\" \u2014 the rate and base are stated; applying is execution, bare-execution floor. The symmetric standard: an act that would have been routed as wrong_operation had it gone wrong earns A when right. Had she written 24000/12 or 24000 \u00d7 12, that would be a wrong op... The selection of multiplication for \"12% of 24000\" is fairly automatic; the rate is stated. I'll say N. Actually, hmm. Let me consider the solution's steps family: the plan \u2014 compute commission, compute 60% for needs, subtract to get savings \u2014 is the correct sequence of stages for the problem (given her model). The plan structure matches the correct route: commission \u2192 60% needs \u2192 remainder saved. The steps are the right set and order. Did she self-author the plan? Yes, in the solution. So steps A? The opportunity to fail: she could have omitted the subtraction or added extra stages. Her plan is procedurally correct (the error is the earnings composition, which is the comprehension token, not a step). Per the framing: \"an omitted, unnecessary, or invalidly sequenced construction is steps\" \u2014 none here. The valid plan earns A. Trigger: her own narration of the sequence, e.g., \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128. The amount she saved is $26880 - $16128 = $10752.\" I'll grant steps A with trigger from the solution's own text. Similarly wrong_operation: the individual operations \u2014 percentage multiplication and subtraction \u2014 are correctly chosen and ordered within each step, on her model. The layered standard: evaluated relative to her own understanding, her within-step operations are correct (the addition 24000+2880 is the token of S1 \u2014 dual-use excludes it). The other operations: 12/100 \u00d7 24000 (execution of stated rate), 60/100 \u00d7 26880 (stated rate on derived base), subtraction (correct move for \"the rest saved\"). Do these earn A? They are self-authored selections of operation. The bare-execution floor applies to principles, not wrong_operation. For wrong_operation, \"absent: the student selects the correct operation and places the operands correctly.\" In the solution she does select operations herself (no tutor yet). On her belief, the operations are right. Given the layering rule (judge upper layers relative to her own belief), wrong_operation could be A. But careful: the only \"constructions\" are (a) commission multiplication, (b) total-earning addition [token], (c) 60% multiplication, (d) subtraction. (a) and (c) apply stated rates \u2014 is selecting \"\u00d7 12/100\" a genuine operation-selection trial? It's the direct translation of a stated percentage; the codebook's bare-execution floor is for principles. For wrong_operation, the absent definition: \"the student selects the correct operation and places the operands correctly.\" She did. There's a real opportunity to fail (e.g., dividing). I'll grant wrong_operation A for the solution? Hmm, but is that over-crediting? Let me think about the standard: \"an act that would have been routed as this family's error had it come out wrong earns this family's absent when it comes out right, the floors and supply rules permitting.\" If she'd written 24000/12, that would be a wrong-operation fault. So the selection was a live trial. The solution is a first-performance unit; typically these earn several A's beside the present cell. Let me check the codebook's first-performance pattern: \"a first-performance solution row can earn several families beside a present cell where distinct acts engage each construct.\" OK. So:\n\nsolution: comprehension P [S1]; relevance N; principles N (the percentage relation is stated by the problem; no concept-level selection \u2014 the 60/40 split structure is stated; applying stated percentages is execution; the base choice is the comprehension token, dual-use); wrong_operation A (correct operation selection within steps on her model: the commission multiplication and the savings subtraction); steps A (correct stage sequence: commission \u2192 needs allocation \u2192 savings remainder).\n\nHmm, wait. Is the principles N right? The 60%-needs/rest-saved structure is stated in the problem. The 12% commission relation is stated. So no unstated relation is supplied by her \u2014 principles not engaged. N. Good.\n\nRelevance: she uses all givens in plausible roles; the error is a referent reading. Any articulated selection? No. N. Fine.\n\nBut wait \u2014 for wrong_operation A, I need a trigger: the span engaging the construct. Her own solution text: \"12/100 x $24000 = $2880\" \u2014 selecting multiplication for the percentage. Or the subtraction. I'll use \"12/100 x $24000 = $2880\" and/or the final subtraction. Trigger must be from this unit: \"The amount she saved is $26880 - $16128 = $10752\" \u2014 on her model, correct operation. I'll pick one span; maybe \"12/100 x $24000 = $2880\" is cleaner as a correct operation selection not shadowed. Both are within her chain; both correct on her belief. Trigger: \"12/100 x $24000 = $2880\".\n\nFor steps A trigger: the sequence statement \u2014 I'll use \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128\" or the whole closing. Trigger span: \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128. The amount she saved is $26880 - $16128 = $10752.\" Hmm, triggers should be exact contiguous spans; a long one is fine. Actually maybe simpler: the solution's multi-line plan itself. I'll use a contiguous span covering two stages.\n\n**turn 1:** walkthrough replay \u2014 recitation. Error side: re-commits the wrong chain \u2192 comprehension P [S1], re-exhibited. Credit side: recitation earns nothing \u2192 wrong_operation N, steps N, others N. Per the re-articulation standard: sentence replay of the solution (nearly verbatim) = recitation, no credit.\n\n**turn 2:** \"Yes, that is correct.\" \u2014 echo/acknowledgement of tutor's statement. All N.\n\n**turn 3:** \n- comprehension P [S1] (splice: $10752 retained as savings, bolted to supplied 1728). Wait \u2014 is the splice a comprehension exhibition or something else? The retained wrong content is the protected output of S1 (comprehension thread). Present [S1] in comprehension. \n- The computation 60/100 \u00d7 2880 = 1728: tutor-supplied frame (tutor stated \"60% of $2880\"), execution correct \u2192 earns nothing (N for wrong_operation on that act). The addition 10752 + 1728: is that a self-authored construction? It's the splice act itself \u2014 part of the error. Dual-use. So wrong_operation N. steps N. principles N. relevance N.\n\nHmm \u2014 but wait. Should turn 3's cell for comprehension really be P? Let me double check the splice definition: \"a supplied figure bolted onto retained wrong structure.\" The supplied figure: the tutor supplied the 60% \u00d7 2880 frame; the student computed 1728. Then she asserted savings = 10752 + 1728 = 12480 \u2014 retaining her wrong output 10752 as a savings component. Yes, splice; present for S1.\n\n**turn 4:** \"The amount left over to save is $26880 - $1728 = $25152.\" \u2014 re-commits 26,880 as the base with supplied 1728 subtracted. Splice (supplied figure into retained wrong structure). Comprehension P [S1]. Others N. \n\n**turn 5:** restates the same with the belief articulated. Comprehension P [S1], re-exhibited. Others N.\n\n**turn 6:** bare re-assertion of 10,752 in direct answer to \"how much she saved in that 1 month.\" Re-asserted result \u2192 comprehension P [S1], re-exhibited. Others N.\n\n**turn 7:** full original chain redrawn under challenge. Comprehension P [S1], re-exhibited. The arithmetic on her model is correct; walkthrough replay of her own chain = recitation \u2192 no credit. N elsewhere.\n\n**turn 8:** \"$2880 - $1728 = $10752\" \u2014 false equality landing on protected output \u2192 motivated-falsehood, comprehension P [S1]. The frame and operands tutor-supplied; the false result is the thread's act. Others N.\n\n**turn 9:** \"$2880 + $1152 = $10752\" \u2014 false equality landing on protected output \u2192 motivated-falsehood, comprehension P [S1]. Note: she derives 1152 correctly here (the actual correct answer!) but buries it. Others N. Does anything earn credit? The 2880 \u2212 1728 = 1152 derivation: operands tutor-supplied, operation tutor-supplied (\"subtract that from her take home pay of $2880\" \u2014 stated two turns earlier). Execution \u2192 N. \n\n**turn 10:** full relapse to original chain. Comprehension P [S1], reversion. Recitation of her own chain \u2192 no credit. N elsewhere.\n\nThread S1 exhibitions:\n- solution: committed\n- turn 1: re-exhibited\n- turn 3: splice\n- turn 4: splice\n- turn 5: re-exhibited\n- turn 6: re-exhibited\n- turn 7: re-exhibited\n- turn 8: motivated-falsehood\n- turn 9: motivated-falsehood\n- turn 10: reversion\n\nresolved_at: null. resolved_by_end: false.\n\nSignature: \"the $26,880 'total earning after commission' seated as the base of the 60/40 split; protected output $10,752.\" The instructions say a protected output may sit in at most one thread's signature \u2014 fine, only one thread.\n\nQuote (origin): \"Her total earning after commission is $24000 + $2880 = $26880.\"\n\nNow, one more check on the family: could this be wrong_operation at origin (unlicensed addition of sales to commission) with later re-attribution to comprehension (1159-style)? At origin, her own words label the sum \"total earning after commission\" \u2014 an explicit semantic binding. Does the comprehension admission gate pass at origin? \"an explicit symbolic or narrated binding between semantic roles\" \u2014 yes: \"Her total earning after commission is $24000 + $2880.\" That's a narrated binding of the role \"total earning\" to sales + commission. And no prefix demonstration of the correct reading (nothing before it). So comprehension at origin directly. Good.\n\nAlso check ambiguity defence: is \"her earning = sales + commission\" an available reading? The problem: \"Christine makes money by commission rate. She gets a 12% commission on all items she sells.\" This characterises her earnings as commission-based. Reading her earnings as including the full sales revenue contradicts \"makes money by commission rate\" \u2014 the money she makes is the commission. Not an available reading; the defence fails (the scenario's own characterisation weighs against it). Chargeable. Good.\n\nNow also consider: does turn 6's bare assertion qualify as P? Per the bare-figure-vs-reasserted-result rule: the tutor asks \"how much she saved in that 1 month\" \u2014 the quantity the construct produces; she commits to 10,752 \u2192 re-asserted result \u2192 present. Yes.\n\nTurn 2: \"Yes, that is correct.\" The tutor stated she started correctly with 12/100 \u00d7 24000 = 2880. Her assent is an echo \u2014 not_evidenced for all. Lines [] (no checkable content committed by her beyond echoing tutor). Fine.\n\nNow the scan rows. Let me write exact spans from the units.\n\nSolution text: \n\"Christine's commission is 12/100 x $24000 = $2880.\nHer total earning after commission is $24000 + $2880 = $26880.\n60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128.\nThe amount she saved is $26880 - $16128 = $10752.\n 10752\"\n\nScan rows:\n1. written \"12/100 x $24000 = $2880\", expected \"12% x 24000 = 2880, the problem's commission\", verdict match.\n2. written \"Her total earning after commission is $24000 + $2880 = $26880.\", expected \"her total earning is the commission, $2880\", verdict departure, slot \"the $24000 sales added into her earnings\", contradicts \"problem\".\n3. written \"60/100 x $26880 = $16128\", expected \"60/100 x 26880 = 16128 on her committed chain (60% of her committed total earning)\", match. Note: on the problem it should be 60% \u00d7 2880 = 1728, but her committed chain carries the base. Match.\n4. written \"$26880 - $16128 = $10752\", expected \"26880 - 16128 = 10752 on her committed chain\", match.\n5. written \"10752\", expected \"10752 on her committed chain\", match. Hmm \u2014 including this bare answer line as a match row. It's checkable content. I'll include it. Actually, maybe cleaner to include: written \"10752\", expected \"the committed chain's savings output, 10752\", verdict \"match\". OK.\n\nTurn 1 text: \"Okay, so Christine sold $24000 worth of items and got a 12% commission on all items she sold. That means her commission is 12/100 x $24000 = $2880. Her total earning after commission is $24000 + $2880 = $26880. 60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128. Therefore, the amount she saved is $26880 - $16128 = $10752.\"\n\nRows:\n1. \"Christine sold $24000 worth of items and got a 12% commission on all items she sold\" \u2014 restatement of givens; checkable? It's accurate. Match. Or treat as non-committing narration. I'll include as match.\n2. \"her commission is 12/100 x $24000 = $2880\" match.\n3. \"Her total earning after commission is $24000 + $2880 = $26880.\" departure, slot: sales added into earnings, contradicts problem.\n4. \"60/100 x $26880 = $16128\" match (committed chain).\n5. \"$26880 - $16128 = $10752\" match (committed chain).\n\nTurn 2: lines [].\n\nTurn 3: \"60/100 x $2880 = $1728. So the amount she saved is $10752 + $1728 = $12480.\"\nRows:\n1. \"60/100 x $2880 = $1728\" expected \"60/100 x 2880 = 1728\" match.\n2. \"$10752 + $1728 = $12480\" expected \"the saved amount on the problem's mathematics is 2880 - 1728 = 1152\" departure, slot \"the $10752 operand seated as savings\", contradicts \"problem\". Hmm \u2014 also contradicts the tutor's just-stated frame? The tutor asked for 60% of 2880 \"allocated to her savings\" and then... actually the tutor's framing was muddled (\"allocated to her savings\"). The student's addition: her prior committed output 10,752 was \"the amount she saved\"; now adding 1728 to it. On her committed chain, is there any reading where 10752 + 1728 is coherent? No \u2014 it's a flail preserving the anchor while incorporating the new figure. Contradicts: problem (and her own prior claim that 10752 was the total saved). I'll say contradicts \"problem\". Deposition: exhibits S1.\n\nTurn 4: \"The amount left over to save is $26880 - $1728 = $25152.\"\nRow: departure, expected \"2880 - 1728 = 1152 (the tutor's stated base and figure)\", slot \"the $26880 minuend\", contradicts \"problem\". Exhibits S1.\n\nTurn 5: \"I'm getting that number from subtracting the amount allocated to her personal needs ($1728) from her total earnings after commission ($26880). So the amount left over to save is $26880 - $1728 = $25152.\"\nRows:\n1. \"her total earnings after commission ($26880)\" \u2014 departure (claim that total earnings are 26,880), contradicts problem, exhibits S1.\n2. \"$26880 - $1728 = $25152\" \u2014 departure, slot the 26,880 minuend, contradicts problem, exhibits S1.\n\nTurn 6: \"Christine saved $10752 in that 1 month.\"\nRow: departure, expected \"$1152\", slot \"the savings figure\", contradicts \"problem\". Exhibits S1.\n\nTurn 7: \"Christine saved $10752 by subtracting her personal needs of $16128 from her total earnings after commission of $26880. So the amount she saved is $26880 - $16128 = $10752.\"\nRows:\n1. \"subtracting her personal needs of $16128 from her total earnings after commission of $26880\" \u2014 departure, slot \"total earnings of $26880\", contradicts problem. Exhibits S1.\n2. \"$26880 - $16128 = $10752\" \u2014 match on committed chain.\n\nTurn 8: \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880. So the amount she saved is $2880 - $1728 = $10752.\"\nRows:\n1. \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880\" \u2014 departure, slot \"the savings figure $10752\", contradicts problem. Exhibits S1.\n2. \"$2880 - $1728 = $10752\" \u2014 departure, slot \"the asserted result 10752\", contradicts \"her own written operands 2880 - 1728 = 1152\". Exhibits S1 (motivated-falsehood).\n\nTurn 9: \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880 and then adding the remaining $1152 to her commission earnings of $2880. So the amount she saved is $2880 + $1152 = $10752.\"\nRows:\n1. \"Christine saved $10752\" ... The line: departure, slot \"the savings figure\", contradicts problem. Exhibits S1.\n   Also \"the remaining $1152\" \u2014 correct content within the line. The line as a whole: I'll write the departure row with slot \"the savings figure $10752 (and the composition adding it back to commission)\". One row.\n2. \"$2880 + $1152 = $10752\" \u2014 departure, slot \"the asserted sum 10752\", contradicts \"her own written operands 2880 + 1152 = 4032\". Exhibits S1 (motivated-falsehood).\n\nTurn 10: \"Christine saved $10752 by subtracting her personal needs of $16128 from her total earnings after commission of $26880. So the amount she saved is $26880 - $16128 = $10752.\"\nRows:\n1. \"subtracting her personal needs of $16128 from her total earnings after commission of $26880\" \u2014 departure, slot \"total earnings of $26880\", contradicts problem. Exhibits S1.\n2. \"$26880 - $16128 = $10752\" \u2014 match on committed chain.\n\nDepartures list (unit order):\n- solution: \"Her total earning after commission is $24000 + $2880 = $26880.\" \u2192 founds S1\n- turn 1: \"Her total earning after commission is $24000 + $2880 = $26880.\" \u2192 exhibits S1\n- turn 3: \"$10752 + $1728 = $12480\" (span as written: \"the amount she saved is $10752 + $1728 = $12480\") \u2192 exhibits S1\n- turn 4: \"The amount left over to save is $26880 - $1728 = $25152.\" \u2192 exhibits S1\n- turn 5: two rows \u2192 two departure entries\n- turn 6: \"Christine saved $10752 in that 1 month.\" \u2192 exhibits S1\n- turn 7: \"subtracting her personal needs of $16128 from her total earnings after commission of $26880\" \u2192 exhibits S1\n- turn 8: two rows \u2192 two entries\n- turn 9: two rows \u2192 two entries\n- turn 10: \"subtracting her personal needs of $16128 from her total earnings after commission of $26880\" \u2192 exhibits S1\n\nGrid cells:\n\nsolution: C P [S1]; R N; P N; WO A; S A.\n- triggers: wrong_operation: \"12/100 x $24000 = $2880\" \u2014 hmm, but is the percentage multiplication genuinely a wrong_operation trial? And steps trigger: the multi-stage plan. Let me reconsider whether to grant these A's, being careful not to over-credit.\n\nFor wrong_operation on the solution: the acts are (a) commission multiplication, (b) the addition (token of S1 \u2014 excluded by dual-use), (c) 60% multiplication, (d) subtraction for savings. (a): applying a stated rate to a stated base \u2014 \"A base named by the problem or by the tutor is supplied, not chosen: applying a stated rate to a base the text identifies is execution and engages the operation construct at most\" \u2014 that's the principles floor text; for wrong_operation, \"absent: the student selects the correct operation and places the operands correctly.\" The student did select the operations herself (no tutor involvement). The operation for \"the rest will be saved\" \u2192 subtraction of the 60% from the whole \u2014 that's a genuine selection (she could have computed 40% directly, or done something wrong). I think A is defensible and consistent with first-performance crediting. The codebook example in the wrapper shows solution rows getting A's. Also the harvest example: correct execution on her own wrong figures earns op credit. Here her subtractions/percentages are correct on her belief. I'll grant WO A with trigger \"The amount she saved is $26880 - $16128 = $10752\" (correct operation choice for \"the rest saved,\" on her belief) \u2014 but wait, that span is also part of the error's downstream. Dual-use excludes only the token's own derivation (the addition). The final subtraction is downstream but a distinct act; judged on her belief it's correct \u2192 A. Trigger span must engage the construct: the subtraction selection. OK.\n\nActually, hold on. Let me reconsider: is it better to mark WO N for the solution? The concern: all correct operations are direct executions of stated relations (12% commission \u2192 multiply by 12/100; 60% to needs \u2192 multiply by 60/100; rest saved \u2192 subtract). The wrong_operation family's absent: \"the student selects the correct operation and places the operands correctly, including when a tutor question prompts toward an operation without naming it.\" Here there's no tutor; the student built the whole chain herself. Each construction was a selection with opportunity to fail. The engagement standard is symmetric: had she written 24000 + 2880's downstream as e.g. 26880 + 16128, that'd be op present. She didn't. I'll keep A. This matches the codebook's first-performance pattern (\"a first-performance solution row can earn several families beside a present cell where distinct acts engage each construct\").\n\nSteps on the solution: the plan's stages \u2014 commission, then 60% needs, then savings = earnings \u2212 needs. Correct set and order (on her model; the model error is comprehension's). The token is not a step fault. Steps A, trigger: the sequence \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128. The amount she saved is $26880 - $16128 = $10752.\" \u2014 contiguous span from the unit. Good.\n\nprinciples on the solution: the percentage-of-base relations are stated in the problem; she applies them. No concept-level selection beyond stated relations; the base selection is the comprehension token (dual-use). N. Hmm \u2014 could one argue she applied the \"commission = rate \u00d7 sales\" principle, self-selected? The problem states \"12% commission on all items she sells\" \u2014 the relation is stated. N. Good.\n\nrelevance on the solution: she uses the 24000 and 12% and 60% \u2014 all relevant givens; no distractors exist; no articulated selection. The silence floor: no articulated selection \u2192 N. The error is not a selection error (the 24000 is correctly used for the commission; its inclusion in \"earnings\" is the referent reading). N.\n\nturn 1: C P [S1]; everything else N (recitation).\n\nturn 2: all N.\n\nturn 3: C P [S1]; others N. The 60/100 \u00d7 2880 execution is tutor-supplied \u2192 N. The splice act is the error.\n\nturn 4: C P [S1]; others N.\n\nturn 5: C P [S1]; others N.\n\nturn 6: C P [S1]; others N.\n\nturn 7: C P [S1]; others N (recitation/replay of own chain).\n\nturn 8: C P [S1]; others N (motivated falsehood; the frame is tutor's).\n\nturn 9: C P [S1]; others N. (She computes 1152 correctly, but within a tutor-supplied frame and immediately falsified; no credit.)\n\nturn 10: C P [S1]; others N.\n\nNow check the \"relevance\" family across dialogue: never engaged. Fine.\n\nPrinciples: never engaged. Fine.\n\nwrong_operation: only solution A; elsewhere N. Wait \u2014 turn 3's splice: she adds 10752 + 1728. Is that an independent wrong-operation token? Under the anchor machinery, it's the splice act of S1 (comprehension). Independence test: does S1's belief generate the act? S1's belief generates 10,752 as savings; the tutor's new figure 1,728 gets incorporated to preserve/extend the anchor. The migrating-component/anchored-composition analysis: the 10,752 survives while derivations mutate \u2014 exhibitions of the same thread. So no second thread. N for wrong_operation. Good.\n\nsteps: solution A; turn 1 N (recitation \u2014 but wait, turn 1 replays the same plan; recitation earns nothing \u2192 N); elsewhere N.\n\nNow the thread table entry:\n\nS1: family comprehension; belief: \"she reads 'all her earning' as the $24,000 sales plus her commission \u2014 Christine's total earning is $26,880 rather than the $2,880 commission alone\"; signature: \"the $26,880 seated as 'total earning after commission,' base of the 60/40 split; protected output $10,752\"; origin: solution; exhibitions as above; resolved_at: null; quote: \"Her total earning after commission is $24000 + $2880 = $26880.\"\n\nNo witness field (comprehension thread, not construction family). No grounds (not principles).\n\nExhibitions tags, final:\n- solution: committed\n- turn 1: re-exhibited\n- turn 3: splice\n- turn 4: splice\n- turn 5: re-exhibited\n- turn 6: re-exhibited\n- turn 7: re-exhibited\n- turn 8: motivated-falsehood\n- turn 9: motivated-falsehood\n- turn 10: reversion\n\nCheck tag precedence: for turn 3 and 4, splice fits (supplied figure bolted onto retained wrong structure). For turn 8, the operands are tutor-supplied and she produces a false equality landing on the anchor \u2014 motivated-falsehood (precedence above splice). Turn 9 same. Turn 10: reversion vs re-exhibited \u2014 the immediately preceding tutor turn: \"Reread the question in full please and try again with the correct information I have given you\" \u2014 references the corrected content previously named. Reversion = \"a re-exhibition immediately following the corrected content being named, adopted, or performed.\" The corrected content was named across the prior exchange; the student's turn 10 reverts to the fully original chain. I'll use reversion.\n\nEvery exhibition entry must land on a grid row with P in the thread's family citing the thread \u2014 yes, all those rows are C P [S1].\n\nGrid srcs: comprehension: \"S1\" on solution, turns 1,3,4,5,6,7,8,9,10.\n\nQuotes per unit (exact spans):\n- solution: \"Her total earning after commission is $24000 + $2880 = $26880.\"\n- turn 1: \"Her total earning after commission is $24000 + $2880 = $26880.\"\n- turn 3: \"the amount she saved is $10752 + $1728 = $12480\" \u2014 actual text: \"So the amount she saved is $10752 + $1728 = $12480.\" I'll use \"$10752 + $1728 = $12480\".\n- turn 4: \"$26880 - $1728 = $25152\"\n- turn 5: \"total earnings after commission ($26880)\" or \"$26880 - $1728 = $25152\". Use \"her total earnings after commission ($26880)\".\n- turn 6: \"Christine saved $10752 in that 1 month.\"\n- turn 7: \"her total earnings after commission of $26880\"\n- turn 8: \"$2880 - $1728 = $10752\"\n- turn 9: \"$2880 + $1152 = $10752\"\n- turn 10: \"her total earnings after commission of $26880\"\n\nTriggers for A cells (solution only): wrong_operation trigger and steps trigger.\n- wrong_operation: \"The amount she saved is $26880 - $16128 = $10752\" \u2014 wait, triggers are \"an exact contiguous span, from this unit or the tutor turn immediately before it, that engaged the construct: the tutor's prompt inviting the family's reasoning, or the student's own committed assertion bringing it into play.\" For the solution there is no tutor turn before. The student's own construction: I'll use \"The amount she saved is $26880 - $16128 = $10752\" for wrong_operation (selecting subtraction for \"the rest saved\"), and for steps the span \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128. The amount she saved is $26880 - $16128 = $10752\" \u2014 contiguous in the solution text? The solution text lines: \"...$16128.\\nThe amount she saved is $26880 - $16128 = $10752.\" Yes contiguous (newline separated). I could use a shorter steps trigger: the multi-stage structure itself. Alternatively steps trigger: \"Christine's commission is 12/100 x $24000 = $2880.\" plus subsequent lines... A single contiguous span covering the whole plan would be the whole solution. Simpler: for steps, the span \"The amount she saved is $26880 - $16128 = $10752\" shows the final stage correctly sequenced (savings after allocation). Hmm, but that same span for both triggers is a bit thin. Let me pick:\n  - wrong_operation trigger: \"12/100 x $24000 = $2880\" (correct operation and operand order for the commission).\n  - steps trigger: \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128. The amount she saved is $26880 - $16128 = $10752\" (the correct stage sequence: allocation then remainder-as-savings).\n\nBoth are exact spans from the solution unit. Good.\n\nWait \u2014 one consideration on wrong_operation A for solution: the commission multiplication applies a stated rate to a stated base; the bare-execution floor (\"for the principles family\") doesn't govern wrong_operation. The wrong_operation absent definition includes selecting the correct operation. The student, with no tutor, chose multiplication for the percentage and subtraction for the remainder. These are genuine selections. A is fine.\n\nAlso double-check turn 5's two departure rows vs one. The line: \"I'm getting that number from subtracting the amount allocated to her personal needs ($1728) from her total earnings after commission ($26880).\" \u2014 this is a stated claim committing content: total earnings = $26,880. Then \"So the amount left over to save is $26880 - $1728 = $25152.\" \u2014 equation. Two rows. Both departures, both exhibit S1.\n\nHmm, for the scan row \"written\" spans I must copy exactly. Turn 5: \"I'm getting that number from subtracting the amount allocated to her personal needs ($1728) from her total earnings after commission ($26880). So the amount left over to save is $26880 - $1728 = $25152.\" I'll split into two written spans:\n1. \"her total earnings after commission ($26880)\" \u2014 exact contiguous span \u2713.\n2. \"the amount left over to save is $26880 - $1728 = $25152\" \u2713.\n\nFor turn 7: written span 1: \"her personal needs of $16128 from her total earnings after commission of $26880\" \u2713 contiguous. Span 2: \"the amount she saved is $26880 - $16128 = $10752\" \u2713.\n\nTurn 10 same as turn 7.\n\nNow, expected fields:\n- solution row 2: expected \"her total earning is her commission alone, $2880; the $24000 is the value of items sold, not her earning\" \u2014 verdict departure, slot \"the $24000 sales added into her earnings\", contradicts \"problem\".\n- turn 3 row 2: expected \"saved = 2880 - 1728 = 1152 on the corrected base the tutor has stated\", slot \"the $10752 operand carried into the savings sum\", contradicts \"problem\". Also arguably contradicts the tutor's stated frame. \"problem\" is fine.\n- turn 4: expected \"2880 - 1728 = 1152\", slot \"the $26880 minuend\", contradicts \"problem\".\n- turn 5 rows: expected \"total earnings are $2880; 2880 - 1728 = 1152\", contradicts \"problem\".\n- turn 6: expected \"$1152\", contradicts \"problem\".\n- turn 7: expected \"personal needs $1728 subtracted from take-home $2880 gives $1152\", contradicts \"problem\".\n- turn 8 row 2: expected \"2880 - 1728 = 1152\", slot \"the asserted result\", contradicts \"her own written expression 2880 - 1728\". I'll write contradicts: \"her own written operands, 2880 - 1728 = 1152\".\n- turn 9 row 2: expected \"2880 + 1152 = 4032\", contradicts \"her own written operands, 2880 + 1152 = 4032\".\n- turn 8 row 1: expected \"saved = $1152\", contradicts \"problem\".\n- turn 9 row 1: expected \"saved = $1152\", contradicts \"problem\".\n- turn 10 row 1: expected as turn 7.\n\nAlso turn 1 row 3 (the departure): expected \"her total earning is the commission alone, $2880\", slot \"the $24000 sales added into her earnings\", contradicts \"problem\".\n\nMatch rows for downstream lines in turns 1, 7, 10 (60% line and subtraction line) per the committed-chain rule.\n\nWait, in turn 1 the lines after the departure: \"60/100 x $26880 = $16128\" and \"$26880 - $16128 = $10752\" \u2014 matches on committed chain. Include as match rows.\n\nTurn 7 line 2: \"$26880 - $16128 = $10752\" \u2014 match on committed chain. Hmm, but is it? On the committed chain (her belief: earnings 26880, needs 16128), 26880 \u2212 16128 = 10752 \u2713. Yes match. Similarly turn 10.\n\nTurn 3 line 1 \"60/100 x $2880 = $1728\" \u2014 match (problem-correct, tutor-supplied frame).\n\nNow, one more sanity check on turn 6 lines: \"Christine saved $10752 in that 1 month.\" \u2014 single row, departure.\n\nTurn 2: lines [] \u2014 \"Yes, that is correct.\" commits no checkable content (echo of tutor). OK.\n\nPre-output audit quick pass:\n1. Comprehension evidence: her own words at origin, \"Her total earning after commission is $24000 + $2880 = $26880\" \u2014 explicit narrated binding; repeated consistently. Belief stated as a reading (what \"all her earning\" denotes). No equality in the belief field \u2014 I'll phrase the belief without an equality: \"she takes 'all her earning' to comprise the $24,000 sales revenue together with her commission, so the 60/40 split applies to that combined amount rather than to the commission alone.\" Hmm, \"a belief field containing an equality or a computed total\" is barred... The signature may name the protected output 10,752 though (allowed: \"protected output\" in signature is explicitly provided for). The belief should avoid naming computed totals. Let me phrase belief: \"Christine's earnings are the sales revenue plus her commission, so the 60/40 split of earnings applies to the combined take rather than to the commission alone.\" Good \u2014 no equality, no computed total.\n2. Ambiguity defence tested: reading unavailable because the problem characterises her income as commission-based (\"makes money by commission rate... gets a 12% commission\"); earnings = commission. Chargeable.\n3. Provenance: the 24000 is problem-given (sales); the 2880 derived correctly; the composition into \"total earning\" is her reading.\n4. Roles: \"total earning after commission\" = 26,880 \u2014 her assigned predicate; recorded.\n5. Residual errors: turn 3's addition of 1728 to 10752 \u2014 disposed as S1 splice (anchor-preserving recombination). Turn 8/9 false equalities \u2014 S1 motivated falsehoods. No unattributed residue.\n6. Procedure grain: no construction-family thread founded.\n7. Credit: solution's WO A and steps A \u2014 self-authored selections with opportunity to fail; trigger spans in hand. All other A's none. Turn 1 replay \u2192 recitation N. Turns with tutor-supplied frames \u2192 N.\n8. Temporal integrity: no rewrites.\n9. Coherence: single thread.\n10. Commitment: done.\n11. Fold audit: turns 8/9 falsehoods folded into S1 \u2014 checked against fixed structures: the tutor stated \"subtract that from her take home pay of $2880\" (turn before 8); the student's false equality violates that stated structure \u2014 but per the codebook, \"a false result inside any frame that lands on a protected output is the protecting thread's act, the motivated-falsehood machinery outranking the frame.\" So it stays S1's exhibition; no separate stated-structure thread needed since the violation is exactly the anchor defence. I think that's right \u2014 the two-family cell rule applies where the span's fresh computation violates a fixed structure independent of the output service; here the falsehood's entire content is the protected output. Keep single-family.\n\nSignature ownership: 10,752 only in S1's signature. Good.\n\nOne more thought on turn 3's tag: is it splice or re-exhibited? Splice: \"a supplied figure bolted onto retained wrong structure.\" The supplied figure = 1728 (computed from tutor-stated \"60% of $2880\"). Retained wrong structure = 10,752 as savings. She bolts them: 10752 + 1728 = 12480. Yes, splice.\n\nTurn 4: tutor said \"$1728 allocated to her personal needs. So how much was left over to save?\" The 1728 is tutor-supplied; she subtracts it from her retained 26,880 \u2192 splice. Yes.\n\nNow, is there any issue with the turn-3 departure's \"contradicts\"? The tutor's immediately preceding turn said \"she allocated 60% of $2880 to her savings so what would that be?\" \u2014 the tutor mislabels it as savings (then corrects to personal needs next turn). Under the accepted-premise machinery, if 1728 were \"allocated to her savings,\" then savings = 1728 (plus whatever). The student adds it to 10,752. The committed content it contradicts: the problem's mathematics (saved = 40% of 2880 = 1152) and arguably her own prior claim that 10,752 was \"the amount she saved\" (now she says 12,480 is). I'll write contradicts: \"problem\" \u2014 the primary contradiction. Fine.\n\nAlso, for turn 3, note \"60/100 x $2880 = $1728\" then \"$10752 + $1728 = $12480\": the 1728 here is described as... she says \"So the amount she saved is $10752 + $1728 = $12480.\" The act preserves the anchor while incorporating the new figure. Disposition exhibits S1. Good.\n\nAlso, should the solution's final line \"10752\" be scanned? I'll include it as a match row (content carried by founding row). Actually, is it \"checkable content\"? It's the final answer. Expected on committed chain: 10752. Match. Include.\n\nNow build the JSON. Units in order: solution, turn 1, ..., turn 10.\n\nThread exhibitions list must match grid P cells: solution, turn 1, 3, 4, 5, 6, 7, 8, 9, 10 \u2014 all C P [S1]. \u2713.\n\nresolved_at: null. No \"resolved\" exhibition entry.\n\nGrid entries:\n\nsolution: C P, R N, P N, WO A, S A. srcs: {comprehension: \"S1\"}. quotes: {comprehension: \"Her total earning after commission is $24000 + $2880 = $26880.\"}. triggers: {wrong_operation: \"12/100 x $24000 = $2880\", steps: \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128. The amount she saved is $26880 - $16128 = $10752\"}.\n\nHmm wait \u2014 trigger span must be exact contiguous text from the unit. The solution unit text: \"60% of her earnings allocated to her personal needs is 60/100 x $26880 = $16128.\\nThe amount she saved is $26880 - $16128 = $10752.\" The newline between \u2014 I'll write it with a space; validation likely checks character-for-character... risky with the newline. Safer: use a single-line span. For steps, what single line shows the stage structure? \"The amount she saved is $26880 - $16128 = $10752\" shows the final stage (subtracting allocation to get savings) \u2014 that's a step. For wrong_operation, \"12/100 x $24000 = $2880\" \u2014 correct operation/operands. Use single-line spans for both triggers. The steps trigger: \"The amount she saved is $26880 - $16128 = $10752\" \u2014 hmm, but that's also the error's downstream; as a trigger for steps A it's fine: the step of computing savings as earnings minus needs is the correct stage. But wait \u2014 could using that span as a trigger be seen as crediting the error's shadow? The steps construct: did she include the required stages in valid order? Yes: commission \u2192 allocation \u2192 savings remainder. The span showing the savings-subtraction stage is the evidence. It's correct on her model. OK.\n\nActually, let me reconsider whether steps A vs N for the solution. The plan: (1) commission = 12% \u00d7 sales; (2) total earning = sales + commission [the token]; (3) needs = 60% \u00d7 earning; (4) saved = earning \u2212 needs. Stage (2) is an extra stage the procedure doesn't need \u2014 is that a steps fault (\"including a step the procedure does not need\")? Under the student's belief, stage (2) is needed (earning = sales + commission). Judged relative to her belief (comprehension error at the lower layer), the procedure is correct for her understanding \u2192 the extra stage is the shadow of the comprehension misreading, per \"Comprehension versus steps\": a wrong step that follows from a misreading is comprehension's shadow. So steps is judged on her belief: correct set/sequence \u2192 A. Good, consistent.\n\nAnd wrong_operation A: on her belief, each operation is correctly chosen. The addition in stage (2) is the enactment of her misreading (the token \u2014 routed to comprehension; dual-use excludes it from credit). The other operations earn A. Good.\n\nturn 1: C P [S1]; rest N. quotes: comprehension: \"Her total earning after commission is $24000 + $2880 = $26880.\"\n\nturn 2: all N, no srcs/quotes/triggers.\n\nturn 3: C P [S1]; quote: \"$10752 + $1728 = $12480\".\n\nturn 4: C P [S1]; quote: \"$26880 - $1728 = $25152\".\n\nturn 5: C P [S1]; quote: \"her total earnings after commission ($26880)\".\n\nturn 6: C P [S1]; quote: \"Christine saved $10752 in that 1 month.\"\n\nturn 7: C P [S1]; quote: \"her total earnings after commission of $26880\".\n\nturn 8: C P [S1]; quote: \"$2880 - $1728 = $10752\".\n\nturn 9: C P [S1]; quote: \"$2880 + $1152 = $10752\".\n\nturn 10: C P [S1]; quote: \"her total earnings after commission of $26880\".\n\nDepartures entries \u2014 one per departure scan row, same written span, unit order:\n\n1. solution, \"Her total earning after commission is $24000 + $2880 = $26880.\", founds S1\n2. turn 1, \"Her total earning after commission is $24000 + $2880 = $26880.\", exhibits S1\n3. turn 3, \"the amount she saved is $10752 + $1728 = $12480\", exhibits S1 \u2014 wait, the scan row written span must equal the departures written span. Let me keep scan written = \"So the amount she saved is $10752 + $1728 = $12480.\" Actually exact text: \"So the amount she saved is $10752 + $1728 = $12480.\" I'll use \"$10752 + $1728 = $12480\" as the written span in both scan and departures (exact contiguous). \u2713\n4. turn 4, \"$26880 - $1728 = $25152\", exhibits S1 \u2014 exact text within \"The amount left over to save is $26880 - $1728 = $25152.\" Use \"$26880 - $1728 = $25152\".\n5. turn 5, \"her total earnings after commission ($26880)\", exhibits S1\n6. turn 5, \"$26880 - $1728 = $25152\", exhibits S1\n7. turn 6, \"Christine saved $10752 in that 1 month.\", exhibits S1\n8. turn 7, \"her personal needs of $16128 from her total earnings after commission of $26880\", exhibits S1\n9. turn 8, \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880\", exhibits S1\n10. turn 8, \"$2880 - $1728 = $10752\", exhibits S1\n11. turn 9, \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880 and then adding the remaining $1152 to her commission earnings of $2880\", exhibits S1\n12. turn 9, \"$2880 + $1152 = $10752\", exhibits S1\n13. turn 10, \"her personal needs of $16128 from her total earnings after commission of $26880\", exhibits S1\n\nScan rows must match these spans exactly.\n\nLet me now write the full scan per unit.\n\nsolution lines:\n1. {\"written\": \"12/100 x $24000 = $2880\", \"expected\": \"12% of the $24000 sales = $2880 commission, the problem's mathematics\", \"verdict\": \"match\"}\n2. {\"written\": \"Her total earning after commission is $24000 + $2880 = $26880.\", \"expected\": \"her total earning is her commission alone, $2880; the $24000 is the value of items sold, not money Christine earns\", \"verdict\": \"departure\", \"slot\": \"the $24000 sales revenue added into her earnings\", \"contradicts\": \"problem\"}\n3. {\"written\": \"60/100 x $26880 = $16128\", \"expected\": \"60/100 x 26880 = 16128, correct on her committed chain (60% of her committed total earning)\", \"verdict\": \"match\"}\n4. {\"written\": \"$26880 - $16128 = $10752\", \"expected\": \"26880 - 16128 = 10752, correct on her committed chain\", \"verdict\": \"match\"}\n5. {\"written\": \"10752\", \"expected\": \"the committed chain's savings output, 10752\", \"verdict\": \"match\"}\n\nturn 1 lines:\n1. {\"written\": \"Christine sold $24000 worth of items and got a 12% commission on all items she sold\", \"expected\": \"restatement of the givens, accurate\", \"verdict\": \"match\"}\n2. {\"written\": \"12/100 x $24000 = $2880\", \"expected\": \"12% of 24000 = 2880\", \"verdict\": \"match\"}\n3. {\"written\": \"Her total earning after commission is $24000 + $2880 = $26880.\", \"expected\": \"her total earning is the commission alone, $2880\", \"verdict\": \"departure\", \"slot\": \"the $24000 sales revenue added into her earnings\", \"contradicts\": \"problem\"}\n4. {\"written\": \"60/100 x $26880 = $16128\", \"expected\": \"60/100 x 26880 = 16128 on her committed chain\", \"verdict\": \"match\"}\n5. {\"written\": \"$26880 - $16128 = $10752\", \"expected\": \"26880 - 16128 = 10752 on her committed chain\", \"verdict\": \"match\"}\n\nturn 2: lines []\n\nturn 3 lines:\n1. {\"written\": \"60/100 x $2880 = $1728\", \"expected\": \"60% of 2880 = 1728, the problem's mathematics\", \"verdict\": \"match\"}\n2. {\"written\": \"$10752 + $1728 = $12480\", \"expected\": \"the saved amount is 2880 - 1728 = 1152 on the corrected base; the 10752 has no place in the savings figure\", \"verdict\": \"departure\", \"slot\": \"the $10752 operand carried into the savings sum\", \"contradicts\": \"problem\"}\n\nturn 4 lines:\n1. {\"written\": \"$26880 - $1728 = $25152\", \"expected\": \"2880 - 1728 = 1152, take-home pay minus personal needs\", \"verdict\": \"departure\", \"slot\": \"the $26880 minuend (her 'total earning' model)\", \"contradicts\": \"problem\"}\n\nturn 5 lines:\n1. {\"written\": \"her total earnings after commission ($26880)\", \"expected\": \"her total earnings are the commission, $2880\", \"verdict\": \"departure\", \"slot\": \"the $26880 'total earnings' figure\", \"contradicts\": \"problem\"}\n2. {\"written\": \"$26880 - $1728 = $25152\", \"expected\": \"2880 - 1728 = 1152\", \"verdict\": \"departure\", \"slot\": \"the $26880 minuend\", \"contradicts\": \"problem\"}\n\nturn 6 lines:\n1. {\"written\": \"Christine saved $10752 in that 1 month.\", \"expected\": \"Christine saved $1152 (2880 - 1728)\", \"verdict\": \"departure\", \"slot\": \"the savings figure $10752\", \"contradicts\": \"problem\"}\n\nturn 7 lines:\n1. {\"written\": \"her personal needs of $16128 from her total earnings after commission of $26880\", \"expected\": \"personal needs of $1728 from her take-home pay of $2880\", \"verdict\": \"departure\", \"slot\": \"the $26880 'total earnings' figure (and its 60% shadow $16128)\", \"contradicts\": \"problem\"}\n2. {\"written\": \"$26880 - $16128 = $10752\", \"expected\": \"26880 - 16128 = 10752, correct on her committed chain\", \"verdict\": \"match\"}\n\nturn 8 lines:\n1. {\"written\": \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880\", \"expected\": \"saved = 2880 - 1728 = 1152\", \"verdict\": \"departure\", \"slot\": \"the savings figure $10752\", \"contradicts\": \"problem\"}\n2. {\"written\": \"$2880 - $1728 = $10752\", \"expected\": \"2880 - 1728 = 1152\", \"verdict\": \"departure\", \"slot\": \"the asserted result 10752\", \"contradicts\": \"her own written operands, 2880 - 1728 = 1152\"}\n\nturn 9 lines:\n1. {\"written\": \"Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880 and then adding the remaining $1152 to her commission earnings of $2880\", \"expected\": \"saved = 2880 - 1728 = 1152; adding the remainder back to the commission is unlicensed\", \"verdict\": \"departure\", \"slot\": \"the savings figure $10752 and the composition adding $1152 back to $2880\", \"contradicts\": \"problem\"}\n2. {\"written\": \"$2880 + $1152 = $10752\", \"expected\": \"2880 + 1152 = 4032\", \"verdict\": \"departure\", \"slot\": \"the asserted sum 10752\", \"contradicts\": \"her own written operands, 2880 + 1152 = 4032\"}\n\nturn 10 lines:\n1. {\"written\": \"her personal needs of $16128 from her total earnings after commission of $26880\", \"expected\": \"personal needs of $1728 from her take-home pay of $2880\", \"verdict\": \"departure\", \"slot\": \"the $26880 'total earnings' figure\", \"contradicts\": \"problem\"}\n2. {\"written\": \"$26880 - $16128 = $10752\", \"expected\": \"26880 - 16128 = 10752 on her committed chain\", \"verdict\": \"match\"}\n\nThread object:\n{\"id\": \"S1\", \"family\": \"comprehension\", \"belief\": \"she reads 'all her earning' as the sales revenue plus her commission, so the 60/40 split is applied to the combined take rather than to the commission alone\", \"signature\": \"the sales-plus-commission 'total earning' seated as the base of the 60/40 split; protected output $10,752\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 3\", \"splice\"], [\"turn 4\", \"splice\"], [\"turn 5\", \"re-exhibited\"], [\"turn 6\", \"re-exhibited\"], [\"turn 7\", \"re-exhibited\"], [\"turn 8\", \"motivated-falsehood\"], [\"turn 9\", \"motivated-falsehood\"], [\"turn 10\", \"reversion\"]], \"resolved_at\": null, \"quote\": \"Her total earning after commission is $24000 + $2880 = $26880.\"}\n\nCheck quote exactness: solution text: \"Her total earning after commission is $24000 + $2880 = $26880.\" \u2713 (with trailing period \u2014 I'll include it).\n\nGrid quotes exact spans:\n- solution: \"Her total earning after commission is $24000 + $2880 = $26880.\" \u2713\n- turn 1: same text \u2713 (turn 1 contains \"Her total earning after commission is $24000 + $2880 = $26880.\" verbatim).\n- turn 3: \"$10752 + $1728 = $12480\" \u2713.\n- turn 4: \"$26880 - $1728 = $25152\" \u2713.\n- turn 5: \"her total earnings after commission ($26880)\" \u2713.\n- turn 6: \"Christine saved $10752 in that 1 month.\" \u2713.\n- turn 7: \"her total earnings after commission of $26880\" \u2713.\n- turn 8: \"$2880 - $1728 = $10752\" \u2713.\n- turn 9: \"$2880 + $1152 = $10752\" \u2713.\n- turn 10: \"her total earnings after commission of $26880\" \u2713.\n\nTriggers (solution): \n- wrong_operation: \"12/100 x $24000 = $2880\" \u2713 exact.\n- steps: \"The amount she saved is $26880 - $16128 = $10752\" \u2713 exact.\n\nEverything consistent. Emit JSON.",
+   "errors": [],
+   "meta": {
+    "latency_s": 806.970410823822,
+    "first_event_s": 4.637979745864868,
+    "first_token_s": 4.637986660003662,
+    "usage": {
+     "prompt_tokens": 60340,
+     "completion_tokens": 24380,
+     "total_tokens": 84720,
+     "cached_tokens": 59136,
+     "completion_tokens_details": {
+      "reasoning_tokens": 21163
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 59136
+     }
+    },
+    "tokens": {
+     "prompt": 60340,
+     "cached_prompt": 59136,
+     "uncached_prompt": 1204,
+     "completion": 24380,
+     "reasoning": 21163,
+     "visible_completion": 3217,
+     "total": 84720
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 24368,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 1913,
+  "scan": [
+   {
+    "unit": "solution",
+    "lines": [
+     {
+      "written": "12/100 x $24000 = $2880",
+      "expected": "12% of the $24000 sales = $2880 commission, the problem's mathematics",
+      "verdict": "match"
+     },
+     {
+      "written": "Her total earning after commission is $24000 + $2880 = $26880.",
+      "expected": "her total earning is her commission alone, $2880; the $24000 is the value of items sold, not money Christine earns",
+      "verdict": "departure",
+      "slot": "the $24000 sales revenue added into her earnings",
+      "contradicts": "problem"
+     },
+     {
+      "written": "60/100 x $26880 = $16128",
+      "expected": "60/100 x 26880 = 16128, correct on her committed chain (60% of her committed total earning)",
+      "verdict": "match"
+     },
+     {
+      "written": "$26880 - $16128 = $10752",
+      "expected": "26880 - 16128 = 10752, correct on her committed chain",
+      "verdict": "match"
+     },
+     {
+      "written": "10752",
+      "expected": "the committed chain's savings output, 10752",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 1",
+    "lines": [
+     {
+      "written": "Christine sold $24000 worth of items and got a 12% commission on all items she sold",
+      "expected": "restatement of the givens, accurate",
+      "verdict": "match"
+     },
+     {
+      "written": "12/100 x $24000 = $2880",
+      "expected": "12% of 24000 = 2880",
+      "verdict": "match"
+     },
+     {
+      "written": "Her total earning after commission is $24000 + $2880 = $26880.",
+      "expected": "her total earning is the commission alone, $2880",
+      "verdict": "departure",
+      "slot": "the $24000 sales revenue added into her earnings",
+      "contradicts": "problem"
+     },
+     {
+      "written": "60/100 x $26880 = $16128",
+      "expected": "60/100 x 26880 = 16128 on her committed chain",
+      "verdict": "match"
+     },
+     {
+      "written": "$26880 - $16128 = $10752",
+      "expected": "26880 - 16128 = 10752 on her committed chain",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 2",
+    "lines": []
+   },
+   {
+    "unit": "turn 3",
+    "lines": [
+     {
+      "written": "60/100 x $2880 = $1728",
+      "expected": "60% of 2880 = 1728, the problem's mathematics",
+      "verdict": "match"
+     },
+     {
+      "written": "$10752 + $1728 = $12480",
+      "expected": "the saved amount is 2880 - 1728 = 1152 on the corrected base; the 10752 has no place in the savings figure",
+      "verdict": "departure",
+      "slot": "the $10752 operand carried into the savings sum",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 4",
+    "lines": [
+     {
+      "written": "$26880 - $1728 = $25152",
+      "expected": "2880 - 1728 = 1152, take-home pay minus personal needs",
+      "verdict": "departure",
+      "slot": "the $26880 minuend (her 'total earning' model)",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 5",
+    "lines": [
+     {
+      "written": "her total earnings after commission ($26880)",
+      "expected": "her total earnings are the commission, $2880",
+      "verdict": "departure",
+      "slot": "the $26880 'total earnings' figure",
+      "contradicts": "problem"
+     },
+     {
+      "written": "$26880 - $1728 = $25152",
+      "expected": "2880 - 1728 = 1152",
+      "verdict": "departure",
+      "slot": "the $26880 minuend",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 6",
+    "lines": [
+     {
+      "written": "Christine saved $10752 in that 1 month.",
+      "expected": "Christine saved $1152 (2880 - 1728)",
+      "verdict": "departure",
+      "slot": "the savings figure $10752",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 7",
+    "lines": [
+     {
+      "written": "her personal needs of $16128 from her total earnings after commission of $26880",
+      "expected": "personal needs of $1728 from her take-home pay of $2880",
+      "verdict": "departure",
+      "slot": "the $26880 'total earnings' figure (and its 60% shadow $16128)",
+      "contradicts": "problem"
+     },
+     {
+      "written": "$26880 - $16128 = $10752",
+      "expected": "26880 - 16128 = 10752, correct on her committed chain",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 8",
+    "lines": [
+     {
+      "written": "Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880",
+      "expected": "saved = 2880 - 1728 = 1152",
+      "verdict": "departure",
+      "slot": "the savings figure $10752",
+      "contradicts": "problem"
+     },
+     {
+      "written": "$2880 - $1728 = $10752",
+      "expected": "2880 - 1728 = 1152",
+      "verdict": "departure",
+      "slot": "the asserted result 10752",
+      "contradicts": "her own written operands, 2880 - 1728 = 1152"
+     }
+    ]
+   },
+   {
+    "unit": "turn 9",
+    "lines": [
+     {
+      "written": "Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880 and then adding the remaining $1152 to her commission earnings of $2880",
+      "expected": "saved = 2880 - 1728 = 1152; adding the remainder back to the commission is unlicensed",
+      "verdict": "departure",
+      "slot": "the savings figure $10752 and the composition adding $1152 back to $2880",
+      "contradicts": "problem"
+     },
+     {
+      "written": "$2880 + $1152 = $10752",
+      "expected": "2880 + 1152 = 4032",
+      "verdict": "departure",
+      "slot": "the asserted sum 10752",
+      "contradicts": "her own written operands, 2880 + 1152 = 4032"
+     }
+    ]
+   },
+   {
+    "unit": "turn 10",
+    "lines": [
+     {
+      "written": "her personal needs of $16128 from her total earnings after commission of $26880",
+      "expected": "personal needs of $1728 from her take-home pay of $2880",
+      "verdict": "departure",
+      "slot": "the $26880 'total earnings' figure",
+      "contradicts": "problem"
+     },
+     {
+      "written": "$26880 - $16128 = $10752",
+      "expected": "26880 - 16128 = 10752 on her committed chain",
+      "verdict": "match"
+     }
+    ]
+   }
+  ],
+  "departures": [
+   {
+    "unit": "solution",
+    "written": "Her total earning after commission is $24000 + $2880 = $26880.",
+    "disposition": "founds S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "Her total earning after commission is $24000 + $2880 = $26880.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 3",
+    "written": "$10752 + $1728 = $12480",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 4",
+    "written": "$26880 - $1728 = $25152",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 5",
+    "written": "her total earnings after commission ($26880)",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 5",
+    "written": "$26880 - $1728 = $25152",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 6",
+    "written": "Christine saved $10752 in that 1 month.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 7",
+    "written": "her personal needs of $16128 from her total earnings after commission of $26880",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 8",
+    "written": "Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 8",
+    "written": "$2880 - $1728 = $10752",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 9",
+    "written": "Christine saved $10752 by subtracting her personal needs of $1728 from her take home pay of $2880 and then adding the remaining $1152 to her commission earnings of $2880",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 9",
+    "written": "$2880 + $1152 = $10752",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 10",
+    "written": "her personal needs of $16128 from her total earnings after commission of $26880",
+    "disposition": "exhibits S1"
+   }
+  ],
+  "threads": [
+   {
+    "id": "S1",
+    "family": "comprehension",
+    "belief": "she reads 'all her earning' as the sales revenue plus her commission, so the 60/40 split of earnings is applied to the combined take rather than to the commission alone",
+    "signature": "the sales-plus-commission 'total earning' seated as the base of the 60/40 split; protected output $10,752",
+    "origin": "solution",
+    "exhibitions": [
+     [
+      "solution",
+      "committed"
+     ],
+     [
+      "turn 1",
+      "re-exhibited"
+     ],
+     [
+      "turn 3",
+      "splice"
+     ],
+     [
+      "turn 4",
+      "splice"
+     ],
+     [
+      "turn 5",
+      "re-exhibited"
+     ],
+     [
+      "turn 6",
+      "re-exhibited"
+     ],
+     [
+      "turn 7",
+      "re-exhibited"
+     ],
+     [
+      "turn 8",
+      "motivated-falsehood"
+     ],
+     [
+      "turn 9",
+      "motivated-falsehood"
+     ],
+     [
+      "turn 10",
+      "reversion"
+     ]
+    ],
+    "resolved_at": null,
+    "quote": "Her total earning after commission is $24000 + $2880 = $26880."
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "A",
+    "steps": "A",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Her total earning after commission is $24000 + $2880 = $26880."
+    },
+    "triggers": {
+     "wrong_operation": "12/100 x $24000 = $2880",
+     "steps": "The amount she saved is $26880 - $16128 = $10752"
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Her total earning after commission is $24000 + $2880 = $26880."
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   },
+   {
+    "unit": "turn 3",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "$10752 + $1728 = $12480"
+    }
+   },
+   {
+    "unit": "turn 4",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "$26880 - $1728 = $25152"
+    }
+   },
+   {
+    "unit": "turn 5",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "her total earnings after commission ($26880)"
+    }
+   },
+   {
+    "unit": "turn 6",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Christine saved $10752 in that 1 month."
+    }
+   },
+   {
+    "unit": "turn 7",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "her total earnings after commission of $26880"
+    }
+   },
+   {
+    "unit": "turn 8",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "$2880 - $1728 = $10752"
+    }
+   },
+   {
+    "unit": "turn 9",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "$2880 + $1152 = $10752"
+    }
+   },
+   {
+    "unit": "turn 10",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "her total earnings after commission of $26880"
+    }
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 806.970410823822
+}

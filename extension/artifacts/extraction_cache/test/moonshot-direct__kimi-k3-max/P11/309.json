@@ -1,0 +1,260 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P11",
+ "reasoning_effort": "max",
+ "dialogue_id": 309,
+ "split": "test",
+ "attempts": [
+  {
+   "raw": "at Luka turned 4 years old, Max would also be 10 years old on Aubrey's 8th birthday.\", \"expected\": \"Max = 10 - 4 = 6 on the problem's mathematics\", \"verdict\": \"departure\", \"slot\": \"Max's age seated at Luka's 10\", \"contradicts\": \"problem\"}]}, {\"unit\": \"turn 2\", \"lines\": [{\"written\": \"Since Luka was 4 years old when Max was born, and Luka is 2 years older than Aubrey, then on Aubrey's 8th birthday, Luka would be 8 + 2 = 10 years old.\", \"expected\": \"8 + 2 = 10, the problem's mathematics\", \"verdict\": \"match\"}, {\"written\": \"Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\", \"expected\": \"Max = 10 - 4 = 6, her own stated premise making Max 4 years younger than Luka\", \"verdict\": \"departure\", \"slot\": \"Max's age seated at Luka's 10\", \"contradicts\": \"problem\"}]}, {\"unit\": \"turn 3\", \"lines\": [{\"written\": \"Yes, that is correct.\", \"expected\": \"acceptance of the tutor's stated 10 - 4\", \"verdict\": \"match\"}, {\"written\": \"Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10 years old on Aubrey's 8th birthday.\", \"expected\": \"Max = 10 - 4 = 6, the calculation she has just accepted\", \"verdict\": \"departure\", \"slot\": \"Max's age still asserted as 10\", \"contradicts\": \"her own just-accepted 10 - 4\"}]}, {\"unit\": \"turn 4\", \"lines\": [{\"written\": \"Yes, I see that.\", \"expected\": \"acknowledgment of the tutor's stated 10 - 4\", \"verdict\": \"match\"}, {\"written\": \"Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10-4 = 6 years old on Aubrey's 8th birthday.\", \"expected\": \"10 - 4 = 6, the problem's mathematics\", \"verdict\": \"match\"}]}], \"departures\": [{\"unit\": \"solution\", \"written\": \"Max would be the same age as Luka on Aubrey's 8th birthday\", \"disposition\": \"founds S1\"}, {\"unit\": \"turn 1\", \"written\": \"On Aubrey's 8th birthday, Luka was 10 years old, and since Max was born on the same day that Luka turned 4 years old, Max would also be 10 years old on Aubrey's 8th birthday.\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 2\", \"written\": \"Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 3\", \"written\": \"Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10 years old on Aubrey's 8th birthday.\", \"disposition\": \"exhibits S1\"}], \"threads\": [{\"id\": \"S1\", \"family\": \"comprehension\", \"belief\": \"she takes 'Max was born on the same day that Luka turned 4' to mean Max is the same age as Luka\", \"signature\": \"Max's age seated at Luka's age; protected output 10\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 2\", \"re-exhibited\"], [\"turn 3\", \"parrot-with-contradiction\"]], \"resolved_at\": null, \"quote\": \"Max would be the same age as Luka on Aubrey's 8th birthday\"}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Max would be the same age as Luka on Aubrey's 8th birthday\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Max would also be 10 years old on Aubrey's 8th birthday\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Max would also be 10 years old on Aubrey's 8th birthday\"}}, {\"unit\": \"turn 3\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Max would also be 10 years old on Aubrey's 8th birthday\"}}, {\"unit\": \"turn 4\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}]}",
+   "reasoning": "Let me solve the problem first.\n\nProblem: Jordan's dog Max was born on the same day Luka turned 4. Luka is exactly 2 years older than Aubrey. On Aubrey's 8th birthday, how old was Max?\n\nCorrect route: When Aubrey turns 8, Luka is 8 + 2 = 10 years old. Max was born when Luka turned 4, so Max's age = Luka's current age - 4 = 10 - 4 = 6 years old.\n\nStudent's solution: Luka is 10 on Aubrey's 8th birthday (correct). Then says \"Max would be the same age as Luka\" \u2192 Max = 10. That's the error: Max is 6 years younger than Luka (born when Luka was 4), not the same age as Luka.\n\nThis is a comprehension error: the student misreads the relation \"born on the same day Luka turned 4\" \u2014 she treats it as if Max and Luka are the same age, rather than Max being 4 years younger than Luka. Actually, let me think about the family.\n\nThe stated condition: \"Max was born on the same day that Luka turned 4 years old.\" The student treats this as meaning Max = Luka's age. This is a misreading of what the stated sentence establishes \u2014 a referent/relation misread. Comprehension: the student takes the text to say Max is the same age as Luka. The belief: \"born the day Luka turned 4 means Max and Luka are the same age.\" This is a wrong reading of what the problem states. It's a comprehension error.\n\nCould it be principles (a false relation)? No \u2014 the relation is stated in the problem (birth dates determine ages), and the student misreads what the sentence means. It's comprehension: a reading of what the problem states.\n\nNow scan each unit.\n\n**Solution (turn 0):**\nLines:\n1. \"If Aubrey was 8 years old, and Luka is 2 years older than Aubrey, then Luka was 8 + 2 = 10 years old on Aubrey's 8th birthday.\" \u2014 correct: Luka = 10. Match.\n2. \"Since Max was born on the same day that Luka turned 4 years old, Max would be the same age as Luka on Aubrey's 8th birthday. Therefore, Max would also be 10 years old.\" \u2014 Departure: Max = Luka's age. Expected: Max = Luka - 4 = 6. The claim \"Max would be the same age as Luka\" contradicts the problem. Departure, slot: the claim Max is the same age as Luka / Max = 10.\n3. \"10\" \u2014 the answer, shadow of the belief (protected output).\n\nActually the \"10\" final answer is generated by the belief; it's the protected output. The founding departure is the claim that Max is the same age as Luka.\n\nThread S1: comprehension. Belief: \"Max was born when Luka turned 4\" means Max is the same age as Luka (i.e., the student takes the stated condition to make Max and Luka equal in age rather than 4 years apart). Signature: Max seated at Luka's age; protected output 10.\n\nWait \u2014 signature: \"the wrong quantity, operand, or omission and the role it sits in\". Here: Max's age set equal to Luka's age; protected output 10.\n\n**Turn 1:**\nStudent: \"On Aubrey's 8th birthday, Luka was 10 years old, and since Max was born on the same day that Luka turned 4 years old, Max would also be 10 years old on Aubrey's 8th birthday.\"\nLine 1: Luka = 10. Match (correct).\nLine 2: Max = 10. Departure \u2014 exhibits S1. The tutor's preceding turn asks \"How is Max the same as Luka\" \u2014 a pointer, not supplying the correction. The student re-commits the error. Re-exhibited.\n\nActually, is the tutor's question supplying? \"How is Max the same as Luka on Aubrey's 8th birthday?\" \u2014 it's a pointing prompt questioning the claim. Student re-asserts. Present, comprehension, exhibits S1.\n\n**Turn 2:**\nTutor: \"If Max was born on the same day that Luka turned 4, how could Max be 10 on Aubrey's 8th birthday?\" \u2014 points at the contradiction, doesn't state the fix.\nStudent: \"Since Luka was 4 years old when Max was born, and Luka is 2 years older than Aubrey, then on Aubrey's 8th birthday, Luka would be 8 + 2 = 10 years old. Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\"\nLines:\n- \"Luka was 4 years old when Max was born\" \u2014 restates problem, true. Match.\n- \"Luka would be 8 + 2 = 10\" \u2014 match.\n- \"Therefore, Max would also be 10\" \u2014 departure, exhibits S1. Note: here she herself restates \"Luka was 4 when Max was born\" and still concludes Max = 10. This is a strong re-commitment. Present.\n\n**Turn 3:**\nTutor: \"Is the calculation not Luka being 10 years old, minus 4 as jordan's dog max was born on the same day that Luka turned 4?\" \u2014 This supplies the correction: 10 - 4.\nStudent: \"Yes, that is correct. Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10 years old on Aubrey's 8th birthday.\"\nThe student says \"Yes, that is correct\" (agreeing with 10 - 4) but then still states Max = 10. This is parrot-with-contradiction: accepts the supplied correction verbally but her working still asserts Max = 10. Present, comprehension, exhibits S1, tag parrot-with-contradiction.\n\nLines:\n- \"Yes, that is correct\" \u2014 echoes tutor's 10-4. Tutor-supplied, not a departure (it's correct content echoed).\n- \"Luka was 10\" \u2014 match.\n- \"Max would also be 10 years old\" \u2014 departure, exhibits S1 (parrot-with-contradiction).\n\n**Turn 4:**\nTutor: \"The answer is 10-4, do you see that?\" \u2014 supplies the answer.\nStudent: \"Yes, I see that. Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10-4 = 6 years old on Aubrey's 8th birthday.\"\nNow the student writes 10 - 4 = 6. This executes the tutor's stated correction. Under the fully-dictated-correction rule: the tutor named both the error and the fix (\"The answer is 10-4\"). The student applies it and reports 6. Per the kombucha/overtime examples: executing a fully dictated correction is not_evidenced, not absent, and does not resolve.\n\nBut wait \u2014 does the student add reasoning? She says \"since Max was born on the same day that Luka turned 4, Max would also be 10-4 = 6 years old\". Is this added reasoning demonstrating grasp? The tutor stated \"The answer is 10-4, do you see that?\" and previously \"Is the calculation not Luka being 10 years old, minus 4 as jordan's dog max was born on the same day that Luka turned 4?\" The tutor fully stated the calculation and its rationale (minus 4 because Max was born when Luka turned 4). The student's turn merely restates it. So not_evidenced, no resolution. Thread remains unresolved? resolved_by_end false, resolved_at null.\n\nHmm, but let me reconsider. The resolution step: \"executing a fix whose content the tutor named\" does not resolve. Correct. The tutor named 10-4 across turns 3-4 prompts. So turn 4 is not_evidenced for comprehension, thread unresolved.\n\nNow the scan for each unit in detail.\n\n**Solution lines:**\n1. \"Luka was 8 + 2 = 10 years old on Aubrey's 8th birthday\" \u2014 expected: 8 + 2 = 10. Match.\n2. \"Max would be the same age as Luka on Aubrey's 8th birthday\" \u2014 expected: Max = 10 - 4 = 6, Max is 4 years younger than Luka. Departure: slot = the claim Max is the same age as Luka; contradicts problem.\n3. \"Max would also be 10 years old\" \u2014 this is the protected output generated by the belief. It's a shadow of S1? The departure rule: \"A slot that is correct on the committed chain but wrong on the problem is not a departure here, because its content is already carried by the row that founded the belief.\" The value 10 for Max follows from the belief that Max = Luka's age. So it's the shadow/protected output. But it's also part of the same sentence. Let me treat line 2 as containing the founding claim, and \"Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\" as the conclusion \u2014 shadow of S1 (generated by the belief). Actually, should the founding span be the whole claim including \"Max would also be 10\"? The signature names the act (Max seated at Luka's age) plus protected output 10. I'll make the founding departure the \"same age as Luka\" claim and the \"10\" conclusion a shadow.\n\nLet me be careful about spans. Solution text:\n\n\"We can start by figuring out how old Luka was on Aubrey's 8th birthday. If Aubrey was 8 years old, and Luka is 2 years older than Aubrey, then Luka was 8 + 2 = 10 years old on Aubrey's 8th birthday.\n\nSince Max was born on the same day that Luka turned 4 years old, Max would be the same age as Luka on Aubrey's 8th birthday. Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\n\n 10\"\n\nLines:\n- \"Luka was 8 + 2 = 10 years old on Aubrey's 8th birthday\": match.\n- \"Max would be the same age as Luka on Aubrey's 8th birthday\": departure, founds S1. Slot: the equation of Max's age with Luka's age. Contradicts: problem (Max born when Luka turned 4, so 4 years younger).\n- \"Max would also be 10 years old on Aubrey's 8th birthday\": departure from problem but generated by S1's belief \u2192 shadow of S1. Per rules: a slot correct on the committed chain (the belief Max=Luka) but wrong on the problem is not a departure \u2014 its content is carried by the founding row. Hmm, the instruction says such a slot is \"not a departure here.\" So should I even record it as a departure row? \"A slot that is correct on the committed chain but wrong on the problem is not a departure here, because its content is already carried by the row that founded the belief\". So I should mark it as... not a departure. But it's also not a \"match\" since it's wrong on the problem. The scan guidance says give a line a single match row only where no slot departs. The conclusion line's value is generated by the belief, so it doesn't independently depart. I could either include it as a shadow departure or omit it. The dispositions list includes \"shadow of S#\", so shadow departures do get recorded. The statement \"is not a departure here\" suggests not recording. But then how do shadows ever appear in departures? The \"shadow\" disposition exists for cases like downstream computations following from a wrong belief \u2014 e.g., if she computed 10 + something. Hmm.\n\nLet me think: the rule says a slot correct on the committed chain is not a departure because content carried by founding row. But the departures closed list includes \"shadow of S#\", legitimate \"only where S#'s belief itself generates the departure's content.\" So shadows are for departures that the belief generates \u2014 distinct acts downstream that are wrong on the problem but right on the belief. E.g., final answer \"10\" is a shadow. The difference between \"not a departure\" and \"shadow\": I think the guidance intends that downstream values generated by the belief are recorded as shadow departures (so they're disposed), while the \"not a departure\" clause is about not double-charging the same content. Actually re-reading: \"A slot that is correct on the committed chain but wrong on the problem is not a departure here, because its content is already carried by the row that founded the belief; a slot contradicting one of her own prior committed outputs is a departure even where its value matches the problem.\"\n\nHmm. This says such a slot is \"not a departure here\". But the disposition \"shadow of S#\" exists and the example... in the given example, no shadow dispositions appear. Let me interpret: downstream conclusions that merely restate the founded belief's output can either be folded or listed as shadows. To be safe and complete, I'll list genuinely separate downstream acts as shadow departures. The final bare \"10\" line is the answer \u2014 it's the protected output, a separate line. I'll record \"Max would also be 10 years old on Aubrey's 8th birthday.\" \u2014 hmm, that's essentially the same content as the founding claim's consequence. \n\nOption: make the founding span the full sentence \"Max would be the same age as Luka on Aubrey's 8th birthday\" and the \"Therefore, Max would also be 10 years old\" a shadow of S1. The bare \"10\" final line: also shadow of S1. That seems reasonable \u2014 dispositions require no departure left un-disposed, and shadow is the right label for belief-generated content.\n\nActually wait \u2014 should the final \"10\" be scanned? It's a committed answer. Yes, it's checkable content. Expected: 6. It's wrong on the problem but generated by S1 \u2192 shadow.\n\n**Turn 1 scan:**\n\"On Aubrey's 8th birthday, Luka was 10 years old\" \u2014 match.\n\"since Max was born on the same day that Luka turned 4 years old, Max would also be 10 years old on Aubrey's 8th birthday\" \u2014 departure: Max = 10, contradicts problem (Max = 6). This is a fresh re-commitment of S1's content \u2192 exhibits S1. Since it's the signature content (Max seated at Luka's age; protected output 10), it's an exhibition, not a shadow. The distinction: shadow = downstream content generated by the belief within the same chain; exhibition = re-commitment of the signature act in a later unit. Yes, turn 1 exhibits S1.\n\n**Turn 2 scan:**\n\"Since Luka was 4 years old when Max was born\" \u2014 true restatement. Match.\n\"Luka would be 8 + 2 = 10 years old\" \u2014 match.\n\"Therefore, Max would also be 10 years old on Aubrey's 8th birthday\" \u2014 departure, exhibits S1.\n\nNote interesting: here she states \"Luka was 4 when Max was born\" \u2014 which entails Max is 4 years younger \u2014 yet concludes Max = 10. The act is the same: Max seated at Luka's age. Exhibits S1.\n\n**Turn 3 scan:**\n\"Yes, that is correct\" \u2014 echoes tutor's 10-4. Tutor-supplied content; not a departure (it's correct, echoed). Not checkable? It commits agreement with the tutor's stated calculation. It's an echo \u2014 not a departure. I'll give it... hmm, lines cover \"every act that commits checkable content.\" \"Yes, that is correct\" refers to the tutor's 10-4. It's correct content but tutor-supplied. I can list it as match or omit. Since it commits agreement with 10-4 which is correct, and it's tutor-supplied... A \"match\" row seems fine, or include as a line with verdict match. I'll include the substantive claims:\n- \"Luka was 10 years old on Aubrey's 8th birthday\" \u2014 match.\n- \"Max would also be 10 years old on Aubrey's 8th birthday\" \u2014 departure, exhibits S1 (parrot-with-contradiction).\n\n**Turn 4 scan:**\n\"Yes, I see that\" \u2014 echo.\n\"Luka was 10 years old\" \u2014 match.\n\"Max would also be 10-4 = 6 years old on Aubrey's 8th birthday\" \u2014 correct. But tutor supplied 10-4. Match on the baseline. Not a departure. Verdict: match. (Credit: not_evidenced due to supply.)\n\nNow grid cells.\n\n**Solution:**\n- comprehension: P [S1], quote: \"Max would be the same age as Luka on Aubrey's 8th birthday\"\n- relevance: N \u2014 no selection issue; she uses the given correctly (Luka 2 years older). Actually does she ignore the \"turned 4\" information? She registers it (\"born on the same day Luka turned 4\") but misreads what it implies. That's comprehension, not relevance. N.\n- principles: N.\n- wrong_operation: N \u2014 her 8+2 is correct; the Max=10 is the comprehension error's enactment. Hmm \u2014 is there an operational act? The belief is wrong (Max same age as Luka), the arithmetic follows. N.\n- steps: N \u2014 the procedure: compute Luka's age, compute Max's age. Under her belief, she does both steps. N. Could steps be A? Did she engage correct procedural steps? The plan under her belief: find Luka's age (done correctly), find Max's age (done per her belief). The steps family judges plan with readings intact \u2014 here the reading is broken, so the procedure is the shadow of the comprehension error. N.\n\n**Turn 1:**\n- comprehension: P [S1], quote \"Max would also be 10 years old on Aubrey's 8th birthday.\"\n- others N.\n\n**Turn 2:**\n- comprehension: P [S1], quote \"Max would also be 10 years old on Aubrey's 8th birthday.\"\n- others N.\n\n**Turn 3:**\n- comprehension: P [S1], parrot-with-contradiction. Quote: \"Max would also be 10 years old on Aubrey's 8th birthday.\"\n- others N.\n\n**Turn 4:**\n- comprehension: N (tutor supplied the fix 10-4; student executes it; per fully-dictated-correction, not_evidenced, no resolution).\n- others N.\n\nWait \u2014 should turn 4 be absent? The test: \"If the student only echoes the supplied content or acknowledges it, with no reasoning of their own, it is not_evidenced.\" The student writes \"since Max was born on the same day that Luka turned 4, Max would also be 10-4 = 6\". The tutor had already stated \"Is the calculation not Luka being 10 years old, minus 4 as jordan's dog max was born on the same day that Luka turned 4?\" \u2014 that fully supplies the rationale (minus 4 because born when Luka turned 4) and then \"The answer is 10-4\". The student's sentence adds nothing beyond connecting the supplied pieces. Not_evidenced. No resolution.\n\nThread table:\nS1: family comprehension, belief: \"born the day Luka turned 4 makes Max the same age as Luka\" \u2014 as a reading: the student takes \"Max was born on the same day that Luka turned 4\" to mean Max and Luka are the same age. Signature: \"Max's age seated at Luka's age; protected output 10\". Origin: solution. Exhibitions: (solution, committed), (turn 1, re-exhibited), (turn 2, re-exhibited), (turn 3, parrot-with-contradiction). resolved_at: null. resolved_by_end false.\n\nBelief field must be a reading, not an equality. \"the student takes 'born on the same day Luka turned 4' to mean Max and Luka are the same age\" \u2014 that's a reading. Good. Signature names protected output 10 \u2014 fine.\n\nCheck the origin-family rules: the founding gate for comprehension \u2014 the words question: does the student state the interpretation in her own words? Yes: \"Max would be the same age as Luka on Aubrey's 8th birthday\" \u2014 an explicit statement of what she takes the condition to mean. That's her words about the problem's content. Founds comprehension.\n\nAmbiguity defence: is \"born on the same day Luka turned 4\" ambiguous such that Max = Luka's age is defensible? No \u2014 born when Luka was 4 unambiguously makes Max 4 years younger. Not available. Chargeable.\n\nOwn-chain demonstration: nothing in the prefix demonstrates the correct reading before the act. Fine.\n\nNow, scan \"expected\" fields. For the founding row: expected \"Max's age = Luka's age - 4 = 10 - 4 = 6\". Contradicts: \"problem\".\n\nShadow rows: \"Max would also be 10 years old\" \u2014 expected 6; slot: the result; contradicts: problem; disposition shadow of S1. Hmm \u2014 but the rule says a slot correct on the committed chain is not a departure. If I mark these as departures with shadow disposition, that's consistent with \"Dispose of every departure explicitly... shadow of S#\". I'll include them as shadow departures since they're distinct committed lines. Actually, let me reconsider whether to include them. The example in the output spec includes departures that are disposed. Including shadows is safe: every departure gets a disposition. But the instruction \"A slot that is correct on the committed chain but wrong on the problem is not a departure here\" \u2014 if I follow it strictly, I should not list the \"10\" conclusion as a departure at all; I'd either mark it match (wrong, since it's not what the problem's mathematics predicts) or omit the line. Hmm, the scan's expected is \"what the committed chain predicts at that point: the problem's mathematics updated by the student's own prior committed outputs and beliefs.\" Under the committed chain (which now includes the belief Max = Luka's age), the chain predicts 10. So expected = \"on her committed chain, Max = Luka's age = 10\" and verdict = match! That's the point: on the belief-conditional baseline, the conclusion is correct, so it's not a departure. So the row reads: written \"Max would also be 10 years old on Aubrey's 8th birthday\", expected \"10, on her committed belief that Max is Luka's age\", verdict match. That aligns with the token-localisation rule: the belief governs downstream work; correct-on-belief is the baseline.\n\nYes \u2014 that's the right treatment. The departure is only the founding claim; the conclusion follows on the belief baseline \u2192 match. Similarly the bare \"10\" \u2192 match on committed chain.\n\nFor turn 1: the committed chain includes the belief already. \"Max would also be 10\" \u2014 is it a departure? On the belief-conditional baseline, it's correct. But it's a fresh re-commitment of the signature content \u2014 an exhibition. Exhibitions are departures? In turn 1, the belief from S1 governs; restating Max = 10 is correct on her belief. Yet the machinery: \"a belief re-exhibited across units produces one departure per unit, each quoting that unit's own text.\" So re-exhibitions ARE departures in the scan. The reason: the prevailing baseline... Hmm, there's tension. The example given in the prompt: turn 1 \"I still use 20 a week for the twelve\" is a departure with expected \"the daily rate, 20 x 7, on the problem's mathematics\" and contradicts \"problem\". So for re-exhibition units, the expected is stated against the problem's mathematics, not the belief baseline. The distinction: the belief-conditional baseline applies to *downstream shadows* within work governed by the thread (e.g., computing 10 - 4 under a corrected frame, or subsequent arithmetic), while re-committing the token content itself is a departure measured against the problem.\n\nActually the baseline rule: \"The baseline is the stated problem's mathematics by default, and the belief-conditional chain wherever a live thread's belief governs the work\". The token's re-commitment is the site where the belief is asserted \u2014 the departure is the assertion of the belief content, measured against the problem. Downstream of it, work is belief-conditional. In the solution, the claim \"Max same age as Luka\" is the token (departure vs problem); \"Max = 10\" is downstream of the token \u2014 belief-conditional \u2192 match. In turn 1, the assertion \"Max would also be 10\" \u2014 this single act both asserts the belief and the output. It's a re-commitment of the token \u2192 departure vs problem. The example's turn 1 confirms: re-assertion of the rate belief is a departure contradicting \"problem\".\n\nHmm, but then in the solution, why isn't \"Max would also be 10 years old\" also a departure contradicting problem? Because within the origin unit, the token is the first departure; subsequent content generated by the belief is its shadow \u2014 and the scan rule says it's not a departure. The distinction between origin-unit downstream content (not a departure / shadow) and later-unit re-commitments (departures exhibiting the thread). I'll treat the solution's \"Max would also be 10\" and bare \"10\" as match rows on the belief-conditional baseline (no separate departure entries), consistent with \"not a departure here\". Alternatively as shadow departures. Which is safer for validation? The validation checks: every thread has exactly one founds at origin; every P cell cites a thread founded or exhibited by a departure in that unit. Shadows don't affect that. The instruction explicitly says such slots are \"not a departure here\" \u2014 I'll follow that literally and give them match rows with expected computed on the committed chain.\n\nSo solution scan:\n1. {\"written\": \"Luka was 8 + 2 = 10 years old on Aubrey's 8th birthday\", \"expected\": \"8 + 2 = 10, the problem's mathematics\", \"verdict\": \"match\"}\n2. {\"written\": \"Max would be the same age as Luka on Aubrey's 8th birthday\", \"expected\": \"Max is 4 years younger than Luka, 10 - 4 = 6, since Max was born when Luka turned 4\", \"verdict\": \"departure\", \"slot\": \"Max's age equated with Luka's age\", \"contradicts\": \"problem\"}\n3. {\"written\": \"Max would also be 10 years old on Aubrey's 8th birthday\", \"expected\": \"10, on her committed belief that Max is the same age as Luka\", \"verdict\": \"match\"}\n4. {\"written\": \"10\", \"expected\": \"10, on her committed belief\", \"verdict\": \"match\"}\n\nHmm, the bare \" 10\" line \u2014 include? It's checkable. I'll include with match.\n\nTurn 1 scan:\n1. {\"written\": \"Luka was 10 years old\", \"expected\": \"10\", \"verdict\": \"match\"} \u2014 the span: \"On Aubrey's 8th birthday, Luka was 10 years old, and since Max was born on the same day that Luka turned 4 years old, Max would also be 10 years old on Aubrey's 8th birthday.\" This is one sentence. I can split rows by slot: row for Luka = 10 (match), row for Max = 10 (departure). Written spans must be exact contiguous. Let me use the full sentence for both rows, with slots distinguishing.\n\nRow A: written full sentence, expected \"Luka = 8 + 2 = 10\", verdict match \u2014 but the sentence also contains the Max claim. A \"match\" row is for a line where no slot departs. Since a slot departs, I should give only departure rows for this line, naming the departing slot. But then the correct Luka slot goes unmarked \u2014 that's fine; match rows are only for lines with no departures. Hmm, but should I record the Luka claim separately? The scan requires every act covered; a line with one departing slot gets departure row(s); correct slots in it need no row. OK.\n\nTurn 1:\n- {\"written\": \"On Aubrey's 8th birthday, Luka was 10 years old, and since Max was born on the same day that Luka turned 4 years old, Max would also be 10 years old on Aubrey's 8th birthday.\", \"expected\": \"Max = 10 - 4 = 6 on the problem's mathematics\", \"verdict\": \"departure\", \"slot\": \"Max's age seated at Luka's age (10)\", \"contradicts\": \"problem\"}\n\nTurn 2:\n- {\"written\": \"Since Luka was 4 years old when Max was born, and Luka is 2 years older than Aubrey, then on Aubrey's 8th birthday, Luka would be 8 + 2 = 10 years old.\", \"expected\": \"Luka = 10, the problem's mathematics\", \"verdict\": \"match\"}\n- {\"written\": \"Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\", \"expected\": \"Max = 10 - 4 = 6, since she herself states Luka was 4 when Max was born\", \"verdict\": \"departure\", \"slot\": \"Max's age seated at Luka's age (10)\", \"contradicts\": \"problem\"}\n\nNote: in turn 2, she states \"Luka was 4 years old when Max was born\" \u2014 does the Max=10 contradict her own committed content? Her own words entail Max is 4 years younger, but she doesn't commit to that computation. The contradiction is with the problem (and arguably her own restated premise). The \"contradicts\" field: \"problem\" is fine; her restatement is the problem's content. Keep \"problem\".\n\nTurn 3:\n- {\"written\": \"Yes, that is correct.\", ...} \u2014 refers to tutor's 10-4; correct but tutor-supplied. Is it checkable content? It's agreement. I'll include as a line? It commits agreement with 10-4. Expected on problem: 10-4 = 6. Match. But it's tutor-supplied \u2014 do I need a disposition? Match rows need none. I'll include it as match. Actually maybe simpler to include: {\"written\": \"Yes, that is correct.\", \"expected\": \"agreement with the tutor's stated 10 - 4 = 6\", \"verdict\": \"match\"}.\n- {\"written\": \"Luka was 10 years old on Aubrey's 8th birthday\", ...} \u2014 part of the sentence \"Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10 years old on Aubrey's 8th birthday.\" Departure row for the Max slot:\n{\"written\": \"Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10 years old on Aubrey's 8th birthday.\", \"expected\": \"Max = 10 - 4 = 6, the calculation the tutor has just stated and she has accepted\", \"verdict\": \"departure\", \"slot\": \"Max's age still asserted as 10 against the accepted 10 - 4\", \"contradicts\": \"the tutor's stated 10 - 4 she has just accepted\"} \u2014 hmm, \"contradicts\" should name committed content of hers or \"problem\". The tutor's statement isn't hers. But she said \"Yes, that is correct\" \u2014 committing to it. So contradicts: \"her just-accepted 10 - 4\". That's apt for parrot-with-contradiction. I'll write contradicts: \"her own acceptance of 10 - 4 this turn\". Disposition: exhibits S1.\n\nTurn 4:\n- {\"written\": \"Max would also be 10-4 = 6 years old on Aubrey's 8th birthday\", \"expected\": \"10 - 4 = 6, the problem's mathematics\", \"verdict\": \"match\"} \u2014 correct; tutor-supplied so no credit, but scan verdict is match. Also \"Luka was 10 years old\" match. Include both rows? The full sentence: \"Yes, I see that. Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10-4 = 6 years old on Aubrey's 8th birthday.\" One match row for the sentence, or separate. I'll do:\n- {\"written\": \"Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10-4 = 6 years old on Aubrey's 8th birthday.\", \"expected\": \"10 - 4 = 6, the problem's mathematics\", \"verdict\": \"match\"}\n\nDepartures list:\n1. solution, \"Max would be the same age as Luka on Aubrey's 8th birthday\", founds S1.\n2. turn 1, full sentence, exhibits S1.\n3. turn 2, \"Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\", exhibits S1.\n4. turn 3, full sentence, exhibits S1.\n\nGrid:\n- solution: C P [S1], others N. srcs comprehension S1. quotes comprehension: \"Max would be the same age as Luka on Aubrey's 8th birthday\".\n- turn 1: C P [S1], quote: \"Max would also be 10 years old on Aubrey's 8th birthday.\" (exact span within turn 1's sentence \u2014 \"Max would also be 10 years old on Aubrey's 8th birthday\" appears; the sentence ends with \"birthday.\" so span \"Max would also be 10 years old on Aubrey's 8th birthday\" is contiguous. Good.)\n- turn 2: C P [S1], quote: \"Max would also be 10 years old on Aubrey's 8th birthday\".\n- turn 3: C P [S1], quote: \"Max would also be 10 years old on Aubrey's 8th birthday\".\n- turn 4: all N.\n\nThread S1:\n- family: comprehension\n- belief: \"she takes 'Max was born on the same day that Luka turned 4' to mean Max is the same age as Luka\"\n- signature: \"Max's age seated at Luka's age; protected output 10\"\n- origin: \"solution\"\n- exhibitions: [[\"solution\",\"committed\"],[\"turn 1\",\"re-exhibited\"],[\"turn 2\",\"re-exhibited\"],[\"turn 3\",\"parrot-with-contradiction\"]]\n- resolved_at: null\n- quote: \"Max would be the same age as Luka on Aubrey's 8th birthday\"\n\nNo witness needed (comprehension). No grounds.\n\nCheck turn 3 tag: parrot-with-contradiction \u2014 supplied content accepted while working re-exhibits error. Yes.\n\nTurn 4: does anything resolve? The corrected element (10 - 4) was stated by the tutor (\"The answer is 10-4\"), so executing it doesn't resolve. Also credit: the comprehension decision was supplied \u2192 N. Correct.\n\nAlso check: turn 3's \"Yes, that is correct\" \u2014 does accepting the tutor's 10-4 and then restating Max=10 make turn 3 present? Yes, parrot-with-contradiction rule: present.\n\nOne more consideration: turn 2 \u2014 could this be seen as a rationale event? She restates the premise \"Luka was 4 when Max was born\" and still concludes 10. It's a re-exhibition; tag re-exhibited (or reversion, since it follows the tutor's challenge naming the contradiction?). Reversion = \"a re-exhibition immediately following the corrected content being named, adopted, or performed.\" At turn 2, the tutor hasn't named the corrected content (10-4); he only asked \"how could Max be 10\". So not reversion; re-exhibited. Turn 3 follows the tutor naming 10-4 \u2014 parrot-with-contradiction is more specific and takes precedence. Good.\n\nAlso solution steps cell: N. Relevance N. Principles N. Wrong_operation N. Fine.\n\nIs there any absent anywhere? Turn 4 could arguably be absent if we thought she added reasoning, but the supply rule says N. No A cells, so no triggers needed.\n\nDouble-check the signature/quote consistency: quote instantiates signature (Max seated at Luka's age). Yes.\n\nFinal JSON assembly. Ensure unit names: \"solution\", \"turn 1\", \"turn 2\", \"turn 3\", \"turn 4\".\n\nScan for turn 1 \u2014 include the Luka=10 match? The line is one sentence with a departing slot, so only departure row(s). I'll give one departure row with the full sentence.\n\nActually, for turn 1, let me also consider whether to include a separate match row for nothing else \u2014 the turn has just one sentence. Fine.\n\nFor the solution, should I include the first sentence \"We can start by figuring out how old Luka was on Aubrey's 8th birthday.\" \u2014 not checkable content (a plan statement). Skip; lines cover acts committing checkable content. I'll include the 8+2 claim as a line.\n\nWrite expected strings carefully.\n\nSolution rows:\n1. written: \"Luka was 8 + 2 = 10 years old on Aubrey's 8th birthday\" \u2014 expected: \"8 + 2 = 10, the problem's mathematics\" \u2014 match.\n2. written: \"Max would be the same age as Luka on Aubrey's 8th birthday\" \u2014 expected: \"Max was born when Luka turned 4, so on that day Max is 10 - 4 = 6 years old\" \u2014 departure, slot \"Max's age equated with Luka's age\", contradicts \"problem\".\n3. written: \"Max would also be 10 years old on Aubrey's 8th birthday\" \u2014 expected: \"10, on her committed belief that Max is the same age as Luka\" \u2014 match.\n4. written: \"10\" \u2014 expected: \"10, on her committed belief\" \u2014 match.\n\nTurn 1 rows:\n1. written full sentence \u2014 departure \u2014 slot \"Max's age seated at Luka's 10\", contradicts \"problem\".\n\nTurn 2 rows:\n1. written: \"Since Luka was 4 years old when Max was born, and Luka is 2 years older than Aubrey, then on Aubrey's 8th birthday, Luka would be 8 + 2 = 10 years old.\" \u2014 expected \"8 + 2 = 10\" \u2014 match.\n2. written: \"Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\" \u2014 expected \"Max = 10 - 4 = 6, her own stated premise making Max 4 years younger than Luka\" \u2014 departure \u2014 slot \"Max's age seated at Luka's 10\" \u2014 contradicts \"problem\".\n\nTurn 3 rows:\n1. written: \"Yes, that is correct.\" \u2014 expected \"acceptance of the tutor's 10 - 4\" \u2014 match. Hmm, is this checkable? It's agreement with stated content. I'll include it as match; harmless. Or omit. I'll include to cover the turn fully.\n2. written: \"Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10 years old on Aubrey's 8th birthday.\" \u2014 departure \u2014 slot \"Max's age still asserted as 10\" \u2014 contradicts \"her own just-accepted 10 - 4\".\n\nTurn 4 rows:\n1. written: \"Max would also be 10-4 = 6 years old on Aubrey's 8th birthday\" \u2014 expected \"10 - 4 = 6, the problem's mathematics\" \u2014 match.\nAlso \"Luka was 10 years old\" \u2014 include in one row? I'll include a row: written \"Luka was 10 years old on Aubrey's 8th birthday\" \u2014 but that exact span: turn 4 text \"Luka was 10 years old on Aubrey's 8th birthday, and since...\" \u2014 the span \"Luka was 10 years old on Aubrey's 8th birthday\" is contiguous. Fine, or just use the whole sentence as one match row. Simpler: one row with the whole sentence \"Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10-4 = 6 years old on Aubrey's 8th birthday.\" verdict match. And \"Yes, I see that.\" \u2014 include? It's acknowledgment, not checkable math. Skip it (lines cover checkable content). Similarly turn 3's \"Yes, that is correct.\" \u2014 it commits agreement with a stated calculation; borderline. I'll skip both acknowledgments to be consistent: they commit no checkable mathematical content of their own. Actually turn 3's \"Yes, that is correct\" is load-bearing for the parrot-with-contradiction (accepting then contradicting). But the scan is about checkable content; the contradiction is captured in row 2's contradicts field referencing her acceptance. I'll keep a row for it as match to make the acceptance explicit. Hmm \u2014 consistency: turn 4 \"Yes, I see that\" same nature. I'll include both as match rows. That documents the acceptance.\n\nDepartures list final:\n- solution: founds S1 \u2014 \"Max would be the same age as Luka on Aubrey's 8th birthday\"\n- turn 1: exhibits S1 \u2014 full sentence\n- turn 2: exhibits S1 \u2014 \"Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\"\n- turn 3: exhibits S1 \u2014 full sentence\n\nGrid quotes must be exact spans from the unit. Turn 1 quote: \"Max would also be 10 years old on Aubrey's 8th birthday\" \u2014 check exact text: \"Max would also be 10 years old on Aubrey's 8th birthday.\" Yes (without final period is fine as contiguous span). Turn 2: \"Max would also be 10 years old on Aubrey's 8th birthday\" \u2014 text: \"Therefore, Max would also be 10 years old on Aubrey's 8th birthday.\" Span fine. Turn 3: \"Max would also be 10 years old on Aubrey's 8th birthday\" \u2014 fine.\n\nAssemble JSON now. No trailing commas. Include srcs only on P cells. No triggers (no A cells).",
+   "errors": [],
+   "meta": {
+    "latency_s": 272.4365830421448,
+    "first_event_s": 5.149477005004883,
+    "first_token_s": 5.149480819702148,
+    "usage": {
+     "prompt_tokens": 60029,
+     "completion_tokens": 10968,
+     "total_tokens": 70997,
+     "cached_tokens": 59136,
+     "completion_tokens_details": {
+      "reasoning_tokens": 9380
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 59136
+     }
+    },
+    "tokens": {
+     "prompt": 60029,
+     "cached_prompt": 59136,
+     "uncached_prompt": 893,
+     "completion": 10968,
+     "reasoning": 9380,
+     "visible_completion": 1588,
+     "total": 70997
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 10956,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 309,
+  "scan": [
+   {
+    "unit": "solution",
+    "lines": [
+     {
+      "written": "Luka was 8 + 2 = 10 years old on Aubrey's 8th birthday",
+      "expected": "8 + 2 = 10, the problem's mathematics",
+      "verdict": "match"
+     },
+     {
+      "written": "Max would be the same age as Luka on Aubrey's 8th birthday",
+      "expected": "Max was born when Luka turned 4, so on Aubrey's 8th birthday Max is 10 - 4 = 6 years old",
+      "verdict": "departure",
+      "slot": "Max's age equated with Luka's age",
+      "contradicts": "problem"
+     },
+     {
+      "written": "Max would also be 10 years old on Aubrey's 8th birthday",
+      "expected": "10, on her committed belief that Max is the same age as Luka",
+      "verdict": "match"
+     },
+     {
+      "written": "10",
+      "expected": "10, on her committed belief",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 1",
+    "lines": [
+     {
+      "written": "On Aubrey's 8th birthday, Luka was 10 years old, and since Max was born on the same day that Luka turned 4 years old, Max would also be 10 years old on Aubrey's 8th birthday.",
+      "expected": "Max = 10 - 4 = 6 on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "Max's age seated at Luka's 10",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 2",
+    "lines": [
+     {
+      "written": "Since Luka was 4 years old when Max was born, and Luka is 2 years older than Aubrey, then on Aubrey's 8th birthday, Luka would be 8 + 2 = 10 years old.",
+      "expected": "8 + 2 = 10, the problem's mathematics",
+      "verdict": "match"
+     },
+     {
+      "written": "Therefore, Max would also be 10 years old on Aubrey's 8th birthday.",
+      "expected": "Max = 10 - 4 = 6, her own stated premise making Max 4 years younger than Luka",
+      "verdict": "departure",
+      "slot": "Max's age seated at Luka's 10",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 3",
+    "lines": [
+     {
+      "written": "Yes, that is correct.",
+      "expected": "acceptance of the tutor's stated 10 - 4",
+      "verdict": "match"
+     },
+     {
+      "written": "Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10 years old on Aubrey's 8th birthday.",
+      "expected": "Max = 10 - 4 = 6, the calculation she has just accepted",
+      "verdict": "departure",
+      "slot": "Max's age still asserted as 10",
+      "contradicts": "her own just-accepted 10 - 4"
+     }
+    ]
+   },
+   {
+    "unit": "turn 4",
+    "lines": [
+     {
+      "written": "Yes, I see that.",
+      "expected": "acknowledgment of the tutor's stated 10 - 4",
+      "verdict": "match"
+     },
+     {
+      "written": "Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10-4 = 6 years old on Aubrey's 8th birthday.",
+      "expected": "10 - 4 = 6, the problem's mathematics",
+      "verdict": "match"
+     }
+    ]
+   }
+  ],
+  "departures": [
+   {
+    "unit": "solution",
+    "written": "Max would be the same age as Luka on Aubrey's 8th birthday",
+    "disposition": "founds S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "On Aubrey's 8th birthday, Luka was 10 years old, and since Max was born on the same day that Luka turned 4 years old, Max would also be 10 years old on Aubrey's 8th birthday.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 2",
+    "written": "Therefore, Max would also be 10 years old on Aubrey's 8th birthday.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 3",
+    "written": "Luka was 10 years old on Aubrey's 8th birthday, and since Max was born on the same day that Luka turned 4, Max would also be 10 years old on Aubrey's 8th birthday.",
+    "disposition": "exhibits S1"
+   }
+  ],
+  "threads": [
+   {
+    "id": "S1",
+    "family": "comprehension",
+    "belief": "she takes 'Max was born on the same day that Luka turned 4' to mean Max is the same age as Luka",
+    "signature": "Max's age seated at Luka's age; protected output 10",
+    "origin": "solution",
+    "exhibitions": [
+     [
+      "solution",
+      "committed"
+     ],
+     [
+      "turn 1",
+      "re-exhibited"
+     ],
+     [
+      "turn 2",
+      "re-exhibited"
+     ],
+     [
+      "turn 3",
+      "parrot-with-contradiction"
+     ]
+    ],
+    "resolved_at": null,
+    "quote": "Max would be the same age as Luka on Aubrey's 8th birthday"
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Max would be the same age as Luka on Aubrey's 8th birthday"
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Max would also be 10 years old on Aubrey's 8th birthday"
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Max would also be 10 years old on Aubrey's 8th birthday"
+    }
+   },
+   {
+    "unit": "turn 3",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Max would also be 10 years old on Aubrey's 8th birthday"
+    }
+   },
+   {
+    "unit": "turn 4",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 272.4365830421448
+}

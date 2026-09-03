@@ -160,6 +160,53 @@ def _thread_family_at(thread: dict, unit: str, units: List[str]) -> Optional[str
         return family
 
 
+def _source_ids(row: dict, family: str) -> List[str]:
+    """Return the normalized thread ids cited by one family cell."""
+    src = (row.get("srcs") or {}).get(family)
+    values = src if isinstance(src, (list, tuple)) else str(src or "").split(",")
+    return [str(value).strip() for value in values if str(value).strip()]
+
+
+def _is_same_family_resolution(
+    thread: dict,
+    row: dict,
+    family: str,
+    units: List[str],
+    threads_by_id: Dict[str, dict],
+) -> bool:
+    """Whether a resolution is hidden by another live same-family thread.
+
+    A family cell collapses all of its threads to one P/A/N value.  If one
+    thread resolves while a different thread in that family is exhibited in
+    the same unit, the cell must remain ``P``.  The resolving thread is then
+    represented only by its ``resolved`` exhibition and ``resolved_at`` in
+    the thread table, as specified by the codebook's source-ledger exception.
+    """
+    if row.get(family) != "P":
+        return False
+
+    resolved_id = str(thread.get("id") or "").strip()
+    present_ids = _source_ids(row, family)
+    if not present_ids or resolved_id in present_ids:
+        return False
+
+    # The P must be caused exclusively by other valid threads that are in
+    # this same family at this unit; an unknown or cross-family source cannot
+    # be used to conceal a malformed resolution.
+    for source_id in present_ids:
+        source = threads_by_id.get(source_id)
+        if source is None or _thread_family_at(source, row.get("unit"), units) != family:
+            return False
+
+    return any(
+        isinstance(event, (list, tuple))
+        and len(event) >= 2
+        and event[0] == row.get("unit")
+        and event[1] == "resolved"
+        for event in (thread.get("exhibitions") or [])
+    )
+
+
 def _validate_scan(obj: dict, units: List[str], grid: list,
                    thread_ids: set, require_scan: bool,
                    conversation: str = "", v8: bool = False,
@@ -401,7 +448,12 @@ def validate(obj: dict, units: List[str], require_scan: bool = False,
     got_units = [r.get("unit") for r in grid if isinstance(r, dict)]
     if got_units != list(units):
         errs.append(f"units mismatch (got {got_units[:3]}...)")
-    thread_ids = {t.get("id") for t in obj.get("threads", []) if isinstance(t, dict)}
+    threads_by_id = {
+        t.get("id"): t
+        for t in obj.get("threads", [])
+        if isinstance(t, dict) and t.get("id")
+    }
+    thread_ids = set(threads_by_id)
     for t in obj.get("threads", []):
         if t.get("family") not in set(FAMILIES):
             errs.append(f"bad family {t.get('family')}")
@@ -430,7 +482,12 @@ def validate(obj: dict, units: List[str], require_scan: bool = False,
         if resolved_at:
             row = next((r for r in grid if r.get("unit") == resolved_at), None)
             resolved_family = _thread_family_at(t, resolved_at, units)
-            if not row or row.get(resolved_family) != "A":
+            if not row or (
+                row.get(resolved_family) != "A"
+                and not _is_same_family_resolution(
+                    t, row, resolved_family, units, threads_by_id
+                )
+            ):
                 errs.append(f"{t.get('id')}: no A at resolved_at {resolved_at}")
     for row in grid:
         for fam in FAMILIES:

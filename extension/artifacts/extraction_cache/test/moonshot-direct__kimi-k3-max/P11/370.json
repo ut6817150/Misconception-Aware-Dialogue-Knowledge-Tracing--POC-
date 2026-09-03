@@ -1,0 +1,436 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P11",
+ "reasoning_effort": "max",
+ "dialogue_id": 370,
+ "split": "test",
+ "attempts": [
+  {
+   "raw": " {\"unit\": \"turn 1\", \"written\": \"Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\", \"disposition\": \"shadow of S1\"}, {\"unit\": \"turn 2\", \"written\": \"the answer is 10 old records since the 5 people brought in a total of 10 old records\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 4\", \"written\": \"The 5 people brought in a total of 10 old records.\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 5\", \"written\": \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 5\", \"written\": \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 6\", \"written\": \"The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 7\", \"written\": \"the 5 people brought in a total of 10 old records, since 7 x 2 = 10\", \"disposition\": \"exhibits S1\"}], \"threads\": [{\"id\": \"S1\", \"family\": \"comprehension\", \"belief\": \"the old records must come out to an equal whole number per person, so the asked total is 5 equal whole shares (2 each) rather than the 14 the 7 new records are worth\", \"signature\": \"the per-person whole-share adjustment (each person brought 2); protected output 10\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 2\", \"parrot-with-contradiction\"], [\"turn 4\", \"reversion\"], [\"turn 5\", \"rationale\"], [\"turn 6\", \"premise-conclusion decoupling\"], [\"turn 7\", \"motivated-falsehood\"]], \"resolved_at\": null, \"quote\": \"Since each person can only trade in whole records, each person brought in 2 old records.\"}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Since each person can only trade in whole records, each person brought in 2 old records.\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"Since each person can only trade in whole records, each person brought in 2 old records.\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"the answer is 10 old records since the 5 people brought in a total of 10 old records\"}}, {\"unit\": \"turn 3\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}, {\"unit\": \"turn 4\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"The 5 people brought in a total of 10 old records.\"}}, {\"unit\": \"turn 5\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\"}}, {\"unit\": \"turn 6\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.\"}}, {\"unit\": \"turn 7\", \"comprehension\": \"P\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\", \"srcs\": {\"comprehension\": \"S1\"}, \"quotes\": {\"comprehension\": \"the 5 people brought in a total of 10 old records, since 7 x 2 = 10\"}}, {\"unit\": \"turn 8\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}]}",
+   "reasoning": "Let me work through this carefully.\n\n**The problem:** Ralph has a record store. People trade 2 old records for 1 new one. 5 people come in with old records and leave with 7 new records between them. How many old records did the 5 people bring in?\n\n**Correct solution:** 7 new records \u00d7 2 old records per new record = 14 old records. The answer is 14. The \"5 people\" is a distractor (or at least, the total is what's asked; the per-person split is irrelevant).\n\n**Student's incorrect solution (turn 0 / \"solution\"):**\n1. \"Each new record is worth 2 old records.\" \u2014 correct.\n2. \"So, the 7 new records are worth 7 x 2 = 14 old records.\" \u2014 correct. This IS the answer to the question.\n3. \"The 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records.\" \u2014 14 total is correct; computing the average 2.8 is mathematically valid but unnecessary.\n4. \"Since each person can only trade in whole records, each person brought in 2 old records.\" \u2014 This is a fabricated assumption. The problem doesn't say each person brought the same number, and rounding 2.8 down to 2 is an invalid move (2.8 isn't 2). This is a false claim.\n5. \"Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\" \u2014 2 \u00d7 5 = 10 is arithmetically fine but builds on the false 2.\n6. \"10\" \u2014 final answer, wrong (should be 14).\n\nSo the student had the correct answer 14 in hand, then went beyond, fabricated a whole-records/equal-split constraint, rounded 2.8 to 2, and concluded 10.\n\nWhat's the error? Let me think about what the belief is. The student believes that the answer requires a per-person whole number, i.e., that the records must be evenly divisible among the 5 people, and since 14/5 = 2.8 isn't whole, she rounds each person's share down to 2 and recomputes the total as 10. \n\nHow to classify this? Let me run the protocol.\n\nStep 1: solve independently. Answer: 14 old records.\n\nStep 2: provenance ledger:\n- 2 old for 1 new: problem-given.\n- 7 new records total: problem-given.\n- 5 people: problem-given.\n- 14 old records: student-derived correctly (7 \u00d7 2).\n- 2.8 average: student-derived correctly as arithmetic (14/5 = 2.8).\n- \"each person brought in 2\": imported/unsupported \u2014 a fabricated constraint that trades must be whole per person and that shares are equal, plus a rounding move.\n- 10: student-derived from the fabricated 2.\n\nStep 3: baseline is the problem's math. Line scan of the solution:\n\nLine 1: \"Each new record is worth 2 old records.\" \u2014 match (2:1 ratio).\nLine 2: \"7 x 2 = 14\" \u2014 match, and 14 is the answer.\nLine 3: \"The 5 people brought in a total of 14 old records\" \u2014 match. \"each person brought in an average of 14/5 = 2.8\" \u2014 arithmetically 14/5 = 2.8 is true. It's an unnecessary step but not false. Hmm, but is the claim \"each person brought in an average of 2.8\" a departure? It's a true statement about the average. The problem doesn't ask for it, but it's not false. So no departure on value. Though it's a step that the procedure doesn't need \u2014 could that be a steps issue? The family \"steps\" includes \"including a step the procedure does not need\". Hmm. But wait \u2014 the extra step isn't just unnecessary; it leads to the wrong answer. Let me think.\n\nActually, the error is the fabricated assumption that each person must have brought a whole number of records and that the total must be a multiple of 5 (evenly divisible). The student takes 2.8, rounds down to 2 (an invalid move \u2014 2.8 \u2260 2), and recomputes 2 \u00d7 5 = 10.\n\nLine 4: \"Since each person can only trade in whole records, each person brought in 2 old records.\" \u2014 This asserts 2 where her own computed average is 2.8. This contradicts her own prior committed output (2.8). It's a departure: slot \"each person brought in 2\", contradicts \"her committed 14/5 = 2.8\".\n\nActually more deeply, the belief is that the answer must be an equal whole-number split across the 5 people \u2014 i.e., that the question requires per-person whole records, so the total must be 5 \u00d7 (whole number). This is a fabricated scenario assumption / misreading of what the problem asks. Hmm, or is it?\n\nLet me think about which family. The codebook's \"goal misreading is comprehension (scope errors)\": \"Misreading which quantity the problem asks for is a comprehension failure, and it includes carrying the solution beyond the asked for quantity and presenting an out of scope quantity as the goal.\" The worked example is the kombucha dialogue 1862: student derives the correct 6 but carries on to compute 186 and presents 186 as the answer \u2014 comprehension present.\n\nHere, the student derives 14 (the asked quantity) but then carries on, imposing a per-person constraint, and presents 10 as the answer. This looks like the same pattern: she read the question as requiring an equal whole-number per-person amount, and adjusted the total to fit. Actually, wait \u2014 is it a goal misread? She does answer \"how many old records did the 5 people bring in\" \u2014 but with a fabricated constraint that each person brought the same whole number.\n\nAlternatively, the fabricated assumption \"each person can only trade in whole records, so each person brought in 2\" \u2014 a scenario assumption fabricated without textual basis \u2014 files comprehension per \"Fabricated scenario assumptions are comprehension.\"\n\nHmm, but let me think more. The belief: \"the records must split evenly among the 5 people in whole records, so the per-person share is 2 (rounding 2.8 down), making the total 10.\" This is a reading of what the problem asks/requires: she takes the problem to require an equal whole-number distribution per person. That's a wrong reading of the problem's situation \u2014 comprehension.\n\nBut wait, is there an ambiguity defence? The problem says \"5 people come in with old records and leave with 7 new records between them.\" \"Between them\" suggests the 7 is shared among the 5 in some way, not necessarily equally. The question asks for the total old records. There's no constraint that each person traded a whole number of new-record-equivalents. Actually, each person trades 2 old for 1 new, so each person individually must trade an even number of old records... but the problem doesn't say each person ended with a whole number of new records? Actually physically, each new record goes to someone, so 7 new records are distributed among 5 people, e.g., 2,2,1,1,1. Then old records would be 4,4,2,2,2 = 14. The total is 14 regardless of distribution. The student's error is thinking the average must be whole (2.8 \u2192 2), which is mathematically wrong: the average need not be a whole number; individual amounts are whole but need not be equal.\n\nSo the belief is: each person brought the same (whole) number of records, so the total must be a multiple of 5; since 14 isn't, round 2.8 down to 2 and get 10.\n\nIs this a misreading (comprehension) or a wrong procedure? Let me run the cluster test: is the working wrong given what she believes, or correct given her belief but the belief wrong?\n\nHer belief: the total must be an equal whole-number split. Given that belief, her working: 14/5 = 2.8, not whole, round to 2, 2 \u00d7 5 = 10. Under her belief, the working is... correct-ish (given the belief, she executes it). The belief itself is wrong \u2014 the problem doesn't require equal splits, and the asked quantity was already computed. So it's conceptual: comprehension. The fabricated constraint is a wrong belief about what the problem states/requires.\n\nActually, let's also consider: is the departure \"rounding 2.8 to 2\" a wrong operation? The claim \"each person brought in 2 old records\" contradicts her own 2.8. But this is driven by the fabricated whole-split belief, so it's the shadow/enactment of the comprehension belief. One token, one family: comprehension.\n\nNow the tutor's turn 2 (after turn 1): \"Okay, it seems as though you have gone further beyond the question. The question only asks 'How many old records did the 5 people bring in?' Not how many did 'each' bring in.\"\n\nThis is a pointing prompt \u2014 names the fault area (going beyond the question, the per-person move) without stating the corrected content (14). Actually it implies the total is what's asked, which the student had as 14. Does it supply the correction? It says the question asks for the total, not each. It doesn't state 14.\n\nTurn 2 (student): \"Ah, I see. So, the answer is 10 old records since the 5 people brought in a total of 10 old records.\"\n\nShe verbally accepts (\"Ah, I see\") but re-asserts 10. This is a re-exhibition \u2014 parrot-with-contradiction? She accepts the correction framing but keeps 10. The 10 is her committed output. Present for the thread. Event tag: reversion (re-exhibition immediately following the corrected content being named) or parrot-with-contradiction. The tutor named the fault (going beyond to per-person) but didn't state 14. Hmm \u2014 \"parrot-with-contradiction: supplied content accepted while the working re-exhibits the error\". She says \"Ah, I see\" (accepting the tutor's point) but re-asserts 10, which embodies the error. The tag precedence: resolved, motivated-falsehood, parrot-with-contradiction, splice, reversion, rationale, re-exhibited. Parrot-with-contradiction seems apt: she accepts the tutor's correction content (that the question asks only the total) yet her asserted answer still embodies the per-person adjustment (10). Actually \"reversion\" is \"a re-exhibition immediately following the corrected content being named, adopted, or performed\". Both could apply; precedence says parrot-with-contradiction outranks reversion. Let me pick parrot-with-contradiction.\n\nTurn 3: Tutor: \"Not quite no, what are the 7 new records worth?\" Student: \"The 7 new records are worth 7 x 2 = 14 old records.\"\n\nThis is correct. Does it engage a construct? The tutor asks for the value of the 7 new records \u2014 a posed prompt asking for the quantity. The student computes 7 \u00d7 2 = 14, which is the correct conversion. This re-derives the asked quantity correctly. Is this a resolution? The thread's token is... what exactly? The token is the fabricated per-person adjustment producing 10. The corrected counterpart would be: committing to 14 as the total without the per-person adjustment. At turn 3, she states 14 as the worth of the 7 new records \u2014 but does she commit it as the answer to \"how many old records did the 5 people bring in\"? She says \"The 7 new records are worth 7 x 2 = 14 old records.\" That's the conversion, not yet the final answer commitment. Hmm.\n\nAlso, is 7 x 2 = 14 supplied content? The tutor asks \"what are the 7 new records worth?\" \u2014 the operation isn't named; the student selects multiplication and operands 7 and 2 from her own prior work. Actually this content was hers all along (turn 0, turn 1). It's a re-derivation of her own prior correct line. Under the re-articulation standard, re-deriving her own standing chain is recitation... but the tutor's question is a fresh prompt, and the content (14) is the correct content. Hmm, but does it engage the comprehension construct? The comprehension issue is whether the asked quantity needs per-person adjustment. Answering \"7 x 2 = 14\" doesn't yet resolve that \u2014 turn 4 shows she still says 10.\n\nLet me think about turn 3's cells. The tutor's question invites computing the worth of the 7 new records. The student answers correctly. Is this absent for any family? For comprehension: the construct is what the problem asks. She states 14 as the worth of the new records \u2014 this is a correct computation but does it demonstrate grasp that 14 is the answer? Not necessarily; she still thinks the answer is 10 (turn 4). The act itself: computing 7\u00d72=14 is something she's done from the start; it's her own chain's first step being re-narrated at the tutor's prompt. The tutor named the quantity (\"the 7 new records\") and asked its worth; the operation (\u00d72) comes from the stated ratio, which she's applied all along. I'd say this is execution of a stated relation at a posed prompt \u2014 not_evidenced for comprehension (she's not resolving the reading; the tutor pointed at the quantity). For wrong operation: she selects the operation? The tutor asks \"what are the 7 new records worth\" \u2014 the operation isn't named, but the ratio 2:1 was stated in the problem and she's used it repeatedly. Hmm \u2014 \"A tutor who supplies an operand but not the operation... still leaves the operation selection to the student, so correct work there is absent.\" Here the tutor supplies the operand (7 new records) and the problem supplies the rate (2:1); she selects multiplication. But is this fresh? She's computed 7 \u00d7 2 = 14 three times already. Re-articulation: \"re-derivation of one's own standing chain is recitation regardless of completeness\". Hmm, but it's in answer to a fresh tutor question. The two-condition test: fresh where it introduces at least one operation, premise, or relation absent from the prior chain, or genuinely restructures. 7\u00d72=14 is verbatim from her prior chain. So it's carried \u2192 earns nothing \u2192 not_evidenced.\n\nActually wait. Let me reconsider. The carried/fresh test: \"a re-derivation is fresh where it introduces at least one operation, premise, or relation absent from the prior chain... it is carried where the prior chain demonstrably contains its full content\". 7\u00d72=14 is fully contained in her prior chain (turn 0 and turn 1). So carried \u2192 not_evidenced. Yes.\n\nSo turn 3: all families not_evidenced? It's a correct statement, engaging nothing fresh. Comprehension: she restates the worth; not resolving the reading. Hmm, but could it count as engaging comprehension correctly? The comprehension thread is about the per-person adjustment. Turn 3 doesn't touch that. So N across.\n\nTurn 4: Tutor: \"Good, so how many 'old records' did the 5 people bring in in tital?\" Student: \"The 5 people brought in a total of 10 old records.\"\n\nThe tutor's prompt is a posed question for the exact asked quantity \u2014 it invites the construct. The student commits to 10, which embodies the misconception (the adjusted total). This is a re-asserted result: present for the comprehension thread. The tutor just got her to say 14 (worth of new records), then asks the total; she still says 10. This directly contradicts the 14 she just stated \u2014 the 10 is her protected output. Event tag: reversion? The corrected content (14) was just named/performed by her at turn 3, and she re-asserts 10 immediately after. \"reversion: a re-exhibition immediately following the corrected content being named, adopted, or performed.\" Turn 3 she performed 7\u00d72=14; turn 4 she re-asserts 10. That's a reversion. Present.\n\nTurn 5: Tutor: \"No, try again.\" Student: \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\"\n\nShe re-asserts 10 and restates the per-person rationale (2 each \u00d7 5). This re-commits the belief \u2014 a rationale event: \"a spontaneous articulation of the belief behind the error\". Actually she articulates the belief: each person brought 2, 5 people, so 10. This is present, tagged rationale (or re-exhibited). Precedence: rationale outranks re-exhibited? The precedence list: resolved, motivated-falsehood, parrot-with-contradiction, splice, reversion, rationale, re-exhibited. So rationale beats re-exhibited. Yes \u2014 she states the belief behind the error (each person 2, times 5 = 10). Tag rationale.\n\nTurn 6: Tutor: \"So the ratio is 2:1, if they left with 7 new records, how many old ones needed to be traded in?\" Student: \"The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.\"\n\nInteresting. She asserts 10 again, but now the stated derivation is 2 per new record \u00d7 7 new records \u2014 which would give 14, not 10. So her stated parts (2 \u00d7 7) don't produce the protected output (10); she asserts 10 anyway. This is a premise-conclusion decoupling: she affirms a corrected-ish premise (2 old per new, 7 new) and immediately redraws the old conclusion (10). Per the codebook: \"Premise-conclusion decoupling. When a turn affirms a corrected premise and immediately redraws the old conclusion... the label follows the conclusion.\" Present.\n\nAlternatively, motivated-falsehood? \"a facially false assertion whose function is to preserve the committed conclusion\". Her assertion \"10, since 2 per new and 7 new\" \u2014 the derivation implies 14, so the claim that this yields 10 is facially false, and it preserves the committed 10. Hmm. The motivated-falsehood tag: \"a facially false assertion whose function is to preserve the committed conclusion\". The stated parts (2 \u00d7 7) do not produce 10; a false implicit equality is needed. The migrating-component arithmetic test: \"the parts the student states must themselves produce the protected value for the account to be a defence... Where the parts the student states do not produce it, and a further false equality is needed to bridge the gap, the parts are not manufactured for the defence. They are judged on their own merits and may found, while the bridging equality is the protecting thread's act.\"\n\nHere the parts (2 per new, 7 new) are actually correct content \u2014 they're the correct premises. The conclusion 10 is the protected output. The implicit claim \"2 \u00d7 7 = 10\" is facially false and protects the anchor. So this is a motivated falsehood (or premise-conclusion decoupling). Both are listed in the event vocabulary: \"premise-conclusion decoupling\" is explicitly a tag option in the output format. The codebook's premise-conclusion decoupling: \"When a turn affirms a corrected premise and immediately redraws the old conclusion, the affirmed premise is judged under the parroting test... and the conclusion is the student's committed output, so the label follows the conclusion.\" Present either way. Which tag? The precedence: motivated-falsehood outranks... let me check: \"resolved, motivated-falsehood, parrot-with-contradiction, splice, reversion, rationale, re-exhibited\". \"premise-conclusion decoupling\" isn't in that precedence list but is in the allowed vocabulary. Hmm. Turn 6: she affirms premise \"2 old for each new, 7 new\" (her own content from the start, and echoed by the tutor's 2:1 ratio statement) and draws conclusion 10. I'd tag it \"premise-conclusion decoupling\" since that describes it precisely. Actually, is the premise \"corrected\"? The premise 2:1 was never wrong. She says 10 is because 2 per new \u00d7 7 new \u2014 a false derivation. It's a motivated falsehood in the sense that the derivation is facially inconsistent. I think \"premise-conclusion decoupling\" fits best: affirms a premise and redraws the old conclusion. Either is defensible; I'll use premise-conclusion decoupling.\n\nTurn 7: Tutor: \"Not quite, the ratio is 2:1. So what do you need to do to 7?\" Student: \"To get the total number of old records, I need to multiply 7 by 2, since the ratio is 2:1. So, the 5 people brought in a total of 10 old records, since 7 x 2 = 10.\"\n\nNow she states the operation (multiply 7 by 2 \u2014 partly tutor-prompted: \"what do you need to do to 7?\" with ratio 2:1 stated \u2014 this strongly suggests multiply by 2; arguably the tutor supplied the operation by pointing). Then: \"the 5 people brought in a total of 10 old records, since 7 x 2 = 10.\" This asserts a facially false equality 7 \u00d7 2 = 10, landing on the protected output 10. Classic motivated-falsehood: \"asserting 3 + 10 = 11 to keep an answer of 11\". Present, tagged motivated-falsehood.\n\nTurn 8: Tutor: \"No, 7 x 2 = 14\". Student: \"Oh, right. So, the 5 people brought in a total of 14 old records, since 7 x 2 = 14.\"\n\nThe tutor states the correction explicitly: 7 \u00d7 2 = 14. The student echoes it and commits to 14. Does this resolve the thread? Resolution requires the student's own act committing the corrected counterpart, not executing a fix whose content the tutor named. The tutor named 7 \u00d7 2 = 14 and implicitly the answer. The student merely echoes. Under the tutor-supplied rule: \"when the tutor has named both the error and the fix, a turn that only applies the named fix and reports the result, without adding reasoning that demonstrates grasp, is not_evidenced rather than absent.\" The tutor said \"No, 7 x 2 = 14\" \u2014 named the corrected computation. The student's \"since 7 x 2 = 14\" is an echo. So not_evidenced, no resolution.\n\nHmm, but wait \u2014 does she add anything? \"So, the 5 people brought in a total of 14 old records\" \u2014 the tutor's turn said \"No, 7 x 2 = 14\" in the context of the question \"how many old records did the 5 people bring in\" (the running question). The tutor's immediately preceding turn corrects the arithmetic; the binding of 14 to the asked total \u2014 was that supplied? The preceding exchange: tutor asked at turn 6 \"how many old ones needed to be traded in?\", at turn 7 \"what do you need to do to 7?\", then \"No, 7 x 2 = 14\". The answer 14 to the asked question is fully determined by the tutor's statement. The student echoing it is executing the named fix. Per the kombucha/overtime examples: not_evidenced, no resolution. So turn 8: all N, thread unresolved at end? But resolved_by_end... Let me think about whether the thread is resolved.\n\nHmm, wait. Let me reconsider. Actually, let me reconsider whether the thread resolves at turn 8 or remains unresolved. The resolution step: \"A resolution is the student's own act committing the corrected counterpart of the thread's token: the corrected element itself, performed by her, at the token's structural position.\" The tutor supplied the corrected content (7 \u00d7 2 = 14) explicitly in the immediately preceding turn. The student repeats it. That's executing named content \u2192 does not resolve. \"Such executions still earn ordinary absent credit where the engagement gates pass; the resolution status is the stronger claim and is what this step withholds.\" But here even absent credit fails because the content was fully supplied (framing floor: \"an act whose content the immediately preceding tutor turn states... earns nothing\"). So turn 8 is not_evidenced across all families, and the thread is not resolved by end (resolved_by_end false, resolved_at null).\n\nHmm, but hold on \u2014 is that right? The student's acceptance of 14 with no contradiction \u2014 the parroting-versus-comprehending test's first outcome: echo \u2192 not_evidenced. Yes. So thread unresolved.\n\nWait, but actually let me reconsider turn 3 as a potential resolution. At turn 3, the tutor asks \"what are the 7 new records worth?\" and she says 14. Then turn 4 she re-asserts 10, so even if turn 3 were a resolution, it's voided by turn 4's re-exhibition (no resolved_at). But I don't think turn 3 is a resolution anyway: the token is the adjusted total 10 (the per-person whole-record adjustment), and its corrected counterpart is committing the total as 14 without adjustment. Turn 3 states the worth of new records is 14 \u2014 she always knew that; it's not the corrected counterpart at the token's site, and she immediately reverts at turn 4. Also the content was carried from her own prior chain (recitation). So no.\n\nNow, let me reconsider the thread's family and belief more carefully.\n\nFounding unit: solution (turn 0). Departures in the solution:\n\nLine scan:\n1. \"Each new record is worth 2 old records.\" \u2014 match.\n2. \"7 x 2 = 14\" \u2014 match.\n3. \"The 5 people brought in a total of 14 old records\" \u2014 match (this is the correct answer, stated!). \"each person brought in an average of 14/5 = 2.8\" \u2014 14/5 = 2.8 is true arithmetic. Match? The claim \"each person brought in an average of 2.8 old records\" \u2014 as a statement about the average, it's true. It's an unnecessary computation but true. Under the steps family, an unnecessary step could be present... but is the average computation itself a departure? The value is true. Hmm. The steps family: \"including a step the procedure does not need\". But the deeper issue is the fabricated constraint. Let me think about whether to mark the average line as a departure.\n\nActually, the scan marks departures from the baseline \u2014 values, equalities, selections, role assignments, or omissions that are false against the baseline. \"each person brought in an average of 2.8\" is not false (the average is indeed 2.8). \"Since each person can only trade in whole records, each person brought in 2 old records\" \u2014 this IS false: her own committed average is 2.8, and the claim that each brought 2 contradicts it. Also the implicit premise that shares are equal is fabricated. So line 4 is the first false content: the token.\n\nWait \u2014 but is the average line a step the procedure doesn't need, founding a steps thread? Let me think. The excess step of computing the average and then adjusting \u2014 the whole per-person detour. Under the goal-misreading/scope rule (kombucha), carrying the solution beyond the asked quantity and presenting an out-of-scope quantity as the goal is comprehension, one thread. The average computation is part of that detour \u2014 it's the shadow of the misread. I think one thread: comprehension, belief that the asked total must be an equal whole-number per-person amount (the records evenly split, whole per person), so the total is 5 \u00d7 2 = 10 rather than 14.\n\nHmm, but let me reconsider: maybe the cleaner statement of the belief: \"the total brought in must be divisible into equal whole records per person; since 14/5 = 2.8 isn't whole, each person brought 2, so the total is 10.\" As a reading: she takes the problem to require that the 5 people each brought the same whole number of records, making the total a multiple of 5, and she takes the per-person count as 2 (rounding down). The asked quantity, on her reading, is the equal-split total.\n\nAlternatively the belief could be framed as a goal misread: she thinks the question asks for a per-person consistent total. Either way it's comprehension \u2014 a fabricated scenario assumption (equal whole split) about what the problem requires.\n\nSignature: the per-person adjustment \u2014 \"each person brought in 2\" and the protected output 10. The signature names: the 2-per-person adjustment producing the total 10; protected output 10. Later exhibitions: turn 2 (re-assert 10), turn 4 (re-assert 10), turn 5 (2 each \u00d7 5 = 10), turn 6 (10 with 2-per-new \u00d7 7 rationale), turn 7 (7 \u00d7 2 = 10 falsehood). All re-commit the protected output 10. The signature: \"the per-person whole-record adjustment; protected output 10\". The output-anchored persistence is clear: she defends 10 while derivations mutate (2\u00d75 at turn 5, 2\u00d77 at turn 6, 7\u00d72=10 at turn 7). So the signature names the protected output 10.\n\nNow \u2014 does the founding pass the comprehension admission gate? Positive evidence: the student's own words: \"Since each person can only trade in whole records, each person brought in 2 old records.\" That's a stated belief about the problem's constraints \u2014 a fabricated scenario assumption in her own words. Yes, gate opens. Belief stated as a reading: she takes the problem to require an equal whole-number per-person split, so the total must be 5 \u00d7 whole. \n\nIs there an available-reading defence? Could the problem be read as requiring equal splits? \"5 people come in with old records and leave with 7 new records between them.\" Nothing says equal. And the question asks the total, which is determined (14). Her reading requires rounding 2.8 down to 2, which contradicts her own computed 2.8 \u2014 so even under her reading the arithmetic isstrained. Also \"each person can only trade in whole records\" \u2014 even granting whole records per person, equal shares aren't required, and the total is still 14. The reading isn't genuinely available: it requires the average to be an attainable equal whole split, which is impossible (7 new records can't split equally among 5 people; 2.8 is the average, not a per-person amount). And it contradicts her own committed 2.8. So no defence; chargeable. Also the internal coherence prong: she asserts 2 right after computing 2.8 \u2014 a self-contradiction within the unit. The disqualifier: \"If the turn endorses construct-relevant content and then acts inconsistently with it... the defence does not apply.\" She computed 2.8 and then said 2. So even if some reading were available, internal coherence fails. Good \u2014 comprehension thread founded at solution.\n\nNow the \"rounding 2.8 to 2\" \u2014 is that a separate wrong-operation token? Independence test: correct the comprehension belief (no equal-split requirement) \u2192 the rounding never happens. So it's the shadow of the comprehension belief. One token. Good.\n\nWhat about \"2 x 5 = 10\" \u2014 shadow of the same belief. And the final \"10\" \u2014 output.\n\nSo the solution unit: comprehension present [S1]. Other families? Let's check:\n- relevance: the 5 people is a stated given; she uses it (in the per-person detour). Is there a selection failure? The 5 is actually used in her (wrong) chain. The issue isn't selecting wrong information; it's the fabricated constraint. Hmm \u2014 one could argue she misuses the \"5 people\" given, attaching a condition (equal split) to it. But the belief is a misreading of what the problem requires, driven by the fabricated whole-record constraint. The tutor's turn 2 says she went beyond the question \u2014 consistent with scope/goal misread \u2192 comprehension. I'll keep relevance N. Actually, wait \u2014 could one argue the \"5 people\" is a distractor that she wrongly wired in? The correct chain doesn't need the 5 at all (total = 7 \u00d7 2 = 14). She wired the 5 in. Hmm. \"Relevance owns which of the problem's information enters the model.\" The 5 people is stated; using it is the error in a sense. But the driven error is the fabricated equal-split constraint \u2014 the misreading of what the problem asks (she thinks a per-person consistent answer is needed). The wiring of the 5 is downstream of the misread goal: because she thinks the answer must be per-person-whole, she needs the 5. So the 5's entry is the shadow of the comprehension belief. Also, the comprehension-vs-relevance test: \"did the student use the wrong piece of information, or misunderstand what a correctly chosen piece represents?\" She used the 5 (correctly chosen piece, in a sense) but misunderstood what the problem asks/requires. Comprehension. And the fabricated constraint is student-supplied content (equal whole split), not a stated given misassigned. Comprehension it is.\n- principles: no general relation supplied wrongly; the 2:1 ratio is handled correctly (7\u00d72=14). The equal-split move isn't a crystallized general rule with grounds. N.\n- wrong_operation: the average computation and rounding \u2014 shadow of comprehension. Also, is 2.8 \u2192 2 an execution fault? It's driven by the belief. N.\n- steps: the per-person detour is an extra stage. Is it a steps error? The extra stage follows from the misread goal (she thinks per-person adjustment is required). Under comprehension-vs-steps: \"If a missing or wrong step follows correctly from a misreading of what the problem asks, so the procedure is right for the problem as she understood it, it is comprehension.\" Yes \u2014 the detour is the shadow of the misread. Steps N.\n\nSo solution: comprehension P [S1], others N.\n\nTurn 1: walkthrough. \"Sure. I started by figuring out that each new record is worth 2 old records. So, the 7 new records are worth 7 x 2 = 14 old records. Then, I figured out that the 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records. Since each person can only trade in whole records, each person brought in 2 old records. Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\"\n\nThis is a verbatim replay of the solution \u2014 recitation. But the error side: \"Re-committing the wrong chain in a walkthrough is a live act of endorsement: the error inherits present as the stability section provides.\" So comprehension present [S1], re-exhibited. Non-error columns: recitation earns nothing \u2192 N. The correct parts (7\u00d72=14) are recited, no fresh decisions. So comprehension P, others N.\n\nTurn 2: \"Ah, I see. So, the answer is 10 old records since the 5 people brought in a total of 10 old records.\" Tutor's preceding turn named the fault (going beyond the question) \u2014 pointing, not supplying 14. She accepts verbally but re-asserts 10. Present [S1], parrot-with-contradiction. Others N.\n\nTurn 3: \"The 7 new records are worth 7 x 2 = 14 old records.\" As discussed: carried content, no fresh decision, doesn't touch the per-person issue. N across. Hmm \u2014 wait. Let me double-check comprehension here. The tutor asks \"what are the 7 new records worth?\" She answers 14. Is the construct in play? The comprehension issue is what the problem asks (total vs per-person-adjusted). This turn computes the worth of new records \u2014 relevant to the chain, but it's her own long-standing correct content re-stated at a posed prompt. Under \"not re-committing an error is not comprehension\" and the carried rule: N. Also no error. N.\n\nTurn 4: \"The 5 people brought in a total of 10 old records.\" Tutor asked exactly the asked quantity (\"how many 'old records' did the 5 people bring in in tital?\"). She commits to 10 \u2014 a re-asserted result, present [S1], reversion (she just performed 14 at turn 3, now reverts to 10). Others N.\n\nTurn 5: \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\" Re-asserts 10 with the per-person rationale. Present [S1], rationale (spontaneous articulation of the belief: each person 2, \u00d75). Others N.\n\nTurn 6: \"The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.\" Affirms premises (2 per new, 7 new \u2014 which entail 14) and redraws 10. Present [S1], premise-conclusion decoupling. Others N.\n\nTurn 7: \"To get the total number of old records, I need to multiply 7 by 2, since the ratio is 2:1. So, the 5 people brought in a total of 10 old records, since 7 x 2 = 10.\" Asserts 7 \u00d7 2 = 10, facially false, protecting the anchored 10. Present [S1], motivated-falsehood. Others N.\n\nNote: the tutor's turn \"Not quite, the ratio is 2:1. So what do you need to do to 7?\" \u2014 this points at the operation (multiply 7 by 2) without stating the result. Her statement \"I need to multiply 7 by 2\" \u2014 the tutor's question with the stated 2:1 ratio makes multiplication by 2 strongly implied; arguably supplied via leading question. Either way, the false equality 7 \u00d7 2 = 10 is hers and lands on the protected output: \"a false result inside any frame that lands on a protected output is the protecting thread's act, the motivated-falsehood machinery outranking the frame.\" So present regardless.\n\nTurn 8: \"Oh, right. So, the 5 people brought in a total of 14 old records, since 7 x 2 = 14.\" Tutor just stated \"No, 7 x 2 = 14\". She echoes. Framing floor: content stated by the immediately preceding tutor turn \u2192 not_evidenced. No resolution (supplied content). Thread unresolved at end.\n\nHmm, wait. Let me reconsider whether turn 8 could be absent for comprehension. The binding of 14 to the asked total \u2014 did the tutor state that? The tutor said \"No, 7 x 2 = 14\" \u2014 in the context of the standing question \"how many old records did the 5 people bring in\". The tutor's statement supplies the corrected value; the student applying it as the total is executing the named fix. The overtime example: tutor says overtime is 4 hours total, student removes times-5 and reports $770 \u2192 not_evidenced. Same here. N. No resolution.\n\nSo thread S1: exhibitions: (solution, committed), (turn 1, re-exhibited), (turn 2, parrot-with-contradiction), (turn 4, reversion), (turn 5, rationale), (turn 6, premise-conclusion decoupling), (turn 7, motivated-falsehood). resolved_at: null. resolved_by_end false.\n\nNow the scan rows. Let me write the line scan carefully for each unit.\n\n**Solution:**\nLines:\n1. \"Each new record is worth 2 old records.\" \u2014 expected: 2 old per 1 new, problem's ratio. match.\n2. \"So, the 7 new records are worth 7 x 2 = 14 old records.\" \u2014 expected 7 x 2 = 14. match.\n3. \"The 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records.\" \u2014 The total 14 matches; 14/5 = 2.8 is true arithmetic. The average claim is true as an average. match? Hmm. Should I mark \"each person brought in an average of 2.8\" as a departure? It's a true statement. Not a departure. But wait \u2014 do I consider the average computation an unnecessary act? The scan marks false content; true-but-unnecessary isn't a scan departure (steps present labels can exist without a scan departure? No \u2014 every P cell must cite a thread exhibited by a departure in that unit). Since I'm not founding a steps thread, no departure needed. match.\n\nActually, hold on. Let me reconsider whether the average step founds anything. The codebook's steps family: \"including a step the procedure does not need\". But the comprehension-vs-steps test routes it: the extra step follows from the misread (she thinks per-person consistency is required). So it's the shadow of comprehension. One thread. The average line itself is true content; the departure is the next line's \"each person brought in 2\". Good.\n\n4. \"Since each person can only trade in whole records, each person brought in 2 old records.\" \u2014 expected: on her own committed chain, the per-person average is 2.8; nothing licenses 2. Departure. Slot: the per-person count 2 (and the fabricated whole-record equal-split constraint). Contradicts: her committed 14/5 = 2.8. Founds S1.\n5. \"Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\" \u2014 expected: on the problem, 14; on her committed chain, the total she committed is 14 (line 3: \"The 5 people brought in a total of 14 old records\"). The 10 contradicts her own committed 14. Departure. Slot: the total 10. Contradicts: her committed total 14. Disposition: shadow of S1 (the belief generates it: 2 per person \u00d7 5). Yes \u2014 S1's belief generates this content directly. shadow of S1.\n\nHmm, wait: in the origin unit, \"any other departure there disposes on its own merits\". Is line 5 a shadow or its own token? Independence test: correct the founding error (the per-person-2 adjustment) \u2192 line 5's 10 disappears. So shadow. Good.\n\n6. \" 10\" \u2014 the final answer line. It's \" 10\" (with a leading space in the transcript). Is this a separate line committing content? It re-states the total 10. It contradicts her committed 14 and the problem. Disposition: shadow of S1 (generated by the belief). Should I include it as a scan row? Yes, it's a committed answer. Departure, shadow of S1.\n\n**Turn 1:** walkthrough, verbatim.\nLines:\n1. \"each new record is worth 2 old records\" \u2014 match.\n2. \"the 7 new records are worth 7 x 2 = 14 old records\" \u2014 match.\n3. \"the 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records\" \u2014 match (true).\n4. \"Since each person can only trade in whole records, each person brought in 2 old records.\" \u2014 departure, contradicts her committed 2.8; exhibits S1.\n5. \"Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\" \u2014 departure, contradicts her committed 14; shadow of S1.\n\n**Turn 2:** \"Ah, I see. So, the answer is 10 old records since the 5 people brought in a total of 10 old records.\"\nLine: \"the answer is 10 old records since the 5 people brought in a total of 10 old records\" \u2014 departure; contradicts her own committed 14 (from turn 0/turn 1/turn 3? At this point in the prefix, her committed outputs include 14 as the total). Actually at turn 2's prefix, she has committed \"total of 14\" twice (turn 0, turn 1). The 10 contradicts that and embodies the belief. Exhibits S1.\n\n**Turn 3:** \"The 7 new records are worth 7 x 2 = 14 old records.\" \u2014 match. (7\u00d72=14, correct.)\n\n**Turn 4:** \"The 5 people brought in a total of 10 old records.\" \u2014 departure; contradicts the 14 she just stated at turn 3 (and the problem). Exhibits S1.\n\n**Turn 5:** \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\" \u2014 departure; the 10 contradicts her committed 14; the per-person 2 contradicts her committed 2.8. This line instantiates the signature directly (per-person adjustment \u2192 10). Exhibits S1. One row or two? The line carries the 2-per-person claim and the 10 total. Both are the thread's own content. I'll write one row for the line (the whole span is one committed claim). Hmm, the scan says a line may carry several rows, one per departing slot. The departing slots: total 10 (contradicts her 14), per-person 2 (contradicts her 2.8). Both are exhibitions of S1 (the signature names the per-person adjustment and protected output 10). I could write two rows both \"exhibits S1\". That seems redundant but accurate. Let me write one row with the whole span, slot \"the total 10 seated on the per-person adjustment\", contradicts \"her committed total 14\". Simpler: one row. Actually the rules say one row per departing slot. Let me do two rows to be safe? Hmm. For turn 1 and solution I treated line 4 (per-person 2) and line 5 (total 10) as separate lines already. For turn 5, both slots are in one sentence. I'll do one row per slot: row A slot \"each person brought in 2\", contradicts \"her committed 14/5 = 2.8\", exhibits S1; row B slot \"the total 10\", contradicts \"her committed 14\", exhibits S1. Both exhibit S1. That's fine \u2014 departures list would then have two entries for turn 5 both \"exhibits S1\". That's acceptable (\"exactly one entry per scan row whose verdict is departure\").\n\nHmm, actually, simpler and cleaner: treat the sentence as one line with one departure row naming the composite claim. The codebook wants exhaustive slot-level scan, but the validation is mechanical on scan/departure/thread linkage. Two rows is more faithful. Let me do two rows where a line genuinely has two departing slots. But for the solution line 4, \"Since each person can only trade in whole records, each person brought in 2 old records\" \u2014 the departing content is the per-person 2 (and the fabricated constraint). The founding row. One slot. OK.\n\n**Turn 6:** \"The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.\"\nDeparting slots: the total 10 \u2014 contradicts her committed 14 (and is inconsistent with her own stated premises in this very line: 2 \u00d7 7 = 14). Exhibits S1. The premises \"2 old per new\" and \"7 new\" are true. The false content is the 10 given those premises. One row: slot \"the total 10\", contradicts \"her own stated 2 per new record across 7 new records (14) and her committed 14\". Exhibits S1.\n\n**Turn 7:** \"To get the total number of old records, I need to multiply 7 by 2, since the ratio is 2:1. So, the 5 people brought in a total of 10 old records, since 7 x 2 = 10.\"\nLines: (a) \"I need to multiply 7 by 2, since the ratio is 2:1\" \u2014 the operation selection is correct (multiply 7 by 2). Match? The claim is about what to do; it's correct. But is it tutor-supplied? The tutor asked \"what do you need to do to 7?\" with ratio stated. As a scan matter, the content isn't false. match. (b) \"the 5 people brought in a total of 10 old records, since 7 x 2 = 10\" \u2014 the equality 7 x 2 = 10 is facially false; result should be 14. Departure: slot \"the asserted product 10 in 7 x 2 = 10\", contradicts \"the arithmetic 7 x 2 = 14 (and her own committed 14)\". Exhibits S1 (motivated-falsehood landing on protected output 10).\n\nNote: a false result of a shown operation \u2014 but here it's not a slip; it lands on the protected output, so it's the thread's act. Disposition: exhibits S1. Not \"slip\" \u2014 motivated falsehood is never a slip.\n\n**Turn 8:** \"Oh, right. So, the 5 people brought in a total of 14 old records, since 7 x 2 = 14.\" \u2014 7\u00d72=14 correct, total 14 correct. match. (Tutor-supplied content; but scan verdicts are about truth on the baseline \u2014 it's a match. The grid cell is N due to framing floor.)\n\nNow the grid:\n\n- solution: comprehension P [S1]; relevance N; principles N; wrong_operation N; steps N.\n  Wait \u2014 should steps be considered? The per-person detour is an extra stage. But it's the shadow of the misread \u2192 comprehension only. N.\n  Should wrong_operation be considered for 2.8\u21922? Shadow. N.\n  Quotes: comprehension: \"Since each person can only trade in whole records, each person brought in 2 old records.\" \u2014 exact span.\n\n- turn 1: comprehension P [S1]; others N. Quote: \"Since each person can only trade in whole records, each person brought in 2 old records.\" (exact span from turn 1).\n\n- turn 2: comprehension P [S1]; others N. Quote: \"the answer is 10 old records since the 5 people brought in a total of 10 old records.\"\n\n- turn 3: all N.\n\n- turn 4: comprehension P [S1]; others N. Quote: \"The 5 people brought in a total of 10 old records.\"\n\n- turn 5: comprehension P [S1]; others N. Quote: \"since each person brought in 2 old records and there were 5 people\" or the whole sentence.\n\n- turn 6: comprehension P [S1]; others N. Quote: the whole sentence.\n\n- turn 7: comprehension P [S1]; others N. Quote: \"since 7 x 2 = 10\".\n\n- turn 8: all N.\n\nThread S1:\n- family: comprehension.\n- belief: she takes the problem to require an equal whole-number split of the records across the 5 people, so the total must be 5 times a whole per-person count (2 each, not the 2.8 average) \u2014 i.e., the asked total is the equal-split total, not the 7\u00d72 conversion. Stated as a reading: \"the records must come out to a whole number per person, so the total the 5 people brought is 5 equal shares rather than the 14 the 7 new records are worth.\" One line.\n- signature: the per-person whole-share adjustment (each person brought 2) and the protected output 10.\n- origin: solution.\n- exhibitions as above.\n- resolved_at: null.\n- quote: \"Since each person can only trade in whole records, each person brought in 2 old records.\"\n\nNo witness needed (comprehension). No grounds needed.\n\nNow \u2014 double-check the reading-family founding gate for S1 at solution: words question \u2014 does the student state the interpretation in her own words about the problem's sentence? She states \"Since each person can only trade in whole records\" \u2014 a claim about the problem's constraints (fabricated), and acts on it. That's a stated scenario assumption in her own words. Also the act is locally coherent under the wrong reading and the reading is exhibited. Gate opens. Also the internal-coherence disqualifier kills any ambiguity defence (she computed 2.8 then said 2). Good.\n\nLet me also double check turn 2's tag. Tutor: \"you have gone further beyond the question. The question only asks 'How many old records did the 5 people bring in?' Not how many did 'each' bring in.\" This names the fault (per-person detour) \u2014 a named fault functioning as pointing; the corrected content (14 as the answer) is entailed but not stated as a number. Student: \"Ah, I see. So, the answer is 10...\" She accepts the framing but re-asserts the protected output. Tags: parrot-with-contradiction (supplied content accepted while the working re-exhibits the error) \u2014 the \"supplied content\" is the tutor's framing that only the total is asked; she accepts it (\"Ah, I see\") yet asserts the per-person-adjusted 10. I'll tag parrot-with-contradiction. Present.\n\nTurn 4 tag: reversion \u2014 immediately follows her own performance of 7\u00d72=14 at turn 3. Yes.\n\nTurn 5 tag: rationale \u2014 she articulates the belief (2 each \u00d7 5). Yes.\n\nTurn 6 tag: premise-conclusion decoupling \u2014 affirms premises entailing 14, redraws 10. Yes.\n\nTurn 7 tag: motivated-falsehood \u2014 7\u00d72=10 facially false, protects 10. Yes.\n\nTurn 8: echo of supplied correction \u2192 N, no resolution.\n\nHmm, one more consideration on turn 3: could it be absent for comprehension? The tutor's question \"what are the 7 new records worth?\" invites the conversion. The student answers 14 correctly. But this is content she's produced twice before; the construct the thread is about (per-person adjustment) isn't engaged; and the act is carried (prior chain contains it fully). N. Also, \"Not re-committing an error is not comprehension\" \u2014 applying a stated rate to an already-correct figure. N. Good.\n\nCould turn 3 earn wrong_operation absent? She selects the operation (multiply) and operands (7, 2) at a prompt that names only the quantity. Hmm \u2014 \"when a tutor question prompts toward an operation without naming it... the student still had to select the operation or arrange the operands\" \u2192 absent. But the re-articulation/carried rule: the prior chain contains 7\u00d72=14 verbatim twice. \"It is carried where the prior chain demonstrably contains its full content... and carried content earns nothing however fluent.\" So carried \u2192 N. The codebook is explicit that re-derivation of one's own standing chain is recitation. Yes, N.\n\nNow, is there any second thread? Let me scan for residue. Turn 6's premises are true; no new false content besides 10. Turn 7's false equality lands on protected output \u2192 S1's act. No other departures. One thread total.\n\nWait \u2014 I should double-check the solution's line 3 \"each person brought in an average of 14/5 = 2.8 old records\" once more. Is asserting the average itself a step toward the error that should be charged? It's true. The token is the first false content: line 4's per-person 2 with the fabricated constraint. Correct \u2014 \"Everything before the token is not the error.\" The average computation is causally necessary but true \u2192 not the error. Good.\n\nAlso should I include the bare \" 10\" as a scan row in the solution? It's a committed final answer. Yes, include as departure, shadow of S1. Actually \u2014 hmm, one could argue it's just the answer line restating line 5's output. It's checkable content (commits 10 as the answer). Include it.\n\nLet me also reconsider: at the solution, should line 5 be \"shadow of S1\" or \"exhibits S1\"? In the origin unit, the founding departure is line 4. Line 5 is generated by the belief (2 \u00d7 5 given the per-person 2). Shadow = \"S1's belief itself generates the departure's content\" \u2014 yes. Shadow of S1. And \" 10\" likewise shadow.\n\nActually, hmm: is line 5's 10 a departure that \"contradicts her committed 14\"? Yes \u2014 line 3 committed \"total of 14\". So the contradicts field: \"her committed total 14\". Good \u2014 this is exactly the \"departure even where its value matches... contradicts her own prior committed output\" case (well, 10 doesn't match the problem; it contradicts both her 14 and the problem). I'll cite her committed 14.\n\nFor turn 1's line 5, same: contradicts her committed 14 (stated earlier in the same turn, and at turn 0). Shadow of S1.\n\nTurn 2's 10: contradicts her committed 14 (turns 0, 1). Exhibits S1 \u2014 wait, is turn 2's departure a shadow or an exhibition? The 10 is the protected output re-asserted. In later units, re-committing the protected output is an exhibition of the thread. The founding departure's shadow relationship is for within-origin-unit downstream content. At turn 2, the re-assertion of 10 is a fresh act re-committing the thread's output \u2192 exhibits S1. Yes.\n\nTurn 4, 5, 6, 7: exhibits S1.\n\nNow, grid cells: every P cites S1 in srcs with quotes. No A cells anywhere (no triggers needed). Let me double check no family earns an A anywhere:\n\n- Turn 3: correct 14 \u2014 but carried/recitation, N.\n- Turn 8: correct 14 \u2014 supplied, N.\n- Turns 2,4,5,6,7: P in comprehension; other families \u2014 any engagement? Turn 5 restates \"there were 5 people\" \u2014 no construct. Turn 7 \"I need to multiply 7 by 2\" \u2014 operation selection, but tutor's question (\"what do you need to do to 7?\" after stating ratio 2:1) \u2014 is this a leading prompt supplying the operation? The tutor states the ratio 2:1 and asks what to do to 7; multiply-by-2 is the entailed answer. Under leading-question supply, the correct arm is entailed. But even if self-authored, the \"multiply 7 by 2\" operation content is in her prior chain repeatedly (carried) and the turn's false equality lands on the protected output (the falsehood is the event). For wrong_operation, the false 7\u00d72=10 \u2014 is that a wrong-operation departure independent of S1? No: it's a motivated falsehood protecting S1's output; the arithmetic inversion is the defence, not an operation-selection fault. And \"the operation visible? 7 x 2 written, asserted = 10\" \u2014 pointable, but the anchor-identity rule binds it to S1: \"A false assertion whose result lands on an existing thread's protected or anchored output is that thread's motivated act, not the founding commitment of a new thread.\" So exhibits S1, no new thread. Good.\n\nAny relevance engagement? The 5 people usage \u2014 part of S1's enactment (dual-use: the token's own derivation can't credit another family). N.\n\nPrinciples: no general rule articulated or enacted twice on fresh material. N throughout.\n\nSteps: the detour is S1's shadow. N throughout.\n\nSo the only non-N cells are comprehension P at solution, turns 1, 2, 4, 5, 6, 7.\n\nHmm, let me reconsider turn 1 once more. The walkthrough re-commits the whole wrong chain verbatim. Error side: present (live endorsement). Non-error columns: recitation \u2192 N. Correct.\n\nNow write the scan carefully with exact spans.\n\nSolution text:\n\"Each new record is worth 2 old records.\nSo, the 7 new records are worth 7 x 2 = 14 old records.\nThe 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records.\nSince each person can only trade in whole records, each person brought in 2 old records.\nTherefore, the 5 people brought in a total of 2 x 5 = 10 old records.\n 10\"\n\nScan rows:\n1. written \"Each new record is worth 2 old records.\" expected \"2 old per 1 new, the problem's stated trade rate\" verdict match.\n2. written \"So, the 7 new records are worth 7 x 2 = 14 old records.\" expected \"7 x 2 = 14\" match.\n3. written \"The 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records.\" expected \"total 14; 14/5 = 2.8 is the true average\" match.\n4. written \"Since each person can only trade in whole records, each person brought in 2 old records.\" expected \"on her committed chain the per-person average is 2.8; no equal whole-share constraint exists, so no per-person count of 2\" verdict departure, slot \"the per-person count 2 under a fabricated whole-share constraint\", contradicts \"her committed average 14/5 = 2.8\".\n5. written \"Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\" expected \"the total is the 14 she committed two lines up\" departure, slot \"the total 10\", contradicts \"her committed total 14\".\n6. written \" 10\" \u2014 hmm, the span is \" 10\" on its own line. I'll write \"10\" \u2014 but must be exact contiguous span. The unit shows \" 10\" with a leading space. I'll use \"10\"; the leading space is formatting. Actually to be safe, use \"10\". expected \"14, her committed total\" departure, slot \"the final answer 10\", contradicts \"her committed total 14\".\n\nTurn 1 text: \"Sure. I started by figuring out that each new record is worth 2 old records. So, the 7 new records are worth 7 x 2 = 14 old records. Then, I figured out that the 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records. Since each person can only trade in whole records, each person brought in 2 old records. Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\"\n\nRows: \n1. \"each new record is worth 2 old records\" match.\n2. \"the 7 new records are worth 7 x 2 = 14 old records\" match.\n3. \"the 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records\" match.\n4. \"Since each person can only trade in whole records, each person brought in 2 old records.\" departure, slot per-person 2, contradicts her committed 2.8.\n5. \"Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\" departure, slot total 10, contradicts her committed 14.\n\nTurn 2: \"Ah, I see. So, the answer is 10 old records since the 5 people brought in a total of 10 old records.\"\nRow: written \"the answer is 10 old records since the 5 people brought in a total of 10 old records\", expected \"14, her committed total and the problem's answer\", departure, slot total 10, contradicts her committed 14.\n\nTurn 3: \"The 7 new records are worth 7 x 2 = 14 old records.\" match.\n\nTurn 4: \"The 5 people brought in a total of 10 old records.\" departure, contradicts her just-stated 14 (turn 3) and committed 14. Slot total 10.\n\nTurn 5: \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\"\nTwo rows:\nA: slot \"each person brought in 2\", contradicts \"her committed average 2.8\", departure.\nB: slot \"the total 10\", contradicts \"her committed 14\", departure.\nBoth exhibits S1.\n\nTurn 6: \"The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.\"\nRow: slot \"the total 10\", contradicts \"her own stated premises here, 2 per new across 7 new = 14, and her committed 14\". departure. exhibits S1.\n\nTurn 7: \nRow 1: \"To get the total number of old records, I need to multiply 7 by 2, since the ratio is 2:1.\" expected \"multiply 7 by 2 \u2014 correct operation\" match.\nRow 2: \"the 5 people brought in a total of 10 old records, since 7 x 2 = 10\" expected \"7 x 2 = 14, so the total is 14\" departure, slot \"the asserted product 10 in 7 x 2 = 10\", contradicts \"the arithmetic fact 7 x 2 = 14 and her committed 14\". exhibits S1.\n\nTurn 8: \"Oh, right. So, the 5 people brought in a total of 14 old records, since 7 x 2 = 14.\" match.\n\nDepartures list (unit order):\n- solution, line 4 \u2192 founds S1\n- solution, line 5 \u2192 shadow of S1\n- solution, \"10\" \u2192 shadow of S1\n- turn 1, line 4 \u2192 exhibits S1\n- turn 1, line 5 \u2192 shadow of S1? Hmm \u2014 in turn 1, is line 5 a shadow or exhibition? The rule: \"shadow of S# is legitimate only where S#'s belief itself generates the departure's content\". The belief generates 2\u00d75=10 from the per-person 2. But turn 1 as a whole re-commits the thread; the line 4 departure is the exhibition (re-committing the signature content: per-person adjustment), and line 5 is downstream content generated by the belief within the unit. I think exhibits for line 4 and shadow for line 5 is right, mirroring the origin unit. But wait \u2014 in later units, re-asserting the protected output 10 is itself an exhibition (the signature names the protected output). Hmm. Line 5 contains \"2 x 5 = 10\" \u2014 the signature's per-person adjustment is line 4's content; line 5 is the product of it. Since the signature names the protected output 10, line 5 also instantiates the signature. To keep it clean: line 4 exhibits S1 (the signature act), line 5 \u2014 generated by the belief \u2192 shadow of S1. Both dispositions are defensible; shadow is accurate because the belief itself generates the content. The mechanical validation: \"Every P cell's cited thread is founded or exhibited by a departure in that same unit\" \u2014 turn 1's P cites S1, and line 4's \"exhibits S1\" satisfies it. Good.\n\nActually, for turn 5 I marked both rows as exhibits S1. That's fine \u2014 both slots are signature content (the per-person 2 and the output 10 are both named in the signature). OK.\n\n- turn 2 \u2192 exhibits S1\n- turn 4 \u2192 exhibits S1\n- turn 5 (two rows) \u2192 exhibits S1, exhibits S1\n- turn 6 \u2192 exhibits S1\n- turn 7 \u2192 exhibits S1\n\nGrid quotes \u2014 exact spans:\n- solution comprehension: \"Since each person can only trade in whole records, each person brought in 2 old records.\"\n- turn 1: \"Since each person can only trade in whole records, each person brought in 2 old records.\"\n- turn 2: \"the answer is 10 old records since the 5 people brought in a total of 10 old records\"\n- turn 4: \"The 5 people brought in a total of 10 old records.\"\n- turn 5: \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\"\n- turn 6: \"The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.\"\n- turn 7: \"the 5 people brought in a total of 10 old records, since 7 x 2 = 10\"\n\nThread quote: \"Since each person can only trade in whole records, each person brought in 2 old records.\" \u2014 instantiates the signature (the per-person adjustment; the output 10 appears in the next line of the same unit \u2014 the signature names both the adjustment and the output; the quote instantiates the adjustment part. The rule: \"The span must instantiate the thread's signature, not merely come from the right unit.\" The signature is \"the per-person whole-share adjustment (each brought 2); protected output 10\". The quote contains the adjustment. Good enough \u2014 it contains the content the signature names (the adjustment). \n\nBelief one-liner: \"the old records must split into equal whole numbers per person, so the asked total is 5 equal whole shares (2 each) rather than the 14 the 7 new records are worth\" \u2014 a reading of what the problem requires/asks.\n\nExhibitions:\n[[\"solution\",\"committed\"],[\"turn 1\",\"re-exhibited\"],[\"turn 2\",\"parrot-with-contradiction\"],[\"turn 4\",\"reversion\"],[\"turn 5\",\"rationale\"],[\"turn 6\",\"premise-conclusion decoupling\"],[\"turn 7\",\"motivated-falsehood\"]]\n\nresolved_at: null.\n\nLet me double check turn 2 vs reversion precedence: parrot-with-contradiction outranks reversion in the list. Turn 2 follows the tutor naming the fault; she accepts (\"Ah, I see\") then re-exhibits. That's textbook parrot-with-contradiction (verbal acceptance, working/answer still exhibits the error). Yes.\n\nAlso check: turn 3 has no exhibition (correct), consistent with exhibitions list (no turn 3). Turn 8 none. Good.\n\nPre-output audit:\n1. Comprehension evidence: her own words \"Since each person can only trade in whole records\" + the enacted adjustment contradicting her own 2.8. Belief stated as a reading (what the problem requires). \u2713\n2. Available-reading defence tested: reading requires equal whole split \u2014 not in text; and internal incoherence (2.8 \u2192 2 in the same unit) disqualifies. \u2713 No token founded on live-thread-generated values: line 5 at origin disposed as shadow. \u2713\n3. Provenance: 5 people problem-given; 2.8, 2, 10 student-derived/fabricated. \u2713\n4. Roles: 14 = total (her own label); 10 = adjusted total \u2014 predicates: she presents 10 as the total, contradicting her own 14. \u2713\n5. Residual: after correcting S1, nothing false remains (2\u00d75=10 arithmetic fine given the 2; all else true). \u2713\n6. Procedure grain: n/a, no construction thread.\n7. Credit: no A cells \u2014 turn 3 carried content, turn 8 supplied. \u2713 Mirror check: any self-authored correct decisions overlooked? Turn 3's 7\u00d72 \u2014 carried (recitation of own chain). Turn 7's \"multiply 7 by 2\" \u2014 tutor-entailed and the turn's committed output is false. No A.\n8. Temporal integrity: no re-attribution. \u2713\n9. Coherence: one thread. \u2713\n10. Commitment: done.\n11. Fold audit: no folds (each exhibition is directly the thread's content; turn 6's premises aren't manufactured parts \u2014 they're the correct premises; the conclusion 10 is the protected output; tagged premise-conclusion decoupling). \u2713\n\nOne more consideration \u2014 the codebook asks whether turn 6 might be \"motivated-falsehood\" vs \"premise-conclusion decoupling\". Turn 6: parts (2 per new, 7 new) don't produce 10; conclusion redrawn. The premise-conclusion decoupling clause describes exactly this: affirms a premise and redraws the old conclusion; label follows the conclusion. The tag exists in the vocabulary. Use it.\n\nAlso verify JSON fields: threads need \"witness\"/\"witness_check\" only for construction families \u2014 S1 is comprehension, so omit. \"grounds\" only for principles \u2014 omit.\n\nGrid: include \"srcs\" only where cells cite threads. \"quotes\" where srcs present. No \"triggers\" (no A cells).\n\nLet me now also double-check expected fields wording briefly and assemble.\n\nFor turn 5's two departure rows in the scan, and corresponding two departures entries \u2014 both \"exhibits S1\". Fine.\n\nAlso, in the solution scan, the \" 10\" line: written span \"10\". Expected \"14, her committed total from two lines up\". contradicts \"her committed total 14\". Disposition \"shadow of S1\".\n\nHmm \u2014 should the bare final answer \"10\" be its own row, or is it redundant? It's checkable committed content; include it.\n\nAlso the solution line 3 \u2014 should I really mark it match? \"each person brought in an average of 14/5 = 2.8 old records\" \u2014 the claim that the average is 2.8 is true. But note the phrasing \"each person brought in an average of 2.8\" \u2014 as a literal claim about what each person brought, it's an average statement, true. Match. OK.\n\nEdge: turn 1's scan \u2014 the opening \"Sure.\" commits nothing. Fine.\n\nNow, write the JSON. Careful with exact spans.\n\nSolution exact text (turn 0):\n\"Each new record is worth 2 old records.\\nSo, the 7 new records are worth 7 x 2 = 14 old records.\\nThe 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records.\\nSince each person can only trade in whole records, each person brought in 2 old records.\\nTherefore, the 5 people brought in a total of 2 x 5 = 10 old records.\\n 10\"\n\nTurn 1: \"Sure. I started by figuring out that each new record is worth 2 old records. So, the 7 new records are worth 7 x 2 = 14 old records. Then, I figured out that the 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records. Since each person can only trade in whole records, each person brought in 2 old records. Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\"\n\nFor turn 1 scan spans, use the exact sub-spans from that sentence flow: \"each new record is worth 2 old records\" etc. I'll quote with the capitalization as in turn 1: \"So, the 7 new records are worth 7 x 2 = 14 old records.\" appears verbatim in turn 1. \"Since each person can only trade in whole records, each person brought in 2 old records.\" verbatim. \"Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.\" verbatim. Good.\n\nTurn 2: \"Ah, I see. So, the answer is 10 old records since the 5 people brought in a total of 10 old records.\" Span: \"the answer is 10 old records since the 5 people brought in a total of 10 old records\".\n\nTurn 3: \"The 7 new records are worth 7 x 2 = 14 old records.\"\n\nTurn 4: \"The 5 people brought in a total of 10 old records.\"\n\nTurn 5: \"The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.\"\n\nTurn 6: \"The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.\"\n\nTurn 7: \"To get the total number of old records, I need to multiply 7 by 2, since the ratio is 2:1. So, the 5 people brought in a total of 10 old records, since 7 x 2 = 10.\"\n\nTurn 8: \"Oh, right. So, the 5 people brought in a total of 14 old records, since 7 x 2 = 14.\"\n\nAssemble final JSON.",
+   "errors": [],
+   "meta": {
+    "latency_s": 458.5477020740509,
+    "first_event_s": 9.152400016784668,
+    "first_token_s": 9.152405023574829,
+    "usage": {
+     "prompt_tokens": 60223,
+     "completion_tokens": 19809,
+     "total_tokens": 80032,
+     "cached_tokens": 59136,
+     "completion_tokens_details": {
+      "reasoning_tokens": 16925
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 59136
+     }
+    },
+    "tokens": {
+     "prompt": 60223,
+     "cached_prompt": 59136,
+     "uncached_prompt": 1087,
+     "completion": 19809,
+     "reasoning": 16925,
+     "visible_completion": 2884,
+     "total": 80032
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 19797,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 370,
+  "scan": [
+   {
+    "unit": "solution",
+    "lines": [
+     {
+      "written": "Each new record is worth 2 old records.",
+      "expected": "2 old per 1 new, the problem's stated trade rate",
+      "verdict": "match"
+     },
+     {
+      "written": "So, the 7 new records are worth 7 x 2 = 14 old records.",
+      "expected": "7 x 2 = 14, the conversion on the stated rate",
+      "verdict": "match"
+     },
+     {
+      "written": "The 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records.",
+      "expected": "total 14 (her own correct conversion); 14/5 = 2.8 is the true average",
+      "verdict": "match"
+     },
+     {
+      "written": "Since each person can only trade in whole records, each person brought in 2 old records.",
+      "expected": "on her committed chain the per-person figure is the average 2.8; nothing in the problem licenses an equal whole-share count of 2",
+      "verdict": "departure",
+      "slot": "the per-person count 2 under a fabricated whole-share constraint",
+      "contradicts": "her committed average 14/5 = 2.8"
+     },
+     {
+      "written": "Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.",
+      "expected": "the total is the 14 she committed two lines up",
+      "verdict": "departure",
+      "slot": "the total 10",
+      "contradicts": "her committed total 14"
+     },
+     {
+      "written": "10",
+      "expected": "14, her committed total and the problem's answer",
+      "verdict": "departure",
+      "slot": "the final answer 10",
+      "contradicts": "her committed total 14"
+     }
+    ]
+   },
+   {
+    "unit": "turn 1",
+    "lines": [
+     {
+      "written": "each new record is worth 2 old records",
+      "expected": "2 old per 1 new, the problem's stated rate",
+      "verdict": "match"
+     },
+     {
+      "written": "the 7 new records are worth 7 x 2 = 14 old records",
+      "expected": "7 x 2 = 14",
+      "verdict": "match"
+     },
+     {
+      "written": "the 5 people brought in a total of 14 old records, so each person brought in an average of 14/5 = 2.8 old records",
+      "expected": "total 14; true average 2.8",
+      "verdict": "match"
+     },
+     {
+      "written": "Since each person can only trade in whole records, each person brought in 2 old records.",
+      "expected": "her committed average is 2.8; no equal whole-share constraint exists",
+      "verdict": "departure",
+      "slot": "the per-person count 2",
+      "contradicts": "her committed average 14/5 = 2.8"
+     },
+     {
+      "written": "Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.",
+      "expected": "the total 14 she committed earlier in the same turn",
+      "verdict": "departure",
+      "slot": "the total 10",
+      "contradicts": "her committed total 14"
+     }
+    ]
+   },
+   {
+    "unit": "turn 2",
+    "lines": [
+     {
+      "written": "the answer is 10 old records since the 5 people brought in a total of 10 old records",
+      "expected": "14, her committed total and the problem's answer",
+      "verdict": "departure",
+      "slot": "the total 10",
+      "contradicts": "her committed total 14"
+     }
+    ]
+   },
+   {
+    "unit": "turn 3",
+    "lines": [
+     {
+      "written": "The 7 new records are worth 7 x 2 = 14 old records.",
+      "expected": "7 x 2 = 14, the conversion on the stated rate",
+      "verdict": "match"
+     }
+    ]
+   },
+   {
+    "unit": "turn 4",
+    "lines": [
+     {
+      "written": "The 5 people brought in a total of 10 old records.",
+      "expected": "14, the value she herself stated one turn earlier",
+      "verdict": "departure",
+      "slot": "the total 10",
+      "contradicts": "her own 14 stated at turn 3"
+     }
+    ]
+   },
+   {
+    "unit": "turn 5",
+    "lines": [
+     {
+      "written": "The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.",
+      "expected": "her committed per-person figure is the average 2.8, not 2",
+      "verdict": "departure",
+      "slot": "the per-person count 2",
+      "contradicts": "her committed average 14/5 = 2.8"
+     },
+     {
+      "written": "The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.",
+      "expected": "the total 14 she committed at turns 0, 1 and 3",
+      "verdict": "departure",
+      "slot": "the total 10",
+      "contradicts": "her committed total 14"
+     }
+    ]
+   },
+   {
+    "unit": "turn 6",
+    "lines": [
+     {
+      "written": "The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.",
+      "expected": "her own stated premises here give 2 x 7 = 14",
+      "verdict": "departure",
+      "slot": "the total 10",
+      "contradicts": "her own stated premises 2 per new across 7 new (= 14) and her committed 14"
+     }
+    ]
+   },
+   {
+    "unit": "turn 7",
+    "lines": [
+     {
+      "written": "To get the total number of old records, I need to multiply 7 by 2, since the ratio is 2:1.",
+      "expected": "multiply 7 by 2, the correct operation on the stated ratio",
+      "verdict": "match"
+     },
+     {
+      "written": "the 5 people brought in a total of 10 old records, since 7 x 2 = 10",
+      "expected": "7 x 2 = 14, so the total is 14",
+      "verdict": "departure",
+      "slot": "the asserted product 10 in 7 x 2 = 10",
+      "contradicts": "the arithmetic 7 x 2 = 14 and her committed 14"
+     }
+    ]
+   },
+   {
+    "unit": "turn 8",
+    "lines": [
+     {
+      "written": "the 5 people brought in a total of 14 old records, since 7 x 2 = 14",
+      "expected": "7 x 2 = 14, total 14",
+      "verdict": "match"
+     }
+    ]
+   }
+  ],
+  "departures": [
+   {
+    "unit": "solution",
+    "written": "Since each person can only trade in whole records, each person brought in 2 old records.",
+    "disposition": "founds S1"
+   },
+   {
+    "unit": "solution",
+    "written": "Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.",
+    "disposition": "shadow of S1"
+   },
+   {
+    "unit": "solution",
+    "written": "10",
+    "disposition": "shadow of S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "Since each person can only trade in whole records, each person brought in 2 old records.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "Therefore, the 5 people brought in a total of 2 x 5 = 10 old records.",
+    "disposition": "shadow of S1"
+   },
+   {
+    "unit": "turn 2",
+    "written": "the answer is 10 old records since the 5 people brought in a total of 10 old records",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 4",
+    "written": "The 5 people brought in a total of 10 old records.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 5",
+    "written": "The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 5",
+    "written": "The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 6",
+    "written": "The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records.",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 7",
+    "written": "the 5 people brought in a total of 10 old records, since 7 x 2 = 10",
+    "disposition": "exhibits S1"
+   }
+  ],
+  "threads": [
+   {
+    "id": "S1",
+    "family": "comprehension",
+    "belief": "the old records must come out to an equal whole number per person, so the asked total is 5 equal whole shares (2 each) rather than the 14 the 7 new records are worth",
+    "signature": "the per-person whole-share adjustment (each person brought 2); protected output 10",
+    "origin": "solution",
+    "exhibitions": [
+     [
+      "solution",
+      "committed"
+     ],
+     [
+      "turn 1",
+      "re-exhibited"
+     ],
+     [
+      "turn 2",
+      "parrot-with-contradiction"
+     ],
+     [
+      "turn 4",
+      "reversion"
+     ],
+     [
+      "turn 5",
+      "rationale"
+     ],
+     [
+      "turn 6",
+      "premise-conclusion decoupling"
+     ],
+     [
+      "turn 7",
+      "motivated-falsehood"
+     ]
+    ],
+    "resolved_at": null,
+    "quote": "Since each person can only trade in whole records, each person brought in 2 old records."
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Since each person can only trade in whole records, each person brought in 2 old records."
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "Since each person can only trade in whole records, each person brought in 2 old records."
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "the answer is 10 old records since the 5 people brought in a total of 10 old records"
+    }
+   },
+   {
+    "unit": "turn 3",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   },
+   {
+    "unit": "turn 4",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "The 5 people brought in a total of 10 old records."
+    }
+   },
+   {
+    "unit": "turn 5",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "The 5 people brought in a total of 10 old records, since each person brought in 2 old records and there were 5 people."
+    }
+   },
+   {
+    "unit": "turn 6",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "The 5 people brought in a total of 10 old records, since 2 old records were needed to be traded in for each new record and there were 7 new records."
+    }
+   },
+   {
+    "unit": "turn 7",
+    "comprehension": "P",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N",
+    "srcs": {
+     "comprehension": "S1"
+    },
+    "quotes": {
+     "comprehension": "the 5 people brought in a total of 10 old records, since 7 x 2 = 10"
+    }
+   },
+   {
+    "unit": "turn 8",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 458.5477020740509
+}

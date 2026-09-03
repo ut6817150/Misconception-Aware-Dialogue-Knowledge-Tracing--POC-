@@ -1,0 +1,282 @@
+{
+ "model": "moonshot-direct/kimi-k3-max",
+ "prompt": "P11",
+ "reasoning_effort": "max",
+ "dialogue_id": 312,
+ "split": "train",
+ "attempts": [
+  {
+   "raw": "t\": \"departure\", \"slot\": \"the final answer\", \"contradicts\": \"problem\"}]}, {\"unit\": \"turn 1\", \"lines\": [{\"written\": \"0.25 x 32 = 8 students\", \"expected\": \"0.25 x 32 = 8\", \"verdict\": \"match\"}, {\"written\": \"I subtracted 8 from 32 to get 24 students who did not receive an A\", \"expected\": \"32 - 8 = 24\", \"verdict\": \"match\"}, {\"written\": \"I divided 24 by 4 to get 1/4 of the remaining students, which is 6 students\", \"expected\": \"24 / 4 = 6\", \"verdict\": \"match\"}, {\"written\": \"I subtracted 8 and 6 from 24 to get 10 students who failed\", \"expected\": \"24 - 6 = 18, on her committed chain the 24 already excludes the 8\", \"verdict\": \"departure\", \"slot\": \"the excess subtrahend 8\", \"contradicts\": \"her committed 24 students who did not receive an A\"}]}, {\"unit\": \"turn 2\", \"lines\": [{\"written\": \"I was subtracting 8 twice\", \"expected\": \"an accurate description of her double subtraction\", \"verdict\": \"match\"}, {\"written\": \"I should have just subtracted 6 from 24 to get 10 students who failed\", \"expected\": \"24 - 6 = 18\", \"verdict\": \"departure\", \"slot\": \"the result 10 asserted for 24 - 6\", \"contradicts\": \"problem\"}]}, {\"unit\": \"turn 3\", \"lines\": [{\"written\": \"Yes, it is 10\", \"expected\": \"24 - 6 = 18, so the answer to the tutor's question is no\", \"verdict\": \"departure\", \"slot\": \"the asserted value 10\", \"contradicts\": \"problem\"}]}, {\"unit\": \"turn 4\", \"lines\": [{\"written\": \"So, 18 students failed\", \"expected\": \"24 - 6 = 18, the tutor's stated correction\", \"verdict\": \"match\"}]}], \"departures\": [{\"unit\": \"solution\", \"written\": \"24 - 6 - 8 = 10 students\", \"disposition\": \"founds S1\"}, {\"unit\": \"solution\", \"written\": \"10\", \"disposition\": \"shadow of S1\"}, {\"unit\": \"turn 1\", \"written\": \"I subtracted 8 and 6 from 24 to get 10 students who failed\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 2\", \"written\": \"I should have just subtracted 6 from 24 to get 10 students who failed\", \"disposition\": \"exhibits S1\"}, {\"unit\": \"turn 3\", \"written\": \"Yes, it is 10\", \"disposition\": \"exhibits S1\"}], \"threads\": [{\"id\": \"S1\", \"family\": \"wrong_operation\", \"belief\": \"the failed-count subtraction seats the already-removed 8 as a second subtrahend beside the 6, re-removing the A-group from the 24 that her own chain already excludes it from\", \"signature\": \"the excess subtrahend 8 in the failed-count subtraction; protected output 10\", \"witness\": \"So, 32 - 8 = 24 students did not receive an A.\", \"witness_check\": \"the re-removal belief produces nothing at the remainder line; that line fixes the 24 as already net of the 8, a predicate the founding construction then violates, so the belief cannot generate the span it is tested against\", \"origin\": \"solution\", \"exhibitions\": [[\"solution\", \"committed\"], [\"turn 1\", \"re-exhibited\"], [\"turn 2\", \"motivated-falsehood\"], [\"turn 3\", \"motivated-falsehood\"]], \"resolved_at\": null, \"quote\": \"24 - 6 - 8 = 10 students\"}], \"grid\": [{\"unit\": \"solution\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"A\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"24 - 6 - 8 = 10 students\"}, \"triggers\": {\"steps\": \"1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\"}}, {\"unit\": \"turn 1\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"I subtracted 8 and 6 from 24 to get 10 students who failed\"}}, {\"unit\": \"turn 2\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"I should have just subtracted 6 from 24 to get 10 students who failed\"}}, {\"unit\": \"turn 3\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"P\", \"steps\": \"N\", \"srcs\": {\"wrong_operation\": \"S1\"}, \"quotes\": {\"wrong_operation\": \"Yes, it is 10\"}}, {\"unit\": \"turn 4\", \"comprehension\": \"N\", \"relevance\": \"N\", \"principles\": \"N\", \"wrong_operation\": \"N\", \"steps\": \"N\"}]}",
+   "reasoning": "Let me work through this carefully.\n\n**The problem:** 32 students. 25% received an A. 1/4 of the remaining students got either a B or C, and the rest failed. How many failed?\n\n**Correct solution:**\n- 25% of 32 = 8 students got A.\n- Remaining: 32 - 8 = 24 students.\n- 1/4 of 24 = 6 students got B or C.\n- Rest failed: 24 - 6 = 18 students.\n\nAnswer: 18.\n\n**Student's solution (turn 0):**\n- \"25% of 32 students received an A, which is 0.25 x 32 = 8 students.\" \u2014 correct.\n- \"So, 32 - 8 = 24 students did not receive an A.\" \u2014 correct.\n- \"1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" \u2014 correct.\n- \"The rest of the students failed, which is 24 - 6 - 8 = 10 students.\" \u2014 WRONG. Should be 24 - 6 = 18. She subtracted the 8 again (double-counted the A students), and also 24 - 6 - 8 = 10 is arithmetically correct as written (24 - 14 = 10), so the arithmetic of the expression is right but the expression itself is misbuilt: it includes an extra -8 term.\n\nSo the error is: an extra operand (-8) inside the final subtraction. The failed count = remaining after A (24) minus B/C (6) = 18. She subtracted the 8 a second time.\n\n**Routing the origin:**\n\nLine scan of solution:\n1. \"0.25 x 32 = 8\" \u2014 match.\n2. \"32 - 8 = 24\" \u2014 match.\n3. \"1/4 x 24 = 6\" \u2014 match.\n4. \"24 - 6 - 8 = 10\" \u2014 departure. Expected: 24 - 6 = 18. The slot: the extra \"- 8\" operand, contradicting her own committed output 24 = students who did not receive an A (the 8 is already removed from the 24). Also the result 10 vs expected 18.\n\nIs the expression's arithmetic correct as written? 24 - 6 - 8 = 10. Yes. So this is an arrangement/construction fault, not a slip: the expression is misbuilt with an excess operand.\n\nWhich family? Run the construction gate:\n- Reading question: does a coherent reading of a stated sentence generate this act? The problem says \"the rest of the students failed.\" The rest = those remaining after removing B/C from the non-A students. Is there a coherent reading under which 24 - 6 - 8 is right? That would read \"the rest\" as... 24 minus 6 minus 8 \u2014 taking the 8 out of the 24 again. A reading would be: she thinks the failed students = total non-B/C, non-A students counted from... Hmm. Actually, one could construct a reading: \"the rest of the students\" = of all 32 students, those who didn't get A, B, or C: 32 - 8 - 6 = 18. That gives 18, not 10. Her expression 24 - 6 - 8 = 10 subtracts the 8 twice total. Is there a reading generating it? Perhaps she reads \"the rest\" as \"the remaining students after removing A students and B/C students from the remaining 24\" \u2014 but the 24 already excludes the 8. That's not a coherent reading of a stated sentence; it's a bookkeeping fault. Her own label in the same breath: \"The rest of the students failed\" \u2014 she correctly identifies the role (the rest of the remaining). Her chain: 24 did not receive an A; 6 of the remaining got B/C; the rest failed = 24 - 6 = 18. The -8 contradicts her own committed 24 (which already has the 8 removed). So there's a witness: her own line \"32 - 8 = 24 students did not receive an A\" establishes the 24 as already net of the 8. The construction fault: excess operand 8 inside a licensed construction (computing the failed count from the remaining). The repair rewrites one expression in place (remove the -8). So wrong_operation.\n\nPer the component-duplication row: \"A named component is already contained in a subtotal, and that same component is explicitly added or otherwise inserted again while forming a still-needed aggregate\" \u2014 duplicated operand inside a licensed aggregation \u2192 wrong operation. Here it's a subtraction rather than addition, but same logic: the 8 is already removed in the 24 (it's contained negatively \u2014 the 24 = 32 - 8), and she removes it again while forming the still-needed failed count. Wrong operation.\n\nThe witness: \"So, 32 - 8 = 24 students did not receive an A.\" \u2014 her own derivation showing the 8 already subtracted. Witness check: would the wrong belief (that the 8 needs to be subtracted again) produce the witness span? No \u2014 the witness line is the correct model; the candidate construction belief (failed = 24 - 6 - 8) doesn't generate \"32 - 8 = 24 did not receive an A\". Actually wait \u2014 could the belief \"the 8 must be removed again\" also generate 32 - 8 = 24? The witness is the line that establishes the 24's predicate as already-A-free. The belief that generates the departure is a bookkeeping error (forgetting the 8 was already removed). The witness span 32 - 8 = 24 is exactly the committed content the departure contradicts. The witness check: \"on the candidate belief, what would the witness span produce?\" The candidate belief is... hmm, there's no coherent wrong belief here; it's an execution fault \u2014 she double-subtracts against her own chain. The witness discriminates because her own chain shows the 8 already removed; the act has no license.\n\nBelief for the wrong_operation thread: per codebook, wrong operation belief names the invalid construction: \"the failed count is built by subtracting the A-count 8 from the already-A-free remainder 24 along with the B/C count 6\" \u2014 the construction act, the slot, and the committed content displaced. The belief never names an output value. So: belief = \"the final subtraction re-removes the 8 A-students from the 24 that already excludes them\" \u2014 i.e., she builds the failed-count subtraction with the already-removed 8 as an extra subtrahend.\n\nSignature: \"the excess -8 term inside 24 - 6 - 8; protected output 10\"? Hmm \u2014 protected output: the signature names content whose re-commitment constitutes re-exhibition. Later, at turn 3, she says \"Yes, it is 10\" after the tutor asks \"Subtract 6 from 24. Is it 10?\" \u2014 she defends the output 10. And turn 2: \"I should have just subtracted 6 from 24 to get 10 students who failed\" \u2014 that's a false equality (24 - 6 = 18, not 10) landing on the protected output 10. So the thread persists as output-anchored: the 10 is defended while the derivation mutates (from 24 - 6 - 8 to 24 - 6). So the signature should name the protected output 10 plus the structural signature. This is the anchored-composition case: output 10 survives while derivation mutates around it. So signature: \"the failed count derived with the 8 double-counted; protected output 10\".\n\nWait \u2014 but at turn 2, she says \"I should have just subtracted 6 from 24 to get 10 students who failed.\" That's a false equality: 24 - 6 = 10 is false. This lands on the protected output 10. Motivated-falsehood / defense of the anchor. And turn 3: \"Yes, it is 10\" \u2014 defending 10 against the tutor's direct challenge. Turn 4: \"Oh, I see. So, 18 students failed.\" \u2014 she accepts 18. Is that a resolution? The tutor supplied the corrected content: \"No. it is 24-6=18\". The tutor named both the error and the fix (24 - 6 = 18). Student echoes: \"So, 18 students failed.\" Under the fully-dictated-correction rule, executing a named fix and reporting the result with no added reasoning is not_evidenced, not absent. So turn 4 is N across the board, and the thread is not resolved (corrected by supply).\n\nNow let's do the per-turn analysis.\n\n**Solution (turn 0):**\n\nLines:\n1. \"0.25 x 32 = 8 students\" \u2014 match.\n2. \"32 - 8 = 24 students did not receive an A\" \u2014 match.\n3. \"1/4 x 24 = 6 students\" \u2014 match.\n4. \"24 - 6 - 8 = 10 students\" \u2014 departure; slot: the excess \"- 8\" operand; contradicts: her committed \"32 - 8 = 24 students did not receive an A\" (the 24 already excludes the 8). Also result slot 10 vs expected 18 \u2014 but the token is the input-side act, the excess operand. The result is the consequence. I'll write one departure row on the operand slot. Actually the scan row should capture the departing slot(s). The departing slot is the -8 term; the result 10 follows from it. One row suffices with slot \"the excess subtrahend 8 in 24 - 6 - 8\". Hmm, should I also list the result as a separate slot? The codebook says a line may carry several rows, one per departing slot. The result 10 is false against the baseline, but it's generated by the operand departure \u2014 it's the shadow/consequence. The token is the input-side act, never the output. So one row: the operand slot.\n\n5. \"10\" (final answer) \u2014 this restates the wrong output. Is it a separate departure? It's the same committed content; the result. I'd treat it as carried by the founding row. In scan, I can mark it as... it's the consequence of the token, not a new departure. But the scan asks to compare every line. \"10\" alone as final answer \u2014 expected 18. It's a departure in value but it's the same content as the founding row's output; its content is carried by the founding row. Per the working-order rule: \"A slot that is correct on the committed chain but wrong on the problem is not a departure here, because its content is already carried by the row that founded the belief.\" Here the bare 10 is the protected output restated \u2014 carried by the founding row. I'll mark it match? No \u2014 it's not a match. Hmm. Options: mark it as a departure with disposition \"shadow of S1\"? The instruction says shadow is legitimate only where S1's belief generates the departure's content. The bare 10 is generated by the misbuilt expression. It's the output, not a token. I think the cleanest: include the final \"10\" within the same scan line as the equation (the unit's final line \"10\" is the answer restatement). I'll fold it: treat the line \"The rest of the students failed, which is 24 - 6 - 8 = 10 students.\\n 10\" as one act, or add a separate row for \"10\" with verdict... Let me just have one departure row for the equation and treat the trailing \"10\" as part of the same committed output. Actually to be safe, I could include a second row for the bare \"10\" as a departure with slot \"result\" contradicts \"problem\" and disposition \"shadow of S1\". Hmm, \"shadow of S1\" is defined for departures generated by S1's belief. The bare answer 10 is generated by the faulty expression \u2014 it IS the thread's protected output. But then every P cell must be cited by a departure in the same unit with disposition founds/exhibits. The grid cell for solution wrong_operation P cites S1 via the founding departure. Fine. Adding a shadow row is acceptable but might be redundant. I'll fold the final 10 into the same line as part of the solution's committed answer; actually the format shows the solution as ending with \" 10\" on its own line. Let me create a separate scan row for it: written \"10\", expected \"18\", verdict departure, slot \"the final answer\", contradicts \"problem\", disposition \"shadow of S1\". That's clean and honest: the bare answer's content is generated by the founding fault. Hmm \u2014 but is a shadow disposition for a bare output consistent with \"shadow of S# is legitimate only where S#'s belief itself generates the departure's content\"? Yes, the excess-operand construction generates 10. OK.\n\nActually, wait. Let me reconsider: maybe simpler to not create a separate row and just treat \"10\" as part of the same line. The scan rows: each line of the solution. The solution's last line is \"10\" (the final answer). I'll include it as a shadow row. That seems fine.\n\nGrid for solution:\n- comprehension: N. No reading error demonstrated \u2014 her labels are all correct (\"the rest of the students failed\"); the fault is construction against her own chain.\n- relevance: N. She used all givens correctly.\n- principles: N. No false general relation; the part-whole structure is intact in her labels.\n- wrong_operation: P [S1]. The excess -8 operand.\n- steps: N or A? She performed the right stages in the right order: compute A count, compute remainder, compute B/C count, compute failed. The plan is correct; the fault is inside one construction. Does steps earn absent? The unit contains step sequencing done correctly \u2014 four stages correctly ordered. The re-articulation standard: a first-performance solution row can earn several families beside a present cell where distinct acts engage each construct. Did she engage steps' construct \u2014 selecting which stages and their order? Yes: she chose the sequence A-count \u2192 remainder \u2192 B/C \u2192 failed, which is the correct procedure, and the error is within-step (excess operand), not a missing/extra stage. Hmm, but is the extra -8 an extra stage? No \u2014 it's an operand inside the final subtraction, same move. The plan shape is right. So steps = A, trigger: the ordered construction sequence, e.g., her correct staging \"So, 32 - 8 = 24 students did not receive an A.\" then \"1/4 of the remaining 24...\" \u2014 the trigger span should be from this unit engaging the construct. I'll cite a span showing the staged procedure. Something like \"The rest of the students failed, which is 24 - 6\" \u2014 no, that's the faulty line. Trigger: the student advancing the correct stages: \"So, 32 - 8 = 24 students did not receive an A.\" Hmm, but triggers must be exact spans engaging the construct. The whole solution is a four-stage procedure correctly sequenced. I'll use a span like \"I subtracted 8 from 32 to get 24\" \u2014 that's turn 1. For solution, \"So, 32 - 8 = 24 students did not receive an A.\" shows advancing the remainder stage. Hmm \u2014 is steps really \"engaged with opportunity to fail\"? Yes: she could have omitted the remainder stage or misordered. She didn't. Credit: A for steps with trigger.\n\nHmm, wait. Let me think about dual-use: the final line (the error token's own derivation) earns nothing. But the first three stages are distinct acts correctly performed. Steps' construct is the plan. Her plan is correct and complete. I think steps A is defensible. But cautious: many annotators would mark N because the procedure's final stage is the faulty one. The final stage \"compute the failed count\" IS present and correctly placed; its internal construction is wrong (operation). The stage selection is right. So steps A.\n\nAlso comprehension: could one argue she misread \"the rest\"? No \u2014 her words \"The rest of the students failed\" correctly state the role; she just built it wrong. The own-chain demonstration bars a comprehension story: her own \"32 - 8 = 24 did not receive an A\" demonstrates the correct structure. So comprehension N (not A \u2014 did she resolve any interpretation not spelled out? The problem spells out the structure; she restated stated relations; per \"Resolving versus restating,\" restating stated relations is execution. So comprehension N).\n\nRelevance: she used 32, 25%, 1/4 correctly; no distractors exist. Silence floor: no articulated selection \u2192 N.\n\nPrinciples: the part-whole decomposition \u2014 did she engage a concept-level choice? The staged decomposition is essentially restating the problem's stated relations (25% of class, 1/4 of remaining, the rest). The bare-execution floor: computing 0.25 x 32 etc. is execution. The concept (remaining = total - A) is stated structure. I'd say principles N. Hmm, but she did select the operations herself (no tutor). For a solution unit with self-authored correct constructions, could principles earn A? The codebook: \"Principles is absent only when the student herself selects or applies the concept-level relation.\" The relations here (percentage of a base, remainder) \u2014 the percentage application is stated in the problem (25% of the class). The remainder relation is stated (\"the remaining students\", \"the rest\"). So no unstated concept-level relation is supplied by her; she executes stated relations. Principles N. Good.\n\n**Turn 1:** Walkthrough: \"I started by calculating 25% of 32 students, which is 0.25 x 32 = 8 students. Then, I subtracted 8 from 32 to get 24 students who did not receive an A. Next, I divided 24 by 4 to get 1/4 of the remaining students, which is 6 students. Finally, I subtracted 8 and 6 from 24 to get 10 students who failed.\"\n\nThis is a re-articulation of her own chain. Is it fresh or recitation? Compare: solution says \"The rest of the students failed, which is 24 - 6 - 8 = 10 students.\" Turn 1 says \"Finally, I subtracted 8 and 6 from 24 to get 10 students who failed.\" This re-commits the same wrong construction (subtracting both 8 and 6 from 24). Under the walkthrough rules: re-committing the wrong chain in a walkthrough is a live act of endorsement \u2192 the error inherits present. Is it verbatim replay? Mostly it maps one-to-one onto the solution's sentences (recitation), but recitation of a wrong chain still re-exhibits the thread (\"a verbatim replay of a wrong chain still re-exhibits the thread\"). So wrong_operation P [S1], tag re-exhibited.\n\nScan rows for turn 1:\n- \"0.25 x 32 = 8\" \u2014 match.\n- \"subtracted 8 from 32 to get 24\" \u2014 match.\n- \"divided 24 by 4 to get ... 6\" \u2014 match.\n- \"I subtracted 8 and 6 from 24 to get 10 students who failed\" \u2014 departure; slot: the excess subtrahend 8; contradicts her committed \"24 students who did not receive an A\" (8 already removed). Disposition: exhibits S1.\n\nOther cells: comprehension N (replay, no new reading content; own-chain bar stands), relevance N, principles N, steps \u2014 replay of the same stages: recitation earns nothing \u2192 N. Per the walkthrough standard: sentence replay is recitation and earns nothing. The turn maps one-to-one onto the solution's content sentences in the same order. So steps N for turn 1 (credit stripped), but the error side re-exhibits.\n\n**Turn 2:** Tutor: \"But you already subtracted 8 once. Why are you subtracting again in the final step?\" Student: \"Oh, right. I was subtracting 8 twice. I should have just subtracted 6 from 24 to get 10 students who failed.\"\n\nScan: \"I should have just subtracted 6 from 24 to get 10 students who failed.\" \u2014 departure. Expected: 24 - 6 = 18. The expression as stated, 24 - 6, evaluates to 18, not 10. She asserts the false equality 24 - 6 = 10. Slot: the result 10; contradicts: arithmetic (24 - 6 = 18) \u2014 and the problem. What's the disposition? She dropped the excess 8 (the tutor named the fault: \"you already subtracted 8 once\") \u2014 so the construction change is tutor-supplied/framed. But she keeps the output 10. The false equality \"24 - 6 = 10\" lands on the protected output 10. This is a motivated-falsehood / splice: the corrected frame (subtract only 6 from 24) with the old output bolted on. Under the splice rule: \"A turn that bolts a supplied answer onto an otherwise unchanged wrong chain\" \u2014 here it's the reverse: the supplied correction (remove the 8) with the old answer retained. The false equality is the protecting thread's act: exhibits S1, tag... options: \"motivated-falsehood\" (a facially false assertion whose function is to preserve the committed conclusion) \u2014 24 - 6 = 10 is facially false and preserves 10. Or \"splice\" (a supplied figure bolted onto retained wrong structure). Here the supplied content is the corrected construction; the retained wrong content is the output 10. The most specific tag: motivated-falsehood, since the asserted equality is false on its face and defends the anchored output. Actually \"splice\" = a supplied figure bolted onto retained wrong structure. Hmm: what's supplied? The tutor's question names the fault (\"you already subtracted 8 once\") and implicitly the fix (don't subtract it again). The student says \"I should have just subtracted 6 from 24\" \u2014 the corrected construction \u2014 \"to get 10\" \u2014 the retained wrong output. So the corrected construction is bolted onto the retained wrong output. That's a splice in the general sense; but the signature event here is a false equality defending the anchor \u2014 motivated-falsehood. Precedence: resolved > motivated-falsehood > parrot-with-contradiction > splice > reversion > rationale > re-exhibited. I'd tag motivated-falsehood.\n\nFraming floor: the act \"subtract 6 from 24\" \u2014 was its content stated by the preceding tutor turn? The tutor said \"you already subtracted 8 once. Why are you subtracting again?\" \u2014 this names the fault and entails the fix but doesn't state \"24 - 6 = 18\". The student then asserts 24 - 6 = 10, a false equality landing on the protected output. Per the framing floor: \"the floor never shields a motivated falsehood: a false result inside any frame that lands on a protected output is the protecting thread's act, the motivated-falsehood machinery outranking the frame.\" So P [S1] for wrong_operation at turn 2.\n\nOther cells turn 2: comprehension N (no reading content), relevance N, principles N, steps N.\n\n**Turn 3:** Tutor: \"Subtract 6 from 24. Is it 10?\" Student: \"Yes, it is 10.\"\n\nThis is a bare re-assertion of the protected output under direct challenge. 24 - 6 = 18, she says it's 10. A committed re-asserted result in a direct exchange about that quantity \u2192 present. Post-reveal contradiction? The tutor hasn't revealed 18 yet (he asks \"Is it 10?\"). It's a defense of the anchored output 10. Tag: motivated-falsehood? The assertion \"it is 10\" for 24 - 6 is facially false and preserves the committed conclusion. Yes \u2014 motivated-falsehood again, or re-exhibited. The tell: she affirms a false equality to protect 10. I'd tag motivated-falsehood. Hmm, but is it \"facially false assertion whose function is to preserve a previously committed conclusion\"? Yes: asserting 24 - 6 = 10. Present for the family whose belief the falsehood protects \u2014 wrong_operation (S1).\n\nActually, could this be \"confident reassertion of the wrong content under challenge\" \u2192 \"bare re-exhibition where the derivation redrawn is true arithmetic...; motivated-falsehood where the reassertion carries a false equality landing on the protected output\". Here the reassertion carries a false equality (24 - 6 is 10) landing on the protected output \u2192 motivated-falsehood. Good.\n\nAlso \u2014 wait, at turn 3, could this be a slip? No: she commits to 10 against a direct question. The claimed-verification rule: judge the committed assertion. Present.\n\nOther cells: N across.\n\n**Turn 4:** Tutor: \"No. it is 24-6=18\". Student: \"Oh, I see. So, 18 students failed.\"\n\nThe tutor named the error and the fix (24 - 6 = 18). Student echoes 18 with no added reasoning. Fully-dictated correction \u2192 not_evidenced for all families. Thread corrected by supply; no resolution (executing named content). Scan: \"18 students failed\" \u2014 the content is tutor-supplied; verdict: match? The value is correct, and it's an echo. Scan row: written \"So, 18 students failed\", expected 18, verdict match (tutor-supplied). Lines with tutor-supplied correct content \u2014 verdict match, no departure. Disposition not needed (only departures get dispositions). Actually do I need a \"tutor-supplied\" disposition? Only for departure rows. Since 18 is correct, it's a match. Good.\n\nresolved_by_end: false. resolved_at: null.\n\nNow the thread details:\n\nS1:\n- family: wrong_operation.\n- belief: the failed-student count is built by removing the 8 A-students again from the 24 that already excludes them \u2014 construction act, slot, committed content displaced. Belief one line: \"the failed count is computed as 24 minus 6 minus 8, re-removing the A-group her own remainder already excludes\" \u2014 but belief must name the act, the slot, and the committed content it displaces, never an output value. So: \"the final subtraction seats the already-removed 8 as a second subtrahend beside the 6 in the failed-count construction\". Good.\n- signature: \"the excess subtrahend 8 in the failed-count subtraction; protected output 10\".\n- witness: \"So, 32 - 8 = 24 students did not receive an A.\" \u2014 her own derivation showing the 24 already net of the 8.\n- witness_check: \"on the double-removal belief the remainder line would still read 32 - 8 = 24; hmm\u2014\" wait. The witness check asks: what would the candidate wrong belief itself produce at the witness span? The candidate belief is the construction fault (re-remove the 8). At the witness span (32 - 8 = 24 did not receive an A), would the belief produce that very span? The belief is about the final construction, not about the remainder stage, so it wouldn't generate the witness line \u2014 the witness line establishes the 24's predicate (A-free), which the final act violates. The witness discriminates because the two part at the final construction: the witness's committed predicate (24 excludes the 8) contradicts re-removal. So witness_check: \"the belief that the 8 must be removed again at the end does not generate the line 32 - 8 = 24 did-not-receive-an-A; that line fixes the 24 as already A-free, which the final act then contradicts.\" Good.\n- origin: solution.\n- exhibitions: [solution, committed], [turn 1, re-exhibited], [turn 2, motivated-falsehood], [turn 3, motivated-falsehood]. resolved_at null.\n- quote: \"24 - 6 - 8 = 10\" \u2014 from the origin unit. Exact span: \"which is 24 - 6 - 8 = 10 students.\" Let me copy exactly: \"The rest of the students failed, which is 24 - 6 - 8 = 10 students.\" I'll use \"24 - 6 - 8 = 10 students\" \u2014 must be exact contiguous span from the solution text. The solution text: \"The rest of the students failed, which is 24 - 6 - 8 = 10 students.\\n 10\". So \"24 - 6 - 8 = 10 students\" is exact.\n\nGrid:\n\nsolution: comprehension N, relevance N, principles N, wrong_operation P [S1], steps A.\n- quotes: wrong_operation: \"24 - 6 - 8 = 10 students\".\n- triggers: steps: need exact span from solution engaging steps construct. The staged procedure: \"So, 32 - 8 = 24 students did not receive an A.\" Hmm, that span shows one stage. The steps construct is plan/sequence. The trigger is the student's own committed assertion bringing it into play \u2014 the full multi-stage solution. I'll pick a span like \"So, 32 - 8 = 24 students did not receive an A.\\n1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" \u2014 contiguous? In the original: \"So, 32 - 8 = 24 students did not receive an A.\\n1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" Yes contiguous (newline between). I could use that. Or simpler single sentence \"1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" \u2014 that shows advancing the procedure's stage on the remainder. I'll use the two-sentence span to evidence sequencing.\n\nHmm, wait \u2014 should steps be A or N at the solution? Let me double-check with the audit: \"for every absent cell, what construct-level decision did the student author, and what plausible error could they have made?\" She authored the four-stage plan: find A count \u2192 find non-A remainder \u2192 find B/C count of remainder \u2192 subtract to get failed. A plausible error: omitting the remainder stage (e.g., computing 32 - 8 - 6 or taking 1/4 of 32), or misordering. She handled staging correctly; the fault was within-step. The credit default says an act correctly performed earns absent even where the unit's answer is wrong. The staged decomposition is a genuine self-authored procedure. I'll keep steps A.\n\nAlso, should wrong_operation be the only P? Yes.\n\nturn 1: comprehension N, relevance N, principles N, wrong_operation P [S1], steps N.\n- quote wrong_operation: \"I subtracted 8 and 6 from 24 to get 10 students who failed.\"\n\nWait \u2014 but should steps be A at turn 1 as a fresh re-articulation? The walkthrough standard: sentence replay is recitation. Turn 1 maps one-to-one onto the solution sentences in the same order: \"I started by calculating 25% of 32... Then, I subtracted 8 from 32 to get 24... Next, I divided 24 by 4... Finally, I subtracted 8 and 6 from 24...\" That's recitation with first-person connectives \u2192 earns nothing. So steps N, and the error re-exhibits (replay of a wrong chain still re-exhibits). Good.\n\nturn 2: all N except wrong_operation P [S1].\n- quote: \"I should have just subtracted 6 from 24 to get 10 students who failed.\"\n\nHmm \u2014 is turn 2's wrong_operation a \"reversion\"? It immediately follows the tutor naming the fault (\"you already subtracted 8 once\"). She acknowledges (\"I was subtracting 8 twice\") then redraws the old output with a false equality. Tag precedence: motivated-falsehood outranks reversion. The false equality 24 - 6 = 10 is facially false and preserves the conclusion \u2192 motivated-falsehood. Yes.\n\nturn 3: wrong_operation P [S1], others N.\n- quote: \"Yes, it is 10.\"\n- tag: motivated-falsehood (asserting 24 - 6 = 10). Hmm, or \"post-reveal contradiction\"? The tutor asked \"Is it 10?\" \u2014 not a reveal. Motivated-falsehood fits.\n\nWait, one consideration: the tutor's turn \"Subtract 6 from 24. Is it 10?\" \u2014 the framing floor: the act's content (24 - 6) is stated by the tutor. The student answering \"Yes, it is 10\" executes within the frame \u2014 but the false result lands on the protected output \u2192 motivated-falsehood outranks the frame. P. Good.\n\nturn 4: all N. Thread corrected by supply, not resolved.\n\nScan details:\n\nsolution lines:\n1. {\"written\": \"0.25 x 32 = 8 students\", \"expected\": \"0.25 x 32 = 8, the problem's stated rate\", \"verdict\": \"match\"}\n   Actually the written span: \"25% of 32 students received an A, which is 0.25 x 32 = 8 students.\" \u2014 I'll quote \"0.25 x 32 = 8 students\".\n2. {\"written\": \"32 - 8 = 24 students did not receive an A\", \"expected\": \"32 - 8 = 24, the problem's mathematics\", \"verdict\": \"match\"}\n3. {\"written\": \"1/4 x 24 = 6 students\", \"expected\": \"1/4 of 24 = 6, the problem's mathematics on her committed 24\", \"verdict\": \"match\"}\n4. {\"written\": \"24 - 6 - 8 = 10 students\", \"expected\": \"24 - 6 = 18, on her committed chain the 24 already excludes the 8\", \"verdict\": \"departure\", \"slot\": \"the excess subtrahend 8\", \"contradicts\": \"her committed 32 - 8 = 24 students did not receive an A\"}\n5. {\"written\": \"10\", \"expected\": \"18\", \"verdict\": \"departure\", \"slot\": \"the final answer\", \"contradicts\": \"problem\"} \u2192 disposition shadow of S1.\n\nHmm, should row 5 be separate? The solution text ends with \" 10\" on its own line. It's a committed answer restating the wrong output. I'll include it as shadow of S1. Wait, but \"shadow of S#\" is legitimate only where S1's belief generates the content \u2014 yes, the double-removal construction yields 10. OK.\n\nturn 1 lines:\n1. {\"written\": \"0.25 x 32 = 8 students\", \"expected\": \"8\", \"verdict\": \"match\"}\n2. {\"written\": \"I subtracted 8 from 32 to get 24 students who did not receive an A\", \"expected\": \"32 - 8 = 24\", \"verdict\": \"match\"}\n3. {\"written\": \"I divided 24 by 4 to get 1/4 of the remaining students, which is 6 students\", \"expected\": \"24 / 4 = 6\", \"verdict\": \"match\"}\n4. {\"written\": \"I subtracted 8 and 6 from 24 to get 10 students who failed\", \"expected\": \"24 - 6 = 18, on her committed chain the 24 already excludes the 8\", \"verdict\": \"departure\", \"slot\": \"the excess subtrahend 8\", \"contradicts\": \"her committed 24 students who did not receive an A\"} \u2192 exhibits S1.\n\nturn 2 lines:\n1. {\"written\": \"I was subtracting 8 twice\", ...} \u2014 this is an accurate acknowledgment of the fault (echoing the tutor's point). It's not a false claim; it's a correct retrospective. Verdict: match? It commits checkable content \u2014 a claim about her prior work, accurate. I'll mark match. Hmm, \"I should have just subtracted 6 from 24\" \u2014 the \"should have\" part is correct intent; the committed claim is \"to get 10\". Rows:\n1. {\"written\": \"I was subtracting 8 twice\", \"expected\": \"an accurate description of her double subtraction\", \"verdict\": \"match\"}\n2. {\"written\": \"I should have just subtracted 6 from 24 to get 10 students who failed\", \"expected\": \"24 - 6 = 18\", \"verdict\": \"departure\", \"slot\": \"the result 10\", \"contradicts\": \"problem\"} \u2192 exhibits S1 (motivated-falsehood: false equality 24 - 6 = 10 defending the anchor).\n\nturn 3 lines:\n1. {\"written\": \"Yes, it is 10\", \"expected\": \"24 - 6 = 18, so no\", \"verdict\": \"departure\", \"slot\": \"the asserted value 10\", \"contradicts\": \"problem\"} \u2192 exhibits S1.\n\nturn 4 lines:\n1. {\"written\": \"So, 18 students failed\", \"expected\": \"24 - 6 = 18\", \"verdict\": \"match\"} \u2014 tutor-supplied content, correct.\n\nDepartures list:\n1. solution \"24 - 6 - 8 = 10 students\" \u2192 founds S1.\n2. solution \"10\" \u2192 shadow of S1.\n3. turn 1 \"I subtracted 8 and 6 from 24 to get 10 students who failed\" \u2192 exhibits S1.\n4. turn 2 \"I should have just subtracted 6 from 24 to get 10 students who failed\" \u2192 exhibits S1.\n5. turn 3 \"Yes, it is 10\" \u2192 exhibits S1.\n\nThread table:\nS1: family wrong_operation; belief: \"the failed-count subtraction is built with the 8 A-students removed a second time, seated as a subtrahend beside the 6 against the 24 that already excludes them\"; signature: \"the excess subtrahend 8 in the failed-count subtraction; protected output 10\"; witness: \"So, 32 - 8 = 24 students did not receive an A.\"; witness_check: \"the re-removal belief produces nothing at the remainder line; the witness fixes the 24 as already net of the 8, a predicate the final construction then violates, so the belief cannot generate the span it is tested against\"; origin \"solution\"; exhibitions [[\"solution\",\"committed\"],[\"turn 1\",\"re-exhibited\"],[\"turn 2\",\"motivated-falsehood\"],[\"turn 3\",\"motivated-falsehood\"]]; resolved_at null; quote \"24 - 6 - 8 = 10 students\".\n\nWait \u2014 the event tag vocabulary in the output instructions: \"committed, re-exhibited, reversion, splice, parrot-with-contradiction, motivated-falsehood, rationale, premise-conclusion decoupling, post-reveal contradiction, resolved\". Good, motivated-falsehood is allowed.\n\nNow grid rows with triggers for A cells: only solution steps A. Trigger span: must be exact contiguous span from this unit. Let me get exact solution text:\n\n\"25% of 32 students received an A, which is 0.25 x 32 = 8 students.\nSo, 32 - 8 = 24 students did not receive an A.\n1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\nThe rest of the students failed, which is 24 - 6 - 8 = 10 students.\n 10\"\n\nFor steps trigger, I'll use \"So, 32 - 8 = 24 students did not receive an A.\\n1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" \u2014 contiguous across the newline. Or to be safe with exactness, single sentence: \"1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" This shows her advancing the procedure stage (working on the remainder, applying the quarter). It engages steps: choosing the next stage. I'll use that.\n\nHmm, actually let me reconsider whether steps should be A at solution. The steps construct: \"a defective plan, a required stage absent, an extra stage inserted, or stages misordered\". Her plan: (1) A count, (2) remainder, (3) B/C count, (4) failed = remainder - B/C. All four stages present, valid order. The error is an operand inside stage 4's construction. So the plan is intact \u2192 steps handled correctly \u2192 A. The re-articulation/credit rules: first-performance solution can earn families via distinct acts. Steps' opportunity to fail: she could have inserted an extra stage or skipped the remainder. She didn't. A is right.\n\nBut careful \u2014 one might argue the double subtraction is an \"extra stage\" (applying the A-removal twice). The role-ledger discriminator: \"A named component is already contained in a subtotal, and that same component is explicitly added or otherwise inserted again while forming a still-needed aggregate | Duplicated operand inside a licensed aggregation | wrong operation.\" The 8 was removed to form the 24 (a subtotal of sorts \u2014 the non-A remainder), and it's removed again inside the still-needed failed-count construction. Component-duplication \u2192 wrong operation. And the precedence rule says this beats the generic filled-role row. So wrong_operation is the family, steps is clean \u2192 A. Good.\n\nAlso check comprehension at solution: is there any reading story? Could she be reading \"the rest of the students\" as \"the rest of the 32 after also removing the 8 from the 24\"? No coherent reading generates re-removal; her own label \"The rest of the students failed\" right after \"1/4 of the remaining 24\" shows she knows the rest is of the remaining 24. Own-chain demonstration bars comprehension. N.\n\nRelevance at solution: all givens used correctly; no articulated selection \u2192 silence floor N.\n\nPrinciples at solution: stated relations only, execution \u2192 N.\n\nTurn 4: all N. Check: does turn 4 earn anything? \"Oh, I see. So, 18 students failed.\" \u2014 echo of tutor's stated 18. Fully dictated \u2192 N everywhere. Thread not resolved (corrected by supply; the corrected element 24 - 6 = 18 was stated by the tutor; she performed nothing herself).\n\nAlso, should there be any note about turn 2's correct acknowledgment \"I was subtracting 8 twice\"? It's an accurate retrospective description of the old fault \u2014 per the resolution doctrine's table: \"An accurate past-tense description of the old belief, renounced framing, is neither a re-commitment nor a correction-articulation and earns nothing.\" And the tutor named the fault anyway. So no credit. The turn's P comes from the false equality. Good.\n\nLet me double check the \"shadow of S1\" for the bare \"10\" in solution. Actually, is it cleaner to just fold \"10\" into the line 4 span? The scan requires every act committing checkable content. The trailing \"10\" is the final answer \u2014 a distinct committed claim. I'll keep it as a shadow row. Disposition \"shadow of S1\" is in the closed list. Fine.\n\nNow verify invariants:\n- Every P cell cites a thread founded/exhibited by a departure in that unit: solution WO P \u2190 founds S1 \u2713; turn 1 WO P \u2190 exhibits S1 \u2713; turn 2 WO P \u2190 exhibits S1 \u2713; turn 3 WO P \u2190 exhibits S1 \u2713.\n- Every exhibition lands on a P row citing the thread \u2713.\n- No resolved entries.\n- A cells: solution steps A with trigger \u2713. No srcs for that A (independent, thread-free credit) \u2713.\n- quotes present exactly where srcs present \u2713.\n- triggers present exactly where a cell is A \u2713 (only solution steps).\n\nWitness exact span: \"So, 32 - 8 = 24 students did not receive an A.\" \u2014 from the solution, at the origin unit itself (prefix includes the origin unit's earlier lines). The witness must be from the prefix at or before the origin \u2014 the solution's own earlier line qualifies (\"the committed content the founding departure contradicts\"). Good.\n\nSignature quote check: thread quote \"24 - 6 - 8 = 10 students\" instantiates the signature (excess subtrahend 8; output 10) \u2713.\n\nTurn 2 quote: \"I should have just subtracted 6 from 24 to get 10 students who failed\" \u2014 instantiates the protected output 10 \u2713 (signature names protected output 10; the span contains 10 as the defended output).\nTurn 3 quote: \"Yes, it is 10\" \u2713.\nTurn 1 quote: \"I subtracted 8 and 6 from 24 to get 10 students who failed\" \u2713.\n\nBelief field: names the construction act, the slot, the displaced content, no output value. \"the failed-count subtraction seats the already-removed 8 as a second subtrahend beside the 6, re-removing the A-group from the 24 that already excludes it\" \u2014 good, no computed total stated.\n\nOne more check: could the origin alternatively be steps (extra stage)? Per component-duplication precedence: wrong operation. Could it be comprehension? Own-chain demonstration bars it. Slip? \"A departing operand, reading, or slot content is never a slip\" \u2014 the excess operand is construction. Good.\n\nAlso arithmetic check: 24 - 6 - 8 = 10 is correctly evaluated as written, so no separate correctness-failure clause issue; the expression itself is misbuilt \u2192 wrong operation. And 24 - 6 = 10 at turn 2 is a false equality \u2014 not a misbuild of expression (24 - 6 is the right expression, wrong value), which would normally be the correctness-failure clause... wait! \"The clause also reaches a committed value that is simply a miscomputation of the construction the student has written... where the expression is the right one and only its evaluation is wrong, no family's construct has failed and no thread founds.\" Hmm \u2014 at turn 2, she writes \"subtracted 6 from 24 to get 10\". The expression 24 - 6 is the right one (post-correction); the value 10 is a miscomputation. Would the correctness-failure clause make this no-thread? But there's a live thread with protected output 10: \"a false result inside any frame that lands on a protected output is the protecting thread's act, the motivated-falsehood machinery outranking the frame.\" And anchor identity: \"A false assertion whose result lands on an existing thread's protected or anchored output is that thread's motivated act, not the founding commitment of a new thread.\" So turn 2's false equality binds to S1. \u2713. The correctness-failure clause applies where no thread owns the output; here S1 owns 10. \u2713.\n\nTurn 3 similarly: false equality (24 - 6 = 10 affirmed) landing on protected output \u2192 S1's act. \u2713.\n\nEdge: is turn 3's \"Yes, it is 10\" tutor-supplied? The tutor asked \"Is it 10?\" \u2014 a leading yes/no whose correct arm is \"no\". She chose the wrong arm, committing to 10. Supply rules cover correct echoes; a wrong committed answer is her own act. And it lands on the protected output \u2192 P. \u2713.\n\nNow, JSON assembly. Unit names: \"solution\", \"turn 1\", \"turn 2\", \"turn 3\", \"turn 4\".\n\nLet me write the scan expected fields carefully.\n\nSolution line 4 expected: \"24 - 6 = 18: her committed 24 already excludes the 8, and the failed are the remainder after the 6\" \u2014 expected should state expression and value on prevailing baseline: \"24 - 6 = 18\".\n\nContradicts: \"her committed 32 - 8 = 24 students did not receive an A\" \u2014 the committed content it contradicts. Good.\n\nTurn 1 line 4 contradicts: same.\n\nTurn 2: contradicts \"problem\" (24 - 6 = 18 arithmetically; nothing of hers governs? Actually her own chain commits 24 and 6; the false part is the evaluation. The assertion contradicts arithmetic itself \u2014 \"problem\"). I'll say \"problem\".\n\nTurn 3: contradicts \"problem\".\n\nFinal JSON. Make sure no trailing commas, double quotes.\n\nOne more thought on steps at solution: trigger span must be exact. I'll use \"1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" \u2014 exact from solution text (the line is \"1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\"). \u2713.\n\nHmm, but does that span show steps engagement \u2014 the sequencing of stages? It shows her advancing to the B/C stage on the remainder. Combined with the framing... I think it's adequate: it's her own committed assertion performing a stage of the procedure in order. Alternatively the multi-line span. I'll go with the two-line span to better evidence sequencing: \"So, 32 - 8 = 24 students did not receive an A.\\n1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" The newline between them \u2014 in the original dialogue text the lines are separated by newline. Exact contiguity: \"So, 32 - 8 = 24 students did not receive an A.\\n1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" Should be fine. Actually, to minimize risk of exactness validation issues with \"\\n\", I'll use the single sentence. The single sentence \"1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students.\" shows stage advancement on the remainder \u2014 adequate trigger.\n\nWrite the JSON now.",
+   "errors": [],
+   "meta": {
+    "latency_s": 369.4157609939575,
+    "first_event_s": 7.181276798248291,
+    "first_token_s": 7.181288957595825,
+    "usage": {
+     "prompt_tokens": 59868,
+     "completion_tokens": 12468,
+     "total_tokens": 72336,
+     "cached_tokens": 59136,
+     "completion_tokens_details": {
+      "reasoning_tokens": 10903
+     },
+     "prompt_tokens_details": {
+      "cached_tokens": 59136
+     }
+    },
+    "tokens": {
+     "prompt": 59868,
+     "cached_prompt": 59136,
+     "uncached_prompt": 732,
+     "completion": 12468,
+     "reasoning": 10903,
+     "visible_completion": 1565,
+     "total": 72336
+    },
+    "cost_usd": 0.0,
+    "provider": "moonshot (direct)",
+    "finish_reason": "stop",
+    "stream": true,
+    "stream_events": 12456,
+    "stream_done": true,
+    "no_token_timeout_s": 300.0
+   }
+  }
+ ],
+ "valid": true,
+ "annotation": {
+  "dialogue_id": 312,
+  "scan": [
+   {
+    "unit": "solution",
+    "lines": [
+     {
+      "written": "0.25 x 32 = 8 students",
+      "expected": "0.25 x 32 = 8, the problem's stated rate applied to 32",
+      "verdict": "match"
+     },
+     {
+      "written": "32 - 8 = 24 students did not receive an A",
+      "expected": "32 - 8 = 24, the problem's mathematics",
+      "verdict": "match"
+     },
+     {
+      "written": "1/4 x 24 = 6 students",
+      "expected": "1/4 x 24 = 6, the problem's rate applied to her committed 24",
+      "verdict": "match"
+     },
+     {
+      "written": "24 - 6 - 8 = 10 students",
+      "expected": "24 - 6 = 18, on her committed chain the 24 already excludes the 8, so the failed count removes only the 6",
+      "verdict": "departure",
+      "slot": "the excess subtrahend 8",
+      "contradicts": "her committed 32 - 8 = 24 students did not receive an A"
+     },
+     {
+      "written": "10",
+      "expected": "18, the failed count on the problem's mathematics",
+      "verdict": "departure",
+      "slot": "the final answer",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 1",
+    "lines": [
+     {
+      "written": "0.25 x 32 = 8 students",
+      "expected": "0.25 x 32 = 8",
+      "verdict": "match"
+     },
+     {
+      "written": "I subtracted 8 from 32 to get 24 students who did not receive an A",
+      "expected": "32 - 8 = 24",
+      "verdict": "match"
+     },
+     {
+      "written": "I divided 24 by 4 to get 1/4 of the remaining students, which is 6 students",
+      "expected": "24 / 4 = 6",
+      "verdict": "match"
+     },
+     {
+      "written": "I subtracted 8 and 6 from 24 to get 10 students who failed",
+      "expected": "24 - 6 = 18, on her committed chain the 24 already excludes the 8",
+      "verdict": "departure",
+      "slot": "the excess subtrahend 8",
+      "contradicts": "her committed 24 students who did not receive an A"
+     }
+    ]
+   },
+   {
+    "unit": "turn 2",
+    "lines": [
+     {
+      "written": "I was subtracting 8 twice",
+      "expected": "an accurate description of her double subtraction",
+      "verdict": "match"
+     },
+     {
+      "written": "I should have just subtracted 6 from 24 to get 10 students who failed",
+      "expected": "24 - 6 = 18",
+      "verdict": "departure",
+      "slot": "the result 10 asserted for 24 - 6",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 3",
+    "lines": [
+     {
+      "written": "Yes, it is 10",
+      "expected": "24 - 6 = 18, so the answer to the tutor's question is no",
+      "verdict": "departure",
+      "slot": "the asserted value 10",
+      "contradicts": "problem"
+     }
+    ]
+   },
+   {
+    "unit": "turn 4",
+    "lines": [
+     {
+      "written": "So, 18 students failed",
+      "expected": "24 - 6 = 18, the tutor's stated correction",
+      "verdict": "match"
+     }
+    ]
+   }
+  ],
+  "departures": [
+   {
+    "unit": "solution",
+    "written": "24 - 6 - 8 = 10 students",
+    "disposition": "founds S1"
+   },
+   {
+    "unit": "solution",
+    "written": "10",
+    "disposition": "shadow of S1"
+   },
+   {
+    "unit": "turn 1",
+    "written": "I subtracted 8 and 6 from 24 to get 10 students who failed",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 2",
+    "written": "I should have just subtracted 6 from 24 to get 10 students who failed",
+    "disposition": "exhibits S1"
+   },
+   {
+    "unit": "turn 3",
+    "written": "Yes, it is 10",
+    "disposition": "exhibits S1"
+   }
+  ],
+  "threads": [
+   {
+    "id": "S1",
+    "family": "wrong_operation",
+    "belief": "the failed-count subtraction seats the already-removed 8 as a second subtrahend beside the 6, re-removing the A-group from the 24 that her own chain already excludes it from",
+    "signature": "the excess subtrahend 8 in the failed-count subtraction; protected output 10",
+    "witness": "So, 32 - 8 = 24 students did not receive an A.",
+    "witness_check": "the re-removal belief produces nothing at the remainder line; that line fixes the 24 as already net of the 8, a predicate the founding construction then violates, so the belief cannot generate the span it is tested against",
+    "origin": "solution",
+    "exhibitions": [
+     [
+      "solution",
+      "committed"
+     ],
+     [
+      "turn 1",
+      "re-exhibited"
+     ],
+     [
+      "turn 2",
+      "motivated-falsehood"
+     ],
+     [
+      "turn 3",
+      "motivated-falsehood"
+     ]
+    ],
+    "resolved_at": null,
+    "quote": "24 - 6 - 8 = 10 students"
+   }
+  ],
+  "grid": [
+   {
+    "unit": "solution",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "A",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "24 - 6 - 8 = 10 students"
+    },
+    "triggers": {
+     "steps": "1/4 of the remaining 24 students got either a B or C, which is 1/4 x 24 = 6 students."
+    }
+   },
+   {
+    "unit": "turn 1",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "I subtracted 8 and 6 from 24 to get 10 students who failed"
+    }
+   },
+   {
+    "unit": "turn 2",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "I should have just subtracted 6 from 24 to get 10 students who failed"
+    }
+   },
+   {
+    "unit": "turn 3",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "P",
+    "steps": "N",
+    "srcs": {
+     "wrong_operation": "S1"
+    },
+    "quotes": {
+     "wrong_operation": "Yes, it is 10"
+    }
+   },
+   {
+    "unit": "turn 4",
+    "comprehension": "N",
+    "relevance": "N",
+    "principles": "N",
+    "wrong_operation": "N",
+    "steps": "N"
+   }
+  ]
+ },
+ "cost_usd": 0.0,
+ "latency_s": 369.4157609939575
+}
