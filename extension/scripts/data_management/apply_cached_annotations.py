@@ -185,7 +185,16 @@ def prepare_dialogue(
                 raise ValueError(
                     f"{row['unit']}/{family}: invalid label {label!r}"
                 )
-            ids = source_ids(srcs.get(family))
+            raw_source = srcs.get(family)
+            # ``independent`` marks thread-free A evidence in some valid P11
+            # records.  Dataset source columns store thread IDs only, so the
+            # marker becomes a blank source rather than an invalid ID.
+            if label == "A" and raw_source == "independent":
+                ids = []
+            elif label == "N":
+                ids = []
+            else:
+                ids = source_ids(raw_source)
             unknown = [
                 source_id
                 for source_id in ids
